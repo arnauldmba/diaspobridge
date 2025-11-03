@@ -1,0 +1,34 @@
+<div class="container" style="width: 1000px;">
+    <div class="container mt-2">
+        <h4>Annonces d'envoi de colis</h4>
+    </div>
+
+    <div class="row p-3 border mt-2">
+        <div class="col-md-4">
+            <input type="email" class="form-control" placeholder="De">
+        </div>
+        <div class=" col-md-4">
+            <input type="password" class="form-control form-control" placeholder="A">
+        </div>
+        <div class="col-md-4">
+            <input type="submit" class="form-control btn btn-primary" value="Rechercher">
+        </div>
+    </div>
+    
+    @for (listing of listings; track listing.id) {
+    <div class="row p-3 mt-3 border">
+        <div class="col-md-6 p-0">
+            <h5>{{listing.transporter.firstName}}</h5>
+            <p>Va au {{listing.destCountry}} le <span>{{listing.departDate}}</span></p>
+        </div>
+        <div class="col-md-6 text-end">
+            <h5 class="d-flex justify-content-end align-items-center">De {{listing.destCity}} vers {{listing.destCity}}</h5>
+            <p>{{listing.maxWeightKg}} Kg disponible - 10 Euro le Kilo</p>
+        </div>
+    </div> 
+    } @empty {
+        <h4>Aucune annonce pour le moment!</h4>
+    }
+</div>
+
+
