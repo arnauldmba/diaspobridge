@@ -1,5 +1,5 @@
 <div class="container">
-    <h4 class="mt-3">Ajouter une annonce</h4>
+    <h4 class="mt-3">Modifier une annonce</h4>
     <div>
         <form class="row g-3 mt-3">
             <!-- Depart -->
@@ -7,15 +7,15 @@
                 <h6>Depart</h6>
             </div>
             <div class="form-floating col-md-4 mb-2">
-                <input type="text" [(ngModel)]="newListing.originCountry" name="originCountry" class="form-control" id="floatingInput1" placeholder="Pays">
+                <input type="text" [(ngModel)]="currentListing.originCountry" name="originCountry" class="form-control" id="floatingInput1" placeholder="Pays">
                 <label for="floatingInput">Pays</label>
             </div>
             <div class="form-floating col-md-4 mb-2">
-                <input type="text" [(ngModel)]="newListing.originCity" name="originCity" class="form-control" id="floatingPassword2" placeholder="Ville">
+                <input type="text" [(ngModel)]="currentListing.originCity" name="originCity" class="form-control" id="floatingPassword2" placeholder="Ville">
                 <label for="floatingInput">Ville</label>
             </div>
             <div class="form-floating col-md-2 mb-2">
-                <input type="date" [(ngModel)]="newListing.departDate" name="departDate" class="form-control" id="floatingPassword3" placeholder="Date">
+                <input type="date" [(ngModel)]="currentListing.departDate" name="departDate" class="form-control" id="floatingPassword3" placeholder="Date">
                 <label for="floatingInput">Date</label>
             </div>
             <!-- Destination -->
@@ -23,11 +23,11 @@
                 <h6>Destination</h6>
             </div>
             <div class="form-floating col-md-4 mb-2">
-                <input type="text" [(ngModel)]="newListing.destCountry" name="destCountry" class="form-control" placeholder="Pays">
+                <input type="text" [(ngModel)]="currentListing.destCountry" name="destCountry" class="form-control" placeholder="Pays">
                 <label for="">Pays</label>
             </div>
             <div class="form-floating col-md-4 mb-2">
-                <input type="text" [(ngModel)]="newListing.destCity" name="destCity" class="form-control"  placeholder="Ville">
+                <input type="text" [(ngModel)]="currentListing.destCity" name="destCity" class="form-control"  placeholder="Ville">
                 <label for="floatingInput">Ville</label>
             </div>
             <div class="form-floating col-md-2 mb-2">
@@ -39,7 +39,7 @@
                 <h6>Kilo</h6>
             </div>
             <div class="form-floating col-md-4 mb-2">
-                <input type="text" [(ngModel)]="newListing.maxWeightKg" name="maxWeightKg" class="form-control" id="floatingInput5" placeholder=""> 
+                <input type="text" [(ngModel)]="currentListing.maxWeightKg" name="maxWeightKg" class="form-control" id="floatingInput5" placeholder=""> 
                 <label for="floatingInput2">Dispobile</label>
             </div>
             <div class="form-floating col-md-4 mb-2">
@@ -65,7 +65,7 @@
                     <h6>Note</h6>
                 </div>
                 <div class="form-floating col-md-6 mb-2">
-                    <textarea type="text" [(ngModel)]="newListing.note" name="note" class="form-control" placeholder="Leave a comment here" id="floatingTextarea" style="height: 150px"></textarea>
+                    <textarea type="text" [(ngModel)]="currentListing.note" name="note" class="form-control" placeholder="Leave a comment here" id="floatingTextarea" style="height: 150px"></textarea>
                     <label for="floatingInput">Ajoute une description</label>
                 </div>
             </div>
@@ -78,14 +78,14 @@
             </div>
             <!-- Buttons submit -->
             <div class="row g-2">
-                <button type="submit" (click)="addLisching()" class="btn btn-warning col-md-4">Publier l'annonce</button>
+                <button type="submit" (click)="updateListing(currentListing)" class="btn btn-warning col-md-4">Publier l'annonce</button>
                 <button type="submit" class="btn btn-outline-primary col-md-4 ms-3">Enregistrer brouillon</button>
             </div>
         </form>
     </div>
     <!-- Message for succefull add TransporterTrip -->
     <div>
-        <h5>{{message}}</h5>
+        <!--<h5>{{message}}</h5>-->
     </div>
     
 </div>

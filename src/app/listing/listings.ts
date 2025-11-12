@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TransporterTrip } from '../model/transporterTrip.model';
-import { TRANSPORTER_TRIPS } from '../mocks/transporterTrip.mock';
+import { ListingService } from '../services/listing.service';
 
 @Component({
   selector: 'app-listing',
@@ -8,11 +8,14 @@ import { TRANSPORTER_TRIPS } from '../mocks/transporterTrip.mock';
   templateUrl: './listings.html',
   styleUrl: './listings.css',
 })
-export class Listings {
+export class Listings implements OnInit  {
 
   listings!: TransporterTrip[];
 
-  constructor() { 
-    this.listings = TRANSPORTER_TRIPS  
+  constructor(listingService: ListingService) { 
+    this.listings = listingService.getAllListings();
+  }
+  
+  ngOnInit(): void {
   }
 }
