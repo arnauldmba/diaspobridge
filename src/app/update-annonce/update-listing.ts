@@ -19,13 +19,17 @@ export class UpdateListing implements OnInit {
               private router: Router) {}
 
   ngOnInit(): void {
-    const id = Number(this.activatedRoute.snapshot.params['id']);
-    this.currentListing = this.listingService.consultListing(id);  
+
+    this.listingService.consultListing(this.activatedRoute.snapshot.params['id']).subscribe(listing => {
+      this.currentListing = listing;
+    });
     console.log("---", this.currentListing);
   }
 
   updateListing(updatedListing: TransporterTrip): void {
-    this.listingService.updateListing(updatedListing);
+    this.listingService.uptateListing(updatedListing).subscribe(() => {
+      console.log('Listing updated successfully');
+    });
     this.router.navigate(['/listings']);
   }
 
