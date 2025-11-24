@@ -13,24 +13,13 @@ import { RouterLink } from "@angular/router";
 export class MyListings {
 
   myListings?: TransporterTrip[];
-  userId: number = 13; // Example user ID
+  userId: number = 13; // Example userID
 
   constructor(private listingService: ListingService) { }
 
   ngOnInit(): void {
     this.getAllTransporterTrips();
   }
-
-  
-  /*
-  getAllTransporterTrips(): TransporterTrip[] {
-    this.myListings = this.listingService.getAllListings().filter(
-      trip => trip.transporter.id === this.userId
-    );
-    console.log(this.myListings);
-    return this.myListings;
-  }
-  */
 
   getAllTransporterTrips(): TransporterTrip[] {
     this.listingService.getAllListings().subscribe(data => {
@@ -44,13 +33,16 @@ export class MyListings {
   
 
   deleteAnnonce(listing: TransporterTrip): void {
-    
     let confirmDelete = confirm("Êtes-vous sûr de vouloir supprimer cette annonce ?");
-    if (confirmDelete) {
+    if (!confirmDelete) {
       return;
     }
-   
-    this.listingService.deleteListing(listing.id!);
-    this.getAllTransporterTrips();
+
+    this.listingService.deleteListing(listing.id!).subscribe(() => {
+      console.log('Listing deleted successfully');
+      this.getAllTransporterTrips();
+    }, error => {
+      console.error('Error deleting listing:', error);
+    });
   }
 }

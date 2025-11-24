@@ -30,10 +30,9 @@ export class ListingService {
     return this.http.post<TransporterTrip>(this.apiUrl, newListing, httpOptions);
   }
 
-  deleteListing(listingId: number): void {
-    this.listing = this.listing.filter(
-      trip => trip.id !== listingId
-    );
+  deleteListing(listingId: number): Observable<void> {
+    const url = `${this.apiUrl}/${listingId}`;
+    return this.http.delete<void>(url, httpOptions);
   }
 
   consultListing(listingId: number): TransporterTrip {
