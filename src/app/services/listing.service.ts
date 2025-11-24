@@ -1,20 +1,33 @@
 import { Injectable } from '@angular/core';
 import { TRANSPORTER_TRIPS } from '../mocks/transporterTrip.mock';
 import { TransporterTrip } from '../model/transporterTrip.model';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+// data coming from the backend is of type json
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable({
   providedIn: 'root',
 })
+
 export class ListingService {
+  apiUrl: string = 'http://localhost:8080/diasporabridge/api/trip';
 
-  listing: TransporterTrip[]; 
+  listing!: TransporterTrip[]; 
 
-  constructor() { 
-    this.listing = TRANSPORTER_TRIPS;
+  constructor(private http: HttpClient) { 
+    //this.listing = TRANSPORTER_TRIPS;
   }
 
-  getAllListings(): TransporterTrip[] {
-    return this.listing;
+  getAllListings(): Observable<TransporterTrip[]> {
+    return this.http.get<TransporterTrip[]>(this.apiUrl);
+  }
+
+  getAllListingsFromApi(): Observable<TransporterTrip[]> {
+    return this.http.get<TransporterTrip[]>(this.apiUrl);
   }
 
   addListing(newListing: TransporterTrip): void {

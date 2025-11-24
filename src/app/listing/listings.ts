@@ -12,10 +12,14 @@ export class Listings implements OnInit  {
 
   listings!: TransporterTrip[];
 
-  constructor(listingService: ListingService) { 
-    this.listings = listingService.getAllListings();
+  constructor(private listingService: ListingService) { 
+    //this.listings = listingService.getAllListings();
   }
   
   ngOnInit(): void {
+    this.listingService.getAllListings().subscribe(data => {
+      console.log(data);
+      this.listings = data;
+    });
   }
 }
