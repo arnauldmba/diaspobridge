@@ -18,41 +18,29 @@ export class ListingService {
 
   listing!: TransporterTrip[]; 
 
-  constructor(private http: HttpClient) { 
-    //this.listing = TRANSPORTER_TRIPS;
-  }
+  constructor(private http: HttpClient) {}
 
   getAllListings(): Observable<TransporterTrip[]> {
     return this.http.get<TransporterTrip[]>(this.apiUrl);
   }
 
-  getAllListingsFromApi(): Observable<TransporterTrip[]> {
-    return this.http.get<TransporterTrip[]>(this.apiUrl);
+  addListing(newListing: TransporterTrip): Observable<TransporterTrip> {
+    return this.http.post<TransporterTrip>(this.apiUrl, newListing, httpOptions);
   }
 
-  addListing(newListing: TransporterTrip): void {
-    this.listing.push(newListing);
+  deleteListing(listingId: number): Observable<void> {
+    const url = `${this.apiUrl}/${listingId}`;
+    return this.http.delete<void>(url, httpOptions);
   }
 
-  deleteListing(listingId: number): void {
-    this.listing = this.listing.filter(
-      trip => trip.id !== listingId
-    );
+  consultListing(listingId: number): Observable<TransporterTrip> {
+    const url = `${this.apiUrl}/${listingId}`;
+    return this.http.get<TransporterTrip>(url);
   }
 
-  consultListing(listingId: number): TransporterTrip {
-    return this.listing.find(
-      trip => trip.id === listingId
-    )!;
-  }
-
-  updateListing(updatedListing: TransporterTrip): void {
-    const index = this.listing.findIndex(
-      trip => trip.id === updatedListing.id
-    );
-    if (index !== -1) {
-      this.listing[index] = updatedListing;
-    }
+  uptateListing(updatedListing: TransporterTrip): Observable<TransporterTrip> {
+    const url = `${this.apiUrl}/${updatedListing.id}`;
+    return this.http.put<TransporterTrip>(url, updatedListing, httpOptions);
   }
 
 }
