@@ -13,7 +13,7 @@ import { RouterLink } from "@angular/router";
 export class MyListings {
 
   myListings?: TransporterTrip[];
-  userId: number = 1; // Example user ID
+  userId: number = 13; // Example user ID
 
   constructor(private listingService: ListingService) { }
 
@@ -21,6 +21,8 @@ export class MyListings {
     this.getAllTransporterTrips();
   }
 
+  
+  /*
   getAllTransporterTrips(): TransporterTrip[] {
     this.myListings = this.listingService.getAllListings().filter(
       trip => trip.transporter.id === this.userId
@@ -28,14 +30,25 @@ export class MyListings {
     console.log(this.myListings);
     return this.myListings;
   }
+  */
+
+  getAllTransporterTrips(): TransporterTrip[] {
+    this.listingService.getAllListings().subscribe(data => {
+      this.myListings = data.filter(
+        trip => trip.transporter.id === this.userId
+      );
+      console.log(this.myListings);
+    });
+    return this.myListings!;
+  }
+  
 
   deleteAnnonce(listing: TransporterTrip): void {
-    /*
+    
     let confirmDelete = confirm("Êtes-vous sûr de vouloir supprimer cette annonce ?");
     if (confirmDelete) {
       return;
     }
-    */
    
     this.listingService.deleteListing(listing.id!);
     this.getAllTransporterTrips();
