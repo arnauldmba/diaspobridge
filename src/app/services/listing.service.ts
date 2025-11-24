@@ -26,12 +26,8 @@ export class ListingService {
     return this.http.get<TransporterTrip[]>(this.apiUrl);
   }
 
-  getAllListingsFromApi(): Observable<TransporterTrip[]> {
-    return this.http.get<TransporterTrip[]>(this.apiUrl);
-  }
-
-  addListing(newListing: TransporterTrip): void {
-    this.listing.push(newListing);
+  addListing(newListing: TransporterTrip): Observable<TransporterTrip> {
+    return this.http.post<TransporterTrip>(this.apiUrl, newListing, httpOptions);
   }
 
   deleteListing(listingId: number): void {

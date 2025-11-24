@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { TransporterTrip } from '../model/transporterTrip.model';
 import { ListingService } from '../services/listing.service';
 import { Role, User } from '../model/users.model';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -17,34 +18,34 @@ export class AddListing implements OnInit {
   newListing = new TransporterTrip();
   message: string = '';
 
-  constructor(private listingService: ListingService) {}
+  constructor(private listingService: ListingService, private router: Router) {}
 
   ngOnInit():void {
-    // Initialization logic here
   } 
 
-  addLisching() {
+  addListing() {
 
     const transporter1: User = {
-      id: 1,
-      email: 'jean.transporter@mail.com',
-      firstName: 'Jean',
-      lastName: 'Mbappe',
-      phone: '+49 176 1234567',
+      id: 13,
+      email: 'transporter+1760965910986@mail.com',
+      firstName: 'Manuel',
+      lastName: 'Eboue',
+      phone: '+49156519222323',
       role: Role.TRANSPORTER,
       isActive: true,
       emailVerified: true
     };
     
-    this.newListing.id = this.newListing.id ?? Math.floor(Math.random() * 10000);
     this.newListing.transporter = transporter1;
-    this.newListing.createdAt = new Date().toISOString();
-    this.newListing.updatedAt = new Date().toISOString();
-    this.listingService.addListing(this.newListing);
-    console.log(this.newListing);
-    // Logic to add a new listing
 
-    this.message = 'Listing added successfully!';
+    this.listingService.addListing(this.newListing).subscribe(response => {
+      console.log('Listing added successfully:', response);
+      this.message = 'Listing added successfully!';
+      this.router.navigate(['/listings']);
+    }, error => {
+      console.error('Error adding listing:', error);
+      this.message = 'Error adding listing. Please try again.';
+    });
   } 
 
 }
