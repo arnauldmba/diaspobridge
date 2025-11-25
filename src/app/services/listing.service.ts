@@ -3,6 +3,7 @@ import { TRANSPORTER_TRIPS } from '../mocks/transporterTrip.mock';
 import { TransporterTrip } from '../model/transporterTrip.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 // data coming from the backend is of type json
 const httpOptions = {
@@ -14,7 +15,7 @@ const httpOptions = {
 })
 
 export class ListingService {
-  apiUrl: string = 'http://localhost:8080/diasporabridge/api/trip';
+  apiUrl = environment.apiUrl;
 
   listing!: TransporterTrip[]; 
 
