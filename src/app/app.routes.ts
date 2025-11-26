@@ -5,13 +5,16 @@ import { AddListing } from './add-listing/add-listing';
 import { UpdateListing } from './update-annonce/update-listing';
 import { SearchListing } from './search-listing/search-listing';
 import { Login } from './login/login';
+import { Forbidden } from './forbidden/forbidden';
+import { authGuardGuard, authGuardGuard2 } from './guards/auth-guard-guard';
 
 export const routes: Routes = [
-    { path: "my-listings", component: MyListings },
+    { path: "my-listings", component: MyListings, canActivate: [authGuardGuard2] },
     { path: "listings", component: Listings },
     { path: "add-listing", component: AddListing },
     { path: "update-listing/:id", component: UpdateListing },
     { path: "search-listing", component: SearchListing },
     { path: "login", component: Login },
+    { path: "app-forbidden", component: Forbidden },
     { path: "", redirectTo: "listings", pathMatch: "full" }
 ];
