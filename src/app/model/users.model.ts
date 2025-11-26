@@ -5,7 +5,7 @@ export class User {
   id?: number;
   email?: string;
   passwordHash?: string;
-  role?: Role;
+  role!: Role;
   firstName?: string;
   lastName?: string;
   phone?: string;
