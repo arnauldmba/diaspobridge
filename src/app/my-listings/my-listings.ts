@@ -3,6 +3,7 @@ import { TransporterTrip } from '../model/transporterTrip.model';
 import { TRANSPORTER_TRIPS } from '../mocks/transporterTrip.mock';
 import { ListingService } from '../services/listing.service';
 import { RouterLink } from "@angular/router";
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-my-listings',
@@ -13,12 +14,15 @@ import { RouterLink } from "@angular/router";
 export class MyListings {
 
   myListings?: TransporterTrip[];
-  userId: number = 13; // Example userID
+  //userId: number = 13; // Example userID
+  userId!: number;
 
-  constructor(private listingService: ListingService) { }
+  constructor(private listingService: ListingService, private authService: AuthService) {
+   }
 
   ngOnInit(): void {
     this.getAllTransporterTrips();
+    this.userId = this.authService.logedUserId!;
   }
 
   getAllTransporterTrips(): TransporterTrip[] {

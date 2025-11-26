@@ -2,9 +2,9 @@ import { Role } from "../model/role.models";
 import { User } from "../model/users.model";
 
 const transporter1: User = {
-  id: 1,
-  email: 'jean.transporter@mail.com',
-  passwordHash: 'transporter1',
+  id: 13,
+  email: 'jean@mail.com',
+  passwordHash: 't1',
   firstName: 'Jean',
   lastName: 'Mbappe',
   phone: '+49 176 1234567',
@@ -15,12 +15,12 @@ const transporter1: User = {
 
 const transporter2: User = {
   id: 2,
-  email: 'sophie.transporter@mail.com',
-  passwordHash: 'transporter2',
+  email: 'sophie@mail.com',
+  passwordHash: 't2',
   firstName: 'Sophie',
   lastName: 'Ngono',
   phone: '+33 612345678',
-  role: Role.TRANSPORTER,
+  role: Role.ADMIN,
   isActive: true,
   emailVerified: true
 };

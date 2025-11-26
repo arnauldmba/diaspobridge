@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { User } from '../model/users.model';
 import { USERS_LIST } from '../mocks/users.mock'; 
 import { Role } from '../model/role.models';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -13,8 +14,9 @@ export class AuthService {
   public logedUser?: string;
   public isloggedIn: boolean = false;
   public roles:Role[] = [];
+  public logedUserId?: number;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   // Simulate user login
   login(user: User): Boolean{
@@ -25,6 +27,7 @@ export class AuthService {
         this.logedUser = u.firstName;
         this.isloggedIn = true;
         this.roles = [u.role];
+        this.logedUserId = u.id;
         localStorage.setItem('loggedUser', this.logedUser!);
         localStorage.setItem('isloggedIn', String(this.isloggedIn));
       }
@@ -42,13 +45,21 @@ export class AuthService {
 
   // Simulate user logout
   logout(): void {
-    // In a real application, you would clear user session data
-    console.log('User logged out');
+    this.isloggedIn = false;
+    this.logedUser = undefined;
+    this.roles = [];
+    localStorage.removeItem('loggedUser');
+    localStorage.setItem('isloggedIn', String(this.isloggedIn));
+    this.router.navigate(['/login']);
   }
 
   // Get current user (for simulation purposes, return the first user)
   getCurrentUser(): User | null {
     return this.usersList.length > 0 ? this.usersList[0] : null;
+  }
+
+  isAdmin(): boolean {
+    return this.roles.includes(Role.ADMIN);
   }
   
 }

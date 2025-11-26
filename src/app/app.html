@@ -15,14 +15,25 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/add-listing">Ajouter une annonce</a>
         </li>
+        @if(authService.isAdmin()) {
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/#">Liste Utilisateur</a>
+          </li>
+        }
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Profil
+            {{ authService.logedUser || 'Compte' }}
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" routerLink="/my-listings">Annonces</a></li>
-            <li><a class="dropdown-item" href="#">Messagerie <span class="badge text-bg-secondary">4</span> </a></li>
-            <li><a class="dropdown-item" routerLink="/login">Login</a></li>
+            <li><a (click)="isUserLogIn()" class="dropdown-item" routerLink="/my-listings">Mes annonces</a></li>
+            <li><a (click)="isUserLogIn()" class="dropdown-item" routerLink="/messagerie">Messagerie <span class="badge text-bg-secondary">4</span> </a></li>
+            <li><a (click)="isUserLogIn()" class="dropdown-item" routerLink="/profile">Profil</a></li>  
+            <li><hr class="dropdown-divider"></li>
+            @if(authService.isloggedIn) {
+                <li><a (click)="logout()" class="dropdown-item" routerLink="/logout">Logout</a></li>
+              }@else{
+                <li><a class="dropdown-item" routerLink="/login">Login</a></li>
+            }
           </ul>
         </li>
       </ul>
