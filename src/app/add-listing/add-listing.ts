@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TransporterTrip } from '../model/transporterTrip.model';
 import { ListingService } from '../services/listing.service';
-import { Role, User } from '../model/users.model';
+import { User } from '../model/users.model';
 import { Router } from '@angular/router';
+import { Role } from '../model/role.models';
 
 
 @Component({

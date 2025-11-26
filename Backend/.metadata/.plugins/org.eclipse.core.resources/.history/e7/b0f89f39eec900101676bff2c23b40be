@@ -1,0 +1,92 @@
+package com.diasporabridge.backend.controllers;
+
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.diasporabridge.backend.entities.TransporterTrip;
+import com.diasporabridge.backend.services.TransporterTripService;
+
+import lombok.RequiredArgsConstructor;
+
+@RestController
+@RequestMapping("/api/trip")
+@CrossOrigin
+@RequiredArgsConstructor // Lombok génère le constructeur pour les champs final
+public class TransporterTripRestController {
+	
+	private final TransporterTripService transporterTripService; 
+	
+	@GetMapping
+	List <TransporterTrip> getAllTransporterTrip(){
+		return this.transporterTripService.getAllTransporterTrip();
+	}
+	
+	// recuperer un trip par ID
+    @GetMapping("/{id}")
+    public TransporterTrip getTripById(@PathVariable Long id) {
+        return transporterTripService.getTransporterTripById(id)
+                .orElseThrow(() -> new RuntimeException("Trip not found: " + id));
+    }
+    
+    // Creer un trip 
+    @PostMapping
+    public TransporterTrip createTrip(@RequestBody TransporterTrip trip) {
+        return transporterTripService.saveTransporterTrip(trip);
+    }
+    
+    // Modifier un trip
+    @PutMapping("/{id}")
+    public TransporterTrip updateTrip(@PathVariable Long id, @RequestBody TransporterTrip updatedTrip) {
+        updatedTrip.setId(id);
+        return transporterTripService.updateTransporterTrip(updatedTrip);
+    }
+    
+    // Supprimer un trip par ID
+    @DeleteMapping("/{id}")
+    public void deleteTrip(@PathVariable Long id) {
+        transporterTripService.deleteTransporterTripById(id);
+    }
+    
+    // Récupérer tous les trips actifs
+    @GetMapping("/active")
+    public List<TransporterTrip> getAllActiveTrips() {
+        return transporterTripService.getActiveTrips();
+    }
+    
+    // Filtrer les trips par origine, destination, dates
+    @GetMapping("/search")
+    public Page<TransporterTrip> searchTrips(
+            @RequestParam(required = false) String origin,
+            @RequestParam(required = false) String dest,
+            @RequestParam(required = false) LocalDate fromDate,
+            @RequestParam(required = false) LocalDate toDate,
+            @RequestParam(defaultValue = "true") boolean activeOnly,
+            Pageable pageable) {
+        return transporterTripService.searchTrips(origin, dest, fromDate, toDate, activeOnly, pageable);
+    }
+    
+    @GetMapping("/search")
+    public Page<TransporterTrip> searchTripsByContry(
+    		@RequestParam(required = false) String origin,
+            @RequestParam(required = false) String dest,
+            Pageable pageable
+    ) {
+        return transporterTripService.searchTripsByCountry(origin, dest, pageable);
+    }
+}

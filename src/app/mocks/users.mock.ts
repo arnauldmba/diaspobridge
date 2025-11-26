@@ -1,4 +1,5 @@
-import { Role, User } from "../model/users.model";
+import { Role } from "../model/role.models";
+import { User } from "../model/users.model";
 
 const transporter1: User = {
   id: 1,

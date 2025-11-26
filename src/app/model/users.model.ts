@@ -1,19 +1,16 @@
-export enum Role {
-  SENDER = 'SENDER',
-  TRANSPORTER = 'TRANSPORTER',
-  ADMIN = 'ADMIN'
-}
+import { Role } from "./role.models";
 
-export interface User {
+
+export class User {
   id?: number;
-  email: string;
+  email?: string;
   passwordHash?: string;
-  role: Role;
+  role?: Role;
   firstName?: string;
   lastName?: string;
   phone?: string;
-  isActive: boolean;
-  emailVerified: boolean;
+  isActive?: boolean;
+  emailVerified?: boolean;
   deletedAt?: string;
   createdAt?: string;
   updatedAt?: string;

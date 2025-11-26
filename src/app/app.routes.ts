@@ -4,6 +4,7 @@ import { Listings } from './listing/listings';
 import { AddListing } from './add-listing/add-listing';
 import { UpdateListing } from './update-annonce/update-listing';
 import { SearchListing } from './search-listing/search-listing';
+import { Login } from './login/login';
 
 export const routes: Routes = [
     { path: "my-listings", component: MyListings },
@@ -11,5 +12,6 @@ export const routes: Routes = [
     { path: "add-listing", component: AddListing },
     { path: "update-listing/:id", component: UpdateListing },
     { path: "search-listing", component: SearchListing },
+    { path: "login", component: Login },
     { path: "", redirectTo: "listings", pathMatch: "full" }
 ];
