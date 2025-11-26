@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { TRANSPORTER_TRIPS } from '../mocks/transporterTrip.mock';
 import { TransporterTrip } from '../model/transporterTrip.model';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { CountrySearchCriteria } from '../model/country-search-criteria.model';
+import { Page } from '../model/page.model';
 
 // data coming from the backend is of type json
 const httpOptions = {
@@ -42,6 +44,32 @@ export class ListingService {
   uptateListing(updatedListing: TransporterTrip): Observable<TransporterTrip> {
     const url = `${this.apiUrl}/${updatedListing.id}`;
     return this.http.put<TransporterTrip>(url, updatedListing, httpOptions);
+  }
+
+  searchTripsByCountry(criteria: CountrySearchCriteria): Observable<Page<TransporterTrip>> {
+    let params = new HttpParams();
+
+    if (criteria.origin) {
+      params = params.set('origin', criteria.origin);
+    }
+    if (criteria.dest) {
+      params = params.set('dest', criteria.dest);
+    }
+
+    // valeurs par défaut si non fournies
+    const page = criteria.page ?? 0;
+    const size = criteria.size ?? 10;
+    const activeOnly = criteria.activeOnly ?? true;
+
+    params = params
+      .set('page', page.toString())
+      .set('size', size.toString())
+      .set('activeOnly', activeOnly.toString());
+
+    return this.http.get<Page<TransporterTrip>>(
+      `${this.apiUrl}/search/country`,
+      { params }
+    );
   }
 
 }
