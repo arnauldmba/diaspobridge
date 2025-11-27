@@ -22,6 +22,7 @@ export class AddListing implements OnInit {
   constructor(private listingService: ListingService, private router: Router) {}
 
   ngOnInit():void {
+    this.addListing();
   } 
 
   addListing() {

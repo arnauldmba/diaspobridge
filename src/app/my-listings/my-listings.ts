@@ -21,8 +21,8 @@ export class MyListings {
    }
 
   ngOnInit(): void {
-    this.getAllTransporterTrips();
     this.userId = this.authService.logedUserId!;
+    this.getAllTransporterTrips();
   }
 
   getAllTransporterTrips(): TransporterTrip[] {

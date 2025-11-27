@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { Router, RouterLink, RouterLinkWithHref, RouterOutlet } from '@angular/router';
 import { AuthService } from './services/auth.service';
 
@@ -9,10 +9,25 @@ import { AuthService } from './services/auth.service';
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-export class App {
+export class App implements OnInit{
   protected readonly title = signal('diasporabridge');
 
   constructor(public authService: AuthService, public router: Router) { }
+
+  ngOnInit(): void {
+    let isloggedIn: string
+    let loggedUser: string;
+
+    isloggedIn = localStorage.getItem('isloggedIn')!;
+    loggedUser = localStorage.getItem('loggedUser')!;
+
+    if (isloggedIn != 'true' || !isloggedIn) {
+      this.router.navigate(['/login']);
+    } else {
+      this.authService.setLoggedUserFromLocalStorage(loggedUser);
+    }
+
+  }
 
   logout(): void {
     this.authService.logout();

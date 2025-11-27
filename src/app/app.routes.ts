@@ -9,7 +9,7 @@ import { Forbidden } from './forbidden/forbidden';
 import { authGuardGuard, authGuardGuard2 } from './guards/auth-guard-guard';
 
 export const routes: Routes = [
-    { path: "my-listings", component: MyListings, canActivate: [authGuardGuard2] },
+    { path: "my-listings", component: MyListings },
     { path: "listings", component: Listings },
     { path: "add-listing", component: AddListing },
     { path: "update-listing/:id", component: UpdateListing },

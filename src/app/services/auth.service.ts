@@ -61,5 +61,20 @@ export class AuthService {
   isAdmin(): boolean {
     return this.roles.includes(Role.ADMIN);
   }
+
+  setLoggedUserFromLocalStorage(logedUser: string) {
+    this.logedUser = logedUser;
+    this.isloggedIn = true;
+    this.getUserRole(logedUser);
+  }
+
+  getUserRole(username: string){
+    this.usersList.forEach((u) => {
+      if(username === u.firstName){
+        this.roles = [u.role];
+        this.logedUserId = u.id;
+      }
+    });
+  }
   
 }

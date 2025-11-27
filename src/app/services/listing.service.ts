@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { TRANSPORTER_TRIPS } from '../mocks/transporterTrip.mock';
 import { TransporterTrip } from '../model/transporterTrip.model';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
