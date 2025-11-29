@@ -26,7 +26,6 @@ export class App implements OnInit{
     } else {
       this.authService.setLoggedUserFromLocalStorage(loggedUser);
     }
-
   }
 
   logout(): void {
