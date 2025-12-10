@@ -3,6 +3,7 @@ import { User } from '../model/users.model';
 import { USERS_LIST } from '../mocks/users.mock'; 
 import { Role } from '../model/role.models';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -10,13 +11,26 @@ import { Router } from '@angular/router';
 export class AuthService {
 
   usersList: User[] = USERS_LIST;
+  apiUrl: string = 'http://localhost:8080/users'; //http://localhost:8080/diasporabridge/api/trip'
+  token!: string;
 
   public logedUser?: string;
   public isloggedIn: boolean = false;
   public roles:Role[] = [];
   public logedUserId?: number;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private http: HttpClient) { }
+
+  login2(user: User) {
+   // return this.http.post<{token: string}>(`${this.apiUrl}/login`, user);
+   return this.http.post<User>(`${this.apiUrl}/login`, user, {observe: 'response'});
+  }
+
+  saveToken(jwt: string) {
+    localStorage.setItem('jwt', jwt);
+    this.token = jwt;
+    this.isloggedIn = true;
+  }
 
   // Simulate user login
   login(user: User): Boolean{
