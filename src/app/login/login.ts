@@ -12,7 +12,11 @@ import { Router } from '@angular/router';
 })
 export class Login implements OnInit  {
 
-  user = new User();
+  requestUser = {
+    email: '',
+    password: ''
+  };
+  
   errorLogin = 0;
 
   constructor(private authService: AuthService, private router: Router) { }
@@ -21,6 +25,25 @@ export class Login implements OnInit  {
   }
 
   onLoggdin(): void {
+
+    this.authService.login(this.requestUser).subscribe({
+      next: (response) => {
+        const jwtToken = response.headers.get('Authorization');
+        if (jwtToken) {
+          console.log('Login sucess: *******', jwtToken);
+          this.authService.saveToken(jwtToken);
+          this.router.navigate(['/']);
+        } else {
+          this.errorLogin = 1;
+        }
+      },
+      error: (err) => {
+        console.error('Login error: ', err);
+        this.errorLogin = 1;
+      }
+    });
+
+    /*
     console.log('Login attempt for user:', this.user);
     let isValidUser = this.authService.login(this.user);
     if (isValidUser) {
@@ -30,6 +53,7 @@ export class Login implements OnInit  {
       console.log('Invalid credentials');
       this.errorLogin = 1;
     }
+      */
   }
 
 }

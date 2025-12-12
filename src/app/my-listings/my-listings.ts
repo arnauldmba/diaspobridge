@@ -13,40 +13,38 @@ import { AuthService } from '../services/auth.service';
 })
 export class MyListings {
 
-  myListings?: TransporterTrip[];
-  //userId: number = 13; // Example userID
+  myListings: TransporterTrip[] = [];
   userId!: number;
 
   constructor(private listingService: ListingService, private authService: AuthService) {
    }
 
   ngOnInit(): void {
-    this.userId = this.authService.logedUserId!;
-    this.getAllTransporterTrips();
-  }
-
-  getAllTransporterTrips(): TransporterTrip[] {
-    this.listingService.getAllListings().subscribe(data => {
-      this.myListings = data.filter(
-        trip => trip.transporter.id === this.userId
-      );
-      console.log(this.myListings);
+    this.listingService.getMyTrips().subscribe(trips => {
+      this.myListings = trips;
     });
-    return this.myListings!;
   }
   
 
   deleteAnnonce(listing: TransporterTrip): void {
-    let confirmDelete = confirm("Êtes-vous sûr de vouloir supprimer cette annonce ?");
+    const confirmDelete = confirm("Êtes-vous sûr de vouloir supprimer cette annonce ?");
     if (!confirmDelete) {
       return;
     }
 
-    this.listingService.deleteListing(listing.id!).subscribe(() => {
-      console.log('Listing deleted successfully');
-      this.getAllTransporterTrips();
-    }, error => {
-      console.error('Error deleting listing:', error);
+    this.listingService.deleteListing(listing.id!).subscribe({
+      next: () => {
+        console.log('Listing deleted successfully');
+
+        // 🔥 Mettre à jour la liste en local :
+        this.myListings = this.myListings.filter(
+          trip => trip.id !== listing.id
+        );
+      },
+      error: (error) => {
+        console.error('Error deleting listing:', error);
+        alert("Une erreur est survenue lors de la suppression.");
+      }
     });
   }
 }

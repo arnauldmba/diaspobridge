@@ -3,3 +3,5 @@ export enum Role {
   TRANSPORTER = 'TRANSPORTER',
   ADMIN = 'ADMIN'
 }
+
+//export const Role// = ["SENDER", "TRANSPORTER", "ADMIN"];

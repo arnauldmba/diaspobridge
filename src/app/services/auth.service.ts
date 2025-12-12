@@ -3,7 +3,10 @@ import { User } from '../model/users.model';
 import { USERS_LIST } from '../mocks/users.mock'; 
 import { Role } from '../model/role.models';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
+import { LoginRequest } from '../model/LoginRequest';
+import { Observable } from 'rxjs';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root',
@@ -11,65 +14,80 @@ import { HttpClient } from '@angular/common/http';
 export class AuthService {
 
   usersList: User[] = USERS_LIST;
-  apiUrl: string = 'http://localhost:8080/users'; //http://localhost:8080/diasporabridge/api/trip'
+  apiUrl: string = 'http://localhost:8080/diasporabridge/api/auth';
   token!: string;
 
   public logedUser?: string;
   public isloggedIn: boolean = false;
   public roles:Role[] = [];
   public logedUserId?: number;
+  private helper = new JwtHelperService();
+
 
   constructor(private router: Router, private http: HttpClient) { }
 
-  login2(user: User) {
-   // return this.http.post<{token: string}>(`${this.apiUrl}/login`, user);
-   return this.http.post<User>(`${this.apiUrl}/login`, user, {observe: 'response'});
+  
+  login(requestUser: LoginRequest): Observable<HttpResponse<User>>  {
+   return this.http.post<User>(`${this.apiUrl}/login`, requestUser, {observe: 'response'});
   }
 
+  // Save JWT token to local storage
   saveToken(jwt: string) {
     localStorage.setItem('jwt', jwt);
     this.token = jwt;
     this.isloggedIn = true;
+    this.decodeJWT();
   }
 
-  // Simulate user login
-  login(user: User): Boolean{
-    let validUser: Boolean = false;
-    this.usersList.forEach((u) => {
-      if(user.email === u.email && user.passwordHash == u.passwordHash){
-        validUser = true;
-        this.logedUser = u.firstName;
-        this.isloggedIn = true;
-        this.roles = [u.role];
-        this.logedUserId = u.id;
-        localStorage.setItem('loggedUser', this.logedUser!);
-        localStorage.setItem('isloggedIn', String(this.isloggedIn));
-      }
-    });
-    return validUser;
+  getToken(): string{
+    return this.token;
   }
 
-  // Simulate fetching user by email
+  decodeJWT(): void {
+    if (this.token) {
+      const decodedToken = this.helper.decodeToken(this.token);
+      console.log('Decoded JWT:', decodedToken);
+      console.log('isloggedIn:', this.isloggedIn);
+
+      const rawRoles: string[] = decodedToken.roles || [];
+
+      // Normalisation : "ROLE_ADMIN" -> "ADMIN"
+      this.roles = rawRoles
+        .map((r: string) => r.replace('ROLE_', ''))
+        .filter((r: string) => Object.values(Role).includes(r as Role)) as Role[];
+      this.logedUser = decodedToken.sub;
+    }
+  }
+
   getUserByEmail(email: string): User | null {
     const user = this.usersList.find(u => u.email === email);
-
-    //const user = this.usersList.find(u => u.email === email);
     return user ? user : null;
   }
 
   // Simulate user logout
   logout(): void {
-    this.isloggedIn = false;
+    this.token =  undefined!;
+    this.roles = undefined!;
+    this.logedUserId = undefined;
+    localStorage.removeItem('jwt');
     this.logedUser = undefined;
-    this.roles = [];
-    localStorage.removeItem('loggedUser');
-    localStorage.setItem('isloggedIn', String(this.isloggedIn));
+    this.isloggedIn = false;
+    //localStorage.setItem('isloggedIn', String(this.isloggedIn));
     this.router.navigate(['/login']);
   }
 
   // Get current user (for simulation purposes, return the first user)
   getCurrentUser(): User | null {
     return this.usersList.length > 0 ? this.usersList[0] : null;
+  }
+
+  isTokenExpired(): boolean {
+    return this.helper.isTokenExpired(this.token);
+  }
+
+  loadToken(): void {
+    this.token = localStorage.getItem('jwt')!;
+    this.decodeJWT();
   }
 
   isAdmin(): boolean {
@@ -90,5 +108,7 @@ export class AuthService {
       }
     });
   }
+
+
   
 }

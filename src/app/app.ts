@@ -15,6 +15,12 @@ export class App implements OnInit{
   constructor(public authService: AuthService, public router: Router) { }
 
   ngOnInit(): void {
+    this.authService.loadToken();
+    if (this.authService.getToken() == null || this.authService.isTokenExpired()) {
+      this.router.navigate(['/login']);
+    }
+
+    /*
     let isloggedIn: string
     let loggedUser: string;
 
@@ -26,6 +32,7 @@ export class App implements OnInit{
     } else {
       this.authService.setLoggedUserFromLocalStorage(loggedUser);
     }
+    */
   }
 
   logout(): void {

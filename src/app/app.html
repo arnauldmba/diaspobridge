@@ -29,7 +29,7 @@
             <li><a (click)="isUserLogIn()" class="dropdown-item" routerLink="/messagerie">Messagerie <span class="badge text-bg-secondary">4</span> </a></li>
             <li><a (click)="isUserLogIn()" class="dropdown-item" routerLink="/profile">Profil</a></li>  
             <li><hr class="dropdown-divider"></li>
-            @if(authService.isloggedIn) {
+            @if(authService.isloggedIn === true) {
                 <li><a (click)="logout()" class="dropdown-item" routerLink="/logout">Logout</a></li>
               }@else{
                 <li><a class="dropdown-item" routerLink="/login">Login</a></li>
