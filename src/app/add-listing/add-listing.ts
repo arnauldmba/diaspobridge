@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TransporterTrip } from '../model/transporterTrip.model';
 import { ListingService } from '../services/listing.service';
-import { Role, User } from '../model/users.model';
+import { User } from '../model/users.model';
 import { Router } from '@angular/router';
+import { Role } from '../model/role.models';
 
 
 @Component({
@@ -24,28 +25,17 @@ export class AddListing implements OnInit {
   } 
 
   addListing() {
-
-    const transporter1: User = {
-      id: 13,
-      email: 'transporter+1760965910986@mail.com',
-      firstName: 'Manuel',
-      lastName: 'Eboue',
-      phone: '+49156519222323',
-      role: Role.TRANSPORTER,
-      isActive: true,
-      emailVerified: true
-    };
-    
-    this.newListing.transporter = transporter1;
-
-    this.listingService.addListing(this.newListing).subscribe(response => {
+  this.listingService.addListing(this.newListing).subscribe({
+    next: (response) => {
       console.log('Listing added successfully:', response);
       this.message = 'Listing added successfully!';
       this.router.navigate(['/listings']);
-    }, error => {
+    },
+    error: (error) => {
       console.error('Error adding listing:', error);
       this.message = 'Error adding listing. Please try again.';
-    });
-  } 
+    }
+  });
+}
 
 }

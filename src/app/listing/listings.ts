@@ -24,13 +24,13 @@ export class Listings implements OnInit  {
   constructor(private listingService: ListingService) {}
   
   ngOnInit(): void {
-    /*
+    
     this.listingService.getAllListings().subscribe(data => {
       console.log(data);
       this.listings = data;
     });
-    */
-   this.loadAllTrips();
+    
+   //this.loadAllTrips();
   }
 
   loadAllTrips(): void {

@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
-import { TRANSPORTER_TRIPS } from '../mocks/transporterTrip.mock';
 import { TransporterTrip } from '../model/transporterTrip.model';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { CountrySearchCriteria } from '../model/country-search-criteria.model';
 import { Page } from '../model/page.model';
+import { AuthService } from './auth.service';
 
 // data coming from the backend is of type json
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
+
 
 @Injectable({
   providedIn: 'root',
@@ -21,14 +22,14 @@ export class ListingService {
 
   listing!: TransporterTrip[]; 
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
   getAllListings(): Observable<TransporterTrip[]> {
     return this.http.get<TransporterTrip[]>(this.apiUrl);
   }
 
   addListing(newListing: TransporterTrip): Observable<TransporterTrip> {
-    return this.http.post<TransporterTrip>(this.apiUrl, newListing, httpOptions);
+    return this.http.post<TransporterTrip>(this.apiUrl, newListing);
   }
 
   deleteListing(listingId: number): Observable<void> {
@@ -70,6 +71,10 @@ export class ListingService {
       `${this.apiUrl}/search/country`,
       { params }
     );
+  }
+
+  getMyTrips(): Observable<TransporterTrip[]> {
+    return this.http.get<TransporterTrip[]>(`${this.apiUrl}/my`);
   }
 
 }

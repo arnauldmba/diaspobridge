@@ -1,0 +1,40 @@
+<div class="container text-center">
+    <h5 class="mt-3 mb-3">Connectez vous</h5>
+    <div class="container row mt-3">
+        <div class="col">
+            <form>
+                <div class="row mb-3">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+                    <div class="col-sm-10">
+                        <input type="email" class="form-control" id="inputEmail3" [(ngModel)]="requestUser.email" name="email">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" id="inputPassword" [(ngModel)]="requestUser.password" name="passwordHash">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label"></label>
+                    <div class="col-sm-10">
+                        <button type="button" (click)="onLoggdin()" class="btn btn-primary">Connectez vous</button>
+                    </div>
+                </div>
+                @if(errorLogin == 1){
+                <div class="row mb-3">
+                    <div class="col-sm-10 offset-sm-2 text-danger">
+                        Login ou mot de passe incorrect!
+                    </div>
+                </div>
+                }
+            </form>
+
+        </div>
+        <div class="col">
+            Enregistez vous sur DiasporaBridge pour pourvoir transporter un colis. <br>
+            Vous povez aussi trouver des personnes pour vous aider a transporter vos colis.<br>
+            <a href="/register">Inscription</a>
+        </div>
+    </div>
+</div>
