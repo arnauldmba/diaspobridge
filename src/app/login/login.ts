@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../model/users.model';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule],
+  imports: [FormsModule, RouterLink],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
@@ -32,7 +32,8 @@ export class Login implements OnInit  {
         if (jwtToken) {
           console.log('Login sucess: *******', jwtToken);
           this.authService.saveToken(jwtToken);
-          this.router.navigate(['/']);
+          this.router.navigate(['/listings']);
+         // this.router.navigate(['/']);
         } else {
           this.errorLogin = 1;
         }

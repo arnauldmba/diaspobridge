@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { User } from '../model/users.model';
-import { USERS_LIST } from '../mocks/users.mock'; 
 import { Role } from '../model/role.models';
 import { Router } from '@angular/router';
 import { HttpClient, HttpResponse } from '@angular/common/http';
@@ -13,7 +12,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class AuthService {
 
-  usersList: User[] = USERS_LIST;
+  usersList: User[] = [];
   apiUrl: string = 'http://localhost:8080/diasporabridge/api/auth';
   token!: string;
 
@@ -57,6 +56,11 @@ export class AuthService {
         .filter((r: string) => Object.values(Role).includes(r as Role)) as Role[];
       this.logedUser = decodedToken.sub;
     }
+  }
+
+  registerUser(user: any) {
+    return this.http.post<User>(this.apiUrl + '/register', user,
+      { observe: 'response' });
   }
 
   getUserByEmail(email: string): User | null {

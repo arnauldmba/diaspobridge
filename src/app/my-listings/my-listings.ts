@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { TransporterTrip } from '../model/transporterTrip.model';
-import { TRANSPORTER_TRIPS } from '../mocks/transporterTrip.mock';
 import { ListingService } from '../services/listing.service';
 import { RouterLink } from "@angular/router";
 import { AuthService } from '../services/auth.service';
