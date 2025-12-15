@@ -16,6 +16,8 @@ export class Login implements OnInit  {
     email: '',
     password: ''
   };
+
+  message: string = '';
   
   errorLogin = 0;
 
@@ -39,7 +41,11 @@ export class Login implements OnInit  {
         }
       },
       error: (err) => {
-        console.error('Login error: ', err);
+        if(err.error.errorCause == "disabled"){
+          this.message = "Compte non activé. Veuillez vérifier votre email.";
+        }else{
+          this.message = "Login ou mot de passe incorrect";
+        }
         this.errorLogin = 1;
       }
     });

@@ -18,16 +18,27 @@ export class AuthService {
 
   public logedUser?: string;
   public isloggedIn: boolean = false;
-  public roles:Role[] = [];
+  public roles: Role[] = [];
   public logedUserId?: number;
   private helper = new JwtHelperService();
 
+  regitredUser: User = new User();
 
   constructor(private router: Router, private http: HttpClient) { }
 
-  
-  login(requestUser: LoginRequest): Observable<HttpResponse<User>>  {
-   return this.http.post<User>(`${this.apiUrl}/login`, requestUser, {observe: 'response'});
+  setRegistredUser(user: User) {
+    this.regitredUser = user;
+  }
+  getRegistredUser() {
+    return this.regitredUser;
+  }
+
+  validateEmail(code: string) {
+    return this.http.get<User>(this.apiUrl + '/verifyEmail/' + code);
+  }
+
+  login(requestUser: LoginRequest): Observable<HttpResponse<User>> {
+    return this.http.post<User>(`${this.apiUrl}/login`, requestUser, { observe: 'response' });
   }
 
   // Save JWT token to local storage
@@ -38,7 +49,7 @@ export class AuthService {
     this.decodeJWT();
   }
 
-  getToken(): string{
+  getToken(): string {
     return this.token;
   }
 
@@ -58,7 +69,8 @@ export class AuthService {
     }
   }
 
-  registerUser(user: any) {
+  //registerUser(user: any) {
+  registerUser(user: User) {
     return this.http.post<User>(this.apiUrl + '/register', user,
       { observe: 'response' });
   }
@@ -70,7 +82,7 @@ export class AuthService {
 
   // Simulate user logout
   logout(): void {
-    this.token =  undefined!;
+    this.token = undefined!;
     this.roles = undefined!;
     this.logedUserId = undefined;
     localStorage.removeItem('jwt');
@@ -104,9 +116,9 @@ export class AuthService {
     this.getUserRole(logedUser);
   }
 
-  getUserRole(username: string){
+  getUserRole(username: string) {
     this.usersList.forEach((u) => {
-      if(username === u.firstName){
+      if (username === u.firstName) {
         this.roles = [u.role];
         this.logedUserId = u.id;
       }
@@ -114,5 +126,5 @@ export class AuthService {
   }
 
 
-  
+
 }

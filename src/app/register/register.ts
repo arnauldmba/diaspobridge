@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { CommonModule } from '@angular/common';
+import { User } from '../model/users.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register',
@@ -14,10 +16,12 @@ export class Register {
   
   myForm!: FormGroup;
   err: any;
+  loading: boolean = false;
 
   constructor( private formBuilder: FormBuilder, 
     private router: Router, 
-    private authService: AuthService) { }
+    private authService: AuthService,
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.myForm = this.formBuilder.group({
@@ -28,11 +32,9 @@ export class Register {
     });
   }
 
-  onRegister2(): void {
-    console.log('Registering user:', this.myForm.value);
-  }
-
   onRegister() {
+    this.loading = true;
+
     if (this.myForm.invalid) {
       this.myForm.markAllAsTouched();
       return;
@@ -47,14 +49,19 @@ export class Register {
       password: formValue.password
     };
 
+    const user = new User();
+    user.firstName = formValue.firstName;
+    user.email = formValue.email;
+    user.password = formValue.password;
+
     console.log('Payload envoyé au backend:', payload);
 
-    this.authService.registerUser(payload).subscribe({
+    this.authService.registerUser(user).subscribe({
       next: (res) => {
-        alert("Veuillez confirmer votre email");
-      //  this.router.navigate(['/listings']);
-      //  this.router.navigate(['/']);
-        // this.router.navigate(["/verifEmail", formValue.email]);
+        this.authService.setRegistredUser(user);
+        this.loading = false;
+        this.toastr.success('Inscription réussie ! Veuillez vérifier votre email pour la validation.', 'Succès'); 
+        this.router.navigate(['/verifEmail']);
       },
       error: (err: any) => {
         console.error('Registration error: ', err);
@@ -64,6 +71,7 @@ export class Register {
 
         // ✅ à la place :
         if (err.status === 400) {
+          this.loading = false;
           this.err = err.error?.message ?? 'Requête invalide (400)';
         }
       }

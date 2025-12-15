@@ -75,6 +75,7 @@
                     <div class="text-danger">
                         La confirmation du mot de passe doit contenir au moins 6 caractères.
                     </div>
+                    
                     }
                     @if(myForm.get('confirmPassword')?.touched &&
                     myForm.get('confirmPassword')?.value != myForm.get('password')?.value){
@@ -82,7 +83,17 @@
                         Le mot de passe et la confirmation du mot de passe ne correspondent pas.
                     </div>
                     }
+                   
                 </div>
+            
+                @if(loading){
+                <div class="d-flex justify-content-center">
+                    <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+                }
+
                 <div class="row mb-3">
                     <button type="button" [disabled]="myForm.invalid" (click)="onRegister()"
                         class="btn btn-success">S'incrire
