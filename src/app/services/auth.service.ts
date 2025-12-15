@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { User } from '../model/users.model';
-import { USERS_LIST } from '../mocks/users.mock'; 
 import { Role } from '../model/role.models';
 import { Router } from '@angular/router';
 import { HttpClient, HttpResponse } from '@angular/common/http';
@@ -13,22 +12,33 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class AuthService {
 
-  usersList: User[] = USERS_LIST;
+  usersList: User[] = [];
   apiUrl: string = 'http://localhost:8080/diasporabridge/api/auth';
   token!: string;
 
   public logedUser?: string;
   public isloggedIn: boolean = false;
-  public roles:Role[] = [];
+  public roles: Role[] = [];
   public logedUserId?: number;
   private helper = new JwtHelperService();
 
+  regitredUser: User = new User();
 
   constructor(private router: Router, private http: HttpClient) { }
 
-  
-  login(requestUser: LoginRequest): Observable<HttpResponse<User>>  {
-   return this.http.post<User>(`${this.apiUrl}/login`, requestUser, {observe: 'response'});
+  setRegistredUser(user: User) {
+    this.regitredUser = user;
+  }
+  getRegistredUser() {
+    return this.regitredUser;
+  }
+
+  validateEmail(code: string) {
+    return this.http.get<User>(this.apiUrl + '/verifyEmail/' + code);
+  }
+
+  login(requestUser: LoginRequest): Observable<HttpResponse<User>> {
+    return this.http.post<User>(`${this.apiUrl}/login`, requestUser, { observe: 'response' });
   }
 
   // Save JWT token to local storage
@@ -39,7 +49,7 @@ export class AuthService {
     this.decodeJWT();
   }
 
-  getToken(): string{
+  getToken(): string {
     return this.token;
   }
 
@@ -59,6 +69,12 @@ export class AuthService {
     }
   }
 
+  //registerUser(user: any) {
+  registerUser(user: User) {
+    return this.http.post<User>(this.apiUrl + '/register', user,
+      { observe: 'response' });
+  }
+
   getUserByEmail(email: string): User | null {
     const user = this.usersList.find(u => u.email === email);
     return user ? user : null;
@@ -66,7 +82,7 @@ export class AuthService {
 
   // Simulate user logout
   logout(): void {
-    this.token =  undefined!;
+    this.token = undefined!;
     this.roles = undefined!;
     this.logedUserId = undefined;
     localStorage.removeItem('jwt');
@@ -100,9 +116,9 @@ export class AuthService {
     this.getUserRole(logedUser);
   }
 
-  getUserRole(username: string){
+  getUserRole(username: string) {
     this.usersList.forEach((u) => {
-      if(username === u.firstName){
+      if (username === u.firstName) {
         this.roles = [u.role];
         this.logedUserId = u.id;
       }
@@ -110,5 +126,5 @@ export class AuthService {
   }
 
 
-  
+
 }

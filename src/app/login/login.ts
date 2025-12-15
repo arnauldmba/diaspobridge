@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../model/users.model';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule],
+  imports: [FormsModule, RouterLink],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
@@ -16,6 +16,8 @@ export class Login implements OnInit  {
     email: '',
     password: ''
   };
+
+  message: string = '';
   
   errorLogin = 0;
 
@@ -32,13 +34,18 @@ export class Login implements OnInit  {
         if (jwtToken) {
           console.log('Login sucess: *******', jwtToken);
           this.authService.saveToken(jwtToken);
-          this.router.navigate(['/']);
+          this.router.navigate(['/listings']);
+         // this.router.navigate(['/']);
         } else {
           this.errorLogin = 1;
         }
       },
       error: (err) => {
-        console.error('Login error: ', err);
+        if(err.error.errorCause == "disabled"){
+          this.message = "Compte non activé. Veuillez vérifier votre email.";
+        }else{
+          this.message = "Login ou mot de passe incorrect";
+        }
         this.errorLogin = 1;
       }
     });

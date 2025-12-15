@@ -5,21 +5,28 @@ import { AuthService } from './auth.service';
 export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
 
   const authService = inject(AuthService);
-  const toExclude = '/login';
 
-  /**
-   * Tester s'il s'agit du login, on n'ajoute pas le header Authorization
-   * puisqu'il n'y a pas encore de token à ce stade.
-   */
-  if(req.url.search(toExclude) === -1) {
-    let jwt = authService.getToken();
-    let reqWihtToken = req.clone({
-      setHeaders: {
-        Authorization: jwt
-      }
-    });
-    return next(reqWihtToken);
+  // URLs à exclure : login & register
+  const excluded = ['/auth/login', '/auth/register'];
+
+  if (excluded.some(path => req.url.includes(path))) {
+    return next(req);
   }
 
-  return next(req);
+  const jwt = authService.getToken(); // peut être null
+
+  // Pas de token → on n'ajoute rien
+  if (!jwt) {
+    return next(req);
+  }
+
+  const authHeader = jwt.startsWith('Bearer ') ? jwt : `Bearer ${jwt}`;
+
+  const reqWithToken = req.clone({
+    setHeaders: {
+      Authorization: authHeader,
+    },
+  });
+
+  return next(reqWithToken);
 };
