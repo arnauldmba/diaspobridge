@@ -28,6 +28,11 @@ export class ListingService {
     return this.http.get<TransporterTrip[]>(this.apiUrl);
   }
 
+  getListingById(listingId: number): Observable<TransporterTrip> {
+    const url = `${this.apiUrl}/${listingId}`;
+    return this.http.get<TransporterTrip>(url);
+  }
+
   addListing(newListing: TransporterTrip): Observable<TransporterTrip> {
     return this.http.post<TransporterTrip>(this.apiUrl, newListing);
   }

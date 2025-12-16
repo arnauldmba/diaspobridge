@@ -9,10 +9,12 @@ import { Forbidden } from './forbidden/forbidden';
 import { authGuardGuard, authGuardGuard2 } from './guards/auth-guard-guard';
 import { Register } from './register/register';
 import { VerifEmail } from './verif-email/verif-email';
+import { ListingDetails } from './listing-details/listing-details';
 
 export const routes: Routes = [
     { path: "my-listings", component: MyListings },
     { path: "listings", component: Listings },
+    { path: "listing-details/:id", component: ListingDetails },
     { path: "add-listing", component: AddListing },
     { path: "update-listing/:id", component: UpdateListing },
     { path: "search-listing", component: SearchListing },

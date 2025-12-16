@@ -16,7 +16,7 @@
     </div>
     
     @for (listing of listings; track listing.id) {
-    <div class="row p-3 mt-3 border">
+    <div (click)="openListing(listing.id)" class="row p-3 mt-3 border">
         <div class="col-md-6 p-0">
             <h5>{{listing.transporter.firstName}}</h5>
             <p>Va au {{listing.destCountry}} le <span>{{listing.departDate}}</span></p>
