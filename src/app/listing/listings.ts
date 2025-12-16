@@ -3,15 +3,17 @@ import { TransporterTrip } from '../model/transporterTrip.model';
 import { ListingService } from '../services/listing.service';
 import { CountrySearchCriteria } from '../model/country-search-criteria.model';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-listing',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './listings.html',
   styleUrl: './listings.css',
 })
-export class Listings implements OnInit  {
+export class Listings implements OnInit {
 
   listings!: TransporterTrip[];
 
@@ -21,16 +23,21 @@ export class Listings implements OnInit  {
   page = 0;
   size = 10;
 
-  constructor(private listingService: ListingService) {}
-  
+  constructor(private listingService: ListingService, private router: Router) { }
+
   ngOnInit(): void {
-    
+
     this.listingService.getAllListings().subscribe(data => {
       console.log(data);
       this.listings = data;
     });
-    
-   //this.loadAllTrips();
+
+    //this.loadAllTrips();
+  }
+
+  openListing(id: number | undefined) {
+    this.router.navigate(['/listing-details/', id]);
+    console.log('Open listing with ID:', id);
   }
 
   loadAllTrips(): void {
