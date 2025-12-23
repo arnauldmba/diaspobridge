@@ -1,0 +1,24 @@
+<div class="">
+  <div class="container-chat">
+    @if (messages; as msgs) {
+    <div class="container chat-message">
+      <ul>
+        @for (m of msgs; track m.id) {
+        <li class="{{m.senderId === curruntUser ? 'my-chat-message' : 'other-chat-message'}}">
+          <span> {{ m.body }} <br></span> <br/>
+          <small>{{ formatMessageDate(m.sentAt) }}</small>
+        </li>
+        }
+      </ul>
+    </div>
+    } @else {
+    <p>Loading messages...</p>
+    }
+
+    <form (ngSubmit)="onSend()" class="pt-2 mt-2 d-flex gap-2 chat-input">
+      <textarea [(ngModel)]="draft" name="draft" placeholder="Écris ton message..." class="form-control p-2 w-100"
+        id="exampleFormControlTextarea1" rows="3"></textarea>
+      <button type="submit" [disabled]="!draft.trim()" class="btn p-2 flex-shrink-1"><mat-icon class="mat-icon">send</mat-icon></button>
+    </form>
+  </div>
+</div>

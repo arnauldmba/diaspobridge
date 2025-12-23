@@ -7,13 +7,14 @@ export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
   const authService = inject(AuthService);
 
   // URLs à exclure : login & register
-  const excluded = ['/auth/login', '/auth/register'];
+  const excluded = ['/auth/login', '/auth/register', '/auth/verifyEmail']; // ajouter (dernier)
 
   if (excluded.some(path => req.url.includes(path))) {
     return next(req);
   }
 
   const jwt = authService.getToken(); // peut être null
+  if (!jwt) return next(req); // ajoute 
 
   // Pas de token → on n'ajoute rien
   if (!jwt) {

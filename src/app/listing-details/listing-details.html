@@ -11,13 +11,13 @@
         </div>
         <div>
             <div class="border rounded-4 p-4" style="width: 800px; margin-left: 10px;">
-            <h2 class="mb-1">{{trip.transporter.firstName}} va au {{trip.destCountry}} {{trip.destCity}}</h2> <br>
+            <h2 class="mb-1">{{trip.transporter.firstName}}, {{trip.transporter.lastName}} va au {{trip.destCountry}} {{trip.destCity}}</h2> <br>
             <p><strong>Origine: </strong> {{trip.originCity}}, {{trip.originCountry}} vers {{trip.destCity}}, {{trip.destCountry}}</p>
             <p><strong>Date:</strong> {{trip.departDate}}</p>
             <p><strong>Poids max disponible:</strong> {{trip.maxWeightKg}} Kg</p>
             <p><strong>Prix par Kilo:</strong> 10 Euro</p>
             <p><strong>Notes:</strong> <br> {{trip.note}} </p>
-            <button class="btn btn-primary">Contacter l'expéditeur</button>
+            <button (click)="onContact()" class="btn btn-primary">Contacter l'expéditeur</button>
             </div>
         </div>
     </div>

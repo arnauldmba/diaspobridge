@@ -49,14 +49,19 @@ export class AuthService {
     this.decodeJWT();
   }
 
+/*
   getToken(): string {
     return this.token;
+  }
+*/
+  getToken(): string | null {
+  return this.token || localStorage.getItem('jwt');
   }
 
   decodeJWT(): void {
     if (this.token) {
       const decodedToken = this.helper.decodeToken(this.token);
-      console.log('Decoded JWT:', decodedToken);
+      console.log('Decoded ---- JWT:', decodedToken);
       console.log('isloggedIn:', this.isloggedIn);
 
       const rawRoles: string[] = decodedToken.roles || [];
@@ -66,6 +71,10 @@ export class AuthService {
         .map((r: string) => r.replace('ROLE_', ''))
         .filter((r: string) => Object.values(Role).includes(r as Role)) as Role[];
       this.logedUser = decodedToken.sub;
+      this.logedUserId = decodedToken.userId; // ✅
+      console.log('User Roles:', this.roles);
+      console.log('Logged User:', this.logedUser);
+      console.log('Logged User ID:', this.logedUserId);
     }
   }
 

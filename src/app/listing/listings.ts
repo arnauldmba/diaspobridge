@@ -21,7 +21,7 @@ export class Listings implements OnInit {
   destCountry: string = '';
 
   page = 0;
-  size = 10;
+  size = 30;
 
   constructor(private listingService: ListingService, private router: Router) { }
 
@@ -31,8 +31,6 @@ export class Listings implements OnInit {
       console.log(data);
       this.listings = data;
     });
-
-    //this.loadAllTrips();
   }
 
   openListing(id: number | undefined) {
