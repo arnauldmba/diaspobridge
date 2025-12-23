@@ -1,0 +1,33 @@
+<div class="container p-0">
+    <h3 class="mb-4 mt-5">Messages</h3>
+    <div *ngIf="myMatches.length === 0">
+        <p>You have no matches yet.</p>
+    </div>
+    <div class="container-match-and-chat">
+        <div *ngIf="myMatches.length > 0" class="matches-list">
+            <ul>
+                <li *ngFor="let match of myMatches" clickable (click)="onOpenChat(match.id)" class="p-3 border-bottom">
+                    <div class="profile-avatar border">
+                        <!-- <mat-icon class="mat-icon">person</mat-icon> -->
+                         <span>{{getFirstLetter(match.otherFirstName)}}</span>
+                    </div>
+                    <div class="ms-2">
+                        <p class="fs-6 fw-semibold">{{match.otherFirstName}}</p>
+                        <p class="fs-lighter">{{match.lastMessagePreview}}</p>
+                        <p class="fs-6 fs-lighter">{{match.updatedAt | date:'dd.MM.yyyy' }}</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="chat-list border">
+            <div class="d-flex align-items-center border-bottom">
+                <div class="profile-avatar  m-3">
+                    <!--<mat-icon class="mat-icon">person</mat-icon>-->
+                    <span>{{getFirstLetter(actuellUser)}}</span>
+                </div>
+                <span>{{actuellUser}} </span>
+            </div>
+            <app-chat-messaging [matchId]="matchIdParent"></app-chat-messaging>
+        </div>
+    </div>
+</div>

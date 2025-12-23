@@ -1,11 +1,12 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { Router, RouterLink, RouterLinkWithHref, RouterOutlet } from '@angular/router';
 import { AuthService } from './services/auth.service';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterLink, RouterOutlet, RouterLinkWithHref],
+  imports: [RouterLink, RouterOutlet, RouterLinkWithHref, MatIconModule],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
