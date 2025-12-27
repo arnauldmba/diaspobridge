@@ -1,0 +1,19 @@
+@use "@angular/material" as mat;
+
+@include mat.core();
+
+/* Un thème Material simple (light). Tu peux changer les palettes plus tard. */
+$theme: mat.define-theme((
+  color: (
+    theme-type: light,
+    primary: mat.$azure-palette,
+    tertiary: mat.$green-palette,
+    warn: mat.$red-palette,
+  ),
+  typography: (
+    plain-family: system-ui,
+  ),
+  density: (scale: 0)
+));
+
+@include mat.all-component-themes($theme);

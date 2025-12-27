@@ -1,8 +1,11 @@
 <div class="container">
-    <div class="container mt-2">
-        <h4>Annonces d'envoi de coliss</h4>
+
+    <div class="mt-5 p-0 mb-4">
+        <h3>Trouvez des voyageurs à destination de l'Afrique</h3>
+        <p style="color: var(--color-muted);">Entrez en contact avec des voyageurs vérifiés qui peuvent transporter vos colis en toute sécurité</p>
     </div>
 
+    <!--
     <div class="row p-3 border mt-2">
         <div class="col-md-4">
             <input [(ngModel)]="originCountry" type="text" class="form-control" placeholder="De">
@@ -14,21 +17,132 @@
             <input (click)="onSearch()" class="form-control btn btn-primary" value="Rechercher">
         </div>
     </div>
-    
-    @for (listing of listings; track listing.id) {
-    <div (click)="openListing(listing.id)" class="row p-3 mt-3 border">
-        <div class="col-md-6 p-0">
-            <h5>{{listing.transporter.firstName}}</h5>
-            <p>Va au {{listing.destCountry}} le <span>{{listing.departDate}}</span></p>
+-->
+    <!--
+    <div class="d-flex row gap-4">
+        <div class="container border w-full shadow p-4 m-3 bg-body-tertiary rounded col">
+            <mat-form-field appearance="outline" class="w-full full-width d-block">
+                <mat-icon matPrefix>location_on</mat-icon>
+                <input matInput [(ngModel)]="originCountry" placeholder="Ville de départ" />
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="w-full d-block">
+                <mat-icon matPrefix>location_on</mat-icon>
+                <input matInput [(ngModel)]="originCountry" placeholder="Ville de d'arrive" />
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="w-full d-block">
+                <mat-icon matPrefix>calendar_today</mat-icon>
+                <input matInput [(ngModel)]="originCountry" type="date" />
+            </mat-form-field>
+            <div class="d-grid">
+                <button mat-flat-button color="primary" class="w-full action-btn">
+                    <mat-icon>search</mat-icon>
+                    Rechercher
+                </button>
+            </div>
         </div>
-        <div class="col-md-6 text-end">
-            <h5 class="d-flex justify-content-end align-items-center">De {{listing.originCity}} vers {{listing.destCity}}</h5>
-            <p>{{listing.maxWeightKg}} Kg disponible - 10 Euro le Kilo</p>
+        <div class="col image-container">
+            <img src="assets/voyageur.jpeg" alt="Profile photo of the transporter" style="width: 100%; height: 100%;" class="rounded-2 image-cover"/>
         </div>
-    </div> 
-    } @empty {
+    </div>
+-->
+
+<!--
+    <div class=" border shadow p-4 mb-3 bg-body-tertiary rounded">
+        <div class="row">
+            <div class="input-container d-flex align-items-center gap-2 col border">
+                <mat-icon matPrefix>location_on</mat-icon>
+                <input [(ngModel)]="originCountry" type="text" class="form-control border-0" placeholder="Ville de depart">
+            </div>
+            <div class="input-container d-flex align-items-center gap-2 col">
+                <mat-icon matPrefix>location_on</mat-icon>
+                <input [(ngModel)]="destCountry" type="text" class="form-control" placeholder="A">
+            </div>
+            <div class="input-container d-flex align-items-center gap-2 col">
+                <mat-icon matPrefix>location_on</mat-icon>
+                <input [(ngModel)]="destCountry" type="date" class="form-control" placeholder="jj.mm.aaaa">
+            </div>
+        </div>
+        <input (click)="onSearch()" class="form-control btn btn-primary mt-4" value="Rechercher">
+       <button (click)="onSearch()" class="form-control btn btn-primary mt-4 d-flex justify-content-center gap-1">
+            <mat-icon class="material-symbols-outlined">Search</mat-icon>
+            Rechercher
+        </button>
+    </div>
+-->
+
+    <div class="border shadow p-4 bg-body-tertiary rounded">
+        <div class="row col">
+            <mat-form-field appearance="outline" class="w-full d-block col">
+                <mat-icon matPrefix>location_on</mat-icon>
+                <input matInput [(ngModel)]="originCountry" placeholder="Ville de départ" />
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="w-full d-bloc col">
+                <mat-icon matPrefix>location_on</mat-icon>
+                <input matInput [(ngModel)]="originCountry" placeholder="Ville de d'arrive" />
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="w-full d-block col">
+                <mat-icon matPrefix>calendar_today</mat-icon>
+                <input matInput [(ngModel)]="originCountry" type="date" />
+            </mat-form-field>
+        </div>
+        <div class="d-grid mt-3 border p-1" style="background-color: var(--color-accent);">
+            <button mat-flat-button class="p-2" style="background-color: var(--color-accent)">
+                <mat-icon>search</mat-icon> 
+                Rechercher
+            </button>
+        </div>
+        <!--
+        <div class="d-grid mt-3">
+            <button mat-flat-button color="primary" class="w-full action-btn">
+                <mat-icon>search</mat-icon>
+                Rechercher
+            </button>
+        </div>
+        -->
+    </div>
+
+    <h4 class="m-3 mt-5">Voyageurs disponible</h4>
+    <div class="row row-cols-2 row-cols-lg-3 g-4 g-lg-4">
+        @for (listing of listings; track listing.id) {
+        <div class="col align-items-center">
+            <!--<div class="card" style="width: 24rem;">-->
+            <div class="card pt-2 pb-1" style="width: 100%">
+                <div class="card-body">
+                    <div class="d-flex align-items-center gap-1">
+                        <mat-icon class="material-symbols-outlined color-1">location_on</mat-icon> 
+                        <strong>{{listing.originCity}}, {{listing.originCountry}} </strong>
+                    </div>
+                    <div class="divider-with-text offset">
+                        <span> a </span>
+                    </div>
+                    <div class="d-flex align-items-center gap-1 mb-3">
+                        <mat-icon class="material-symbols-outlined color-1">location_on</mat-icon> 
+                        <strong>{{listing.destCity}}, {{listing.destCountry}}</strong>
+                    </div>
+
+                    <div class="d-flex mb-4 gap-3">
+                        <div class="card-text d-flex align-items-center" style="color: var(--color-muted);">
+                            <mat-icon class="material-symbols-outlined">calendar_today</mat-icon> {{listing.departDate | date:'dd MMM yyyy' }}
+                        </div>
+                        <div class="card-text d-flex align-items-center" style="color: var(--color-muted);">
+                            <mat-icon class="material-symbols-outlined">balance</mat-icon> {{listing.maxWeightKg}} kg
+                        </div>
+                    </div>
+                    <h6 class="card-subtitle mb-4 ms-2 color-1">10€/kg</h6>
+                    <div class="border-top align-items-center d-flex align-items-start gap-2 pt-3 mb-3">
+                        <div class="profile-avatar">
+
+                        </div>
+                        <span style="font-size: var(--text-sm); font-weight: 500;">{{listing.transporter.firstName}}</span>
+                    </div>
+                    <div class="d-grid mb-2">
+                        <button (click)="openListing(listing.id)" class="btn border" style="font-size: var(--text-sm); font-weight: 500;" type="button">Voir details</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        } @empty {
         <h4>Aucune annonce pour le moment!</h4>
-    }
+        }
+    </div>
 </div>
-
-

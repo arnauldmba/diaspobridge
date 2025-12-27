@@ -1,0 +1,88 @@
+.profile-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    /* coupe l'image a l'interieur */
+    background: rgb(223, 223, 223);
+    /*box-shadow: 0 4px 10px rgba(0,0,0,0.01);*/
+
+    display: flex;
+    align-items: center;
+    /* centre verticalement */
+    justify-content: center;
+    /* centre horizontalement */
+}
+
+.profile-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* evite que l'image soit deformee a l interieux du div */
+}
+
+/*trait qui separe les deux ville */
+.divider-with-text {
+  display: flex;
+  align-items: center;
+  color: #6b7280;
+  margin: 2px 0px 2px 26px;
+}
+
+.divider-with-text::before,
+.divider-with-text::after {
+  content: "";
+  height: 1px;
+  background-color: #e5e7eb;
+  flex: 1;
+}
+
+.divider-with-text span {
+  padding: 0 12px;
+  font-size: 14px;
+  font-weight: 500;
+  /*text-transform: uppercase;*/
+}
+
+/* 🔥 Décalage horizontal */
+.divider-with-text.offset::before {
+  flex: 1; /* ligne gauche plus longue */
+}
+
+.divider-with-text.offset::after {
+  flex: 9; /* ligne droite plus courte */
+}
+
+/* style pour les icones des voyages disponible*/
+.material-symbols-outlined{
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.testCsC{
+  background-color: var(--color-primary);
+}
+
+/* pour que l'image soit proportionnel au div */
+.image-container {
+  width: 100%;
+  height: 500px; /* ou ce que tu veux */
+  overflow: hidden;
+}
+
+.image-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* très important */
+}
+
+.no-border-field {
+  /* supprime l'underline (la ligne du bas) */
+  --mdc-filled-text-field-active-indicator-height: 0px;
+  --mdc-filled-text-field-hover-active-indicator-height: 0px;
+  --mdc-filled-text-field-focus-active-indicator-height: 0px;
+
+  /* fond par défaut */
+  --mdc-filled-text-field-container-color: #f3f4f6; /* gris clair */
+}
