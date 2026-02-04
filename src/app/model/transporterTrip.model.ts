@@ -9,6 +9,7 @@ export class TransporterTrip {
   destCountry!: string;
   departDate!: string;            // LocalDate → string (format ISO, ex: "2025-11-01")
   maxWeightKg?: number;          // BigDecimal → number
+  pricePerKg?: number;          // BigDecimal → number
   acceptedTypes?: string;        // CSV ex: "DOCUMENT,PHONE,LAPTOP"
   isActive!: boolean;
   note?: string;

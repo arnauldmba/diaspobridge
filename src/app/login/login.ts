@@ -3,14 +3,17 @@ import { User } from '../model/users.model';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { Router, RouterLink } from '@angular/router';
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from '@angular/material/input';
+import { MatIcon } from "@angular/material/icon";
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule, RouterLink],
+  imports: [FormsModule, RouterLink, MatFormFieldModule, MatFormFieldModule, MatInputModule],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
-export class Login implements OnInit  {
+export class Login implements OnInit {
 
   requestUser = {
     email: '',
@@ -18,7 +21,7 @@ export class Login implements OnInit  {
   };
 
   message: string = '';
-  
+
   errorLogin = 0;
 
   constructor(private authService: AuthService, private router: Router) { }
@@ -35,32 +38,27 @@ export class Login implements OnInit  {
           console.log('Login sucess: *******', jwtToken);
           this.authService.saveToken(jwtToken);
           this.router.navigate(['/listings']);
-         // this.router.navigate(['/']);
         } else {
+          console.log("erreur connection1: ", this.errorLogin)
           this.errorLogin = 1;
         }
       },
       error: (err) => {
-        if(err.error.errorCause == "disabled"){
+        console.log("HTTP error:", err);
+
+        const raw = err?.error;
+        const cause =
+          typeof raw === "object" && raw !== null ? (raw as any).errorCause : null;
+
+        if (cause === "disabled") {
           this.message = "Compte non activé. Veuillez vérifier votre email.";
-        }else{
+        } else {
           this.message = "Login ou mot de passe incorrect";
         }
+
         this.errorLogin = 1;
       }
     });
-
-    /*
-    console.log('Login attempt for user:', this.user);
-    let isValidUser = this.authService.login(this.user);
-    if (isValidUser) {
-      console.log('Login successful');
-      this.router.navigate(['/']);
-    } else {
-      console.log('Invalid credentials');
-      this.errorLogin = 1;
-    }
-      */
   }
 
 }

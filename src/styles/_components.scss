@@ -6,6 +6,27 @@ html, body {
   background: var(--color-bg);
 }
 
+.color-text{
+  color: var(--color-text);
+}
+
+.muted { color: var(--color-muted); }
+
+.subpage-titel{
+  font-weight: 1000;
+  font-size: 28px;
+}
+
+.text-meta {
+  font-weight: 400;
+  font-size: var(--text-sm);
+}
+
+.text-meta-strong {
+  font-weight: 500;
+  font-size: var(--text-sm);
+}
+
 .container {
   width: min(1120px, calc(100% - 32px));
   margin-inline: auto;
@@ -14,21 +35,26 @@ html, body {
 .card {
   background: var(--color-surface);
   border: var(--border);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
+  /*border-radius: var(--radius-lg);*/
+  border-radius: 16px;
 }
 
 .card--hover:hover {
-  box-shadow: var(--shadow-md);
-  transform: translateY(-1px);
+  /*box-shadow: var(--shadow-md);
+  transform: translateY(-1px);*/
   transition: box-shadow 140ms ease, transform 140ms ease;
+  border: 1px solid var(--color-accent);
+}
+
+/*le margien entre la nav bar et la page */
+.mt-app{
+  margin-top: 88px;
 }
 
 .p-2 { padding: var(--space-2); }
 .p-3 { padding: var(--space-3); }
 .p-4 { padding: var(--space-4); }
 
-.muted { color: var(--color-muted); }
 .border { border: var(--border); }
 .rounded { border-radius: var(--radius-md); }
 
@@ -45,20 +71,40 @@ html, body {
 }
 
 /* Buttons */
-.btn {
+.btn-app {
   border: none;
   border-radius: var(--radius-sm);
   padding: 10px 14px;
-  font-weight: 600;
+  font-weight: 400;
   cursor: pointer;
 }
 
-.btn-primary {
-  background: var(--color-primary);
+.btn-app-sm {
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.btn-app-primary {
+  background-color: var(--color-accent);
   color: white;
 }
 
-.btn-primary:hover { filter: brightness(0.95); }
+.btn-app-outline-secondary{
+  background-color: white;
+  border: var(--border);
+  font-size: var(--text-sm);
+  color: black;
+}
+
+.btn-app-outline-secondary:hover{
+  background-color: rgba(0, 0, 0, 0.041);
+  border: var(--border);
+}
+
+.btn-app-primary:hover { filter: brightness(0.90); }
 
 .btn-ghost {
   background: transparent;
@@ -88,12 +134,13 @@ html, body {
 
 /* Avatar (image ou lettre) */
 .avatar {
-  width: 44px;
-  height: 44px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   border: var(--border);
   overflow: hidden;
-  background: rgba(34, 197, 94, 0.18);
+  /*background: rgba(34, 197, 94, 0.18);*/
+  background-color: var(--color-border);
   display: grid;
   place-items: center;
   box-shadow: var(--shadow-sm);
@@ -141,28 +188,76 @@ html, body {
   color: var(--color-accent);
 }
 
-/* icon size, align..*/
-.material-symbols-outlined{
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.color-accent{
+  color: var( --color-accent);
 }
 
-/* Angular material */
-
-.mat-mdc-form-field {
-  --mdc-outlined-text-field-outline-color: #2563eb;
-  --mdc-outlined-text-field-focus-outline-color: #22c55e;
-  --mdc-outlined-text-field-outline-width: 2px;
+.app-color-secondary{
+  color: var(--color-secondary);
 }
 
-.no-border-field {
-  /* supprime l'underline (la ligne du bas) */
-  --mdc-filled-text-field-active-indicator-height: 0px;
+.app-warn-color{
+  color: var(--color-warn);
+}
+
+.shadow-app{
+    /*box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);*/
+    box-shadow: var( --shadow-sm);
+}
+
+/* Style for Angular Material start */
+/* 1) Cache complètement la ligne (line ripple) */
+.no-border-field .mdc-line-ripple {
+  display: none !important;
+}
+
+/* 2) Et au cas où, force aussi l'indicator à 0 sur le bon élément MDC */
+.no-border-field .mdc-text-field--filled {
   --mdc-filled-text-field-hover-active-indicator-height: 0px;
   --mdc-filled-text-field-focus-active-indicator-height: 0px;
 
-  /* fond par défaut */
-  --mdc-filled-text-field-container-color: #f3f4f6; /* gris clair */
+  /* ton fond */
+  --mdc-filled-text-field-container-color: #f3f4f6;
+}
+
+/* 3) Focus -> change le fond */
+.no-border-field.mat-focused .mdc-text-field--filled {
+  --mdc-filled-text-field-container-color: #e0f2fe;
+}
+
+/* 4) Arrondis (tu l'as déjà) */
+.no-border-field .mat-mdc-text-field-wrapper {
+  border-radius: 8px;
+}
+
+/* Style for Angular Material end */
+
+/* Style for Angular Material textarea create listing/annonce */
+
+.custom-textarea .mdc-line-ripple {
+  display: none; /* supprime la ligne du bas */
+}
+
+.custom-input .mdc-line-ripple {
+  display: none;
+}
+
+
+/* Style for Angular Material textarea create listing/annonce end */
+
+
+/* Style for responsive design */
+
+/* Tablette */
+@media (max-width: 1024px) {
+  .container {
+    width: min(1000px, calc(100% - 24px));
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .container {
+    width: calc(100% - 8px);
+  }
 }

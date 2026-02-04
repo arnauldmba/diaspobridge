@@ -1,12 +1,133 @@
-li a{
-    font-weight: 400;
-    color: black;
-    font-size: var(--text-sm);
+/*--------------------*/
+/* ===== BASE ===== */
+.navbar {
+  position: relative;
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  height: 64px;
+  padding: 0 20px;
+  border-bottom: 1px solid #ddd;
+  background-color: white;
+  z-index: 50;
 }
 
-mat-icon {
-    font-size: 16px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.dropdown-menu-res ul {
+  background-color: red;
+  text-decoration: none;
+}
+
+a{
+  text-decoration: none;
+  color: #1f2937;
+}
+
+.nav-left,
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-right {
+  margin-left: auto;
+}
+
+.nav-right a {
+  transition: background 150ms ease, color 150ms ease;
+}
+
+/* Hover (si pas actif) */
+.desktop-link:not(.active):hover {
+  color: #008b58;
+}
+
+/* Actif */
+.desktop-link.active {
+  color: #008b58;
+  font-weight: 500;
+  /*border-bottom: 1px solid #008b58;*/
+}
+
+.logo {
+  font-weight: 700;
+  font-size: var(--text-xl);
+  cursor: pointer;
+  margin: 0px;
+  padding: 0px;
+}
+
+.burger {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* ===== Mobile menu dropdown ===== */
+.mobile-menu {
+  position: absolute;
+  top: 58px;
+  right: 0;
+  width: 100%;
+  background-color: white;
+  border-bottom: 1px solid #ddd;
+  transform-origin: top;
+  transform: scaleY(0);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    transform 300ms cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 150ms ease;
+}
+
+.mobile-menu.open {
+  transform: scaleY(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobile-menu a {
+  display: block;
+  padding: 22px;
+  text-decoration: none;
+  color: black;
+  border-top: 1px solid var(--color-border);
+  transition: background 150ms ease, color 150ms ease;
+}
+
+/* ===== Mobile layout ===== */
+@media (max-width: 767px) {
+  .navbar {
+    justify-content: space-between;
+  }
+
+  .nav-left {
+    width: 56px;
+  }
+
+  .logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .mobile-menu {
+  height: 100dvh;
+  }
+
+  .desktop-link {
+    display: none;
+  }
+}
+
+/* ===== Desktop layout ===== */
+@media (min-width: 768px) {
+  .burger {
+    display: none;
+  }
+
+  .mobile-menu {
+    width: 300px;
+  }
 }

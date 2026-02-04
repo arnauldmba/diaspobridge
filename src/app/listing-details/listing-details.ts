@@ -2,27 +2,44 @@ import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ListingService } from '../services/listing.service';
 import { MatchService } from '../services/match.service';
+import { MatIcon, MatIconModule } from "@angular/material/icon";
+import { A11yModule } from "@angular/cdk/a11y";
+import { MatDialog } from '@angular/material/dialog';
+import { ContactMessageDialogComponent } from '../contact-message-dialog-component/contact-message-dialog-component';
+import { MessageService } from '../services/message.service';
+import { AuthService } from '../services/auth.service';
+import { FirstLetterPipe } from "../shared/first-letter-pipe";
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-listing-details',
   standalone: true,
-  imports: [],
+  imports: [MatIcon, MatIconModule, A11yModule, FirstLetterPipe, DatePipe],
   templateUrl: './listing-details.html',
   styleUrl: './listing-details.css',
 })
 export class ListingDetails {
 
+  onContactDetail(arg0: number) {
+    console.log('Contact detail clicked for listing ID:', arg0);
+  }
+
   private route = inject(ActivatedRoute);
   private listingService = inject(ListingService);
-  //private chatService = inject(ChatMessaging);
   trip: any;
   loading = true;
 
-  constructor(private router: Router, private matchService: MatchService) {}  
+  constructor(
+    private dialog: MatDialog,
+    private router: Router,
+    private matchService: MatchService,
+    private messageService: MessageService,
+    private authService: AuthService
+  ) { }
 
   ngOnInit(): void {
     const listingId = Number(this.route.snapshot.paramMap.get('id'));
-    
+
     console.log('Listing ID from route:', listingId);
 
     this.listingService.getListingById(listingId).subscribe({
@@ -36,11 +53,9 @@ export class ListingDetails {
         this.loading = false;
       }
     });
-    // You can now use listingId to fetch the listing details using tripService
   }
 
   onContact() {
-
     this.matchService.contactTransporter(this.trip.id).subscribe({
       next: (match) => {
         console.log('Match created:', match);
@@ -49,7 +64,7 @@ export class ListingDetails {
       },
       error: (err) => {
         console.error('Error contacting transporter', err);
-        
+
       }
     });
   }
@@ -58,6 +73,59 @@ export class ListingDetails {
     // Placeholder for contact logic
     console.log('Contact transporter for trip ID:', this.trip.id);
     this.router.navigate(['/chat', this.trip.id]);
+  }
+
+  onContactClick() {
+    // ✅ 1. Vérifier si l'utilisateur est connecté
+    if (!this.authService.isLoggedIn()) {
+      // Redirection vers login avec returnUrl
+      this.router.navigate(['/login'], {
+        queryParams: { returnUrl: this.router.url }
+      });
+      return; // ⛔ on n'ouvre PAS le dialog
+    }
+
+    const ref = this.dialog.open(ContactMessageDialogComponent, {
+      width: '520px',
+      maxWidth: '95vw',
+      data: { title: this.trip.transporter.firstName, placeholder: this.trip.destCity, date: this.trip.departDate },
+    });
+
+    ref.afterClosed().subscribe((message: string | null) => {
+      if (!message) return; // Annulé
+
+      this.matchService.contactTransporter(this.trip.id).subscribe({
+        next: (match) => {
+          console.log('Match created:', match);
+          this.sendMessage(message, match.id);
+          this.router.navigate(['/messages']);
+        },
+        error: (err) => {
+          console.error('Error contacting transporter', err);
+        }
+      });
+    });
+  }
+
+  sendMessage(message: string, matchId: number) {
+    const text = message.trim();
+    if (!text) return;
+
+    if (!matchId || matchId <= 0) {
+      console.error('Invalid matchId provided to ChatMessaging:', matchId);
+      return;
+    }; // valider matchId; si invalide, ne rien faire
+
+    this.messageService.send(matchId, text).subscribe({
+      next: (saved) => {
+        console.log('Message sent successfully:', saved);
+      },
+      error: (err) => console.error(err)
+    });
+  }
+
+  onBackToListing() {
+    this.router.navigate(['/listings']);
   }
 
 }

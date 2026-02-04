@@ -3,14 +3,21 @@
   /* Brand */
   --color-primary: #2563eb; /* bleu */
   --color-accent: #0d943e;  /* vert */
+  --color-secondary: #FFB703;  
+
+  --color-accent: #0d943e;  /* vert */
+  --color-secondary: #FFB703;  
+
   --color-warn: #ef4444;    /* rouge */
 
   /* Surfaces & text */
   --color-bg: #f8fafc;
+  --color-bg-accent: #1cbd271e;
   --color-surface: #ffffff;
   --color-text: #111827;
   /*--color-muted: #6b7280; */
-  --color-muted: #5b606c;
+  /*--color-muted: #5b606c;*/
+   --color-muted: #5b606ce4;
   --color-border: #e5e7eb;
 
   /* Typography */
@@ -21,6 +28,7 @@
   --text-base: 16px;
   --text-lg: 18px;
   --text-xl: 22px;
+  --text-xxl: 26px;
 
   --line-tight: 1.2;
   --line-normal: 1.5;
@@ -34,9 +42,9 @@
   --space-6: 24px;
 
   /* Radius */
-  --radius-sm: 10px;
-  --radius-md: 14px;
-  --radius-lg: 18px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
 
   /* Shadows */
   --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.08);

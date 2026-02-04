@@ -3,18 +3,9 @@
 @use "./styles/material-theme";
 @use "./styles/components";
 
-
-.no-outline-field {
-  /* enlève l'outline */
-  --mdc-outlined-text-field-outline-color: transparent;
-  --mdc-outlined-text-field-focus-outline-color: transparent;
-  --mdc-outlined-text-field-hover-outline-color: transparent;
-
-  /* fond par défaut */
-  --mdc-outlined-text-field-container-color: #f3f4f6;
-}
-
-.no-outline-field.mat-focused {
-  --mdc-outlined-text-field-container-color: #e0f2fe;
-}
-
+/**
+Breakpoints simples (tu peux commencer avec 3)
+    ≤ 600px : mobile
+    601–1024px : tablette
+    ≥ 1025px : desktop
+*/

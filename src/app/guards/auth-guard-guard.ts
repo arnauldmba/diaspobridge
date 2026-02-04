@@ -6,7 +6,8 @@ export const authGuardGuard: CanActivateFn = (route, state) => {
 
   const authService = inject(AuthService);
   const router = inject(Router);
-  if (authService.isloggedIn) {
+
+  if (authService.isLoggedIn()) {
     return true;
   } else {
     router.navigate(['/app-forbidden']);
@@ -18,7 +19,8 @@ export const authGuardGuard2: CanActivateFn = (route, state) => {
 
   const authService = inject(AuthService);
   const router = inject(Router);
-  if (authService.isloggedIn) {
+
+  if (authService.isLoggedIn()) {
     return true;
   } else {
     router.navigate(['/login']);

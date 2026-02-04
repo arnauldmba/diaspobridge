@@ -1,0 +1,56 @@
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+.container-menu {
+    display: flex;
+    align-items: center;
+}
+
+.icon-logo-app,
+.connected-use .icon-burger {
+    flex: 1;
+    margin: 0px;
+    padding: 0px;
+}
+
+.icon-logo-app {
+    text-align: center;
+}
+
+.menu {
+    flex: 1;
+    display: flex;
+    justify-content: end;
+}
+
+.menu ul {
+    display: flex;
+    list-style: none;
+    align-items: center;
+    padding: 0px;
+    margin: 0px;
+    gap: 20px;
+}
+
+.menu ul li{
+    color: red;
+}
+
+
+
+@media (max-width: 600px) {
+    .menu {
+        display: none;
+    }
+}
+
+@media (min-width: 600px) {
+    .icon-burger {
+        display: none;
+    }
+
+    .icon-logo-app {
+        text-align: start;
+    }
+}

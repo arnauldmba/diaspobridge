@@ -1,4 +1,4 @@
-import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, LOCALE_ID, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
@@ -11,6 +11,7 @@ import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-br
 
 export const appConfig: ApplicationConfig = {
   providers: [
+   // { provide: LOCALE_ID, useValue: 'de-DE' }, // Set the locale to German (Germany) 'fr-FR' for French
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
