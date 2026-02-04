@@ -1,12 +1,14 @@
-import { Component, Input, OnChanges, SimpleChange, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChange, SimpleChanges } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MessageDto } from '../model/message-dto';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from '../services/message.service';
 import { AuthService } from '../services/auth.service';
 import { Subscription, switchMap, timer } from 'rxjs';
 import { MatIconModule } from '@angular/material/icon';
+import { MatFormField, MatLabel } from "@angular/material/form-field";
+
 
 @Component({
   selector: 'app-chat-messaging',
@@ -16,35 +18,66 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: './chat-messaging.css',
 })
 
-export class ChatMessaging implements OnChanges{
+export class ChatMessaging implements OnChanges, OnInit{
 
-  @Input() matchId!: number;
+  @Input({ required: true }) matchId!: number;
+
   messages: MessageDto[] = [];
   draft = '';
-  curruntUser!: number;
+  curruntUser = 0 ;
+
   private lastSinceIso = new Date(0).toISOString();
   private sub?: Subscription;
 
   constructor(private route: ActivatedRoute,
+    private router: Router,
     private messageService: MessageService,
-    private authService: AuthService) { }
+    private authService: AuthService,
+  ) { }
+
+  private initChat(id: number){
+    // stop ancien polling si on change de match
+    this.sub?.unsubscribe();
+
+    this.matchId = id;
+    this.messages = []; 
+    this.lastSinceIso = new Date(0).toISOString();
+
+    this.loadMessages();
+    this.startPolling();
+  }
 
   ngOnInit(): void {
-    this.curruntUser = this.authService.logedUserId!;
+    this.authService.loadToken();
+    this.curruntUser = this.authService.logedUserId ?? 0;
 
-    this.route.paramMap.subscribe(pm => {
-      this.matchId = Number(pm.get('matchId'));
-      if (!this.matchId) return;
+    if (this.matchId && this.matchId > 0){
+      this.initChat(this.matchId);
+    }
 
-      this.startPolling(); // <-- ici seulement
-    });
+    this.route.paramMap.subscribe(params => {
+      const id = Number(params.get('matchId'));
+      if(!id || id <= 0) return; 
+
+      this.initChat(id);
+    })
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['matchId'] && this.matchId) {
-      this.loadMessages();
-      this.startPolling();
-    }
+    if(!changes['matchId']) return;
+
+    this.sub?.unsubscribe(); // arrêter l'ancien abonnement s'il existe
+
+    if(!this.matchId || this.matchId <= 0){
+      console.error('Invalid matchId provided to ChatMessaging:', this.matchId);
+      return;
+    }; 
+
+    this.messages = []; // réinitialiser les messages
+    this.lastSinceIso = new Date(0).toISOString(); // réinitialiser lastSinceIso
+
+    this.loadMessages();
+    this.startPolling();  
   }
 
   loadMessages() {
@@ -52,13 +85,17 @@ export class ChatMessaging implements OnChanges{
       next: (msgs) => this.messages = msgs,
       error: (err) => console.error(err)
     });
+    console.log("Liste de match: ", this.messages);
   }
 
   onSend() {
-    console.log('Loaded messages for matchId:', this.messages);
-
     const text = this.draft.trim();
     if (!text) return;
+
+    if(!this.matchId || this.matchId <= 0){
+      console.error('Invalid matchId provided to ChatMessaging:', this.matchId);
+      return;
+    }; // valider matchId; si invalide, ne rien faire
 
     this.messageService.send(this.matchId, text).subscribe({
       next: (saved) => {
@@ -93,29 +130,29 @@ export class ChatMessaging implements OnChanges{
 
 
   startPolling() {
-    this.sub?.unsubscribe();
+    const id = this.matchId;
 
-    this.sub = timer(0, 2000).pipe(
-      switchMap(() =>
-        this.messageService.getNewMessages(this.matchId, this.lastSinceIso)
-      )
-    ).subscribe(newMsgs => {
+    this.sub = timer(0, 2000)
+      .pipe(switchMap(() => this.messageService.getNewMessages(id, this.lastSinceIso)))
+      .subscribe({
+        next: (newMsgs) => {
+          if (!newMsgs.length) return;
 
-      if (!newMsgs.length) return;
+          const existing = new Set(this.messages.map((m) => m.id));
+          const toAdd = newMsgs.filter((m) => !existing.has(m.id));
 
-      const existing = new Set(this.messages.map(m => m.id));
-      const toAdd = newMsgs.filter(m => !existing.has(m.id));
-
-      this.messages = [...this.messages, ...toAdd];
-
-      // très important
-      this.lastSinceIso = newMsgs[newMsgs.length - 1].sentAt;
-    });
+          this.messages = [...this.messages, ...toAdd];
+          this.lastSinceIso = newMsgs[newMsgs.length - 1].sentAt;
+        },
+        error: (err) => console.error(err),
+      });
   }
 
   ngOnDestroy() {
     this.sub?.unsubscribe();
   }
 
-
+  onReturntoMatchList(){
+    this.router.navigate(['/messages']);
+  }
 }

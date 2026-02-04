@@ -1,0 +1,6 @@
+.guide ul li{
+    margin: 4px 0px;
+    font-size: 14px;
+    color: var(--color-muted);
+    font-weight: 400;
+}

@@ -1,91 +1,66 @@
-<div class="container">
-    <h4 class="mt-3">Modifier une annonce</h4>
-    <div>
-        <form class="row g-3 mt-3">
-            <!-- Depart -->
-            <div class="col-md-2 d-flex justify-content-start align-items-center">
-                <h6>Depart</h6>
-            </div>
-            <div class="form-floating col-md-4 mb-2">
-                <input type="text" [(ngModel)]="currentListing.originCountry" name="originCountry" class="form-control" id="floatingInput1" placeholder="Pays">
-                <label for="floatingInput">Pays</label>
-            </div>
-            <div class="form-floating col-md-4 mb-2">
-                <input type="text" [(ngModel)]="currentListing.originCity" name="originCity" class="form-control" id="floatingPassword2" placeholder="Ville">
+<div class="container mt-app">
+    <h1 class="mb-3 text-center">Modifier une annonce</h1>
+    <form class="">
+        <!-- Depart -->
+        <div class="row my-3">
+            <h6 class="col-sm-2">Depart</h6>
+            <div class="col-sm form-floating mb-2">
+                <input type="text" [(ngModel)]="currentListing.originCity" name="originCity" class="form-control"
+                    id="floatingPassword2" placeholder="Ville">
                 <label for="floatingInput">Ville</label>
             </div>
-            <div class="form-floating col-md-2 mb-2">
-                <input type="date" [(ngModel)]="currentListing.departDate" name="departDate" class="form-control" id="floatingPassword3" placeholder="Date">
+
+            <div class="col-sm form-floating mb-2">
+                <input type="date" [(ngModel)]="currentListing.departDate" name="departDate" class="form-control"
+                    id="floatingPassword3" placeholder="Date">
                 <label for="floatingInput">Date</label>
             </div>
-            <!-- Destination -->
-            <div class="col-md-2 d-flex justify-content-start align-items-center">
-                <h6>Destination</h6>
-            </div>
-            <div class="form-floating col-md-4 mb-2">
-                <input type="text" [(ngModel)]="currentListing.destCountry" name="destCountry" class="form-control" placeholder="Pays">
-                <label for="">Pays</label>
-            </div>
-            <div class="form-floating col-md-4 mb-2">
-                <input type="text" [(ngModel)]="currentListing.destCity" name="destCity" class="form-control"  placeholder="Ville">
+        </div>
+
+        <!-- Destination -->
+        <div class="row mb-3">
+            <h6 class="col-sm-2">Destination</h6>
+            <div class="form-floating mb-2 col-sm">
+                <input type="text" [(ngModel)]="currentListing.destCity" name="destCity" class="form-control"
+                    placeholder="Ville">
                 <label for="floatingInput">Ville</label>
             </div>
-            <div class="form-floating col-md-2 mb-2">
-                <input type="date" name="date" class="form-control" id="floatingPassword4" placeholder="Date">
-                <label for="floatingInput">Date</label>
-            </div>
-            <!-- Details -->
-            <div class="col-md-2 d-flex justify-content-start align-items-center">
-                <h6>Kilo</h6>
-            </div>
-            <div class="form-floating col-md-4 mb-2">
-                <input type="text" [(ngModel)]="currentListing.maxWeightKg" name="maxWeightKg" class="form-control" id="floatingInput5" placeholder=""> 
+        </div>
+
+        <!-- Details -->
+        <div class="row mb-3">
+            <h6 class="col-sm-2">Kilo</h6>
+            <div class="form-floating col-sm mb-2">
+                <input type="text" [(ngModel)]="currentListing.maxWeightKg" name="maxWeightKg" class="form-control"
+                    id="floatingInput5">
                 <label for="floatingInput2">Dispobile</label>
             </div>
-            <div class="form-floating col-md-4 mb-2">
-                <input type="text" class="form-control" id="floatingInput6" name="preisKilo" placeholder="">
+            <div class="form-floating col-sm mb-2">
+                <input type="number" [(ngModel)]="currentListing.pricePerKg" class="form-control" id="floatingInput6"
+                    name="pricePerKg">
                 <label for="floatingInput">Prix par Kilo</label>
             </div>
-            <!-- Document type -->
-                <div class="row g-3 mt-2">
-                    <h6 class="col-md-2">Type de Document</h6>
-                    <div class="col-md-4">
-                        <select id="inputState7" class="form-select form-select-lg mb-3 col-md-4">
-                            <option selected>Choose...</option>
-                            <option>Telephone</option>
-                            <option>Ordinateur</option>
-                            <option>Vetements</option>
-                            <option>Autres</option>
-                        </select>
-                    </div>
-                </div>
-            <!-- Description -->
-            <div class="row g-3 mt-2">
-                <div class="col-md-2">
-                    <h6>Note</h6>
-                </div>
-                <div class="form-floating col-md-6 mb-2">
-                    <textarea type="text" [(ngModel)]="currentListing.note" name="note" class="form-control" placeholder="Leave a comment here" id="floatingTextarea" style="height: 150px"></textarea>
+        </div>
+
+
+        <!-- Description -->
+        <div class="row">
+            <h6 class="col-sm-2">Note</h6>
+            <div class="col">
+                <div class="form-floating m-0 col-sm mb-3">
+                    <textarea type="text" [(ngModel)]="currentListing.note" name="note" class="form-control m-0"
+                        placeholder="Leave a comment here" id="floatingTextarea" style="height: 100px"></textarea>
                     <label for="floatingInput">Ajoute une description</label>
                 </div>
+                <!-- Buttons submit -->
+                <button type="submit" (click)="updateListing(currentListing)"
+                    class="btn btn-warning col-sm-4 py-2">Sauvegarder les modifications
+                </button>
             </div>
-            <!-- Condition general -->
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="checkDefault">
-                <label class="form-check-label" for="checkDefault">
-                    J'accepte les conditions generales d'utilisation
-                </label>
-            </div>
-            <!-- Buttons submit -->
-            <div class="row g-2">
-                <button type="submit" (click)="updateListing(currentListing)" class="btn btn-warning col-md-4">Publier l'annonce</button>
-                <button type="submit" class="btn btn-outline-primary col-md-4 ms-3">Enregistrer brouillon</button>
-            </div>
-        </form>
-    </div>
-    <!-- Message for succefull add TransporterTrip -->
-    <div>
-        <!--<h5>{{message}}</h5>-->
-    </div>
-    
+        </div>
+    </form>
+</div>
+<!-- Message for succefull add TransporterTrip -->
+<div>
+    <!--<h5>{{message}}</h5>-->
 </div>

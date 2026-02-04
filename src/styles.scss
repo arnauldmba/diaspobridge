@@ -1,0 +1,11 @@
+@use "./styles/tokens";
+@use "./styles/mixins";
+@use "./styles/material-theme";
+@use "./styles/components";
+
+/**
+Breakpoints simples (tu peux commencer avec 3)
+    ≤ 600px : mobile
+    601–1024px : tablette
+    ≥ 1025px : desktop
+*/

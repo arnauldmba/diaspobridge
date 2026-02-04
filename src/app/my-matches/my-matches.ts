@@ -2,34 +2,42 @@ import { Component } from '@angular/core';
 import { MatchService } from '../services/match.service';
 import { MatchDto } from '../model/chat.models';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { ChatMessaging } from '../chat-messaging/chat-messaging';
 import { MatIconModule } from '@angular/material/icon';
+import { getAvatarColor } from '../shared/utils/avatar-color.util';
 
 @Component({
   selector: 'app-my-matches',
-  imports: [CommonModule, ChatMessaging, MatIconModule],
+  imports: [CommonModule, ChatMessaging, MatIconModule, RouterOutlet],
   templateUrl: './my-matches.html',
   styleUrl: './my-matches.css',
 })
 export class MyMatches {
 
+  //Selected machtid
   matchIdParent!: number;
+  selectedId!: number;
+
+  isMobile = window.matchMedia('(max-width: 600px)').matches;
 
   myMatches: MatchDto[] = [];
   firstMatchiD!: number;
   actuellUser?: string;
+  showMessage = false;
 
 
-  constructor(private matchService: MatchService, private router: Router) { }
+  constructor(
+    private matchService: MatchService,
+    private router: Router) { }
 
   ngOnInit() {
     this.matchService.getMyMatches().subscribe({
       next: (matches) => {
         this.myMatches = matches;
         if (matches.length > 0) {
-          this.matchIdParent = matches[0].id; // ou matches[0].matchId selon ton DTO
-          this.actuellUser = matches[0].otherFirstName;
+          //const first = matches[0];  // take first match 
+          //this.onOpenChat(first.id, first.otherFirstName); // open first match
         }
         console.log("tout premier match", this.myMatches[0]); // ✅ ici
       },
@@ -41,9 +49,49 @@ export class MyMatches {
     return name ? name.charAt(0).toUpperCase() : '';
   }
 
-  onOpenChat(matchId: number) {
+  onOpenChat2(matchId: number, firstname?: string) {
     console.log('onOpenChat matchId parent: ', matchId);
     this.matchIdParent = matchId;
+    this.actuellUser = firstname;
+
+    if (window.innerWidth <= 600) {
+      this.showMessage = true;
+    }
+  }
+
+  /*
+  * ouvrer le chat dans un composant
+  */
+  onOpenChat4(matchId: number, firstname?: string) {
+    this.matchIdParent = matchId;
+    this.actuellUser = firstname;
+    this.router.navigate(['/chat', matchId]);
+    if (window.innerWidth <= 600) {
+      this.showMessage = true;
+    }
+  }
+
+  onBackToListing() {
+    this.router.navigate(['/listings']);
+  }
+
+
+  onOpenChat(id: number) {
+    if (this.isMobile) {
+      this.router.navigate(['/chat', id]);
+    } else {
+      this.selectedId = id;
+    }
+  }
+
+  openChat(matchId: number) {
+    this.router.navigate(['/chat', matchId]);
+  }
+
+  onCloseChat() {
+    if (window.innerWidth <= 600) {
+      this.showMessage = false;
+    }
   }
 
   formatMessageDate(sentAt: string | Date): string {
@@ -66,5 +114,9 @@ export class MyMatches {
     const mm = String(d.getMonth() + 1).padStart(2, "0");
     const yyyy = d.getFullYear();
     return `${dd}.${mm}.${yyyy}`;
+  }
+
+  avatarColor(name: string | null | undefined): string {
+    return getAvatarColor(name);
   }
 }

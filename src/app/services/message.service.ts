@@ -2,10 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, switchMap, timer } from 'rxjs';
 import { MessageDto } from '../model/message-dto';
+import { environment } from '../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class MessageService {
-  private baseUrl = 'http://localhost:8080/diasporabridge/api';
+  //private baseUrl = 'http://localhost:8080/diasporabridge/api';
+  private baseUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
 

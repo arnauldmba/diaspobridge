@@ -18,11 +18,11 @@ const httpOptions = {
 })
 
 export class ListingService {
-  apiUrl = environment.apiUrl;
+  apiUrl = environment.apiUrl + '/trip';
 
-  listing!: TransporterTrip[]; 
+  listing!: TransporterTrip[];
 
-  constructor(private http: HttpClient, private authService: AuthService) {}
+  constructor(private http: HttpClient, private authService: AuthService) { }
 
   getAllListings(): Observable<TransporterTrip[]> {
     return this.http.get<TransporterTrip[]>(this.apiUrl);
@@ -76,6 +76,22 @@ export class ListingService {
       `${this.apiUrl}/search/country`,
       { params }
     );
+  }
+
+  searchTrips(criteria: CountrySearchCriteria): Observable<Page<TransporterTrip>> {
+    let params = new HttpParams();
+
+    if (criteria.origin) params = params.set('origin', criteria.origin);
+    if (criteria.fromDate) params = params.set('fromDate', criteria.fromDate);
+    if (criteria.toDate) params = params.set('toDate', criteria.toDate);
+
+    params = params
+      .set('page', String(criteria.page ?? 0))
+      .set('size', String(criteria.size ?? 10))
+      .set('activeOnly', String(criteria.activeOnly ?? true));
+
+    return this.http.get<Page<TransporterTrip>>(
+      `${this.apiUrl}/search`,{ params });
   }
 
   getMyTrips(): Observable<TransporterTrip[]> {

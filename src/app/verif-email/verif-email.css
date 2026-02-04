@@ -1,0 +1,63 @@
+.verify-container {
+    max-width: 520px;
+    margin: 40px auto;
+    padding: 16px;
+}
+
+.card {
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, .06);
+    margin-top: 16px;
+}
+
+label {
+    display: block;
+    margin: 8px 0 6px;
+    font-weight: 600;
+}
+
+input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
+
+button {
+    width: 100%;
+    margin-top: 12px;
+    padding: 10px 12px;
+    border: 0;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+button.secondary {
+    background: #f3f4f6;
+}
+
+.alert {
+    margin-top: 12px;
+    padding: 10px 12px;
+    border-radius: 10px;
+}
+
+.alert.success {
+    background: #ecfdf5;
+}
+
+.alert.error {
+    background: #fef2f2;
+}
+
+.subtitle {
+    color: #555;
+}
+
+.hint {
+    font-size: 12px;
+    color: #777;
+    margin-top: 10px;
+}

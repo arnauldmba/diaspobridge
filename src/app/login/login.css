@@ -1,0 +1,15 @@
+formm{
+    width: 400px;
+}
+
+.intro-loggin{
+    margin: 10px 0px 10px 5px;
+}
+
+@media (max-width: 600px) {
+    .intro-loggin{
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+    }
+}

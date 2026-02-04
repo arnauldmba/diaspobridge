@@ -1,25 +1,42 @@
 import { Component, OnInit, signal } from '@angular/core';
-import { Router, RouterLink, RouterLinkWithHref, RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router, RouterLink, RouterLinkActive, RouterLinkWithHref, RouterOutlet } from '@angular/router';
 import { AuthService } from './services/auth.service';
 import { MatIconModule } from '@angular/material/icon';
+import { Observable } from 'rxjs';
+import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
+import { filter } from 'rxjs/operators';
+import { FirstLetterPipe } from "./shared/first-letter-pipe";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterLink, RouterOutlet, RouterLinkWithHref, MatIconModule],
+  imports: [RouterLink, RouterOutlet, RouterLinkWithHref, MatIconModule, RouterLinkActive, MatButtonModule, MatMenuModule, FirstLetterPipe],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
 export class App implements OnInit{
   protected readonly title = signal('diasporabridge');
+  isLoggedIn$!: Observable<boolean>;
+  mobileMenuOpen = false;
+  currentUserEmail?: string; 
 
-  constructor(public authService: AuthService, public router: Router) { }
+  constructor(public authService: AuthService, public router: Router) { 
+    this.router.events
+      .pipe(filter((e) => e instanceof NavigationEnd))
+      .subscribe(() => (this.mobileMenuOpen = false));
+  }
 
   ngOnInit(): void {
+    this.authService.loadToken();
+    this.isLoggedIn$ = this.authService.authState$;
+    this.currentUserEmail = this.authService.logedUser;
+    /*
     this.authService.loadToken();
     if (this.authService.getToken() == null || this.authService.isTokenExpired()) {
       this.router.navigate(['/login']);
     }
+      */
 
     /*
     let isloggedIn: string
@@ -40,9 +57,11 @@ export class App implements OnInit{
     this.authService.logout();
   }
 
-  isUserLogIn() {
-    if (!this.authService.isloggedIn) {
-      this.router.navigate(['/login']);
-    }
+  toggleMenu(): void {
+    this.mobileMenuOpen = !this.mobileMenuOpen;
+  }
+
+  closeMenu(): void {
+    this.mobileMenuOpen = false;
   }
 }

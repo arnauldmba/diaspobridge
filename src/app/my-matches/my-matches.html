@@ -1,33 +1,47 @@
-<div class="container p-0">
-    <h3 class="mb-4 mt-5">Messages</h3>
-    <div *ngIf="myMatches.length === 0">
-        <p>You have no matches yet.</p>
-    </div>
-    <div class="container-match-and-chat">
-        <div *ngIf="myMatches.length > 0" class="matches-list">
-            <ul>
-                <li *ngFor="let match of myMatches" clickable (click)="onOpenChat(match.id)" class="p-3 border-bottom">
-                    <div class="profile-avatar border">
-                        <!-- <mat-icon class="mat-icon">person</mat-icon> -->
-                         <span>{{getFirstLetter(match.otherFirstName)}}</span>
+<div class="mb-3 mt-app container">
+    <span class="material-symbols-outlined back-button" (click)="onBackToListing()">
+        keyboard_backspace
+    </span>
+    <h1 class="m-0 text-center">Messages</h1>
+</div>
+
+<div class="p-0 border container rounded-1" style="display: flex;">
+    @if(myMatches.length > 0){
+    <div class="container-match-and-chat" style="flex: 1;">
+        <div class="matches-list" [class.hide-on-mobile]="showMessage">
+            <ul class="matches-item-container">
+                <!--<li *ngFor="let match of myMatches" clickable (click)="onOpenChat(match.id, match.otherFirstName)"-->
+                <li *ngFor="let match of myMatches" clickable (click)="onOpenChat(match.id)"
+                    class="p-3 d-flex gap-1 border-bottom match-item" [class.active]="match.id === matchIdParent">
+                    <div class="">
+                        <div class="avatar border me-2" [style.background]="avatarColor(match.otherFirstName)">
+                            <span>{{getFirstLetter(match.otherFirstName)}}</span>
+                        </div>
                     </div>
-                    <div class="ms-2">
-                        <p class="fs-6 fw-semibold">{{match.otherFirstName}}</p>
-                        <p class="fs-lighter">{{match.lastMessagePreview}}</p>
-                        <p class="fs-6 fs-lighter">{{match.updatedAt | date:'dd.MM.yyyy' }}</p>
+                    <div class="w-100">
+                        <p class="chat-firstname m-0">
+                            <span>{{match.otherFirstName}}</span>
+                            <span class="updated-date">{{match.updatedAt | date:'dd.MM.yyyy' }}</span>
+                        </p>
+                        <p class="preview-message mb-2">{{match.lastMessagePreview}}</p>
                     </div>
                 </li>
             </ul>
         </div>
-        <div class="chat-list border">
-            <div class="d-flex align-items-center border-bottom">
-                <div class="profile-avatar  m-3">
-                    <!--<mat-icon class="mat-icon">person</mat-icon>-->
-                    <span>{{getFirstLetter(actuellUser)}}</span>
-                </div>
-                <span>{{actuellUser}} </span>
-            </div>
-            <app-chat-messaging [matchId]="matchIdParent"></app-chat-messaging>
-        </div>
+    </div>
+    }@else{
+    <div class="container text-center my-5" *ngIf="myMatches.length === 0">
+        <h5>Aucun messasges pour le moment.</h5>
+    </div>
+    }
+    <div style="flex: 2;" class="container-chat-component" *ngIf="!isMobile && selectedId">
+        <app-chat-messaging [matchId]="selectedId"></app-chat-messaging>
     </div>
 </div>
+
+<!-- Mobile: chat en plain ecrain via route -->
+@if(isMobile){
+<div class="mobile">
+    <router-outlet></router-outlet>
+</div>
+}
