@@ -7,19 +7,51 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface MatchRepository extends JpaRepository<Match, Long> {
+	
+	@Query("""
+			  SELECT m FROM Match m
+			  JOIN FETCH m.requester r
+			  JOIN FETCH m.trip t
+			  JOIN FETCH t.transporter tr
+			  WHERE r.id = :userId OR tr.id = :userId
+			  ORDER BY m.updatedAt DESC
+			""")
+	List<Match> findMyMatches(@Param("userId") Long userId);
 
-    // 🔹 Trouver un match spécifique pour un couple (parcel, trip)
-    Optional<Match> findByParcel_IdAndTrip_Id(Long parcelId, Long tripId);
+    //Trouver un match spécifique pour un couple (parcel, trip)
+    Optional<Match> findByTripIdAndRequesterId(Long tripId, Long requestId);
+    
+    List<Match> findByRequesterIdOrderByUpdatedAtDesc(Long requesterId);
+    
+    @Query("""
+            SELECT m FROM Match m
+            WHERE m.trip.transporter.id = :transporterId
+            ORDER BY m.updatedAt DESC
+        """)
+        List<Match> findForTransporter(@Param("transporterId") Long transporterId);
 
-    // 🔹 Vérifier si un match existe déjà entre un colis et un trajet
+    @Query("""
+      SELECT m FROM Match m
+      WHERE m.requester.id = :userId
+      ORDER BY m.updatedAt DESC
+    """)
+    List<Match> findForRequester(@Param("userId") Long userId);
+
+
+
+    
+    
+    
+    // Vérifier si un match existe déjà entre un colis et un trajet
     boolean existsByParcel_IdAndTrip_Id(Long parcelId, Long tripId);
 
-    // 🔹 Liste des matches proposés par un expéditeur
+    // Liste des matches proposés par un expéditeur
     Page<Match> findByParcel_Sender_IdOrderByCreatedAtDesc(Long senderId, Pageable pageable);
 
     // 🔹 Liste des matches pour un transporteur donné

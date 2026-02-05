@@ -19,7 +19,7 @@ import lombok.*;
 @Table(name = "users")
 public class User {
 
-	public enum Role { SENDER, TRANSPORTER, ADMIN }
+	public enum Role { ADMIN, USER }
 
 	  @Id
 	  @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,7 +33,7 @@ public class User {
 
 	  @Enumerated(EnumType.STRING)
 	  @Column(nullable = false, length = 20)
-	  private Role role = Role.SENDER;
+	  private Role role = Role.USER;
 
 	  @Column(name = "first_name", length = 100)
 	  private String firstName;
@@ -47,11 +47,11 @@ public class User {
 	  // 🟢 Champs à ajouter :
 	  @Builder.Default
 	  @Column(name = "is_active", nullable = false)
-	  private Boolean isActive = true;
+	  private Boolean isActive = false;
 
 	  @Builder.Default
 	  @Column(name = "email_verified", nullable = false)
-	  private Boolean emailVerified = true;
+	  private Boolean emailVerified = false;
 	  
 	  @Column(name = "deleted_at")
 	  private Instant deletedAt;
@@ -65,8 +65,8 @@ public class User {
 	  @PrePersist
 	  void onCreate() {
 	      // filet de sécurité si jamais le builder a mis null
-	      if (isActive == null)       isActive = true;
-	      if (emailVerified == null)  emailVerified = true; // ou false selon ta logique
+	      if (isActive == null)       isActive = false;
+	      if (emailVerified == null)  emailVerified = false; // ou false selon ta logique
 	      this.createdAt = this.updatedAt = Instant.now();
 	  }
 

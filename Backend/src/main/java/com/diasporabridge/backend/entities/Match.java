@@ -8,51 +8,64 @@ import java.time.Instant;
 
 @Entity
 @Table(
-  name = "matches",
-  uniqueConstraints = @UniqueConstraint(name = "uq_parcel_trip", columnNames = {"parcel_id","trip_id"})
-)
+		name = "matches",
+		uniqueConstraints = @UniqueConstraint(
+				name = "uq_trip_requester",
+				columnNames = {"trip_id","requester_id"}
+				)
+		)
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
 public class Match {
 
-  public enum ProposedBy { SENDER, TRANSPORTER, SYSTEM }
-  public enum MatchStatus { PENDING, ACCEPTED, REJECTED, CANCELLED }
+	//public enum ProposedBy { TRANSPORT, SYSTEM, SENDER }
+	public enum ProposedBy { REQUESTER, TRIP_OWNER, SENDER }
+	public enum MatchStatus { PENDING, ACCEPTED, REJECTED, CANCELLED }
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-  @ManyToOne(optional = false, fetch = FetchType.LAZY)
-  @JoinColumn(name = "parcel_id", nullable = false)
-  private ParcelRequest parcel;
+	// ✅ nouveau: celui qui contacte (le client)
+	@ManyToOne(optional = false, fetch = FetchType.LAZY)
+	@JoinColumn(name = "requester_id", nullable = false)
+	private User requester;
 
-  @ManyToOne(optional = false, fetch = FetchType.LAZY)
-  @JoinColumn(name = "trip_id", nullable = false)
-  private TransporterTrip trip;
+	// ✅ devient optionnel: tu peux chatter sans parcel
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "parcel_id")
+	private ParcelRequest parcel;
 
-  @Enumerated(EnumType.STRING)
-  @Column(name = "proposed_by", nullable = false, length = 20)
-  private ProposedBy proposedBy;
+	@ManyToOne(optional = false, fetch = FetchType.LAZY)
+	@JoinColumn(name = "trip_id", nullable = false)
+	private TransporterTrip trip;
 
-  @Column(name = "price_eur", precision = 10, scale = 2)
-  private BigDecimal priceEur;
+	@Enumerated(EnumType.STRING)
+	@Column(name = "proposed_by", nullable = false, length = 20)
+	private ProposedBy proposedBy;
 
-  @Enumerated(EnumType.STRING)
-  @Column(name = "status", nullable = false, length = 20)
-  private MatchStatus status = MatchStatus.PENDING;
+	@Column(name = "price_eur", precision = 10, scale = 2)
+	private BigDecimal priceEur;
 
-  @Column(name = "created_at", nullable = false, updatable = false)
-  private Instant createdAt;
+	@Enumerated(EnumType.STRING)
+	@Column(name = "status", nullable = false, length = 20)
+	@Builder.Default
+	private MatchStatus status = MatchStatus.PENDING;
 
-  @Column(name = "updated_at", nullable = false)
-  private Instant updatedAt;
+	@Column(name = "created_at", nullable = false, updatable = false)
+	private Instant createdAt;
 
-  @PrePersist
-  void onCreate() {
-    this.createdAt = this.updatedAt = Instant.now();
-  }
+	@Column(name = "updated_at", nullable = false)
+	private Instant updatedAt;
+	
+	@Column(name = "last_message_preview", length = 120)
+	private String lastMessagePreview;
+	
+	@Column(name = "last_message_at")
+	private Instant lastMessageAt;
 
-  @PreUpdate
-  void onUpdate() {
-    this.updatedAt = Instant.now();
-  }
+	@PrePersist
+	void onCreate() { this.createdAt = this.updatedAt = Instant.now(); }
+
+	@PreUpdate
+	void onUpdate() { this.updatedAt = Instant.now(); }
 }
