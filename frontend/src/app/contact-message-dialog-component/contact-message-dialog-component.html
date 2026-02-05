@@ -1,0 +1,32 @@
+<div class="container p-3">
+    <div class="d-flex align-items-center gap-3 my-3">
+        <div class="avatar" style="width: 80px; height: 80px;">
+            {{(data.title | firstLetter )}}
+        </div>
+        <div class="d-grid align-items-center gap-1">
+            <h6 class="m-0">{{ data.title ?? 'Contacter' }}</h6>
+            <p class="m-0">Voyage pour {{ data.placeholder }} le {{ data.date}} </p>
+        </div>
+    </div>
+    <div class="d-grid">
+        <mat-form-field appearance="outline">
+            <mat-label>Message</mat-label>
+            <textarea 
+                matInput 
+                [(ngModel)]="message"
+                placeholder="Ecris ton message"
+                style="height: 120px;"
+            ></textarea>
+
+            @if (touched && !message.trim()) {
+                <mat-error>
+                    Le message ne peut pas être vide.
+                </mat-error>
+            }
+        </mat-form-field>
+        <mat-dialog-actions class="mb-1 p-0">
+            <button matButton mat-dialog-close (click)="onCancel()">Annuler</button>
+            <button matButton mat-dialog-close cdkFocusInitial (click)="onSend()" >Envoyer</button>
+        </mat-dialog-actions>
+    </div>
+</div>

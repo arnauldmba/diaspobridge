@@ -1,0 +1,92 @@
+<nav class="navbar">
+  <div class="nav-left">
+    @if(!mobileMenuOpen){
+    <span class="material-symbols-outlined burger" (click)="toggleMenu()">
+      menu
+    </span>
+    }@else {
+    <span (click)="closeMenu()" class="material-symbols-outlined burger">
+      close
+    </span>
+    }
+    <span class="logo" routerLink="/">
+      <span style="font-weight: 300">Mboko</span>
+      <span style="font-style: italic;">GO</span>
+    </span>
+  </div>
+
+  <!-- Desktop -->
+  <div class="nav-right">
+    <a class="desktop-link active" routerLink="/listings" (click)="closeMenu()" routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }">
+      Annonces
+    </a>
+    @if(authService.isAdmin()) {
+    <a routerLinkActive="active" class="desktop-link" routerLink="/#">Liste Utilisateur</a>
+    }
+    <a routerLinkActive="active" class="desktop-link" routerLink="/add-listing">Créer une annonce</a>
+    <a routerLinkActive="active" class="desktop-link" routerLink="/messages">Messages</a>
+    <a routerLinkActive="active" class="desktop-link" routerLink="/compte">
+      @if(authService.isLoggedIn()){
+      <!--@if(authService.logedUser && authService.isLoggedIn()){-->
+        @if(!mobileMenuOpen ){
+        <span class="material-symbols-outlined d-flex align-items-center" (click)="toggleMenu()">
+          <span class="material-symbols-outlined avatar">person</span>
+          keyboard_arrow_down
+        </span>
+        }@else {
+        <span (click)="closeMenu()" class="material-symbols-outlined d-flex align-items-center">
+          <span class="material-symbols-outlined avatar">person</span>
+          keyboard_arrow_up
+        </span>
+        }
+
+      }@else{
+      <span [matMenuTriggerFor]="menu" class="material-symbols-outlined avatar">person</span>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item routerLink="/login">Connexion/Inscription</button>
+      </mat-menu>
+      }
+    </a>
+    <a routerLinkActive="active" class="desktop-link-auth burger" routerLink="/compte">
+      @if(authService.isLoggedIn()){
+      <span [matMenuTriggerFor]="menu" 
+        style="background-color: black; color: white;"
+        class="avatar">{{currentUserEmail | firstLetter}}</span>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="logout()">Deconnexion</button>
+      </mat-menu>
+    }@else {
+      <span [matMenuTriggerFor]="menu" class="material-symbols-outlined avatar">person</span>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item routerLink="/login">Connexion/Inscription</button>
+      </mat-menu>
+    }
+    </a>
+  </div>
+
+
+  <!-- Mobile dropdown -->
+  <div class="mobile-menu shadow-app" [class.open]="mobileMenuOpen">
+    <a routerLink="/add-listing" (click)="closeMenu()" routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }">
+      Publier
+    </a>
+    <a routerLink="/listings" (click)="closeMenu()">Annonces</a>
+    <a routerLink="/my-listings" (click)="closeMenu()">Mes annonces</a>
+    <a routerLink="/compte" (click)="closeMenu()">Profil</a>
+    <a routerLink="/messages" (click)="closeMenu()">Messages</a>
+
+    @if(authService.isLoggedIn()) {
+    <a (click)="logout()" class="dropdown-item">Deconnexion</a>
+    }@else{
+    <a class="dropdown-item" routerLink="/login" (click)="closeMenu()">Connexion</a>
+    }
+  </div>
+</nav>
+
+<router-outlet />
+
+<div class="mt-4 pt-3 text-center" style="color: var(--color-muted); font-size: 0.875rem;   ">
+  
+</div>

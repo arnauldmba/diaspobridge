@@ -1,0 +1,76 @@
+<!-- 
+<div class="container mt-5 text-center">
+    <div class="row justify-content-md-center">
+        <div class="col-md-3">
+            @if(err) {
+            <div class="alert alert-danger">
+                <strong>{{err}}</strong>
+            </div>
+            }
+            <form class="">
+                <div class="txt_field">
+                    <label class="mb-3">Veuillez entrer le code envoyé par mail</label>
+                    <input type="text" name="code" [(ngModel)]="code" class="formcontrol"
+                        style="height: 38px; width: 100%;" placeholder=" code de confirmation">
+                </div>
+                <button type="button" class="btn btn-success mt-3" (click)="onValidateEmail()"
+                    style="height: 40px; width: 100%;">S'insrire</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+-->
+
+<div class="verify-container">
+    <h2>Confirmer ton email</h2>
+    <p class="subtitle">
+        On t’a envoyé un code de vérification par email (vérifie aussi le dossier spam).
+    </p>
+
+    <!-- ✅ Message feedback -->
+    <div *ngIf="message" class="alert success">
+        {{ message }}
+    </div>
+    <div *ngIf="error" class="alert error">
+        {{ error }}
+    </div>
+
+    <!-- ✅ Vérification code -->
+    <form (ngSubmit)="onVerify()" class="card">
+        <label for="code">Code de vérification</label>
+
+        <input id="code" type="text" name="code" [(ngModel)]="code" placeholder="Ex: 482913"
+            autocomplete="one-time-code" inputmode="numeric" maxlength="10" required />
+
+        <button type="submit" [disabled]="loading || !code.trim()">
+            {{ loading ? 'Vérification...' : 'Vérifier' }}
+        </button>
+
+        <p class="hint">
+            Le code expire au bout de 15 minutes.
+        </p>
+    </form>
+
+    <!-- ✅ Renvoyer le code -->
+    <div class="card resend">
+        <h3>Tu n’as rien reçu ?</h3>
+        <p class="subtitle">
+            Entre ton email pour recevoir un nouveau code.
+        </p>
+
+        <form (ngSubmit)="onResend()">
+            <label for="email">Adresse email</label>
+            <input id="email" type="email" name="email" [(ngModel)]="email" placeholder="ton.email@example.com"
+                autocomplete="email" required />
+
+            <button type="submit" class="secondary" [disabled]="resending || !email.trim()">
+                {{ resending ? 'Envoi...' : 'Renvoyer le code' }}
+            </button>
+        </form>
+
+        <p class="hint">
+            Si l’email existe, on t’enverra un code (pour des raisons de sécurité on ne confirme pas).
+        </p>
+    </div>
+</div>

@@ -43,3 +43,8 @@ __screenshots__/
 Thumbs.db
 
 **/.metadata/
+
+# Environment variables
+.env
+**/.env
+**/.env.*

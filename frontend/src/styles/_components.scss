@@ -1,0 +1,263 @@
+/* Classes UI réutilisables (cards, boutons, etc.) */
+
+html, body {
+  font-family: var(--font-family);
+  color: var(--color-text);
+  background: var(--color-bg);
+}
+
+.color-text{
+  color: var(--color-text);
+}
+
+.muted { color: var(--color-muted); }
+
+.subpage-titel{
+  font-weight: 1000;
+  font-size: 28px;
+}
+
+.text-meta {
+  font-weight: 400;
+  font-size: var(--text-sm);
+}
+
+.text-meta-strong {
+  font-weight: 500;
+  font-size: var(--text-sm);
+}
+
+.container {
+  width: min(1120px, calc(100% - 32px));
+  margin-inline: auto;
+}
+
+.card {
+  background: var(--color-surface);
+  border: var(--border);
+  /*border-radius: var(--radius-lg);*/
+  border-radius: 16px;
+}
+
+.card--hover:hover {
+  /*box-shadow: var(--shadow-md);
+  transform: translateY(-1px);*/
+  transition: box-shadow 140ms ease, transform 140ms ease;
+  border: 1px solid var(--color-accent);
+}
+
+/*le margien entre la nav bar et la page */
+.mt-app{
+  margin-top: 88px;
+}
+
+.p-2 { padding: var(--space-2); }
+.p-3 { padding: var(--space-3); }
+.p-4 { padding: var(--space-4); }
+
+.border { border: var(--border); }
+.rounded { border-radius: var(--radius-md); }
+
+.row {
+  display: flex;
+  align-items: center;
+  /*gap: var(--space-3);*/
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+/* Buttons */
+.btn-app {
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.btn-app-sm {
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.btn-app-primary {
+  background-color: var(--color-accent);
+  color: white;
+}
+
+.btn-app-outline-secondary{
+  background-color: white;
+  border: var(--border);
+  font-size: var(--text-sm);
+  color: black;
+}
+
+.btn-app-outline-secondary:hover{
+  background-color: rgba(0, 0, 0, 0.041);
+  border: var(--border);
+}
+
+.btn-app-primary:hover { filter: brightness(0.90); }
+
+.btn-ghost {
+  background: transparent;
+  border: var(--border);
+  color: var(--color-text);
+}
+
+.btn-ghost:hover { background: rgba(0,0,0,0.03); }
+
+/* Badge / Chip */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: var(--border);
+  background: var(--color-surface);
+  font-size: var(--text-sm);
+}
+
+.badge--primary {
+  border-color: rgba(37, 99, 235, 0.25);
+  background: rgba(37, 99, 235, 0.08);
+  color: var(--color-primary);
+}
+
+/* Avatar (image ou lettre) */
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: var(--border);
+  overflow: hidden;
+  /*background: rgba(34, 197, 94, 0.18);*/
+  background-color: var(--color-border);
+  display: grid;
+  place-items: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.avatar--lg { width: 60px; height: 60px; }
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar .initials {
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--color-text);
+}
+
+/* Divider with text (horizontal) */
+.divider-with-text {
+  display: flex;
+  align-items: center;
+  color: var(--color-muted);
+  margin: var(--space-4) 0;
+}
+
+.divider-with-text::before,
+.divider-with-text::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--color-border);
+}
+
+.divider-with-text span {
+  padding: 0 12px;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  /*text-transform: uppercase;*/
+}
+
+/*icon couleur */
+.color-1{
+  color: var(--color-accent);
+}
+
+.color-accent{
+  color: var( --color-accent);
+}
+
+.app-color-secondary{
+  color: var(--color-secondary);
+}
+
+.app-warn-color{
+  color: var(--color-warn);
+}
+
+.shadow-app{
+    /*box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);*/
+    box-shadow: var( --shadow-sm);
+}
+
+/* Style for Angular Material start */
+/* 1) Cache complètement la ligne (line ripple) */
+.no-border-field .mdc-line-ripple {
+  display: none !important;
+}
+
+/* 2) Et au cas où, force aussi l'indicator à 0 sur le bon élément MDC */
+.no-border-field .mdc-text-field--filled {
+  --mdc-filled-text-field-hover-active-indicator-height: 0px;
+  --mdc-filled-text-field-focus-active-indicator-height: 0px;
+
+  /* ton fond */
+  --mdc-filled-text-field-container-color: #f3f4f6;
+}
+
+/* 3) Focus -> change le fond */
+.no-border-field.mat-focused .mdc-text-field--filled {
+  --mdc-filled-text-field-container-color: #e0f2fe;
+}
+
+/* 4) Arrondis (tu l'as déjà) */
+.no-border-field .mat-mdc-text-field-wrapper {
+  border-radius: 8px;
+}
+
+/* Style for Angular Material end */
+
+/* Style for Angular Material textarea create listing/annonce */
+
+.custom-textarea .mdc-line-ripple {
+  display: none; /* supprime la ligne du bas */
+}
+
+.custom-input .mdc-line-ripple {
+  display: none;
+}
+
+
+/* Style for Angular Material textarea create listing/annonce end */
+
+
+/* Style for responsive design */
+
+/* Tablette */
+@media (max-width: 1024px) {
+  .container {
+    width: min(1000px, calc(100% - 24px));
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .container {
+    width: calc(100% - 8px);
+  }
+}

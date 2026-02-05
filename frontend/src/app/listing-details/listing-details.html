@@ -1,0 +1,121 @@
+<div class="mt-app">
+    @if (loading) {
+    <div>Chargement ... </div>
+    }
+
+    <div class="container back-button">
+        <span class="material-symbols-outlined color-1" (click)="onBackToListing()">
+            keyboard_backspace
+        </span>
+    </div>
+
+    <div class="container text-center mb-4">
+        <h1 class="" style="color: rgb(4, 84, 4);">Détail du voyage</h1>
+    </div>
+
+    @if (!loading && trip) {
+    <div class="container">
+        <div class="trip-container">
+            <!-- <h2 class="mb-1">Annonce de {{trip.transporter.firstName}}</h2> -->
+            <div class="trip-details">
+                <!--<h4 class="">Détail du voyage</h4>-->
+
+                <!--section 1 -->
+                <div class="departure-and-arrival"
+                    >
+                    <p class="color-second-text">Route</p>
+                    <div class="d-flex gap-2">
+                        <mat-icon class="color-1 location-icon">location_on</mat-icon>
+                        <p class="p-0 m-0">
+                            <strong>{{trip.originCity}}, {{trip.originCountry}}</strong><br>
+                            <span class="color-second-text">Départ</span>
+                        </p>
+                    </div>
+                    <div class="d-flex gap-2 border-start my-2" style="height: 30px; margin-left: 19px;">
+                    </div>
+                    <div class="d-flex gap-2">
+                        <mat-icon class="color-1 location-icon">location_on</mat-icon>
+                        <p>
+                            <strong>{{trip.destCity}}, {{trip.destCountry}}</strong><br>
+                            <span class="color-second-text">Arrivé</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!--section 2 -->
+                <div class="date-weight-kilo mt-2">
+                    <div class="d-flex">
+                        <div class="col">
+                            <div class="color-second-text align-items-center d-flex">
+                                <mat-icon class="material-symbols-outlined p-0">calendar_today</mat-icon>
+                                Date de départ
+                            </div>
+                            <span class="ms-4 text-meta-strong">{{trip.departDate | date:'dd MMM yyyy'}}</span>
+
+                            <div class="color-second-text align-items-center d-flex mt-2">
+                                <mat-icon class="material-symbols-outlined p-0">weight</mat-icon>
+                                Kilo disponible
+                            </div>
+                            <span class="ms-4 text-meta-strong">{{trip.maxWeightKg}}kg</span>
+                        </div>
+                        <div class="col-4 price align-items-start">
+                            <h3 style="color: var(--color-accent);">6€/kg</h3>
+                        </div>
+                    </div>
+
+                    <!--section 3 -->
+                    <div style="background-color: var(--color-bg-accent);" class="p-2 px-3 mt-3 rounded-2">
+                        <h6 class="mt-1 muted" style="font-size: var(--text-ms);">Description</h6>
+                        @if(trip.note){
+                        <p style="font-size: var(--text-sm);">{{trip.note}}</p>
+                        }@else {
+                        <p style="font-style: italic;"> <strong>{{trip.transporter.firstName }}</strong> n’a pas laissé
+                            de note. Contactez-le pour plus d’informations. </p>
+                        }
+                    </div>
+                </div>
+            </div>
+            <!-- Details transporter -->
+            <div class="trip-user-info">
+                <div class="rounded-4 transporter-detail">
+                    <div class="trip-details-button">
+                        <h5 class="">Transporteur</h5>
+                        <div class="user-foto-and-name gap-2">
+                            <div class="avatar" style="width: 50px; height: 50px;">
+                                {{(trip.transporter.firstName | firstLetter )}}
+                            </div>
+                            <h6 class="m-0 p-0">{{trip.transporter.firstName}}</h6>
+                        </div>
+
+                        <div class="d-grid gap-2 pb-2">
+                            <button (click)="onContactClick()" class="btn-app btn-app-primary gap-2">
+                                <mat-icon class="material-symbols-outlined">chat_bubble</mat-icon>
+                                Contacter le transporteur
+                            </button>
+                            <!--
+                            <button (click)="onContactDetail(1)"
+                                class="button-contact-transporter btn btn-light border">
+                                Consulter le profil
+                            </button>
+                            -->
+                        </div>
+                    </div>
+                    <div class="transporter-additional-info">
+                        <h6 class="pt-1 pb-2">Conseils de sécurité</h6>
+                        <ul>
+                            <li>Vérifier l'identité du transporteur</li>
+                            <li>Emballer les articles de manière sécurisée</li>
+                            <li>Déclarer honnêtement le contenu</li>
+                            <li>Obtenir une confirmation de suivi</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    }
+
+    @if (loading && !trip) {
+    <div>Annonce introuvable!</div>
+    }
+</div>
