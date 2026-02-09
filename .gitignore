@@ -1,50 +1,67 @@
-# See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
+# =========================
+# GLOBAL (Monorepo)
+# =========================
 
-# Compiled output
-/dist
-/tmp
-/out-tsc
-/bazel-out
-
-# Node
-/node_modules
-npm-debug.log
-yarn-error.log
-
-# IDEs and editors
-.idea/
-.project
-.classpath
-.c9/
-*.launch
-.settings/
-*.sublime-workspace
-
-# Visual Studio Code
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-.history/*
-
-# Miscellaneous
-/.angular/cache
-.sass-cache/
-/connect.lock
-/coverage
-/libpeerconnection.log
-testem.log
-/typings
-__screenshots__/
-
-# System files
+# OS
 .DS_Store
 Thumbs.db
 
-**/.metadata/
-
-# Environment variables
+# Env files
 .env
+.env.*
 **/.env
 **/.env.*
+**/.env.local
+
+# Logs
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
+
+# IDE / Editors
+.idea/
+.vscode/
+.history/
+*.iml
+.project
+.classpath
+.settings/
+*.launch
+*.sublime-workspace
+.c9/
+
+# =========================
+# NODE / ANGULAR (Frontend)
+# =========================
+
+# Node dependencies
+**/node_modules/
+
+# Angular cache/build
+**/.angular/
+**/.angular/cache/
+**/dist/
+**/out-tsc/
+*.tsbuildinfo
+
+# Coverage
+**/coverage/
+
+# =========================
+# JAVA / SPRING (Backend)
+# =========================
+
+# Maven / Gradle
+**/target/
+**/build/
+
+# =========================
+# MISC
+# =========================
+
+# Mac / temp
+**/.metadata/
+**/.classpath
+**/.factorypath
+**/.recommenders/
