@@ -24,6 +24,9 @@ public class TransporterTrip {
 
   @Column(name = "origin_city", nullable = false, length = 120)
   private String originCity;
+  
+  @Column(name = "price_per_kg", nullable = false, precision = 8, scale = 2)
+  private BigDecimal pricePerKg;
 
   @Column(name = "origin_country", nullable = false, length = 120)
   private String originCountry;

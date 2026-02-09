@@ -12,37 +12,28 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.diasporabridge.backend.entities.User;
+import com.diasporabridge.backend.register.VerificationToken;
 
 import jakarta.transaction.Transactional;
 
 public interface UsersRepository extends JpaRepository<User, Long> {
 	
+	User findByfirstName(String firstName);
+	
 	// --- Uniques / existence ---
     Optional<User> findByEmailIgnoreCaseAndDeletedAtIsNull(String email);
     boolean existsByEmailIgnoreCaseAndDeletedAtIsNull(String email);
-
     Optional<User> findByIdAndDeletedAtIsNull(Long id);
-
-    // --- Lists / filtres courants ---
     Page<User> findByIsActiveTrueAndDeletedAtIsNull(Pageable pageable);
     Page<User> findByRoleAndIsActiveTrueAndDeletedAtIsNull(User.Role role, Pageable pageable);
-
-    // Recherche "annuaire" (nom/prénom)
     Page<User> findByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCaseAndDeletedAtIsNull(
         String firstNameLike, String lastNameLike, Pageable pageable
     );
-
-    // Outils
     long countByRoleAndDeletedAtIsNull(User.Role role);
     List<User> findTop10ByDeletedAtIsNullOrderByCreatedAtDesc();
     List<User> findByIdInAndDeletedAtIsNull(Collection<Long> ids);
-
-    // Optionnel : si tu veux VRAIMENT chercher par email partiel (admin only)
     Page<User> findByEmailContainingIgnoreCaseAndDeletedAtIsNull(String emailLike, Pageable pageable);
 
-    // Exemple si tu veux garder une @Query explicite :
-    // @Query("select u from User u where lower(u.firstName) = lower(?1) and u.deletedAt is null")
-    // List<User> findByFirstNameExactIgnoreCase(String firstName);
     
     /**
      * Modifying indique qu’il s’agit d’une requête d’écriture (UPDATE).
@@ -63,4 +54,11 @@ public interface UsersRepository extends JpaRepository<User, Long> {
     		         OR LOWER(u.lastName) LIKE LOWER(CONCAT('%', :q, '%')))
     		""")
 	Page<User> searchDirectory(@Param("q") String q, Pageable pageable);
+    
+    List<User> findByIsActiveTrue();
+    Optional<User> findActiveById(Long id);
+	boolean existsActiveByEmailIgnoreCase(String email);
+	Optional<User> findActiveByEmailIgnoreCase(String email);
+	
+
 }
