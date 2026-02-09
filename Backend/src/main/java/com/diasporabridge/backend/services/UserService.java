@@ -43,5 +43,7 @@ public interface UserService {
 	
 	public void sendEmailUser(User user, String code);
 	public User validateToken(String code);
+	public Page<User> getAllActiveUsers(Pageable pageable);
+	public void setActive(Long userId, boolean active) ;
 	
 }

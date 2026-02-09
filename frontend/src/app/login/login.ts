@@ -27,6 +27,11 @@ export class Login implements OnInit {
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
+    const msg = sessionStorage.getItem('auth_error');
+    if (msg) {
+      this.message = msg;
+      sessionStorage.removeItem('auth_error');
+    }
   }
 
   onLoggdin(): void {

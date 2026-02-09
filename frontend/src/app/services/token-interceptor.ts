@@ -5,38 +5,30 @@ import { Router } from '@angular/router';
 import { catchError, throwError } from 'rxjs';
 
 /*
-ancinne version
-export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
 
+export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
-  // URLs à exclure : login & register
-  const excluded = ['/auth/login', '/auth/register', '/auth/verifyEmail']; // ajouter (dernier)
-
+  const excluded = ['/api/auth/login', '/api/auth/register', '/api/auth/verifyEmail'];
   if (excluded.some(path => req.url.includes(path))) {
     return next(req);
   }
 
-  const jwt = authService.getToken(); // peut être null
-  
+  const token = authService.getToken();
+  const reqWithToken = token
+    ? req.clone({ setHeaders: { Authorization: `Bearer ${token}` } })
+    : req;
 
-  if (!jwt) return next(req); // ajoute 
-
-  // Pas de token → on n'ajoute rien
-  if (!jwt) {
-    return next(req);
-  }
-
-  const authHeader = jwt.startsWith('Bearer ') ? jwt : `Bearer ${jwt}`;
-
-  const reqWithToken = req.clone({
-    setHeaders: {
-      Authorization: authHeader,
-    },
-  });
-
-  return next(reqWithToken);
+  return next(reqWithToken).pipe(
+    catchError((err: HttpErrorResponse) => {
+      if (err.status === 401) {
+        authService.logout(); 
+        router.navigate(['/login'], { queryParams: { returnUrl: router.url } });
+      }
+      return throwError(() => err);
+    })
+  );
 };
 */
 
@@ -49,19 +41,45 @@ export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
     return next(req);
   }
 
-  const token = authService.getToken(); // ✅ raw ou null (purge si expiré)
+  const token = authService.getToken();
   const reqWithToken = token
     ? req.clone({ setHeaders: { Authorization: `Bearer ${token}` } })
     : req;
 
   return next(reqWithToken).pipe(
     catchError((err: HttpErrorResponse) => {
-      if (err.status === 401) {
-        authService.logout(); // ✅ supprime le token & état
+      // Backend peut renvoyer un body JSON
+      const body: any = err.error;
+
+      const isDisabled =
+        err.status === 403 &&
+        body &&
+        (body.errorCause === 'disabled' || body.error === 'disabled');
+
+      const isAuthProblem =
+        err.status === 401 ||
+        (err.status === 403 && isDisabled) ||
+        (err.status === 401 && body && (body.error === 'TOKEN_EXPIRED' || body.error === 'INVALID_TOKEN'));
+
+      if (isAuthProblem) {
+        authService.logout();
+
+        // Option: stocker un message pour l’afficher sur la page login
+        // (selon ton app: toast/snackbar/service message)
+        if (isDisabled) {
+          // ex: authService.setAuthMessage?.("Compte désactivé");
+          // ou localStorage/sessionStorage
+          sessionStorage.setItem('auth_error', 'Compte désactivé. Contactez le support.');
+        } else if (body?.message) {
+          sessionStorage.setItem('auth_error', body.message);
+        }
+
         router.navigate(['/login'], { queryParams: { returnUrl: router.url } });
       }
+
       return throwError(() => err);
     })
   );
 };
+
 

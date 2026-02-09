@@ -33,7 +33,7 @@ import lombok.RequiredArgsConstructor;
 
 @Configuration
 @EnableWebSecurity
-//@EnableMethodSecurity(prePostEnabled = true)
+@EnableMethodSecurity(prePostEnabled = true)
 @RequiredArgsConstructor
 public class SecurityConfig {
 	@Autowired
@@ -73,7 +73,8 @@ public class SecurityConfig {
 
             c.setAllowedOrigins(java.util.List.of(
                 "http://localhost:4200",
-                "http://192.168.178.21:4200"
+                "http://192.168.178.70:4200"
+				//,"http://192.168.*.*:4200"
             ));
 
             c.setAllowedMethods(java.util.List.of(
@@ -107,14 +108,17 @@ public class SecurityConfig {
         	    .requestMatchers("/api/matches/**").authenticated()
         	    .requestMatchers("/api/messages/**").authenticated()
 
-        	    // admin (si tu veux le garder)
-        	    .requestMatchers("/api/users/**").hasAuthority("ADMIN")
+        	    /*.requestMatchers("/api/users/**").hasAuthority("ADMIN")*/
+				/*.requestMatchers("/api/users/**").hasAuthority("ROLE_ADMIN")*/
+				//.requestMatchers("/api/users/**").hasRole("ADMIN")
+				.requestMatchers("/api/admin/**").hasRole("ADMIN")
+
 
         	    .anyRequest().authenticated()
         )
         
         .addFilter(jwtAuthFilter)
-        .addFilterBefore(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
+        .addFilterBefore(new JWTAuthorizationFilter(usersRepository), UsernamePasswordAuthenticationFilter.class);
         
         
         return http.build();

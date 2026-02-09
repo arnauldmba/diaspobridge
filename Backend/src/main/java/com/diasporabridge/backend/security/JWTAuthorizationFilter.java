@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
@@ -17,6 +18,8 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.diasporabridge.backend.entities.User;
+import com.diasporabridge.backend.repos.UsersRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jakarta.servlet.FilterChain;
@@ -26,33 +29,53 @@ import jakarta.servlet.http.HttpServletResponse;
 
 public class JWTAuthorizationFilter extends OncePerRequestFilter {
 
+	private final UsersRepository usersRepository;
+
+	public JWTAuthorizationFilter(UsersRepository usersRepository) {
+		this.usersRepository = usersRepository;
+	}
+
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
 
 		String jwt = request.getHeader("Authorization");
-
-		if(jwt == null || !jwt.startsWith(SecParams.PREFIX)) {
+		if (jwt == null || !jwt.startsWith(SecParams.PREFIX)) {
 			filterChain.doFilter(request, response);
-			return; 
+			return;
 		}
 
 		try {
-			String tocken = jwt.substring(SecParams.PREFIX.length()); 
+			String tocken = jwt.substring(SecParams.PREFIX.length());
 			JWTVerifier verifier = JWT.require(Algorithm.HMAC256(SecParams.SECRET)).build();
-
 			DecodedJWT decodedJWT = verifier.verify(tocken);
 
 			String email = decodedJWT.getSubject();
-			List<String> roles = decodedJWT.getClaims().get("roles").asList(String.class);
 
-			Collection <GrantedAuthority> authorities = new ArrayList<>();
+			// ✅ Vérifie en DB si compte actif
+			boolean active = usersRepository.findActiveByEmailIgnoreCase(email)
+					.map(User::getIsActive)
+					.orElse(false);
 
-			if (roles != null) {
-				for (String r : roles) authorities.add(new SimpleGrantedAuthority(r));
+			if (!active) {
+				SecurityContextHolder.clearContext();
+				response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+				response.setContentType("application/json");
+				new ObjectMapper().writeValue(response.getOutputStream(), Map.of(
+						"errorCause", "disabled",
+						"message", "Compte désactivé."));
+				return;
 			}
 
-			UsernamePasswordAuthenticationToken user = new UsernamePasswordAuthenticationToken(email, null, authorities);
+			List<String> roles = decodedJWT.getClaims().get("roles").asList(String.class);
+			Collection<GrantedAuthority> authorities = new ArrayList<>();
+			if (roles != null) {
+				for (String r : roles)
+					authorities.add(new SimpleGrantedAuthority(r));
+			}
+
+			UsernamePasswordAuthenticationToken user = new UsernamePasswordAuthenticationToken(email, null,
+					authorities);
 
 			SecurityContextHolder.getContext().setAuthentication(user);
 			filterChain.doFilter(request, response);
@@ -65,6 +88,10 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
 			sendUnauthorized(response, "INVALID_TOKEN", "Token invalide. Veuillez vous reconnecter.");
 		}
 
+		System.out.println("requestURI=" + request.getRequestURI());
+		System.out.println("servletPath=" + request.getServletPath());
+		System.out.println("contextPath=" + request.getContextPath());
+
 	}
 
 	private void sendUnauthorized(HttpServletResponse response, String code, String message) throws IOException {
@@ -72,8 +99,7 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
 		response.setContentType("application/json");
 		new ObjectMapper().writeValue(response.getOutputStream(), java.util.Map.of(
 				"error", code,
-				"message", message
-				));
+				"message", message));
 	}
 
 }
