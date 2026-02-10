@@ -32,6 +32,10 @@
     margin-left: 2px;
 }
 
+.icon-size-m{
+    font-size: var(--text-base);
+}
+
 .container-description{
     flex: 2;
     color: var(--color-text);
