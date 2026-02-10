@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, signal, ViewChild } from '@angular/core';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive, RouterLinkWithHref, RouterOutlet } from '@angular/router';
 import { AuthService } from './services/auth.service';
 import { MatIconModule } from '@angular/material/icon';
@@ -18,8 +18,12 @@ import { FirstLetterPipe } from "./shared/first-letter-pipe";
 export class App implements OnInit{
   protected readonly title = signal('diasporabridge');
   isLoggedIn$!: Observable<boolean>;
-  mobileMenuOpen = false;
   currentUserEmail?: string; 
+
+  mobileMenuOpen = false;
+
+  @ViewChild('mobileMenu') mobileMenu!: ElementRef;
+  @ViewChild('navbar') navbar!: ElementRef;
 
   constructor(public authService: AuthService, public router: Router) { 
     this.router.events
@@ -31,26 +35,6 @@ export class App implements OnInit{
     this.authService.loadToken();
     this.isLoggedIn$ = this.authService.authState$;
     this.currentUserEmail = this.authService.logedUser;
-    /*
-    this.authService.loadToken();
-    if (this.authService.getToken() == null || this.authService.isTokenExpired()) {
-      this.router.navigate(['/login']);
-    }
-      */
-
-    /*
-    let isloggedIn: string
-    let loggedUser: string;
-
-    isloggedIn = localStorage.getItem('isloggedIn')!;
-    loggedUser = localStorage.getItem('loggedUser')!;
-
-    if (isloggedIn != 'true' || !isloggedIn) {
-      this.router.navigate(['/login']);
-    } else {
-      this.authService.setLoggedUserFromLocalStorage(loggedUser);
-    }
-    */
   }
 
   logout(): void {
@@ -63,5 +47,18 @@ export class App implements OnInit{
 
   closeMenu(): void {
     this.mobileMenuOpen = false;
+  }
+
+  @HostListener('document:click', ['$event'])
+  onClickOutside(event: MouseEvent) {
+    if (!this.mobileMenuOpen) return;
+
+    const clickedInside =
+      this.mobileMenu?.nativeElement.contains(event.target) ||
+      this.navbar?.nativeElement.contains(event.target);
+
+    if (!clickedInside) {
+      this.closeMenu();
+    }
   }
 }

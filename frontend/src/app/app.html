@@ -1,4 +1,4 @@
-<nav class="navbar">
+<nav class="navbar" #navbar>
   <div class="nav-left">
     @if(!mobileMenuOpen){
     <span class="material-symbols-outlined burger" (click)="toggleMenu()">
@@ -67,7 +67,7 @@
 
 
   <!-- Mobile dropdown -->
-  <div class="mobile-menu shadow-app" [class.open]="mobileMenuOpen">
+  <div class="mobile-menu shadow-app" [class.open]="mobileMenuOpen" #mobileMenu>
     <a routerLink="/add-listing" (click)="closeMenu()" routerLinkActive="active"
       [routerLinkActiveOptions]="{ exact: true }">
       Publier
