@@ -6,7 +6,7 @@
 }
 
 .container-add-listing {
-    width: min(1080px, calc(100% - 32px));
+    width: min(1120px, calc(100% - 32px));
     margin-inline: auto;
 }
 

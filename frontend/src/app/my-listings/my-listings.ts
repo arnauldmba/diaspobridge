@@ -8,7 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-my-listings',
-  imports: [RouterLink, FirstLetterPipe, MatButtonModule],
+  imports: [RouterLink, MatButtonModule],
   templateUrl: './my-listings.html',
   styleUrl: './my-listings.css',
 })
