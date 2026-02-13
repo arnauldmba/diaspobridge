@@ -1,7 +1,7 @@
 <div class="container mt-app">
     <!-- <button class="btn-app btn-app-primary publier">+ Publier</button> -->
     <!-- Presentation text -->
-    <div class="mb-4 p-0 text-center container-intro-message">
+    <div class="mb-4 p-0 container-intro-message">
         <h1 class="mb-2">Trouvez des <span class="app-color-secondary">voyageurs</span> à destination du Cameroun</h1>
         <p class="muted">Entrez en contact avec des <span class="">voyageurs</span> vérifiés qui peuvent <span
                 class="">transporter</span>
@@ -11,18 +11,73 @@
 
     <!-- Search bar: Transport city, Period, search bar -->
     <div class="row align-items-start mb-5">
-        <div class="col-sm">
+        <!--<div class="col-sm">
             <mat-form-field appearance="outline" class="w-100">
-                <mat-label class="muted" style="font-size: var(--text-sm);">Ville du transporteur
+                <mat-label style="font-size: var(--text-base);">Où au Cameroun ?
                     (optionnel)</mat-label>
                 <mat-icon matPrefix>location_on</mat-icon>
                 <input style="font-size: var(--text-sm);" matInput [(ngModel)]="pickupCity" name="pickupCity"
-                    placeholder="Ex: Cologne">
-                <!-- <mat-hint>Tu peux envoyer le colis par la poste ou remise en main propre.</mat-hint> -->
+                    placeholder="Ex: Douala, Yaoundé…">
+                <mat-hint class="muted">Choisissez la ville où votre colis doit arriver.</mat-hint>
             </mat-form-field>
         </div>
+        -->
+        
+        <app-city-autocomplete-component 
+            class="col-sm"
+            [cities]="citiesCM"
+            label="Où au Cameroun (optionnel) ?"
+            placeholder="Ex : Douala, Yaoundé…"
+            hint="Ville où votre colis doit arriver."
+            [(ngModel)]="pickupCity" name="pickupCity" [required]="false" [minlength]="2"
+            >
+        </app-city-autocomplete-component>
+        
 
-        <!-- Period -->
+        <div class="col-sm">
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label class="muted" style="font-size: var(--text-base);">
+                    Quand ? (optionnel)
+                </mat-label>
+                
+                <mat-icon matPrefix>calendar_today</mat-icon>
+
+                <mat-select class="" [(ngModel)]="selectedPeriod" name="selectedPeriod">
+
+                    <mat-option value="7days">
+                        Prochains 7 jours
+                    </mat-option>
+
+                    <mat-option value="30days">
+                        Prochains 30 jours
+                    </mat-option>
+
+                    <mat-option value="thisMonth">
+                        Ce mois-ci
+                    </mat-option>
+
+                    <mat-option (click)="isCalendarOpen = !isCalendarOpen" value="custom">
+                        {{fromDate ? (fromDate | date:'dd MMM yyyy') : 'Choisir une date'   }}
+                    </mat-option>
+
+                </mat-select>
+
+                <mat-hint class="muted">Sélectionnez une période de départ.</mat-hint>
+            </mat-form-field>
+
+            <div class="date-picker">
+                <!--*ngIf="selectedPeriod === 'custom'"-->
+                <mat-card class="demo-inline-calendar-card" *ngIf="isCalendarOpen">
+                    <mat-calendar [(selected)]="fromDate" [dateFilter]="futureDatesOnly"></mat-calendar>
+                    <button (click)="closeCalender()" matButton>Fermer</button>
+                </mat-card>
+            </div>
+        </div>
+
+
+
+
+        <!--
         <div class="col-sm">
             <mat-form-field appearance="outline" class="w-100">
                 <mat-label class="muted" style="font-size: var(--text-sm);">Période de départ</mat-label>
@@ -38,6 +93,7 @@
                 <mat-hint class="muted">Choisis une période (ex: 10 jan → 31 jan)</mat-hint>
             </mat-form-field>
         </div>
+        -->
 
         <!-- Bouton search -->
         <div class="col-sm button-search">
@@ -50,7 +106,7 @@
     </div>
 
     <!--Item trip / card -->
-    <h4 class="">Voyageurs disponible</h4>
+    <h5 class="">Voyageurs disponible</h5>
     <div class="row row-cols-1 row-cols-lg-3 g-3 g-lg-4">
         @for (listing of listings; track listing.id) {
         <div class="col align-items-center">

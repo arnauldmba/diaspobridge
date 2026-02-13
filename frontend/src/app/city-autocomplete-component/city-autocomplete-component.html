@@ -1,0 +1,49 @@
+<mat-form-field appearance="outline" class="w-100">
+  <mat-label>{{ label }}</mat-label>
+
+  @if (icon) {
+    <mat-icon matPrefix>{{ icon }}</mat-icon>
+  }
+
+  <input
+    matInput
+    [ngModel]="value"
+    (ngModelChange)="onInput($event)"
+    (blur)="onBlur()"
+    [required]="required"
+    [attr.minlength]="minlength || null"
+    [disabled]="disabled"
+    [matAutocomplete]="auto"
+    [placeholder]="placeholder"
+    #model="ngModel"
+  />
+
+  <mat-autocomplete
+    #auto="matAutocomplete"
+    (optionSelected)="onSelected($event.option.value)"
+    autoActiveFirstOption
+  >
+    @for (c of (filteredCities$ | async); track c.id) {
+      <mat-option [value]="c">
+        {{ c.name }}
+        @if (c.state) {
+          <span class="muted">· {{ c.state }}</span>
+        }
+        @if (c.region) {
+          <span class="muted">· {{ c.region }}</span>
+        }
+      </mat-option>
+    }
+  </mat-autocomplete>
+
+  @if (hint) {
+    <mat-hint>{{ hint }}</mat-hint>
+  }
+
+  @if (model.touched && model.errors?.['required']) {
+    <mat-error>Ce champ est obligatoire.</mat-error>
+  }
+  @if (model.touched && model.errors?.['minlength']) {
+    <mat-error>Minimum {{ minlength }} caractères.</mat-error>
+  }
+</mat-form-field>

@@ -32,11 +32,15 @@ html, body {
   margin-inline: auto;
 }
 
+.container-2 {
+  width: min(720px, calc(100% - 32px));
+  margin-inline: auto;
+}
+
 .card {
   background: var(--color-surface);
   border: var(--border);
-  /*border-radius: var(--radius-lg);*/
-  border-radius: 16px;
+  border-radius: var(--radius-lg);
 }
 
 .card--hover:hover {
@@ -48,7 +52,7 @@ html, body {
 
 /*le margien entre la nav bar et la page */
 .mt-app{
-  margin-top: 88px;
+  margin-top: 100px;
 }
 
 .p-2 { padding: var(--space-2); }

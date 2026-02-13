@@ -3,9 +3,9 @@ import { User } from "./users.model";
 export class TransporterTrip {
   id?: number;
   transporter!: User;             // Relation ManyToOne (backend)
-  originCity!: string;
+  originCity: string | null = null;
   originCountry!: string;
-  destCity!: string;
+  destCity: string | null = null;
   destCountry!: string;
   departDate!: string;            // LocalDate → string (format ISO, ex: "2025-11-01")
   maxWeightKg?: number;          // BigDecimal → number

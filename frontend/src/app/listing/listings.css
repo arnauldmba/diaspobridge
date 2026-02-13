@@ -1,6 +1,3 @@
-/* Presentation text  */
-
-
 /* trait qui separe les deux ville */
 .divider-with-text {
   display: flex;
@@ -51,6 +48,16 @@
   --mdc-filled-text-field-container-color: #f3f4f6; /* gris clair */
 }
 
+/* style pour entrer une date recherche */
+
+.demo-inline-calendar-card {
+  min-width: 350px;
+  position: absolute;
+  top: 180px;
+  z-index: 500;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 /* Mobile */
 @media (max-width: 600px) {
 
@@ -64,5 +71,15 @@
 
   .button-search{
     margin-top: 10px;
+  }
+
+  .demo-inline-calendar-card {
+    width: 90%;
+  }
+
+  .date-picker{
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
   }
 }

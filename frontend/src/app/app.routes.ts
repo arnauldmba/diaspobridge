@@ -16,6 +16,7 @@ import { ChatDetailComponent } from './chat-detail.component/chat-detail.compone
 import { MenuBurger } from './shared/menu-burger/menu-burger';
 import { ForgotPasswordComponent } from './authentication/forgot-password-component/forgot-password-component';
 import { ResetPasswordCompotent } from './authentication/reset-password-compotent/reset-password-compotent';
+import { CityAutocompleteComponent } from './city-autocomplete-component/city-autocomplete-component';
 
 export const routes: Routes = [
     { path: "my-listings", component: MyListings, canActivate: [authGuardGuard2]},
@@ -24,6 +25,7 @@ export const routes: Routes = [
     { path: "listing-details/:id", component: ListingDetails },
     { path: "add-listing", component: AddListing, canActivate: [authGuardGuard2] },
     { path: "update-listing/:id", component: UpdateListing },
+    { path: "seach", component: CityAutocompleteComponent },
     { path: "chat/:matchId", component: ChatMessaging },
     { path: "messages", component: MyMatches, canActivate: [authGuardGuard2] },
     { path: "messages/:matchId", component: MyMatches, canActivate: [authGuardGuard2] },

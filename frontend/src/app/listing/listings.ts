@@ -12,32 +12,47 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { provideNativeDateAdapter } from '@angular/material/core';
+import { provideNativeDateAdapter, MatOption } from '@angular/material/core';
 import { FirstLetterPipe } from '../shared/first-letter-pipe';
 import { getAvatarColor } from '../shared/utils/avatar-color.util';
 import { futureDatesOnly } from '../shared/utils/date-filters.util';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatSelectModule } from '@angular/material/select';
+import { CityAutocompleteComponent } from "../city-autocomplete-component/city-autocomplete-component";
+import { CITIES_CM } from '../model/cities-cm';
 
 
 @Component({
   selector: 'app-listing',
   standalone: true,
   imports: [FormsModule, CommonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatCardModule, MatTabsModule,
-    MatButtonModule, MatInputModule, MatFormFieldModule, MatStepperModule, MatDatepickerModule, FirstLetterPipe, MatChipsModule
-  ],
+    MatButtonModule, MatInputModule, MatFormFieldModule, MatStepperModule, MatDatepickerModule, FirstLetterPipe, MatChipsModule, MatOption, MatSelectModule, CityAutocompleteComponent],
   providers: [provideNativeDateAdapter()],
   templateUrl: './listings.html',
   styleUrl: './listings.css',
 })
 export class Listings implements OnInit {
 
+  citiesCM = CITIES_CM;
+
+
+  isCalendarOpen = false;
+  selectedDate: Date | null = null;
+
+  closeCalender() {
+    this.isCalendarOpen = false;
+  }
+
+  selectedPeriod: '7days' | '30days' | 'thisMonth' | 'custom' = '30days';
+
   today = new Date();
   futureDatesOnly = futureDatesOnly;
 
   listings!: TransporterTrip[];
 
-  pickupCity: string = '';
+  //pickupCity: string = '';
+  pickupCity: string | null = null;
   fromDate: Date | null = null;
   toDate: Date | null = null;
 
@@ -74,17 +89,35 @@ export class Listings implements OnInit {
   }
 
   onSearch(): void {
+    if(this.selectedPeriod === 'custom') {
+      this.selectedDate = this.fromDate; 
+      console.log('Selected period custom:', this.selectedPeriod, 'From:', this.fromDate, 'To:', this.toDate);  
+    }else if(this.selectedPeriod === '7days') {
+      console.log('Selected period 7days:', this.selectedPeriod);
+      this.fromDate = new Date();
+      this.toDate = new Date();
+      this.toDate.setDate(this.toDate.getDate() + 7);
+    }else if(this.selectedPeriod === 'thisMonth') {
+      this.fromDate = new Date(this.today.getFullYear(), this.today.getMonth(), 1);
+      this.toDate = new Date(this.today.getFullYear(), this.today.getMonth() + 1, 0);
+      console.log('Selected period thisMonth:', this.selectedPeriod);
+    }else if(this.selectedPeriod === '30days') {
+      this.fromDate = new Date();
+      this.toDate = new Date();
+      this.toDate.setDate(this.toDate.getDate() + 30);
+      console.log('Selected period 30days:', this.selectedPeriod);
+    }
+
     const criteria: CountrySearchCriteria = {
       origin: this.pickupCity?.trim() || undefined,
-      fromDate: this.fromDate ? this.toIsoDate(this.fromDate) : undefined,
-      toDate: this.toDate ? this.toIsoDate(this.toDate) : undefined,
+      fromDate: this.fromDate ? this.toIsoDateLocal(this.fromDate) : undefined,
+      toDate: this.toDate ? this.toIsoDateLocal(this.toDate) : undefined,
       page: 0,
       size: this.size,
       activeOnly: true
     };
 
     if (this.fromDate && this.toDate && this.fromDate > this.toDate) return;
-
     this.fetch(criteria);
   }
 
@@ -105,10 +138,12 @@ export class Listings implements OnInit {
     });
   }
 
-  private toIsoDate(d: Date): string {
-    console.log('Converting date to ISO:', d);
-    return d.toISOString().slice(0, 10);
-  }
+private toIsoDateLocal(d: Date): string {
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
 
 
   resetFilters(): void {
