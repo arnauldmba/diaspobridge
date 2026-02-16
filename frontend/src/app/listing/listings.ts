@@ -1,4 +1,4 @@
-import { Component, NgModule, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TransporterTrip } from '../model/transporterTrip.model';
 import { ListingService } from '../services/listing.service';
 import { CountrySearchCriteria } from '../model/country-search-criteria.model';
@@ -27,32 +27,30 @@ import { CITIES_CM } from '../model/cities-cm';
   selector: 'app-listing',
   standalone: true,
   imports: [FormsModule, CommonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatCardModule, MatTabsModule,
-    MatButtonModule, MatInputModule, MatFormFieldModule, MatStepperModule, MatDatepickerModule, FirstLetterPipe, MatChipsModule, MatOption, MatSelectModule, CityAutocompleteComponent],
+    MatButtonModule, MatFormFieldModule, MatStepperModule, MatDatepickerModule, FirstLetterPipe, MatChipsModule, MatSelectModule, CityAutocompleteComponent],
   providers: [provideNativeDateAdapter()],
   templateUrl: './listings.html',
   styleUrl: './listings.css',
 })
 export class Listings implements OnInit {
 
+  isThereResult: boolean = false; //Vaiable pour afficher et cacher le button: Effacer la recherche
+
+  seachResutat: string = ''; // variable qui contient le resutlat de la recherche
+
   citiesCM = CITIES_CM;
 
-
-  isCalendarOpen = false;
   selectedDate: Date | null = null;
 
-  closeCalender() {
-    this.isCalendarOpen = false;
-  }
-
-  selectedPeriod: '7days' | '30days' | 'thisMonth' | 'custom' = '30days';
-
+  readonly selectedPeriodList: {name:string , value: string}[] = [{name: '7days', value: 'Prochains 7 jours'}, {name: 'thisMonth', value: 'Ce mois-ci'}, {name: '30days', value: '30 jours'}];
+  selectedPeriod: string = '';
   today = new Date();
   futureDatesOnly = futureDatesOnly;
 
   listings!: TransporterTrip[];
 
-  //pickupCity: string = '';
   pickupCity: string | null = null;
+
   fromDate: Date | null = null;
   toDate: Date | null = null;
 
@@ -75,6 +73,12 @@ export class Listings implements OnInit {
     this.loadAllTrips();
   }
 
+  get canSearch(): boolean {
+    const hasCity = (this.pickupCity?.trim()?.length ?? 0) >= 2;
+    const hasDates = !!(this.fromDate && this.toDate);
+    return hasCity || hasDates;
+  }
+
   openListing(id: number | undefined) {
     this.router.navigate(['/listing-details/', id]);
   }
@@ -89,25 +93,6 @@ export class Listings implements OnInit {
   }
 
   onSearch(): void {
-    if(this.selectedPeriod === 'custom') {
-      this.selectedDate = this.fromDate; 
-      console.log('Selected period custom:', this.selectedPeriod, 'From:', this.fromDate, 'To:', this.toDate);  
-    }else if(this.selectedPeriod === '7days') {
-      console.log('Selected period 7days:', this.selectedPeriod);
-      this.fromDate = new Date();
-      this.toDate = new Date();
-      this.toDate.setDate(this.toDate.getDate() + 7);
-    }else if(this.selectedPeriod === 'thisMonth') {
-      this.fromDate = new Date(this.today.getFullYear(), this.today.getMonth(), 1);
-      this.toDate = new Date(this.today.getFullYear(), this.today.getMonth() + 1, 0);
-      console.log('Selected period thisMonth:', this.selectedPeriod);
-    }else if(this.selectedPeriod === '30days') {
-      this.fromDate = new Date();
-      this.toDate = new Date();
-      this.toDate.setDate(this.toDate.getDate() + 30);
-      console.log('Selected period 30days:', this.selectedPeriod);
-    }
-
     const criteria: CountrySearchCriteria = {
       origin: this.pickupCity?.trim() || undefined,
       fromDate: this.fromDate ? this.toIsoDateLocal(this.fromDate) : undefined,
@@ -119,6 +104,67 @@ export class Listings implements OnInit {
 
     if (this.fromDate && this.toDate && this.fromDate > this.toDate) return;
     this.fetch(criteria);
+
+    if (!this.pickupCity && !this.fromDate && !this.toDate && !this.selectedPeriod){
+      this.seachResutat = "aucun resultat";
+    }
+
+    this.isThereResult = true;
+  }
+
+  onSearch2(): void {
+    this.selectedPeriod = '';
+
+    const parts: string[] = [];
+
+    if (this.pickupCity?.trim()) {
+      parts.push(this.pickupCity.trim());
+    }
+
+    if (this.fromDate) {
+      parts.push(this.fromDate.toLocaleDateString('de-DE'));
+    }
+
+    if (this.toDate) {
+      parts.push(`- ${this.toDate.toLocaleDateString('de-DE')}`);
+    }
+
+    this.seachResutat = parts.join(' ');
+    this.onSearch();
+  }
+
+  filterSelect() {
+    if (this.selectedPeriod === '7days') {
+      this.seachResutat = "Prochains 7 jours";
+      this.fromDate = new Date();
+      this.toDate = new Date();
+      this.toDate.setDate(this.toDate.getDate() + 7);
+
+      if (this.pickupCity) {
+        this.seachResutat = `${this.pickupCity} · ${this.seachResutat}`;
+      }
+
+    } else if (this.selectedPeriod === 'thisMonth') {
+
+      this.seachResutat = "Ce mois-ci";
+      this.fromDate = new Date(this.today.getFullYear(), this.today.getMonth(), 1);
+      this.toDate = new Date(this.today.getFullYear(), this.today.getMonth() + 1, 0);
+
+      if (this.pickupCity) {
+        this.seachResutat = `${this.pickupCity} · ${this.seachResutat}`;
+      }
+
+    } else if (this.selectedPeriod === '30days') {
+
+      this.seachResutat = "30 jours";
+      this.fromDate = new Date();
+      this.toDate = new Date();
+      this.toDate.setDate(this.toDate.getDate() + 30);
+
+      if (this.pickupCity) {
+        this.seachResutat = `${this.pickupCity} · ${this.seachResutat}`;
+      }
+    } 
   }
 
   private fetch(criteria: CountrySearchCriteria): void {
@@ -138,19 +184,21 @@ export class Listings implements OnInit {
     });
   }
 
-private toIsoDateLocal(d: Date): string {
-  const year = d.getFullYear();
-  const month = String(d.getMonth() + 1).padStart(2, '0');
-  const day = String(d.getDate()).padStart(2, '0');
-  return `${year}-${month}-${day}`;
-}
+  private toIsoDateLocal(d: Date): string {
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
 
 
   resetFilters(): void {
     this.pickupCity = '';
     this.fromDate = null;
     this.toDate = null;
-
+  
+    this.isThereResult = false;
+    this.selectedPeriod = '';
     this.loadAllTrips();
   }
 
@@ -171,5 +219,11 @@ private toIsoDateLocal(d: Date): string {
   changeSize(newSize: number): void {
     this.size = newSize;
     this.fetch({ ...this.currentCriteria, page: 0, size: newSize });
+  }
+
+  applyQuickPeriod(chip: string) {
+    this.selectedPeriod = chip;
+    this.filterSelect();
+    this.onSearch();
   }
 }

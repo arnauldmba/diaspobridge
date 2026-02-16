@@ -58,8 +58,23 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.filter-div{
+  margin-top: 34px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 /* Mobile */
 @media (max-width: 600px) {
+
+  .container-intro-message{
+    text-align: center;
+  }
+
+  .seach-bar{
+    gap: 20px;
+  }
 
   .card button{
     display: none;
@@ -67,10 +82,6 @@
 
   .card {
     cursor: pointer;
-  }
-
-  .button-search{
-    margin-top: 10px;
   }
 
   .demo-inline-calendar-card {
@@ -82,4 +93,20 @@
     justify-content: center;
     margin: 0 auto;
   }
+
+  .avaible-trips{
+    display: none;
+  }
+
+  .filter-div{
+    display: block;
+    flex-direction: column-reverse;
+  }
+
+  .filter-div .button-reinit{
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
 }

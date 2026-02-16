@@ -52,4 +52,14 @@
 
   /* Borders */
   --border: 1px solid var(--color-border);
+
+  /*changer la couleur de fond pour le button chip pour le button filtre page listing */
+  .mat-mdc-chip.mat-mdc-chip-selected {
+  background-color: var(--color-accent) !important;
+  }
+
+  /*changer la couleur de du text pour le button chip pour le button filtre page listing */
+  .mat-mdc-chip.mat-mdc-chip-selected .mdc-evolution-chip__text-label {
+    color: #ffffffd7 !important;
+  }
 }

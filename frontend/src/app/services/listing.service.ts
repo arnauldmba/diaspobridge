@@ -81,7 +81,7 @@ export class ListingService {
   searchTrips(criteria: CountrySearchCriteria): Observable<Page<TransporterTrip>> {
     let params = new HttpParams();
 
-    if (criteria.origin) params = params.set('origin', criteria.origin); // si on veut chercher par ville d'arrivee on utilise 'dest' et pas 'origin'
+    if (criteria.origin) params = params.set('dest', criteria.origin); // si on veut chercher par ville d'arrivee on utilise 'dest' et pas 'origin'
     if (criteria.fromDate) params = params.set('fromDate', criteria.fromDate);
     if (criteria.toDate) params = params.set('toDate', criteria.toDate);
 

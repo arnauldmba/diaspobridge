@@ -2,7 +2,7 @@
     <!-- <button class="btn-app btn-app-primary publier">+ Publier</button> -->
     <!-- Presentation text -->
     <div class="mb-4 p-0 container-intro-message">
-        <h1 class="mb-2">Trouvez des <span class="app-color-secondary">voyageurs</span> à destination du Cameroun</h1>
+        <h2 class="mb-2">Trouvez des <span class="app-color-secondary">voyageurs</span> à destination du Cameroun</h2>
         <p class="muted">Entrez en contact avec des <span class="">voyageurs</span> vérifiés qui peuvent <span
                 class="">transporter</span>
             vos colis en toute sécurité
@@ -10,74 +10,12 @@
     </div>
 
     <!-- Search bar: Transport city, Period, search bar -->
-    <div class="row align-items-start mb-5">
-        <!--<div class="col-sm">
-            <mat-form-field appearance="outline" class="w-100">
-                <mat-label style="font-size: var(--text-base);">Où au Cameroun ?
-                    (optionnel)</mat-label>
-                <mat-icon matPrefix>location_on</mat-icon>
-                <input style="font-size: var(--text-sm);" matInput [(ngModel)]="pickupCity" name="pickupCity"
-                    placeholder="Ex: Douala, Yaoundé…">
-                <mat-hint class="muted">Choisissez la ville où votre colis doit arriver.</mat-hint>
-            </mat-form-field>
-        </div>
-        -->
-        
-        <app-city-autocomplete-component 
-            class="col-sm"
-            [cities]="citiesCM"
-            label="Où au Cameroun (optionnel) ?"
-            placeholder="Ex : Douala, Yaoundé…"
-            hint="Ville où votre colis doit arriver."
-            [(ngModel)]="pickupCity" name="pickupCity" [required]="false" [minlength]="2"
-            >
+    <div class="row align-items-start mb-4 seach-bar">
+        <app-city-autocomplete-component class="col-sm" [cities]="citiesCM" label="Où au Cameroun (optionnel) ?"
+            placeholder="Ex : Douala, Yaoundé…" hint="Ville où votre colis doit arriver." [(ngModel)]="pickupCity"
+            name="pickupCity" [required]="false" [minlength]="2">
         </app-city-autocomplete-component>
-        
 
-        <div class="col-sm">
-            <mat-form-field appearance="outline" class="w-100">
-                <mat-label class="muted" style="font-size: var(--text-base);">
-                    Quand ? (optionnel)
-                </mat-label>
-                
-                <mat-icon matPrefix>calendar_today</mat-icon>
-
-                <mat-select class="" [(ngModel)]="selectedPeriod" name="selectedPeriod">
-
-                    <mat-option value="7days">
-                        Prochains 7 jours
-                    </mat-option>
-
-                    <mat-option value="30days">
-                        Prochains 30 jours
-                    </mat-option>
-
-                    <mat-option value="thisMonth">
-                        Ce mois-ci
-                    </mat-option>
-
-                    <mat-option (click)="isCalendarOpen = !isCalendarOpen" value="custom">
-                        {{fromDate ? (fromDate | date:'dd MMM yyyy') : 'Choisir une date'   }}
-                    </mat-option>
-
-                </mat-select>
-
-                <mat-hint class="muted">Sélectionnez une période de départ.</mat-hint>
-            </mat-form-field>
-
-            <div class="date-picker">
-                <!--*ngIf="selectedPeriod === 'custom'"-->
-                <mat-card class="demo-inline-calendar-card" *ngIf="isCalendarOpen">
-                    <mat-calendar [(selected)]="fromDate" [dateFilter]="futureDatesOnly"></mat-calendar>
-                    <button (click)="closeCalender()" matButton>Fermer</button>
-                </mat-card>
-            </div>
-        </div>
-
-
-
-
-        <!--
         <div class="col-sm">
             <mat-form-field appearance="outline" class="w-100">
                 <mat-label class="muted" style="font-size: var(--text-sm);">Période de départ</mat-label>
@@ -93,12 +31,13 @@
                 <mat-hint class="muted">Choisis une période (ex: 10 jan → 31 jan)</mat-hint>
             </mat-form-field>
         </div>
-        -->
 
         <!-- Bouton search -->
         <div class="col-sm button-search">
             <button class="btn-app d-flex align-items-center justify-content-center gap-2 btn-app-primary w-100"
-                (click)="onSearch()" style="height: 56px; font-size: 16px;">
+                (click)="onSearch2()" 
+                [disabled]="!canSearch"
+                style="height: 56px; font-size: 16px;">
                 <mat-icon>search</mat-icon>
                 Rechercher
             </button>
@@ -106,7 +45,42 @@
     </div>
 
     <!--Item trip / card -->
-    <h5 class="">Voyageurs disponible</h5>
+    <div class="filter-div">
+        <div class="select-buttons d-flex align-items-center">
+            <mat-chip-listbox class="my-3" aria-label="Cutest dog breeds">
+                @for (chip of selectedPeriodList; track chip) {
+                <mat-chip-option (click)="applyQuickPeriod(chip.name)">
+                    {{chip.value}}
+                </mat-chip-option>
+                }
+                <mat-chip-option class="ms-2"  (click)="resetFilters()" *ngIf="isThereResult">
+                    <span style="color: red;">Effacer la recherche</span>
+                </mat-chip-option>
+            </mat-chip-listbox>
+        </div>
+        <h4 class="avaible-trips">Voyageurs disponibles</h4>
+    </div>
+
+
+    @if(isThereResult){
+    <div class="border text-center p-3 mb-4" style="background-color: var(--color-bg-accent); color: var(--color-accent);">
+        @if(seachResutat == "aucun resultat"){
+            <h6 class="m-0" style="font-style: italic;">
+                Aucun resultat
+            </h6>
+        }@else{
+            <h6 class="m-0">
+                <span style="font-weight: bolder;" >{{listings.length}}</span>
+                voyage<span *ngIf="listings!.length>1">s</span> -
+                <span style="font-style: italic;">''{{seachResutat}}''</span>
+            </h6>
+        }
+        
+    </div>
+    }
+
+
+    <!--@if(listings.length > 0){-->
     <div class="row row-cols-1 row-cols-lg-3 g-3 g-lg-4">
         @for (listing of listings; track listing.id) {
         <div class="col align-items-center">
@@ -156,19 +130,9 @@
                         </div>
                         <span class="text-meta">{{listing.transporter.firstName}}</span>
                     </div>
-
-                    <!-- Button -->
-                    <!--<div class="d-grid details-btn">
-                        <button (click)="openListing(listing.id)" class="btn btn-app-outline-secondary mt-3 mb-2 py-2"
-                            style="font-size: var(--text-sm);">
-                            Détails
-                        </button>
-                    </div>-->
                 </div>
             </div>
         </div>
-        } @empty {
-        <h4>Aucune annonce pour le moment!</h4>
         }
     </div>
 

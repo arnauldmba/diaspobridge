@@ -10,7 +10,7 @@
     </span>
     }
     <span class="logo" routerLink="/">
-      <span style="font-weight: 300">Mboko</span>
+      <span style="font-weight: 400">Mboko</span>
       <span style="font-style: italic;">GO</span>
     </span>
   </div>
@@ -51,7 +51,7 @@
     <a routerLinkActive="active" class="desktop-link-auth burger" routerLink="/compte">
       @if(authService.isLoggedIn()){
       <span [matMenuTriggerFor]="menu" 
-        style="background-color: black; color: white;"
+        style="font-size: 12px; font-weight: 400;"
         class="avatar">{{currentUserEmail | firstLetter}}</span>
       <mat-menu #menu="matMenu">
         <button mat-menu-item (click)="logout()">Deconnexion</button>
