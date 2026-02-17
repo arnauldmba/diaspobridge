@@ -4,10 +4,11 @@ import { ListingService } from '../services/listing.service';
 import { RouterLink } from "@angular/router";
 import { AuthService } from '../services/auth.service';
 import { FirstLetterPipe } from "../shared/first-letter-pipe";
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-my-listings',
-  imports: [RouterLink, FirstLetterPipe],
+  imports: [RouterLink, MatButtonModule],
   templateUrl: './my-listings.html',
   styleUrl: './my-listings.css',
 })

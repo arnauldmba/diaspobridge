@@ -1,10 +1,23 @@
-.avatar {
-    width: 100px;
-    height: 100px;
+.user-profil-and-listings {
+    display: grid;
+    grid-template-columns: 1fr 200px;
+    grid-template-rows: auto 1fr;
+    gap: 20px;
+
+    grid-template-areas: "annonces user";
 }
 
-.user-profile {
-    border: 3px solid red;
+.user-profil {
+    grid-area: user;    
+}
+
+.user-listings {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* 2 colonnes */
+    gap: 8px;
+
+    grid-area: annonces;
 }
 
 .user-info-and-button-container {
@@ -23,16 +36,20 @@
     width: 30px;
 }
 
-.container-button-and-description{
+.container-button-and-description {
     display: flex;
 }
 
-.span-text{
+.span-text {
     font-size: var(--text-xs);
     margin-left: 2px;
 }
 
-.container-description{
+.icon-size-m {
+    font-size: var(--text-base);
+}
+
+.container-description {
     flex: 2;
     color: var(--color-text);
     font-size: var(--text-xs);
@@ -43,5 +60,21 @@
     .container-my-listing {
         width: 900px;
         margin: 0 auto
+    }
+}
+
+@media (max-width: 768px) {
+    .user-listings {
+        display: grid;
+        grid-template-columns: 1fr;/* 1 colonnes */
+    }
+
+    .user-profil-and-listings {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "user"
+            "annonces"
+            
+        ;
     }
 }

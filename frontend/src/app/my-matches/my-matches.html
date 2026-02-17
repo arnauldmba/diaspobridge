@@ -2,7 +2,7 @@
     <span class="material-symbols-outlined back-button" (click)="onBackToListing()">
         keyboard_backspace
     </span>
-    <h1 class="m-0 text-center">Messages</h1>
+    <h1 class="m-0">Messages</h1>
 </div>
 
 <div class="p-0 border container rounded-1" style="display: flex;">
@@ -31,7 +31,7 @@
     </div>
     }@else{
     <div class="container text-center my-5" *ngIf="myMatches.length === 0">
-        <h5>Aucun messasges pour le moment.</h5>
+        <p>Aucun messasges pour le moment.</p>
     </div>
     }
     <div style="flex: 2;" class="container-chat-component" *ngIf="!isMobile && selectedId">

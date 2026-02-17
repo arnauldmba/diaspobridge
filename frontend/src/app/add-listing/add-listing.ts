@@ -14,18 +14,24 @@ import { MatDatepickerControl, MatDatepickerModule, MatDatepickerPanel } from '@
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { CommonModule } from '@angular/common';
 import { MatChipsModule } from '@angular/material/chips';
+import { CityAutocompleteComponent } from "../city-autocomplete-component/city-autocomplete-component";
+import { CITIES_CM } from '../model/cities-cm';
+import { CITIES_DE } from '../model/cities-de';
 
 
 @Component({
   selector: 'app-add-listing',
   standalone: true,
   imports: [CommonModule, FormsModule, MatFormField, MatLabel, MatIcon, MatHint, MatCardModule,
-    MatButtonModule, MatInputModule, MatFormFieldModule, MatStepperModule, MatDatepickerModule, MatChipsModule],
+    MatButtonModule, MatInputModule, MatFormFieldModule, MatStepperModule, MatDatepickerModule, MatChipsModule, CityAutocompleteComponent],
   providers: [provideNativeDateAdapter()],
   templateUrl: './add-listing.html',
   styleUrl: './add-listing.css',
 })
 export class AddListing implements OnInit {
+
+  citiesDE = CITIES_DE;
+  citiesCM = CITIES_CM;
 
   message: string = '';
   originCountry: any;
