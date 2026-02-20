@@ -7,11 +7,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { filter } from 'rxjs/operators';
 import { FirstLetterPipe } from "./shared/first-letter-pipe";
+import { BehaviorSubject } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterLink, RouterOutlet, RouterLinkWithHref, MatIconModule, RouterLinkActive, MatButtonModule, MatMenuModule, FirstLetterPipe],
+  imports: [AsyncPipe, RouterLink, RouterOutlet, RouterLinkWithHref, MatIconModule, RouterLinkActive, MatButtonModule, MatMenuModule, FirstLetterPipe],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
@@ -19,6 +21,7 @@ export class App implements OnInit{
   protected readonly title = signal('diasporabridge');
   isLoggedIn$!: Observable<boolean>;
   currentUserEmail?: string; 
+  currentUserEmail2$: Observable<string | null> | undefined;
 
   mobileMenuOpen = false;
 
@@ -35,6 +38,7 @@ export class App implements OnInit{
     this.authService.loadToken();
     this.isLoggedIn$ = this.authService.authState$;
     this.currentUserEmail = this.authService.logedUser;
+    this.currentUserEmail2$ = this.authService.userEmail$;
   }
 
   logout(): void {

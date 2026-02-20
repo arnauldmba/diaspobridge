@@ -3,54 +3,6 @@
     display: none;
 }
 
-.chat {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 16px;
-}
-
-.messages {
-    padding: 12px;
-    height: 60vh;
-    overflow: auto;
-}
-
-.msg {
-    padding: 8px 0;
-    border-bottom: 1px solid #eee;
-}
-
-.meta {
-    font-size: 12px;
-    opacity: .7;
-    display: flex;
-    justify-content: space-between;
-}
-
-.body {
-    font-size: 14px;
-}
-
-.composer {
-    display: flex;
-    gap: 8px;
-    margin-top: 12px;
-}
-
-input {
-    flex: 1;
-    padding: 10px;
-}
-
-button {
-    padding: 10px 14px;
-}
-
-button:disabled {
-    background: #ccc;
-    cursor: not-allowed;
-}
-
 .container-match-and-chat {
     display: flex;
     gap: 10px;
@@ -73,9 +25,7 @@ button:disabled {
 }
 
 .matches-list {
-    /*border: 1px solid #ddd;*/
     flex: 1;
-    /*border-radius: 18px;*/
     overflow-y: auto;
 }
 
@@ -84,33 +34,13 @@ button:disabled {
 }
 
 .match-item.active {
-    /*background: var(--color-accent);*/
     background: #008b58;
 }
-
-/*----fin---*/
 
 .matches-list ul li {
     display: flex;
     align-items: center;
     gap: 4px;
-}
-
-.matches-list ul li p {
-    margin: 0px;
-    padding: 0px;
-}
-
-.chat-list {
-    flex: 2;
-    border-radius: 18px;
-    margin: 0px;
-    padding: 0px;
-    height: 80vb;
-}
-
-.back-btn {
-    margin-bottom: 12px;
 }
 
 /* Matches info*/
@@ -134,9 +64,6 @@ button:disabled {
 }
 
 .container-chat-component {
-    /*
-    height: 59vb; overflow-y: auto; 
-    background-color: blue;*/
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -172,7 +99,6 @@ button:disabled {
         inset: 0;
         /* top/right/bottom/left = 0 */
         background: #fff;
-        /* adapte si tu as un background global */
         z-index: 50;
 
         display: block;

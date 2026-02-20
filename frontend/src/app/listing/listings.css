@@ -1,8 +1,8 @@
-/* trait qui separe les deux ville */
+/* Divider with text (horizontal) */
 .divider-with-text {
   display: flex;
   align-items: center;
-  color: #6b7280;
+  color: var(--color-muted);
   margin: 2px 0px 2px 26px;
 }
 
@@ -18,7 +18,6 @@
   padding: 0 12px;
   font-size: 14px;
   font-weight: 500;
-  /*text-transform: uppercase;*/
 }
 
 /* 🔥 Décalage horizontal */
@@ -30,33 +29,7 @@
   flex: 9; /* ligne droite plus courte */
 }
 
-/* style pour les icones des voyages disponible*/
-.material-symbols-outlined{
-    font-size: var(--text-base);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.no-border-field {
-  /* supprime l'underline (la ligne du bas) */
-  --mdc-filled-text-field-active-indicator-height: 0px;
-  --mdc-filled-text-field-hover-active-indicator-height: 0px;
-  --mdc-filled-text-field-focus-active-indicator-height: 0px;
-
-  /* fond par défaut */
-  --mdc-filled-text-field-container-color: #f3f4f6; /* gris clair */
-}
-
 /* style pour entrer une date recherche */
-
-.demo-inline-calendar-card {
-  min-width: 350px;
-  position: absolute;
-  top: 180px;
-  z-index: 500;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
 
 .filter-div{
   margin-top: 34px;
@@ -72,26 +45,12 @@
     text-align: center;
   }
 
-  .seach-bar{
-    gap: 20px;
-  }
-
-  .card button{
-    display: none;
+  .seach-items{
+    gap: 8px;
   }
 
   .card {
     cursor: pointer;
-  }
-
-  .demo-inline-calendar-card {
-    width: 90%;
-  }
-
-  .date-picker{
-    display: flex;
-    justify-content: center;
-    margin: 0 auto;
   }
 
   .avaible-trips{
@@ -103,10 +62,9 @@
     flex-direction: column-reverse;
   }
 
-  .filter-div .button-reinit{
+  .filter-div {
     text-align: center;
     margin-top: 10px;
     margin-bottom: 10px;
   }
-
 }

@@ -1,19 +1,8 @@
-.color-second-text {
-    color: var(--color-muted);
-}
-
-.trip-container .material-symbols-outlined{
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 .trip-container{
     display: flex;
 }
 
-.trip-container .trip-details{
+.trip-details{
     border: 1px solid var(--color-border);
     border-radius: 14px;
     padding: 20px;
@@ -21,26 +10,22 @@
     margin-right: 10px;
 }
 
-
-/* <!--section 2 --> */
 .date-weight-kilo{
     border-top: 1px solid var(--color-border);
     padding-top: 10px;
 }
 
 .date-weight-kilo .price{
-        display: flex;
-        justify-content: end;
-        padding-top: 8px;
-    }
+    display: flex;
+    justify-content: end;
+    padding-top: 8px;
+}
 
-/* <!--section 3 description --> */
 .description{
     border-top: 1px solid var(--color-border);
 }
 
-
-.trip-container .trip-user-info{
+.trip-user-info{
     flex: 3;
 }
 
@@ -49,8 +34,6 @@
     padding-bottom: 8px;
 }
 
-
-/* container mat-icon - round */
 .location-icon {
     height: 40px;
     width: 40px;
@@ -85,6 +68,7 @@
 
 .transporter-additional-info{
     padding-top: 10px;
+    margin-top: 6px;
 }
 
 .transporter-additional-info h6{
@@ -97,12 +81,9 @@
     font-size: 14px;
     font-weight: 400;
     color: rgba(0, 0, 0, 0.675);
-    margin: 8px 0px;
+    margin: 6px 0px;
 }
 
-/*Responsive */
-
-/* Mobile */
 @media (max-width: 600px) {
 
     .trip-container{
@@ -117,17 +98,17 @@
         margin: 0px;
     }
 
+    .trip-details-button{
+        border-top: 1px solid var(--color-border);
+    }
+
     .transporter-additional-info,
     .trip-details-button,
     .description,
     .date-weight-kilo,
     .departure-and-arrival{
-        /*border: 1px solid var(--color-border);*/
         margin-bottom: 10px;
         padding: 16px;
-        /*border-radius: var(--radius-md);
-        background-color: white;
-        box-shadow: var(--shadow-sm);*/
     }
 
     .transporter-detail {
@@ -141,12 +122,6 @@
         font-weight: 400;
     }
 
-    /*
-    .date-weight-kilo{
-        border: 1px solid var(--color-border);
-    }
-    */
-
     .description{
         border: 1px solid var(--color-border);
         margin-top: 10px;
@@ -154,6 +129,5 @@
 
     .transporter-detail .button-contact-transporter{
         display: none;
-    }
-    
+    }   
 }

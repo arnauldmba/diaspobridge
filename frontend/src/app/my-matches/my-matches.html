@@ -1,7 +1,8 @@
-<div class="mb-3 mt-app container">
-    <span class="material-symbols-outlined back-button" (click)="onBackToListing()">
-        keyboard_backspace
-    </span>
+<span class="material-symbols-outlined back-button mt-app mb-3 ms-3" (click)="onBackToListing()">
+    keyboard_backspace
+</span>
+
+<div class="mb-3 container">
     <h1 class="m-0">Messages</h1>
 </div>
 
@@ -19,7 +20,7 @@
                         </div>
                     </div>
                     <div class="w-100">
-                        <p class="chat-firstname m-0">
+                        <p class="chat-firstname m-0 p-0">
                             <span>{{match.otherFirstName}}</span>
                             <span class="updated-date">{{match.updatedAt | date:'dd.MM.yyyy' }}</span>
                         </p>

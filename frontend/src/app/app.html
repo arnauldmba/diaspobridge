@@ -10,7 +10,7 @@
     </span>
     }
     <span class="logo" routerLink="/">
-      <span style="font-weight: 400">Mboko</span>
+      <span style="font-weight: 300">Mboko</span>
       <span style="font-style: italic;">GO</span>
     </span>
   </div>
@@ -22,13 +22,13 @@
       Annonces
     </a>
     @if(authService.isAdmin()) {
-    <a routerLinkActive="active" class="desktop-link" routerLink="/#">Liste Utilisateur</a>
+      <a routerLinkActive="active" class="desktop-link" routerLink="/#">Liste Utilisateur</a>
     }
     <a routerLinkActive="active" class="desktop-link" routerLink="/add-listing">Créer une annonce</a>
     <a routerLinkActive="active" class="desktop-link" routerLink="/messages">Messages</a>
+    <a routerLink="/add-listing" class="material-symbols-outlined avatar mobile-link">add</a>
     <a routerLinkActive="active" class="desktop-link" routerLink="/compte">
       @if(authService.isLoggedIn()){
-      <!--@if(authService.logedUser && authService.isLoggedIn()){-->
         @if(!mobileMenuOpen ){
         <span class="material-symbols-outlined d-flex align-items-center" (click)="toggleMenu()">
           <span class="material-symbols-outlined avatar">person</span>
@@ -51,8 +51,8 @@
     <a routerLinkActive="active" class="desktop-link-auth burger" routerLink="/compte">
       @if(authService.isLoggedIn()){
       <span [matMenuTriggerFor]="menu" 
-        style="font-size: 12px; font-weight: 400;"
-        class="avatar">{{currentUserEmail | firstLetter}}</span>
+        style="font-size: 12px; font-weight: 1000; color: white; background-color: black;"
+        class="avatar">{{ (currentUserEmail2$ | async) | firstLetter }}</span>
       <mat-menu #menu="matMenu">
         <button mat-menu-item (click)="logout()">Deconnexion</button>
       </mat-menu>
@@ -87,6 +87,6 @@
 
 <router-outlet />
 
-<div class="mt-4 pt-3 text-center" style="color: var(--color-muted); font-size: 0.875rem;   ">
+<div class="mt-4 pt-3 text-center" style="color: var(--color-muted); font-size: 0.875rem;">
   
 </div>

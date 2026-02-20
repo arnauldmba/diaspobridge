@@ -1,9 +1,9 @@
-.guide ul li {
+/*.guide ul li {
     margin: 4px 0px;
     font-size: 14px;
     color: var(--color-muted);
     font-weight: 400;
-}
+}*/
 
 .container-add-listing {
     width: min(1120px, calc(100% - 32px));

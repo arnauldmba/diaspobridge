@@ -8,12 +8,13 @@ import { AuthService } from '../services/auth.service';
 import { Subscription, switchMap, timer } from 'rxjs';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormField, MatLabel } from "@angular/material/form-field";
+import { FirstLetterPipe } from "../shared/first-letter-pipe";
 
 
 @Component({
   selector: 'app-chat-messaging',
   standalone: true,
-  imports: [FormsModule, CommonModule, MatIconModule],
+  imports: [FormsModule, CommonModule, MatIconModule, FirstLetterPipe],
   templateUrl: './chat-messaging.html',
   styleUrl: './chat-messaging.css',
 })

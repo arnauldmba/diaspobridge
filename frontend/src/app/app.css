@@ -1,4 +1,3 @@
-/*--------------------*/
 /* ===== BASE ===== */
 .navbar {
   position: relative;
@@ -8,7 +7,6 @@
   align-items: center;
   height: 64px;
   padding: 0 20px;
-  /*border-bottom: 1px solid #ddd;*/
   background-color: var(--color-bg);
   z-index: 50;
 }
@@ -47,7 +45,6 @@ a{
 .desktop-link.active {
   color: #008b58;
   font-weight: 500;
-  /*border-bottom: 1px solid #008b58;*/
 }
 
 .logo {
@@ -96,14 +93,29 @@ a{
   transition: background 150ms ease, color 150ms ease;
 }
 
+.avatar{
+  width: 28px;
+  height: 28px;
+}
+
 /* ===== Mobile layout ===== */
 @media (max-width: 767px) {
   .navbar {
     justify-content: space-between;
   }
 
+  .mobile-link {
+    font-size: var(--text-lg);
+    background-color: var(--color-accent);
+    color: white;
+  }
+
   .nav-left {
     width: 56px;
+  }
+
+  .nav-right {
+    gap: 16px;
   }
 
   .logo {
@@ -113,7 +125,7 @@ a{
   }
 
   .mobile-menu {
-  height: 100dvh;
+    height: 100dvh;
   }
 
   .desktop-link {
@@ -123,7 +135,7 @@ a{
 
 /* ===== Desktop layout ===== */
 @media (min-width: 768px) {
-  .burger {
+  .burger, .mobile-link {
     display: none;
   }
 
