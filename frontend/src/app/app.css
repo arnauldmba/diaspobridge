@@ -22,7 +22,7 @@
 
 a{
   text-decoration: none;
-  color: var(--color-accent);
+  color: rgb(11, 117, 11);
 }
 
 .nav-right {
@@ -98,8 +98,8 @@ a{
 }
 
 .avatar{
-  width: 30px;
-  height: 30px;
+  width: 28px;
+  height: 28px;
   border: solid 1px var(--color-accent);
   background: var(--color-bg);
 }
@@ -117,7 +117,7 @@ a{
   }
 
   .nav-right {
-    gap: 16px;
+    gap: 12px;
   }
 
 

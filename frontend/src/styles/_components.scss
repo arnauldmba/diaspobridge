@@ -189,6 +189,23 @@ html, body {
     box-shadow: var( --shadow-sm);
 }
 
+.spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(255,255,255,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
 .no-border-field .mdc-line-ripple {
   display: none !important;
 }

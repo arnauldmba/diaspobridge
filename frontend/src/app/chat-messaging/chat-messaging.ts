@@ -8,20 +8,22 @@ import { AuthService } from '../services/auth.service';
 import { Subscription, switchMap, timer } from 'rxjs';
 import { MatIconModule } from '@angular/material/icon';
 import { FirstLetterPipe } from "../shared/first-letter-pipe";
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 @Component({
   selector: 'app-chat-messaging',
   standalone: true,
-  imports: [FormsModule, CommonModule, MatIconModule, FirstLetterPipe],
+  imports: [FormsModule, CommonModule, MatIconModule, FirstLetterPipe, MatProgressSpinnerModule],
   templateUrl: './chat-messaging.html',
   styleUrl: './chat-messaging.css',
 })
 
 export class ChatMessaging implements OnChanges, OnInit{
 
-  matchId!: number;
+  isLoading = false; // varaible pour gerer le chargement des voyages (spinner)
 
+  matchId!: number;
   messages: MessageDto[] = [];
   draft = '';
   curruntUser = 0 ;
@@ -85,9 +87,17 @@ export class ChatMessaging implements OnChanges, OnInit{
   }
 
   loadMessages() {
+    this.isLoading = true; 
+    
     this.messageService.list(this.matchId).subscribe({
-      next: (msgs) => this.messages = msgs,
-      error: (err) => console.error(err)
+      next: (msgs) => {
+        this.messages = msgs; 
+        this.isLoading = false; 
+      },
+      error: (err) => {
+        console.error(err)
+        this.isLoading = false; 
+      }
     });
     console.log("Liste de match: ", this.messages);
   }

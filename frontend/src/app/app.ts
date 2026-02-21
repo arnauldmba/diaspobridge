@@ -9,17 +9,25 @@ import { filter } from 'rxjs/operators';
 import { FirstLetterPipe } from "./shared/first-letter-pipe";
 import { BehaviorSubject } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
+import { MatBadgeModule } from '@angular/material/badge';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [AsyncPipe, RouterLink, RouterOutlet, RouterLinkWithHref, MatIconModule, RouterLinkActive, MatButtonModule, MatMenuModule, FirstLetterPipe],
+  imports: [AsyncPipe, RouterLink, RouterOutlet, RouterLinkWithHref, MatIconModule, RouterLinkActive, MatButtonModule, MatMenuModule, FirstLetterPipe, MatBadgeModule],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
 export class App implements OnInit{
   
   protected readonly title = signal('diasporabridge');
+
+  hidden = false;
+  unreadMessage!: number;
+
+  toggleBadgeVisibility() {
+    this.hidden = !this.hidden;
+  }
 
   /** detect scroll for nav-shadow bottom */
   isScrolled = false;
@@ -56,8 +64,8 @@ export class App implements OnInit{
     this.authService.logout();
   }
 
-  toggleMenu(): void {
-    this.mobileMenuOpen = !this.mobileMenuOpen;
+  toggleMenu(): boolean {
+    return this.mobileMenuOpen = !this.mobileMenuOpen;
   }
 
   closeMenu(): void {

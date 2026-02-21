@@ -1,6 +1,13 @@
 <!--<span class="material-symbols-outlined back-button mb-3 " (click)="onBackToListing()">
     keyboard_backspace
 </span>-->
+@if (isLoading) {
+    <div class="overlay">
+        <mat-spinner 
+            diameter="50">
+        </mat-spinner>
+    </div>
+}
 
 <div class="matches">
     <h1 class="title subpage-title mt-app">Messages</h1>

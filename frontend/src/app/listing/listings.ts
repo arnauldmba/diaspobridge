@@ -12,7 +12,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { provideNativeDateAdapter, MatOption } from '@angular/material/core';
+import { provideNativeDateAdapter } from '@angular/material/core';
 import { FirstLetterPipe } from '../shared/first-letter-pipe';
 import { getAvatarColor } from '../shared/utils/avatar-color.util';
 import { futureDatesOnly } from '../shared/utils/date-filters.util';
@@ -21,18 +21,21 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatSelectModule } from '@angular/material/select';
 import { CityAutocompleteComponent } from "../city-autocomplete-component/city-autocomplete-component";
 import { CITIES_CM } from '../model/cities-cm';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 @Component({
   selector: 'app-listing',
   standalone: true,
   imports: [FormsModule, CommonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatCardModule, MatTabsModule,
-    MatButtonModule, MatFormFieldModule, MatStepperModule, MatDatepickerModule, FirstLetterPipe, MatChipsModule, MatSelectModule, CityAutocompleteComponent],
+    MatButtonModule, MatFormFieldModule, MatStepperModule, MatDatepickerModule, FirstLetterPipe, MatChipsModule, MatSelectModule, CityAutocompleteComponent, MatProgressSpinnerModule],
   providers: [provideNativeDateAdapter()],
   templateUrl: './listings.html',
   styleUrl: './listings.css',
 })
 export class Listings implements OnInit {
+
+  isLoading = false; // variable pour afficher le spinner (lorsque la page charge les voyages)
 
   isThereResult: boolean = false; //Vaiable pour afficher et cacher le button: Effacer la recherche
 
@@ -168,9 +171,12 @@ export class Listings implements OnInit {
   }
 
   private fetch(criteria: CountrySearchCriteria): void {
+    this.isLoading = true; 
+
     this.listingService.searchTrips(criteria).subscribe({
       next: (res) => {
         this.listings = res.content;
+        this.isLoading = false;
         this.totalPages = res.totalPages;
         this.totalElements = res.totalElements;
         this.page = res.number;
@@ -180,7 +186,10 @@ export class Listings implements OnInit {
 
         this.currentCriteria = { ...criteria, page: this.page, size: this.size };
       },
-      error: (err) => console.error('Erreur chargement annonces:', err)
+      error: (err) => {
+        console.error('Erreur chargement annonces:', err); 
+        this.isLoading = false;
+      }
     });
   }
 

@@ -10,11 +10,12 @@ import { MessageService } from '../services/message.service';
 import { AuthService } from '../services/auth.service';
 import { FirstLetterPipe } from "../shared/first-letter-pipe";
 import { DatePipe } from '@angular/common';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-listing-details',
   standalone: true,
-  imports: [MatIcon, MatIconModule, A11yModule, FirstLetterPipe, DatePipe],
+  imports: [MatIcon, MatIconModule, A11yModule, FirstLetterPipe, DatePipe, MatProgressSpinnerModule],
   templateUrl: './listing-details.html',
   styleUrl: './listing-details.css',
 })
@@ -27,7 +28,8 @@ export class ListingDetails {
   private route = inject(ActivatedRoute);
   private listingService = inject(ListingService);
   trip: any;
-  loading = true;
+
+  isLoading = false; // varaible pour gerer le chargement des voyages (spinner)
 
   constructor(
     private dialog: MatDialog,
@@ -38,6 +40,8 @@ export class ListingDetails {
   ) { }
 
   ngOnInit(): void {
+    this.isLoading = true;
+
     const listingId = Number(this.route.snapshot.paramMap.get('id'));
 
     console.log('Listing ID from route:', listingId);
@@ -45,12 +49,12 @@ export class ListingDetails {
     this.listingService.getListingById(listingId).subscribe({
       next: (data) => {
         this.trip = data;
-        this.loading = false;
+        this.isLoading = false;
         console.log('Listing details:', this.trip);
       },
       error: (err) => {
         console.error('Error fetching listing details', err);
-        this.loading = false;
+        this.isLoading = false;
       }
     });
   }

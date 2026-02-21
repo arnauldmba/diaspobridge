@@ -1,6 +1,19 @@
 <div class="mt-app">
-    @if (loading) {
-    <div>Chargement ... </div>
+    @if (isLoading) {
+    <div class="overlay">
+        <mat-spinner 
+            diameter="50">
+        </mat-spinner>
+    </div>
+    <!--
+    <div class="spinner-container">
+        <mat-spinner 
+            diameter="50"
+            strokeWidth="5"
+            color="primary">
+        </mat-spinner>
+    </div>
+    -->
     }
 
     <div class="container mb-4">
@@ -13,7 +26,7 @@
         <h1 style="color: rgb(4, 84, 4);">Détail du voyage</h1>
     </div>
 
-    @if (!loading && trip) {
+    @if (!isLoading && trip) {
     <div class="container">
         <div class="trip-container">
             <div class="trip-details">
@@ -104,7 +117,7 @@
     </div>
     }
 
-    @if (loading && !trip) {
+    @if (!isLoading && !trip) {
     <div>Annonce introuvable!</div>
     }
 </div>
