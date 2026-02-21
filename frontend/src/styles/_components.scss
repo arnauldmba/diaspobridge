@@ -62,7 +62,7 @@ html, body {
 }
 
 .mt-app{
-  margin-top: 70px;
+  margin-top: 80px;
 }
 
 .p-2 { padding: var(--space-2); }
@@ -152,7 +152,7 @@ html, body {
   background-color: var(--color-border);
   display: grid;
   place-items: center;
-  box-shadow: var(--shadow-sm);
+  /*box-shadow: var(--shadow-sm);*/
 }
 
 .avatar--lg { width: 60px; height: 60px; }

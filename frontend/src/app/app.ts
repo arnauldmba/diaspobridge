@@ -18,7 +18,12 @@ import { AsyncPipe } from '@angular/common';
   styleUrl: './app.css'
 })
 export class App implements OnInit{
+  
   protected readonly title = signal('diasporabridge');
+
+  /** detect scroll for nav-shadow bottom */
+  isScrolled = false;
+
   isLoggedIn$!: Observable<boolean>;
   currentUserEmail?: string; 
   currentUserEmail2$: Observable<string | null> | undefined;
@@ -39,6 +44,12 @@ export class App implements OnInit{
     this.isLoggedIn$ = this.authService.authState$;
     this.currentUserEmail = this.authService.logedUser;
     this.currentUserEmail2$ = this.authService.userEmail$;
+  }
+
+  /** scroll shadow */
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    this.isScrolled = window.scrollY > 0;
   }
 
   logout(): void {
