@@ -10,9 +10,9 @@ html, body {
 
 .muted { color: var(--color-muted); }
 
-.subpage-titel{
+.subpage-title{
   font-weight: 1000;
-  font-size: 28px;
+  color: rgb(0, 81, 0);
 }
 
 .icon-size-lg{
@@ -62,7 +62,7 @@ html, body {
 }
 
 .mt-app{
-  margin-top: 90px;
+  margin-top: 70px;
 }
 
 .p-2 { padding: var(--space-2); }

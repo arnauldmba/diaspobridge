@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ChatMessaging } from "../chat-messaging/chat-messaging";
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-chat-detail.component',
   standalone: true,
-  imports: [ChatMessaging, CommonModule],
+  imports: [ CommonModule],
   templateUrl: './chat-detail.component.html',
   styleUrl: './chat-detail.component.css',
 })

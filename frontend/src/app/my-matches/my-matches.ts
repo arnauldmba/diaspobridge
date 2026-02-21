@@ -2,14 +2,14 @@ import { Component } from '@angular/core';
 import { MatchService } from '../services/match.service';
 import { MatchDto } from '../model/chat.models';
 import { CommonModule } from '@angular/common';
-import { Router, RouterOutlet } from '@angular/router';
-import { ChatMessaging } from '../chat-messaging/chat-messaging';
+import { Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { getAvatarColor } from '../shared/utils/avatar-color.util';
+import { FirstLetterPipe } from "../shared/first-letter-pipe";
 
 @Component({
   selector: 'app-my-matches',
-  imports: [CommonModule, ChatMessaging, MatIconModule, RouterOutlet],
+  imports: [CommonModule, MatIconModule, FirstLetterPipe],
   templateUrl: './my-matches.html',
   styleUrl: './my-matches.css',
 })
@@ -50,13 +50,9 @@ export class MyMatches {
   }
 
   onOpenChat2(matchId: number, firstname?: string) {
-    console.log('onOpenChat matchId parent: ', matchId);
-    this.matchIdParent = matchId;
-    this.actuellUser = firstname;
-
-    if (window.innerWidth <= 600) {
-      this.showMessage = true;
-    }
+    this.router.navigate(['/chat', matchId], {
+      queryParams: { name: firstname ?? ''}
+    });
   }
 
   /*

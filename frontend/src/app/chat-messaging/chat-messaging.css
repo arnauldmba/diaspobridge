@@ -2,6 +2,14 @@
     display: flex;
     flex-direction: column;
     height: 80dvh;
+    margin: auto;
+    width:  50%;
+    position: relative;
+    top: 8dvh;
+}
+
+.back-button {
+    color: var(--color-accent);
 }
 
 .container-titel-and-back-button {
@@ -11,17 +19,8 @@
     gap: 16px;
 }
 
-.chat-message {
-    flex: 1;
-    overflow-y: auto;
-}
-
 .chat-input {
-    padding: 10px;
-    border-top: 1px solid #ebf1f1;
-    background: white;
-    /*position: sticky;
-  bottom: 0;*/
+    margin: 10px;
 }
 
 .chat-input textarea {
@@ -31,52 +30,63 @@
     background-color: #e8e8e8;
 }
 
-.my-chat-message {
-    text-align: right;
-    margin-bottom: 16px;
-}
-
 ul {
-    list-style-type: none;
-    padding: 0;
+  list-style: none;
+  padding: 0;
 }
 
-.my-chat-message span {
-    background-color: #008b58;
-    display: inline-block;
-    padding: 14px;
-    max-width: 70%;
-    border-end-end-radius: 10px;
-    border-start-start-radius: 10px;
-    color: white;
+.chat-message {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
 }
 
+/* Style commun aux deux types */
+.my-chat-message,
 .other-chat-message {
-    text-align: left;
-    margin-bottom: 16px;
+  margin-bottom: 16px;
+}
+
+.my-chat-message { text-align: right; }
+.other-chat-message { text-align: left; }
+
+/* Bubble commun */
+.my-chat-message span,
+.other-chat-message span {
+  display: inline-block;
+  padding: 8px 14px 2px 10px;; 
+  max-width: 80%;
+  border-radius: 10px;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  white-space: pre-wrap;
+}
+
+/* Couleurs */
+.my-chat-message span {
+  background: #095910;
+  color: white;
 }
 
 .other-chat-message span {
-    background-color: #e8e8e8;
-    display: inline-block;
-    padding: 14px;
-    max-width: 70%;
-    border-end-end-radius: 10px;
-    border-start-start-radius: 10px;
+  background: #e8e8e8;
 }
 
+
+/* Mobile */
 @media (min-width: 600px) {
-    .back-button {
+    /*back-button {
         display: none;
     }
+    */
 }
 
 @media (max-width: 600px) {
     .container-chat {
         display: flex;
         flex-direction: column;
-        height: 90dvh;
-        margin-top: 9vh;
+        height: 92dvh;
+        width: 100%;
         /*
         position: relative;
         position: fixed;
@@ -88,9 +98,5 @@ ul {
 
     .chat-message {
         margin-top: 4px;
-    }
-
-    .container-titel-and-back-button .back-button {
-        color: var(--color-accent);
     }
 }

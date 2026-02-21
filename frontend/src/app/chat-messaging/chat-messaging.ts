@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChange, SimpleChanges } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MessageDto } from '../model/message-dto';
@@ -7,7 +7,6 @@ import { MessageService } from '../services/message.service';
 import { AuthService } from '../services/auth.service';
 import { Subscription, switchMap, timer } from 'rxjs';
 import { MatIconModule } from '@angular/material/icon';
-import { MatFormField, MatLabel } from "@angular/material/form-field";
 import { FirstLetterPipe } from "../shared/first-letter-pipe";
 
 
@@ -21,11 +20,12 @@ import { FirstLetterPipe } from "../shared/first-letter-pipe";
 
 export class ChatMessaging implements OnChanges, OnInit{
 
-  @Input({ required: true }) matchId!: number;
+  matchId!: number;
 
   messages: MessageDto[] = [];
   draft = '';
   curruntUser = 0 ;
+  chatFirstName = '';
 
   private lastSinceIso = new Date(0).toISOString();
   private sub?: Subscription;
@@ -52,16 +52,19 @@ export class ChatMessaging implements OnChanges, OnInit{
     this.authService.loadToken();
     this.curruntUser = this.authService.logedUserId ?? 0;
 
-    if (this.matchId && this.matchId > 0){
-      this.initChat(this.matchId);
-    }
-
     this.route.paramMap.subscribe(params => {
       const id = Number(params.get('matchId'));
       if(!id || id <= 0) return; 
-
       this.initChat(id);
     })
+
+    this.route.queryParamMap.subscribe(q => {
+      this.chatFirstName = q.get('name') ?? '';
+    })
+
+    if (this.matchId && this.matchId > 0){
+      this.initChat(this.matchId);
+    }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
