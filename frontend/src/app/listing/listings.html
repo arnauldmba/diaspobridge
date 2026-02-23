@@ -8,7 +8,7 @@
 <div class="container mt-app">
     <!-- Site presentation -->
     <div class="mb-4 p-0 container-intro-message">
-        <h2 class="mb-2">Trouvez des <span class="app-color-secondary">voyageurs</span> à destination du Cameroun</h2>
+        <h2 class="mb-2 app-title-color">Trouvez des <span class="app-color-secondary">voyageurs</span> à destination du Cameroun</h2>
         <p class="muted">Entrez en contact avec des <span class="">voyageurs</span> vérifiés qui peuvent <span
                 class="">transporter</span>
             vos colis en toute sécurité
@@ -29,18 +29,27 @@
         </app-city-autocomplete-component>
 
         <div class="col-sm">
-            <mat-form-field appearance="outline" class="w-100">
+            <mat-form-field appearance="outline" class="w-100" >
                 <mat-label class="muted" style="font-size: var(--text-sm);">Période de départ</mat-label>
 
                 <mat-date-range-input [rangePicker]="rangePicker">
-                    <input matStartDate [(ngModel)]="fromDate" name="fromDate" placeholder="Du">
-                    <input matEndDate [(ngModel)]="toDate" name="toDate" placeholder="Au">
+                    <input matStartDate [(ngModel)]="fromDate" name="fromDate" placeholder="Du" [required]="!!toDate">
+                    <input matEndDate [(ngModel)]="toDate" name="toDate" placeholder="Au" [required]="!!fromDate">
                 </mat-date-range-input>
 
                 <mat-datepicker-toggle matIconSuffix [for]="rangePicker"></mat-datepicker-toggle>
-                <mat-date-range-picker #rangePicker></mat-date-range-picker>
+                <mat-date-range-picker #rangePicker required></mat-date-range-picker>
 
-                <mat-hint class="muted">Choisis une période (ex: 10 jan → 31 jan)</mat-hint>
+                <mat-hint class="muted" *ngIf="(!fromDate && !toDate) || (fromDate && toDate)">Choisis une période (ex: 10 jan → 31 jan)</mat-hint>
+
+                <mat-error *ngIf="fromDate && !toDate">
+                Complète la période avec une date de fin.
+                </mat-error>
+
+                <mat-error *ngIf="!fromDate && toDate">
+                Ajoute une date de début.
+                </mat-error>
+                
             </mat-form-field>
         </div>
 

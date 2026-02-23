@@ -9,9 +9,9 @@
     matInput
     [ngModel]="value"
     (ngModelChange)="onInput($event)"
-    (blur)="onBlur()"
+    (blur)="onBlur(); model.control.markAsTouched()"
     [required]="required"
-    [attr.minlength]="minlength || null"
+    [minlength]="minlength"
     [disabled]="disabled"
     [matAutocomplete]="auto"
     [placeholder]="placeholder"

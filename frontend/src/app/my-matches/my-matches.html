@@ -10,7 +10,7 @@
 }
 
 <div class="matches">
-    <h1 class="title subpage-title mt-app">Messages</h1>
+    <h1 class="title subpage-title mt-app app-title-color">Messages</h1>
     @if(myMatches.length > 0){
     <ul class="m-0 p-0" [class.hide-on-mobile]="showMessage">
         <li *ngFor="let match of myMatches" clickable (click)="onOpenChat2(match.id, match.otherFirstName)"

@@ -28,12 +28,14 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   selector: 'app-listing',
   standalone: true,
   imports: [FormsModule, CommonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatCardModule, MatTabsModule,
-    MatButtonModule, MatFormFieldModule, MatStepperModule, MatDatepickerModule, FirstLetterPipe, MatChipsModule, MatSelectModule, CityAutocompleteComponent, MatProgressSpinnerModule],
+    MatButtonModule, MatStepperModule, MatDatepickerModule, FirstLetterPipe, MatChipsModule, MatSelectModule, CityAutocompleteComponent, MatProgressSpinnerModule],
   providers: [provideNativeDateAdapter()],
   templateUrl: './listings.html',
   styleUrl: './listings.css',
 })
 export class Listings implements OnInit {
+
+  dateInteracted = false;
 
   isLoading = false; // variable pour afficher le spinner (lorsque la page charge les voyages)
 

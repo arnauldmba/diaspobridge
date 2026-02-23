@@ -16,14 +16,14 @@
     -->
     }
 
-    <div class="container mb-4">
-        <span class="material-symbols-outlined color-1" (click)="onBackToListing()">
+    <div class="container mb-2">
+        <span class="material-symbols-outlined app-title-color" (click)="onBackToListing()">
             keyboard_backspace
         </span>
     </div>
 
-    <div class="container mb-4">
-        <h1 style="color: rgb(4, 84, 4);">Détail du voyage</h1>
+    <div class="container mb-4 app-title-color">
+        <h1>Détail du voyage</h1>
     </div>
 
     @if (!isLoading && trip) {
