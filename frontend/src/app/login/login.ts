@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../model/users.model';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { Router, RouterLink } from '@angular/router';
@@ -9,7 +8,7 @@ import { MatIcon } from "@angular/material/icon";
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule, RouterLink, MatFormFieldModule, MatFormFieldModule, MatInputModule],
+  imports: [FormsModule, RouterLink, MatFormFieldModule, MatInputModule],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })

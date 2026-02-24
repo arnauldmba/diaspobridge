@@ -1,15 +1,131 @@
 <div class="container text-center mt-app">
-    <h1 class="mt-3 mb-3">Inscrivez vous</h1>
-    <div class="container mt-3" style="width: 500px;">
-        <div *ngIf="err" class="text-danger mt-2">
-            {{ err }}
-        </div>
-        <div class="col">
+    <h1 class="mt-3 mb-3 app-title-color">Inscrivez vous</h1>
+    <div *ngIf="err" class="text-danger mt-2">
+        {{ err }}
+    </div>
             <form [formGroup]="myForm">
+                <div class="mb-2">
+                    <mat-form-field appearance="outline" class="w-100 m-0">
+                        <mat-label>Nom d'utilisateur</mat-label>
+                        <input matInput type="text" name="firstName" formControlName="firstName">
+                        @if(myForm.controls['firstName'].invalid && (myForm.controls['firstName'].dirty ||
+                        myForm.controls['firstName'].touched)){
+                        <mat-error class="text-end pt-0">Le nom d'utilisateur est obligatoire.</mat-error>
+                        }
+                    </mat-form-field>
+                </div>
+
+                <div class="mb-2">
+                    <mat-form-field appearance="outline" class="w-100 m-0">
+                        <mat-label>Entrez votre Email-adresse</mat-label>
+                        <input matInput type="email" name="email" formControlName="email">
+                        @if (myForm.controls['email'].hasError('required')&&
+                        myForm.controls['email'].touched) {
+                        <mat-error class="text-end">
+                            email est obligatoire
+                        </mat-error>
+                        }
+                        @if(myForm.controls['email'].hasError('email')&&!myForm.controls['email'].hasError('required')&&
+                        myForm.controls['email'].touched){
+                        <mat-error class="text-end">
+                            email non valide
+                        </mat-error>
+                        }
+                    </mat-form-field>
+                </div>
+
+                <div class="mb-2">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Entrez votre mot de passe</mat-label>
+                        <input matInput type="password" name="password" formControlName="password">
+                    
+
+                        @if(myForm.controls['password'].invalid && (myForm.controls['password'].dirty ||
+                        myForm.controls['password'].touched)){
+                        <mat-error class="text-end">
+                            Le mot de passe est obligatoire.
+                        </mat-error>
+                        }
+                        @if(myForm.controls['password'].hasError('minlength') &&
+                        !myForm.controls['password'].hasError('required')&&
+                        myForm.controls['password'].touched){
+                        <mat-error class="text-end">
+                            Le mot de passe doit contenir au moins 6 caractères.
+                        </mat-error >
+                        }
+                    </mat-form-field>
+                </div>
+
+                <div class="form-floating row mb-2">
+                     <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Confirme password</mat-label>
+                        <input matInput type="password" name="confirmPassword" formControlName="confirmPassword">
+
+                        @if(myForm.controls['confirmPassword'].invalid && (myForm.controls['confirmPassword'].dirty ||
+                        myForm.controls['confirmPassword'].touched)){
+                        <mat-error class="text-end">
+                            La confirmation du mot de passe est obligatoire.
+                        </mat-error>
+                        }
+                        @if(myForm.controls['confirmPassword'].hasError('minlength') &&
+                        !myForm.controls['confirmPassword'].hasError('required')&&
+                        myForm.controls['confirmPassword'].touched){
+                        <mat-error class="text-end">
+                            La confirmation du mot de passe doit contenir au moins 6 caractères.
+                        </mat-error>
+                        
+                        }
+                        @if(myForm.get('confirmPassword')?.touched &&
+                        myForm.get('confirmPassword')?.value != myForm.get('password')?.value){
+                        <mat-error class="text-end">
+                            Le mot de passe et la confirmation du mot de passe ne correspondent pas.
+                        </mat-error>
+                        }
+                    </mat-form-field>
+                </div>
+            
+                @if(loading){
+                <div class="d-flex justify-content-center">
+                    <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+                }
+
+                <div>
+                    <!--<button type="button" [disabled]="myForm.invalid" (click)="onRegister()"
+                        class="btn btn-success">S'incrire
+                    </button>-->
+
+                    <button class="btn-app btn-app-primary w-100"
+                        type="button" [disabled]="myForm.invalid"
+                        (click)="onRegister()" style="height: 56px; font-size: 16px;">
+                        Inscrivez vous
+                    </button>
+                </div>
+            </form>
+        <div class="col pt-3">
+            <span>Vous avez déjà un compte ? </span> 
+            <a class="color-1" routerLink="/login">Connectez-vous</a>
+        </div>
+    
+</div>
+
+
+
+<!--new version-->
+
+<!--
+<form [formGroup]="myForm">
                 <div class="form-floating row mb-3">
                     <input type="text" class="form-control" id="floatingInput1" formControlName="firstName"
                         name="firstName" placeholder="Non d'utilisateur">
                     <label for="floatingInput">Nom d'utilisateur</label>
+
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Entrez votre Email-adresse</mat-label>
+                        <input matInput type="email" name="firstName" formControlName="firstName" placeholder="mustermann@mail.com">
+                    </mat-form-field>
 
                     @if(myForm.controls['firstName'].invalid && (myForm.controls['firstName'].dirty ||
                     myForm.controls['firstName'].touched)){
@@ -99,12 +215,4 @@
                         class="btn btn-success">S'incrire
                     </button>
                 </div>
-            </form>
-
-        </div>
-        <div class="col">
-            Vous avez déjà un compte ? <br>
-            <a routerLink="/login">Connectez-vous</a>
-        </div>
-    </div>
-</div>
+            </form>-->

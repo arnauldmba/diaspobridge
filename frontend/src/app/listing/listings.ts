@@ -35,6 +35,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 })
 export class Listings implements OnInit {
 
+  isFocused: boolean = false;
+
   dateInteracted = false;
 
   isLoading = false; // variable pour afficher le spinner (lorsque la page charge les voyages)

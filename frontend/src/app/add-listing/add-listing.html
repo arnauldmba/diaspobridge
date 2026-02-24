@@ -23,7 +23,8 @@
                         [(ngModel)]="newListing.originCity" name="originCity" [required]="true" [minlength]="2">
                     </app-city-autocomplete-component>
 
-                    <app-city-autocomplete-component [cities]="citiesCM" label="Où au Cameroun ?"
+                    <app-city-autocomplete-component 
+                        [cities]="citiesCM" label="Où au Cameroun ?"
                         placeholder="Ex : Douala, Yaoundé…" hint="Ville d’arrivée du colis au Cameroun."
                         [(ngModel)]="newListing.destCity" name="destCity" [required]="true" [minlength]="2">
                     </app-city-autocomplete-component>
@@ -31,13 +32,13 @@
 
                 <!-- Date -->
                 <div class="row justify-content-center mb-3">
-                    <mat-form-field appearance="outline" class="w-full d-block col">
+                    <mat-form-field appearance="outline" class="w-full d-block col custom-border-focus custom-green-focus-label">
                         <mat-label>Date de départ</mat-label>
 
                         <input matInput [matDatepicker]="picker" [(ngModel)]="newListing.departDate" name="departDate"
                             #departDate="ngModel" required [matDatepickerFilter]="futureDatesOnly" />
 
-                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker-toggle class="border-color-input" matIconSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker [startAt]="today"></mat-datepicker>
 
                         <mat-error *ngIf="departDate.touched && departDate.errors?.['required']">
@@ -48,9 +49,9 @@
 
                 <!-- weight + price -->
                 <div class="row row-cols-2 row-cols-lg-2 g-2 g-lg-2 mb-3">
-                    <mat-form-field appearance="outline" class="example-full-width col">
+                    <mat-form-field appearance="outline" class="example-full-width col custom-border-focus custom-green-focus-label">
                         <mat-label>Kilo dispo</mat-label>
-                        <mat-icon matPrefix>balance</mat-icon>
+                        <mat-icon class="border-color-input" matPrefix>balance</mat-icon>
 
                         <input matInput type="number" [(ngModel)]="newListing.maxWeightKg" name="maxWeightKg"
                             #maxWeightKg="ngModel" required min="1" placeholder="Kilo disponible" />
@@ -63,9 +64,9 @@
                         </mat-error>
                     </mat-form-field>
 
-                    <mat-form-field appearance="outline" class="example-full-width col">
+                    <mat-form-field appearance="outline" class="example-full-width col custom-border-focus custom-green-focus-label">
                         <mat-label>Prix par kilo</mat-label>
-                        <mat-icon matPrefix>euro_symbol</mat-icon>
+                        <mat-icon class="border-color-input" matPrefix>euro_symbol</mat-icon>
 
                         <input matInput type="number" [(ngModel)]="newListing.pricePerKg" name="pricePerKg"
                             #pricePerKg="ngModel" required min="0" step="0.01" placeholder="Ex: 10" />
@@ -81,7 +82,7 @@
 
                 <!-- NOTE (optionnel) -->
                 <div class="row justify-content-center mb-3">
-                    <mat-form-field appearance="outline" class="example-full-width">
+                    <mat-form-field appearance="outline" class="example-full-width custom-border-focus custom-green-focus-label">
                         <mat-label>Laisser un commentaire</mat-label>
                         <textarea matInput [(ngModel)]="newListing.note" name="note" maxlength="500"
                             style="height: 100px;" placeholder="Laisser un commentaire...">

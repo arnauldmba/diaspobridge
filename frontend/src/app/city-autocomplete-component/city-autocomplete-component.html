@@ -1,8 +1,10 @@
-<mat-form-field appearance="outline" class="w-100">
-  <mat-label style="font-size: var(--text-sm); color: var(--color-muted);">{{ label }}</mat-label>
+<mat-form-field appearance="outline" class="w-100 custom-green-focus-label custom-border-focus">
+  <mat-label style="font-size: var(--text-sm);">{{ label }}</mat-label>
 
   @if (icon) {
-    <mat-icon class="p-0 ps-2" matPrefix>{{ icon }}</mat-icon>
+    <mat-icon 
+      class="p-0 ps-2 border-color-input" matPrefix
+    >{{ icon }}</mat-icon>
   }
 
   <input

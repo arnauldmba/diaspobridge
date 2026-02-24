@@ -32,7 +32,6 @@
 /* style pour entrer une date recherche */
 
 .filter-div{
-  margin-top: 34px;
   display: flex;
   justify-content: space-between;
   align-items: center;

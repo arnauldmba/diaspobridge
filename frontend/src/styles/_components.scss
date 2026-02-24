@@ -8,10 +8,14 @@ html, body {
   color: var(--color-text);
 }
 
+.border-color-input{
+  color: var(--color-input) !important;
+}
+
 .muted { color: var(--color-muted); }
 
 .app-title-color{
-  color: rgb(4, 84, 4);
+  color: rgb(4, 77, 4);
 }
 
 .icon-size-lg{
@@ -169,7 +173,7 @@ html, body {
 }
 
 .color-1{
-  color: var(--color-accent);
+  color: var(--color-accent) !important;
 }
 
 .color-accent{
