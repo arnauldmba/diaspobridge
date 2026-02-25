@@ -17,7 +17,7 @@
 
 a{
   text-decoration: none;
-  color: rgb(11, 117, 11);
+  color: var(--color-accent)
 }
 
 .desktop-link-button{
@@ -79,7 +79,8 @@ a{
   top: 58px;
   right: 0;
   width: 100%;
-  background-color: white;
+  background-color: var(--color-bg);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
   border-bottom: 1px solid #ddd;
   transform-origin: top;
   transform: scaleY(0);
@@ -97,12 +98,26 @@ a{
 }
 
 .mobile-menu a {
-  display: block;
-  padding: 22px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 14px 14px 14px;
+  margin: 8px 8px 8px 8px;
   text-decoration: none;
-  color: black;
-  border-top: 1px solid var(--color-border);
+  color: rgb(1, 12, 1);
+  font-weight: 500;
   transition: background 150ms ease, color 150ms ease;
+  border-radius: 8px;
+}
+
+.mobile-menu a:not(.active):hover {
+  background-color: #147e2620;
+}
+
+.mobile-menu a.active {
+  background-color: var(--color-accent);
+  color: white;
+  border: none;
 }
 
 .avatar{

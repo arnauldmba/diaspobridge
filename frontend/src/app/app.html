@@ -68,20 +68,30 @@
   </div>
 
   <!-- Mobile dropdown -->
-  <div class="mobile-menu shadow-app" [class.open]="mobileMenuOpen" #mobileMenu>
-    <a routerLink="/add-listing" (click)="closeMenu()" routerLinkActive="active"
+  <div class="mobile-menu " [class.open]="mobileMenuOpen" #mobileMenu>
+    <a routerLink="/listings" (click)="closeMenu()" routerLinkActive="active"
       [routerLinkActiveOptions]="{ exact: true }">
-      Publier
+      <span class="material-symbols-outlined">list_alt</span> Annonces
     </a>
-    <a routerLink="/listings" (click)="closeMenu()">Annonces</a>
-    <a routerLink="/my-listings" (click)="closeMenu()">Mes annonces</a>
-    <a routerLink="/compte" (click)="closeMenu()">Profil</a>
-    <a routerLink="/messages" (click)="closeMenu()"><span matBadge="{{unreadMessage}}" matBadgeOverlap="false">Messages</span></a>
+    <a routerLink="/add-listing" (click)="closeMenu()" routerLinkActive="active">
+      <span class="material-symbols-outlined">add_circle</span> 
+      Pulier une annonce
+    </a>
+    <a routerLink="/messages" (click)="closeMenu()" routerLinkActive="active">
+      <span class="material-symbols-outlined">chat_bubble</span>
+      <span matBadge="{{unreadMessage}}" matBadgeOverlap="false">Messages</span>
+    </a>
+    <a routerLink="/my-listings" (click)="closeMenu()" routerLinkActive="active">
+      <span class="material-symbols-outlined">account_box</span>
+      Profil
+    </a>
 
     @if(authService.isLoggedIn()) {
-    <a (click)="logout()" class="dropdown-item">Deconnexion</a>
+    <a (click)="logout()" class="dropdown-item">
+      <span class="material-symbols-outlined">logout</span>
+      Deconnexion</a>
     }@else{
-    <a class="dropdown-item" routerLink="/login" (click)="closeMenu()">Connexion</a>
+    <a class="dropdown-item color-1" routerLink="/login" (click)="closeMenu()">Connexion</a>
     }
   </div>
 </nav>
