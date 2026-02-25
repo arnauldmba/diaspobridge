@@ -1,17 +1,19 @@
-<mat-form-field appearance="outline" class="w-100">
-  <mat-label>{{ label }}</mat-label>
+<mat-form-field appearance="outline" class="w-100 custom-green-focus-label custom-border-focus">
+  <mat-label style="font-size: var(--text-sm);">{{ label }}</mat-label>
 
   @if (icon) {
-    <mat-icon matPrefix>{{ icon }}</mat-icon>
+    <mat-icon 
+      class="p-0 ps-2 border-color-input" matPrefix
+    >{{ icon }}</mat-icon>
   }
 
   <input
     matInput
     [ngModel]="value"
     (ngModelChange)="onInput($event)"
-    (blur)="onBlur()"
+    (blur)="onBlur(); model.control.markAsTouched()"
     [required]="required"
-    [attr.minlength]="minlength || null"
+    [minlength]="minlength"
     [disabled]="disabled"
     [matAutocomplete]="auto"
     [placeholder]="placeholder"
@@ -37,7 +39,7 @@
   </mat-autocomplete>
 
   @if (hint) {
-    <mat-hint>{{ hint }}</mat-hint>
+    <mat-hint class="muted">{{ hint }}</mat-hint>
   }
 
   @if (model.touched && model.errors?.['required']) {

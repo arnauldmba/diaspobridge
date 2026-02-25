@@ -5,9 +5,6 @@
   --color-accent: #0d943e;  /* vert */
   --color-secondary: #FFB703;  
 
-  --color-accent: #0d943e;  /* vert */
-  --color-secondary: #FFB703;  
-
   --color-warn: #ef4444;    /* rouge */
 
   /* Surfaces & text */
@@ -19,6 +16,7 @@
   /*--color-muted: #5b606c;*/
    --color-muted: #5b606ce4;
   --color-border: #e5e7eb;
+  --color-input: rgb(27, 99, 27);
 
   /* Typography */
   --font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
@@ -58,8 +56,74 @@
   background-color: var(--color-accent) !important;
   }
 
-  /*changer la couleur de du text pour le button chip pour le button filtre page listing */
+  /*changer la couleur du text pour le button chip pour le button filtre page listing */
   .mat-mdc-chip.mat-mdc-chip-selected .mdc-evolution-chip__text-label {
     color: #ffffffd7 !important;
+  }
+
+  /*change la couleur des bordures des inputs*/
+  .custom-border-color .mdc-notched-outline__leading,
+  .custom-border-color .mdc-notched-outline__trailing {
+    border-color: var(--color-input) !important;
+  }
+
+  .custom-border-color-left .mdc-notched-outline__notch{
+    border-color: var(--color-input) !important;
+    border-left: none !important;
+  }
+
+
+  /* Bordure au focus */
+  .custom-border-focus .mdc-text-field--focused .mdc-notched-outline__leading,
+  .custom-border-focus .mdc-text-field--focused .mdc-notched-outline__notch,
+  .custom-border-focus .mdc-text-field--focused .mdc-notched-outline__trailing {
+    border-color: rgb(8, 173, 27) !important;
+  }
+
+ /* Label vert au focus */
+  .custom-green-focus-label
+    .mat-mdc-text-field-wrapper.mdc-text-field--focused
+    .mdc-floating-label {
+    color: var(--color-input) !important;
+  }
+
+  /* Supprime les bordures du input*/
+  .no-border .mdc-notched-outline__leading,
+  .no-border .mdc-notched-outline__notch,
+  .no-border .mdc-notched-outline__trailing {
+    border-color: none !important;
+  }
+
+  /* Enlever la ligne du bas (underline) */
+  .no-underline .mdc-line-ripple::before,
+  .no-underline .mdc-line-ripple::after {
+    display: none !important;
+  }
+
+  /*change le background du input*/
+  .custom-background .mdc-text-field {
+    background-color: white;
+    border-radius: 8px;
+  }
+
+  /* ajouter un pointer clickable sur uune balise */
+  /*
+  .date-clickable{
+    cursor: pointer;
+  }*/
+
+  /* changer la couleur des border d'un input
+  .date-clickable:hover .mdc-notched-outline__leading,
+  .date-clickable:hover .mdc-notched-outline__notch,
+  .date-clickable:hover .mdc-notched-outline__trailing {
+    border-color: red;
+    transition: border-color 0.2s ease;
+  }
+  */
+
+  .input-hover:hover .mat-mdc-text-field-wrapper {
+    background-color: rgba(47, 80, 55, 0.107);
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
   }
 }

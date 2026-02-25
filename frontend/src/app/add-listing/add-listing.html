@@ -1,7 +1,7 @@
 <div class="container-add-listing mt-app">
     <!-- First titel -->
-    <div class="mb-4 p-0 border-0 ">
-        <h1>Créer une nouvelle annonce</h1>
+    <div class="mb-4 p-0 border-0">
+        <h1 class="app-title-color">Créer une nouvelle annonce</h1>
         <p style="color: var(--color-muted);">Partagez vos projets de voyage et aidez d'autres personnes à envoyer
             des colis chez elles
         </p>
@@ -14,44 +14,6 @@
                 <h6 class="m-0 fw-medium">Informations sur le voyage</h6>
             </div>
             <form #tripForm="ngForm" (ngSubmit)="addListing(tripForm)">
-                
-                <!-- Ville -->
-                <!--<div class="row row-cols-1 row-cols-lg-2 g-2 g-lg-2 mb-3">
-                    <mat-form-field appearance="outline" class="col">
-                        <mat-label>Ville de remise du colis (Allemagne)</mat-label>
-                        <mat-icon matPrefix>location_on</mat-icon>
-
-                        <input matInput [(ngModel)]="newListing.originCity" name="originCity" #originCity="ngModel"
-                            required minlength="2" placeholder="Ville de depart" />
-
-                        <mat-hint style="color: rgba(0,0,0,0.748); width: 100%;">
-                            Par poste ou en main propre dans cette ville.
-                        </mat-hint>
-
-                        <mat-error *ngIf="originCity.touched && originCity.errors?.['required']">
-                            La ville de départ est obligatoire.
-                        </mat-error>
-                        <mat-error *ngIf="originCity.touched && originCity.errors?.['minlength']">
-                            Minimum 2 caractères.
-                        </mat-error>
-                    </mat-form-field>
-
-                    <mat-form-field appearance="outline" class="col">
-                        <mat-label>Ville de destination (Cameroun)</mat-label>
-                        <mat-icon matPrefix>location_on</mat-icon>
-
-                        <input matInput [(ngModel)]="newListing.destCity" name="destCity" #destCity="ngModel" required
-                            minlength="2" placeholder="Ville d'arrive" />
-
-                        <mat-error *ngIf="destCity.touched && destCity.errors?.['minlength']">
-                            Minimum 2 caractères.
-                        </mat-error>
-
-                        <mat-error *ngIf="destCity.touched && destCity.errors?.['required']">
-                            La ville d’arrivée est obligatoire.
-                        </mat-error>
-                    </mat-form-field>
-                </div>-->
                 <div class="row row-cols-1 row-cols-lg-2 g-3 g-lg-2 mb-3">
                     <app-city-autocomplete-component 
                         [cities]="citiesDE" 
@@ -61,7 +23,8 @@
                         [(ngModel)]="newListing.originCity" name="originCity" [required]="true" [minlength]="2">
                     </app-city-autocomplete-component>
 
-                    <app-city-autocomplete-component [cities]="citiesCM" label="Où au Cameroun ?"
+                    <app-city-autocomplete-component 
+                        [cities]="citiesCM" label="Où au Cameroun ?"
                         placeholder="Ex : Douala, Yaoundé…" hint="Ville d’arrivée du colis au Cameroun."
                         [(ngModel)]="newListing.destCity" name="destCity" [required]="true" [minlength]="2">
                     </app-city-autocomplete-component>
@@ -69,13 +32,13 @@
 
                 <!-- Date -->
                 <div class="row justify-content-center mb-3">
-                    <mat-form-field appearance="outline" class="w-full d-block col">
+                    <mat-form-field appearance="outline" class="w-full d-block col custom-border-focus custom-green-focus-label input-hover">
                         <mat-label>Date de départ</mat-label>
 
-                        <input matInput [matDatepicker]="picker" [(ngModel)]="newListing.departDate" name="departDate"
-                            #departDate="ngModel" required [matDatepickerFilter]="futureDatesOnly" />
+                        <input matInput [matDatepicker]="picker" [(ngModel)]="newListing.departDate" name="departDate" style="cursor: pointer;"
+                            #departDate="ngModel" required [matDatepickerFilter]="futureDatesOnly" readonly (click)="picker.open()" />
 
-                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker-toggle class="border-color-input" matIconSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker [startAt]="today"></mat-datepicker>
 
                         <mat-error *ngIf="departDate.touched && departDate.errors?.['required']">
@@ -86,9 +49,9 @@
 
                 <!-- weight + price -->
                 <div class="row row-cols-2 row-cols-lg-2 g-2 g-lg-2 mb-3">
-                    <mat-form-field appearance="outline" class="example-full-width col">
+                    <mat-form-field appearance="outline" class="example-full-width col custom-border-focus custom-green-focus-label">
                         <mat-label>Kilo dispo</mat-label>
-                        <mat-icon matPrefix>balance</mat-icon>
+                        <mat-icon class="border-color-input" matPrefix>balance</mat-icon>
 
                         <input matInput type="number" [(ngModel)]="newListing.maxWeightKg" name="maxWeightKg"
                             #maxWeightKg="ngModel" required min="1" placeholder="Kilo disponible" />
@@ -101,9 +64,9 @@
                         </mat-error>
                     </mat-form-field>
 
-                    <mat-form-field appearance="outline" class="example-full-width col">
+                    <mat-form-field appearance="outline" class="example-full-width col custom-border-focus custom-green-focus-label">
                         <mat-label>Prix par kilo</mat-label>
-                        <mat-icon matPrefix>euro_symbol</mat-icon>
+                        <mat-icon class="border-color-input" matPrefix>euro_symbol</mat-icon>
 
                         <input matInput type="number" [(ngModel)]="newListing.pricePerKg" name="pricePerKg"
                             #pricePerKg="ngModel" required min="0" step="0.01" placeholder="Ex: 10" />
@@ -119,7 +82,7 @@
 
                 <!-- NOTE (optionnel) -->
                 <div class="row justify-content-center mb-3">
-                    <mat-form-field appearance="outline" class="example-full-width custom-textarea">
+                    <mat-form-field appearance="outline" class="example-full-width custom-border-focus custom-green-focus-label">
                         <mat-label>Laisser un commentaire</mat-label>
                         <textarea matInput [(ngModel)]="newListing.note" name="note" maxlength="500"
                             style="height: 100px;" placeholder="Laisser un commentaire...">
@@ -155,7 +118,6 @@
                 </div>
 
                 <!-- MESSAGE GLOBAL -->
-
                 <div *ngIf="message">
                     <h5>{{ message }}</h5>
                 </div>
@@ -164,11 +126,11 @@
         </div>
 
         <div class="container-consignes">
-            <div class="card shadow-app mb-4">
+            <div class="border p-3 rounded-4 mb-4">
                 <!--<img src="assets/images/add-listing-illustration.png" class="card-img-top"
                     alt="Illustration de création d'annonce">-->
                 <div class="card-body">
-                    <h6 class="card-title text-center">Pourquoi créer une annonce ?</h6>
+                    <h6 class="card-title text-center mb-2">Pourquoi créer une annonce ?</h6>
                     <p class="card-text mx-2 ">
                         C'est une excellente façon de contribuer à la communauté et de faciliter les échanges entre les voyageurs et les expéditeurs.
                 </div> <!--En créant une annonce, vous partagez vos projets de voyage et aidez d'autres personnes à envoyer des colis chez elles.-->

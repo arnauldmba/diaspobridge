@@ -5,10 +5,13 @@ import { AuthService } from '../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { User } from '../model/users.model';
 import { ToastrService } from 'ngx-toastr';
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { MatFormField, MatLabel, MatHint, MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-register',
-  imports: [FormsModule, ReactiveFormsModule, RouterLink, CommonModule],
+  imports: [FormsModule, ReactiveFormsModule, RouterLink, CommonModule, MatProgressSpinnerModule, MatFormField, MatLabel, MatFormFieldModule, MatInputModule],
   templateUrl: './register.html',
   styleUrl: './register.css',
 })

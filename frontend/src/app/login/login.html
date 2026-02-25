@@ -1,45 +1,45 @@
 <div class="container text-center mt-app">
-        <form class="container d-grid justify-content-center">
-            <div class="intro-loggin text-start mb-4">
-                <h1>Connectez vous</h1>
-                Enregistez vous sur DiasporaBridge pour pourvoir transporter un colis. <br>
-                Vous povez aussi trouver des personnes pour vous aider a transporter vos colis.<br>
+    <form class="container d-grid justify-content-center">
+        <div class="text-start mb-4">
+            <h1 class="app-title-color">Connectez vous</h1>
+            Enregistez vous sur DiasporaBridge pour pourvoir transporter un colis. <br>
+            Vous povez aussi trouver des personnes pour vous aider a transporter vos colis.<br>
+        </div>
+        <div class="mb-1">
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Entrez votre Email-adresse</mat-label>
+                <input matInput type="email" [(ngModel)]="requestUser.email" name="email"
+                    placeholder="mustermann@mail.com">
+            </mat-form-field>
+        </div>
+        <div class="mb-1">
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Mot de passe</mat-label>
+                <input matInput type="password" [(ngModel)]="requestUser.password" id="inputPassword"
+                    name="passwordHash">
+            </mat-form-field>
+        </div>
+        <div class="mb-2">
+            <div class="">
+                <button class="btn-app d-flex align-items-center justify-content-center gap-2 btn-app-primary w-100"
+                    (click)="onLoggdin()" style="height: 56px; font-size: 16px;">
+                    Connectez vous
+                </button>
             </div>
-            <div class="mb-1">
-                <mat-form-field appearance="outline" class="w-100">
-                    <mat-label>Entrez votre Email-adresse</mat-label>
-                    <input matInput type="email" [(ngModel)]="requestUser.email" name="email"
-                        placeholder="mustermann@mail.com">
-                </mat-form-field>
+            <div class="text-start mt-3">
+                <a routerLink="/forgot-password">Mot de passe oublié ? </a>
             </div>
-            <div class="mb-1">
-                <mat-form-field appearance="outline" class="w-100">
-                    <mat-label>Mot de passe</mat-label>
-                    <input matInput type="password" [(ngModel)]="requestUser.password" id="inputPassword"
-                        name="passwordHash">
-                </mat-form-field>
-            </div>
-            <div class="mb-2">
-                <div class="">
-                    <button class="btn-app d-flex align-items-center justify-content-center gap-2 btn-app-primary w-100"
-                        (click)="onLoggdin()" style="height: 56px; font-size: 16px;">
-                        Connectez vous
-                    </button>
-                </div>
-                <div class="text-start mt-3">
-                    <a routerLink="/forgot-password">Mot de passe oublié ? </a>
-                </div>
-            </div>
-            <div class="col text-start">
-                Nouveau sur DiasporaBridge?
-                <a routerLink="/register">inscrivez vous</a>
-            </div>
-            @if(errorLogin == 1){
+        </div>
+        <div class="col text-start">
+            Nouveau sur DiasporaBridge?
+            <a routerLink="/register">inscrivez vous</a>
+        </div>
+        @if(errorLogin == 1){
+        <div class="text-danger text-center">
             <div class="text-danger text-center">
-                <div class="text-danger text-center">
-                    {{message}}
-                </div>
+                {{message}}
             </div>
-            }
-        </form>
+        </div>
+        }
+    </form>
 </div>

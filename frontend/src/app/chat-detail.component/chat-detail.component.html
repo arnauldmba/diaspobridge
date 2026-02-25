@@ -1,7 +1,0 @@
-<div class="chat-detail">
-    <button class="back-btn" routerLink="/messages">← Retour</button>
-
-    <app-chat-messaging *ngIf="matchId !== null" [matchId]="matchId"></app-chat-messaging>
-    <p *ngIf="matchId === null">matchId invalide</p>
-    <p>ChatDetail OK — matchId = {{ matchId }}</p>
-</div>

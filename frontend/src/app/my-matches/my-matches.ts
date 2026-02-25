@@ -2,14 +2,15 @@ import { Component } from '@angular/core';
 import { MatchService } from '../services/match.service';
 import { MatchDto } from '../model/chat.models';
 import { CommonModule } from '@angular/common';
-import { Router, RouterOutlet } from '@angular/router';
-import { ChatMessaging } from '../chat-messaging/chat-messaging';
+import { Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { getAvatarColor } from '../shared/utils/avatar-color.util';
+import { FirstLetterPipe } from "../shared/first-letter-pipe";
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-my-matches',
-  imports: [CommonModule, ChatMessaging, MatIconModule, RouterOutlet],
+  imports: [CommonModule, MatIconModule, FirstLetterPipe, MatProgressSpinnerModule],
   templateUrl: './my-matches.html',
   styleUrl: './my-matches.css',
 })
@@ -18,6 +19,8 @@ export class MyMatches {
   //Selected machtid
   matchIdParent!: number;
   selectedId!: number;
+
+  isLoading = false; // varaible pour gerer le chargement des voyages (spinner)
 
   isMobile = window.matchMedia('(max-width: 600px)').matches;
 
@@ -32,16 +35,22 @@ export class MyMatches {
     private router: Router) { }
 
   ngOnInit() {
+    this.isLoading = true; 
+
     this.matchService.getMyMatches().subscribe({
       next: (matches) => {
         this.myMatches = matches;
+        this.isLoading = false; 
         if (matches.length > 0) {
           //const first = matches[0];  // take first match 
           //this.onOpenChat(first.id, first.otherFirstName); // open first match
         }
         console.log("tout premier match", this.myMatches[0]); // ✅ ici
       },
-      error: (err) => console.error(err),
+      error: (err) => {
+        console.error(err); 
+        this.isLoading = false; 
+      }
     });
   }
 
@@ -50,13 +59,9 @@ export class MyMatches {
   }
 
   onOpenChat2(matchId: number, firstname?: string) {
-    console.log('onOpenChat matchId parent: ', matchId);
-    this.matchIdParent = matchId;
-    this.actuellUser = firstname;
-
-    if (window.innerWidth <= 600) {
-      this.showMessage = true;
-    }
+    this.router.navigate(['/chat', matchId], {
+      queryParams: { name: firstname ?? ''}
+    });
   }
 
   /*

@@ -1,23 +1,26 @@
-<div class="container-chat">
-  <div class="container-titel-and-back-button">
+<div class="container-chat mt-app">
+  <div class="container-titel-and-back-button border-bottom">
     <span 
       class="material-symbols-outlined back-button" 
       (click)="onReturntoMatchList()">
         keyboard_backspace
     </span> 
-    <span class="avatar">M</span>
-    <span class="m-0 ">User Name</span>
+    <span class="avatar">{{chatFirstName | firstLetter}}</span>
+    <span class="m-0 ">{{chatFirstName}}</span>
   </div>
+  
   @if (messages; as msgs) {
-  <div class="container chat-message" #scrollContainer>
+  <div class="chat-message" #scrollContainer>
     <ul>
       @for (m of msgs; track m.id) {
       <li class="{{m.senderId === curruntUser ? 'my-chat-message' : 'other-chat-message'}}">
-        <span> {{ m.body }} </span> <br />
-        <small>{{ formatMessageDate(m.sentAt) }}</small>
+        <span> 
+          {{ m.body }} 
+          <br /><small>{{ formatMessageDate(m.sentAt) }}</small>
+        </span>
       </li>
       }
-      <li #bottomAnchor style="height: 1px;"></li>
+      <!--<li #bottomAnchor style="height: 1px; background-color: red;"></li>-->
     </ul>
   </div>
   } @else {

@@ -1,8 +1,14 @@
+@if (isLoading) {
+<div class="overlay">
+    <mat-spinner 
+        diameter="50">
+    </mat-spinner>
+</div>
+}
 <div class="container mt-app">
-    <!-- <button class="btn-app btn-app-primary publier">+ Publier</button> -->
-    <!-- Presentation text -->
+    <!-- Site presentation -->
     <div class="mb-4 p-0 container-intro-message">
-        <h2 class="mb-2">Trouvez des <span class="app-color-secondary">voyageurs</span> à destination du Cameroun</h2>
+        <h2 class="mb-2 app-title-color">Trouvez des <span class="app-color-secondary">voyageurs</span> à destination du Cameroun</h2>
         <p class="muted">Entrez en contact avec des <span class="">voyageurs</span> vérifiés qui peuvent <span
                 class="">transporter</span>
             vos colis en toute sécurité
@@ -10,43 +16,59 @@
     </div>
 
     <!-- Search bar: Transport city, Period, search bar -->
-    <div class="row align-items-start mb-4 seach-bar">
-        <app-city-autocomplete-component class="col-sm" [cities]="citiesCM" label="Où au Cameroun (optionnel) ?"
-            placeholder="Ex : Douala, Yaoundé…" hint="Ville où votre colis doit arriver." [(ngModel)]="pickupCity"
-            name="pickupCity" [required]="false" [minlength]="2">
+    <div class="row align-items-start seach-items mb-3">
+        <app-city-autocomplete-component 
+            class="col-sm custom-border-color custom-border-color-left" [cities]="citiesCM" 
+            label="Où au Cameroun (optionnel) ?"
+            placeholder="Ex : Douala, Yaoundé…" 
+            hint="Ville où votre colis doit arriver." 
+            [(ngModel)]="pickupCity"
+            name="pickupCity" 
+            [required]="false" 
+            [minlength]="2">
         </app-city-autocomplete-component>
 
         <div class="col-sm">
-            <mat-form-field appearance="outline" class="w-100">
-                <mat-label class="muted" style="font-size: var(--text-sm);">Période de départ</mat-label>
+            <mat-form-field appearance="outline" class="w-100 custom-border-color custom-border-color-left custom-border-focus custom-green-focus-label input-hover">
+                <mat-label class="muted" [class.color-1]="isFocused" style="font-size: var(--text-sm);">Période de départ</mat-label>
 
                 <mat-date-range-input [rangePicker]="rangePicker">
-                    <input matStartDate [(ngModel)]="fromDate" name="fromDate" placeholder="Du">
-                    <input matEndDate [(ngModel)]="toDate" name="toDate" placeholder="Au">
+                    <input matStartDate [(ngModel)]="fromDate" name="fromDate" placeholder="Du" [required]="!!toDate" readonly (focus)="rangePicker.open()"> <!--'readonly' empeche l'utilisateur d entrer la date lui meme. l oblige a utiliser le rangepicker-->
+                    <input matEndDate [(ngModel)]="toDate" name="toDate" placeholder="Au" [required]="!!fromDate" readonly (focus)="rangePicker.open()"> <!--'rangePicker.open()' pemet d ouvrir le datepicker au click sans le input -->
                 </mat-date-range-input>
 
-                <mat-datepicker-toggle matIconSuffix [for]="rangePicker"></mat-datepicker-toggle>
-                <mat-date-range-picker #rangePicker></mat-date-range-picker>
+                <mat-datepicker-toggle matIconSuffix [for]="rangePicker" style="color: var(--color-input);"></mat-datepicker-toggle>
+                <mat-date-range-picker #rangePicker required></mat-date-range-picker>
 
-                <mat-hint class="muted">Choisis une période (ex: 10 jan → 31 jan)</mat-hint>
+                <mat-hint class="muted" *ngIf="(!fromDate && !toDate) || (fromDate && toDate)">Choisis une période (ex: 10 jan → 31 jan)</mat-hint>
+
+                <mat-error *ngIf="fromDate && !toDate">
+                Complète la période avec une date de fin.
+                </mat-error>
+
+                <mat-error *ngIf="!fromDate && toDate">
+                Ajoute une date de début.
+                </mat-error>
+                
             </mat-form-field>
         </div>
 
         <!-- Bouton search -->
         <div class="col-sm button-search">
-            <button class="btn-app d-flex align-items-center justify-content-center gap-2 btn-app-primary w-100"
+            <button 
+                class="btn-app d-flex align-items-center justify-content-center gap-2 btn-app-primary w-100"
                 (click)="onSearch2()" 
                 [disabled]="!canSearch"
                 style="height: 56px; font-size: 16px;">
                 <mat-icon>search</mat-icon>
-                Rechercher
+                    Rechercher
             </button>
         </div>
     </div>
 
-    <!--Item trip / card -->
+    <!--Item select -->
     <div class="filter-div">
-        <div class="select-buttons d-flex align-items-center">
+        <div class="d-flex align-items-center">
             <mat-chip-listbox class="my-3" aria-label="Cutest dog breeds">
                 @for (chip of selectedPeriodList; track chip) {
                 <mat-chip-option (click)="applyQuickPeriod(chip.name)">
@@ -74,13 +96,11 @@
                 voyage<span *ngIf="listings!.length>1">s</span> -
                 <span style="font-style: italic;">''{{seachResutat}}''</span>
             </h6>
-        }
-        
+        }   
     </div>
     }
 
-
-    <!--@if(listings.length > 0){-->
+    <!--Item trip / card -->
     <div class="row row-cols-1 row-cols-lg-3 g-3 g-lg-4">
         @for (listing of listings; track listing.id) {
         <div class="col align-items-center">
@@ -89,33 +109,29 @@
                     <div class="d-flex">
                         <div class="col">
                             <div class="d-flex align-items-center gap-1">
-                                <mat-icon class="material-symbols-outlined color-1">location_on</mat-icon>
-                                <strong>{{listing.originCity}} </strong>
+                                <span class="material-symbols-outlined icon-size-xl app-title-color">location_on</span>
+                                <strong class="app-title-color">{{listing.originCity}} </strong>
                                 <!--<strong>{{listing.originCity}}, {{listing.originCountry}} </strong>-->
                             </div>
                             <div class="divider-with-text offset">
                                 <span class="material-symbols-outlined">flight_takeoff</span>
                             </div>
                             <div class="d-flex align-items-center gap-1 mb-3">
-                                <mat-icon class="material-symbols-outlined color-1">location_on</mat-icon>
-                                <span class="text-meta-strong">{{listing.destCity}}</span>
+                                <span class="material-symbols-outlined icon-size-xl app-title-color">location_on</span>
+                                <strong class="app-title-color">{{listing.destCity}}</strong>
                                 <!--<span class="text-meta-strong">{{listing.destCity}}, {{listing.destCountry}}</span>-->
                             </div>
                         </div>
-                        <h6 class="col text-end"
-                            style="font-size: var(--text-lg); color: var(--color-accent); font-weight: 1000; display: none;">
-                            10€/kg
-                        </h6>
                     </div>
 
                     <div class="row">
-                        <div class="d-flex mb-3 gap-3 col-8">
-                            <div class="card-text d-flex align-items-center" style="color: var(--color-muted);">
-                                <mat-icon class="material-symbols-outlined">calendar_today</mat-icon>
+                        <div class="d-flex mb-3 gap-4 col-8">
+                            <div class="card-text d-flex align-items-center gap-1" style="color: var(--color-muted);">
+                                <span class="material-symbols-outlined icon-size-lg">calendar_today</span>
                                 <span class="text-meta">{{listing.departDate | date:'dd MMM yyyy' }}</span>
                             </div>
-                            <div class="card-text d-flex align-items-center" style="color: var(--color-muted);">
-                                <mat-icon class="material-symbols-outlined">balance</mat-icon>
+                            <div class="card-text d-flex align-items-center gap-1" style="color: var(--color-muted);">
+                                <span class="material-symbols-outlined icon-size-lg">balance</span>
                                 <span class="text-meta">{{listing.maxWeightKg}}kg</span>
                             </div>
                         </div>
@@ -125,7 +141,8 @@
                         </span>
                     </div>
                     <div class="border-top align-items-center d-flex align-items-start gap-2 pt-3">
-                        <div class="avatar" [style.background]="avatarColor(listing.transporter.firstName)">
+                        <div class="avatar">
+                        <!--<div class="avatar" [style.background]="avatarColor(listing.transporter.firstName)">-->    
                             {{(listing.transporter.firstName | firstLetter )}}
                         </div>
                         <span class="text-meta">{{listing.transporter.firstName}}</span>

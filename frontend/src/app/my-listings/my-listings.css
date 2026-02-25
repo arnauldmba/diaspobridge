@@ -20,26 +20,6 @@
     grid-area: annonces;
 }
 
-.user-info-and-button-container {
-    border: 1px solid green;
-    width: 100%;
-}
-
-.user-info-and-button {
-    display: flex;
-    justify-content: space-between;
-}
-
-.user-info-and-button button {
-    margin: 0px;
-    padding: 0px;
-    width: 30px;
-}
-
-.container-button-and-description {
-    display: flex;
-}
-
 .span-text {
     font-size: var(--text-xs);
     margin-left: 2px;
@@ -54,13 +34,6 @@
     color: var(--color-text);
     font-size: var(--text-xs);
     font-weight: 400;
-}
-
-@media (min-width: 600px) {
-    .container-my-listing {
-        width: 900px;
-        margin: 0 auto
-    }
 }
 
 @media (max-width: 768px) {

@@ -1,3 +1,104 @@
+<nav class="navbar" #navbar [class.scrolled]="isScrolled">
+  <div class="logo" routerLink="/">
+    <span style="font-weight: 300">Mboko</span>
+    <span style="font-style: italic;">GO</span>
+  </div>
+
+  <!-- Desktop -->
+  <div class="nav-right">
+    <a class="desktop-link active" routerLink="/listings" (click)="closeMenu()" routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }">
+      Annonces
+    </a>
+    @if(authService.isAdmin()) {
+      <a routerLinkActive="active" class="desktop-link" routerLink="/#">Liste Utilisateur</a>
+    }
+    <a routerLinkActive="active" class="desktop-link-button" routerLink="/add-listing">
+      Créer une annonce
+    </a>
+    <a routerLinkActive="active" class="desktop-link" routerLink="/messages">Messages</a>
+    <a routerLink="/add-listing" class="material-symbols-outlined avatar mobile-link">add</a>
+    <a routerLinkActive="active" class="desktop-link" matBadge="{{unreadMessage}}" matBadgeSize="large" routerLink="/compte">
+      @if(authService.isLoggedIn()){
+        
+        <div class="d-flex align-items-center" (click)="!toggleMenu()">
+          <span class="avatar">{{ (currentUserEmail2$ | async) | firstLetter }}</span>
+          @if(!mobileMenuOpen ){
+          <span class="material-symbols-outlined">keyboard_arrow_down</span>
+          }@else {
+          <span class="material-symbols-outlined d-flex align-items-center">
+          keyboard_arrow_up</span>
+          }
+        </div>
+        
+      }@else{
+      <span [matMenuTriggerFor]="menu" class="material-symbols-outlined avatar">person</span>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item routerLink="/login">Connexion/Inscription</button>
+      </mat-menu>
+      }
+    </a>
+
+    <!-- Mobile-->
+    <a routerLinkActive="active" class="desktop-link-auth burger" routerLink="/compte">
+      @if(authService.isLoggedIn()){
+      <span [matMenuTriggerFor]="menu" 
+        style="font-size: 14px; font-weight: 1000;"
+        class="avatar">{{ (currentUserEmail2$ | async) | firstLetter }}</span>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="logout()">Deconnexion</button>
+      </mat-menu>
+    }@else {
+      <span [matMenuTriggerFor]="menu" class="material-symbols-outlined avatar">person</span>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item routerLink="/login">Connexion/Inscription</button>
+      </mat-menu>
+    }
+    </a>
+    <!--Buger menu -->
+    @if(!mobileMenuOpen){
+    <span class="material-symbols-outlined burger" matBadge="{{unreadMessage}}" matBadgeSize="large" (click)="toggleMenu()">
+      menu
+    </span>
+    }@else {
+    <span (click)="closeMenu()" class="material-symbols-outlined burger">
+      close
+    </span>
+    }
+  </div>
+
+  <!-- Mobile dropdown -->
+  <div class="mobile-menu " [class.open]="mobileMenuOpen" #mobileMenu>
+    <a routerLink="/listings" (click)="closeMenu()" routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }">
+      <span class="material-symbols-outlined">list_alt</span> Annonces
+    </a>
+    <a routerLink="/add-listing" (click)="closeMenu()" routerLinkActive="active">
+      <span class="material-symbols-outlined">add_circle</span> 
+      Pulier une annonce
+    </a>
+    <a routerLink="/messages" (click)="closeMenu()" routerLinkActive="active">
+      <span class="material-symbols-outlined">chat_bubble</span>
+      <span matBadge="{{unreadMessage}}" matBadgeOverlap="false">Messages</span>
+    </a>
+    <a routerLink="/my-listings" (click)="closeMenu()" routerLinkActive="active">
+      <span class="material-symbols-outlined">account_box</span>
+      Profil
+    </a>
+
+    @if(authService.isLoggedIn()) {
+    <a (click)="logout()" class="dropdown-item">
+      <span class="material-symbols-outlined">logout</span>
+      Deconnexion</a>
+    }@else{
+    <a class="dropdown-item color-1" routerLink="/login" (click)="closeMenu()">Connexion</a>
+    }
+  </div>
+</nav>
+
+
+<!-- Nav original -->
+<!--
 <nav class="navbar" #navbar>
   <div class="nav-left">
     @if(!mobileMenuOpen){
@@ -10,25 +111,26 @@
     </span>
     }
     <span class="logo" routerLink="/">
-      <span style="font-weight: 400">Mboko</span>
+      <span style="font-weight: 300">Mboko</span>
       <span style="font-style: italic;">GO</span>
     </span>
   </div>
+  -->
 
-  <!-- Desktop -->
+  <!-- Desktop --><!-- 
   <div class="nav-right">
     <a class="desktop-link active" routerLink="/listings" (click)="closeMenu()" routerLinkActive="active"
       [routerLinkActiveOptions]="{ exact: true }">
       Annonces
     </a>
     @if(authService.isAdmin()) {
-    <a routerLinkActive="active" class="desktop-link" routerLink="/#">Liste Utilisateur</a>
+      <a routerLinkActive="active" class="desktop-link" routerLink="/#">Liste Utilisateur</a>
     }
     <a routerLinkActive="active" class="desktop-link" routerLink="/add-listing">Créer une annonce</a>
     <a routerLinkActive="active" class="desktop-link" routerLink="/messages">Messages</a>
+    <a routerLink="/add-listing" class="material-symbols-outlined avatar mobile-link">add</a>
     <a routerLinkActive="active" class="desktop-link" routerLink="/compte">
       @if(authService.isLoggedIn()){
-      <!--@if(authService.logedUser && authService.isLoggedIn()){-->
         @if(!mobileMenuOpen ){
         <span class="material-symbols-outlined d-flex align-items-center" (click)="toggleMenu()">
           <span class="material-symbols-outlined avatar">person</span>
@@ -51,8 +153,8 @@
     <a routerLinkActive="active" class="desktop-link-auth burger" routerLink="/compte">
       @if(authService.isLoggedIn()){
       <span [matMenuTriggerFor]="menu" 
-        style="font-size: 12px; font-weight: 400;"
-        class="avatar">{{currentUserEmail | firstLetter}}</span>
+        style="font-size: 12px; font-weight: 1000; color: white; background-color: black;"
+        class="avatar">{{ (currentUserEmail2$ | async) | firstLetter }}</span>
       <mat-menu #menu="matMenu">
         <button mat-menu-item (click)="logout()">Deconnexion</button>
       </mat-menu>
@@ -64,9 +166,10 @@
     }
     </a>
   </div>
+-->
 
 
-  <!-- Mobile dropdown -->
+  <!-- Mobile dropdown --> <!--
   <div class="mobile-menu shadow-app" [class.open]="mobileMenuOpen" #mobileMenu>
     <a routerLink="/add-listing" (click)="closeMenu()" routerLinkActive="active"
       [routerLinkActiveOptions]="{ exact: true }">
@@ -84,9 +187,10 @@
     }
   </div>
 </nav>
+-->
 
 <router-outlet />
 
-<div class="mt-4 pt-3 text-center" style="color: var(--color-muted); font-size: 0.875rem;   ">
+<div class="mt-4 pt-3 text-center" style="color: var(--color-muted); font-size: 0.875rem;">
   
 </div>

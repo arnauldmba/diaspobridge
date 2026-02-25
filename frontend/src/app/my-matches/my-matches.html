@@ -1,47 +1,37 @@
-<div class="mb-3 mt-app container">
-    <span class="material-symbols-outlined back-button" (click)="onBackToListing()">
-        keyboard_backspace
-    </span>
-    <h1 class="m-0">Messages</h1>
-</div>
-
-<div class="p-0 border container rounded-1" style="display: flex;">
-    @if(myMatches.length > 0){
-    <div class="container-match-and-chat" style="flex: 1;">
-        <div class="matches-list" [class.hide-on-mobile]="showMessage">
-            <ul class="matches-item-container">
-                <!--<li *ngFor="let match of myMatches" clickable (click)="onOpenChat(match.id, match.otherFirstName)"-->
-                <li *ngFor="let match of myMatches" clickable (click)="onOpenChat(match.id)"
-                    class="p-3 d-flex gap-1 border-bottom match-item" [class.active]="match.id === matchIdParent">
-                    <div class="">
-                        <div class="avatar border me-2" [style.background]="avatarColor(match.otherFirstName)">
-                            <span>{{getFirstLetter(match.otherFirstName)}}</span>
-                        </div>
-                    </div>
-                    <div class="w-100">
-                        <p class="chat-firstname m-0">
-                            <span>{{match.otherFirstName}}</span>
-                            <span class="updated-date">{{match.updatedAt | date:'dd.MM.yyyy' }}</span>
-                        </p>
-                        <p class="preview-message mb-2">{{match.lastMessagePreview}}</p>
-                    </div>
-                </li>
-            </ul>
-        </div>
+<!--<span class="material-symbols-outlined back-button mb-3 " (click)="onBackToListing()">
+    keyboard_backspace
+</span>-->
+@if (isLoading) {
+    <div class="overlay">
+        <mat-spinner 
+            diameter="50">
+        </mat-spinner>
     </div>
+}
+
+<div class="matches">
+    <h1 class="title subpage-title mt-app app-title-color">Messages</h1>
+    @if(myMatches.length > 0){
+    <ul class="m-0 p-0" [class.hide-on-mobile]="showMessage">
+        <li *ngFor="let match of myMatches" clickable (click)="onOpenChat2(match.id, match.otherFirstName)"
+            class="p-3 gap-2 match-item border-bottom" [class.active]="match.id === matchIdParent">
+            <!--<div class="avatar border me-2" [style.background]="avatarColor(match.otherFirstName)">-->
+            <div class="avatar">
+                <span>{{match.otherFirstName | firstLetter}}</span>
+            </div>
+            <div class="namme-and-date">
+                <div class="w-100 d-flex justify-content-between">
+                    <strong class="m-0 p-0">{{match.otherFirstName}}</strong>
+                    <span class="updated-date">{{match.updatedAt | date:'dd.MM.yyyy' }} </span>
+                </div>
+                <p class="preview-message m-0 p-0">{{match.lastMessagePreview}}</p>
+            </div>
+        </li>
+    </ul>
     }@else{
-    <div class="container text-center my-5" *ngIf="myMatches.length === 0">
+    <div class="container text-center my-5">
         <p>Aucun messasges pour le moment.</p>
     </div>
     }
-    <div style="flex: 2;" class="container-chat-component" *ngIf="!isMobile && selectedId">
-        <app-chat-messaging [matchId]="selectedId"></app-chat-messaging>
-    </div>
-</div>
 
-<!-- Mobile: chat en plain ecrain via route -->
-@if(isMobile){
-<div class="mobile">
-    <router-outlet></router-outlet>
 </div>
-}
