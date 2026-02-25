@@ -7,10 +7,13 @@
 }
 
 .avatar{
-    font-size: 20px;
-    font-weight: 1000;
-    width: 48px;
-    height: 44px;
+    font-size: 16px;
+    font-weight: 400;
+
+    width: 44px;
+    height: 44px; 
+    /*color: rgb(31, 128, 31);
+    border-color: var(--color-accent);*/
 }
 
 .matches{
@@ -42,6 +45,11 @@
     padding: 0px;
 }
 
+.namme-and-date{
+    flex: 2;
+
+}
+
 .chat-description h6{
     font-size: var(--text-sm);
 }
@@ -53,8 +61,8 @@
 }
 
 .updated-date {
-    color: var(--color-muted);
-    font-weight: 400;
+    color: rgb(16, 118, 16);
+    font-weight: 500;
     font-size: var(--text-xs);
 }
 

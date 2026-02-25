@@ -80,7 +80,7 @@ a{
   right: 0;
   width: 100%;
   background-color: var(--color-bg);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
   border-bottom: 1px solid #ddd;
   transform-origin: top;
   transform: scaleY(0);
@@ -146,6 +146,7 @@ a{
 
   .mobile-menu {
     height: 100dvh;
+    box-shadow: none;
   }
 
   .desktop-link, .desktop-link-button{

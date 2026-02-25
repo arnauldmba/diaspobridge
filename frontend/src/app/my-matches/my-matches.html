@@ -14,18 +14,15 @@
     @if(myMatches.length > 0){
     <ul class="m-0 p-0" [class.hide-on-mobile]="showMessage">
         <li *ngFor="let match of myMatches" clickable (click)="onOpenChat2(match.id, match.otherFirstName)"
-            class="p-3 gap-1 match-item border-bottom" [class.active]="match.id === matchIdParent">
+            class="p-3 gap-2 match-item border-bottom" [class.active]="match.id === matchIdParent">
             <!--<div class="avatar border me-2" [style.background]="avatarColor(match.otherFirstName)">-->
-            <div class="avatar me-2">
-                {{match.otherFirstName | firstLetter}}
+            <div class="avatar">
+                <span>{{match.otherFirstName | firstLetter}}</span>
             </div>
-            <div class="w-100">
-                <div class="chat-description">
-                    <h6 class="m-0 p-0">{{match.otherFirstName}}</h6>
-                    <div class="align-items-center d-flex">
-                        <p class="updated-date m-0 p-0">{{match.updatedAt | date:'dd.MM.yyyy' }} </p>
-                        <span class="material-symbols-outlined muted m-0 p-0">chevron_forward</span>
-                    </div>
+            <div class="namme-and-date">
+                <div class="w-100 d-flex justify-content-between">
+                    <strong class="m-0 p-0">{{match.otherFirstName}}</strong>
+                    <span class="updated-date">{{match.updatedAt | date:'dd.MM.yyyy' }} </span>
                 </div>
                 <p class="preview-message m-0 p-0">{{match.lastMessagePreview}}</p>
             </div>
