@@ -13,7 +13,9 @@
     @if(authService.isAdmin()) {
       <a routerLinkActive="active" class="desktop-link" routerLink="/#">Liste Utilisateur</a>
     }
-    <a routerLinkActive="active" class="desktop-link" routerLink="/add-listing">Créer une annonce</a>
+    <a routerLinkActive="active" class="desktop-link-button" routerLink="/add-listing">
+      Créer une annonce
+    </a>
     <a routerLinkActive="active" class="desktop-link" routerLink="/messages">Messages</a>
     <a routerLink="/add-listing" class="material-symbols-outlined avatar mobile-link">add</a>
     <a routerLinkActive="active" class="desktop-link" matBadge="{{unreadMessage}}" matBadgeSize="large" routerLink="/compte">

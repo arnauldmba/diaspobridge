@@ -15,14 +15,16 @@
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
 }
 
-.dropdown-menu-res ul {
-  background-color: red;
-  text-decoration: none;
-}
-
 a{
   text-decoration: none;
   color: rgb(11, 117, 11);
+}
+
+.desktop-link-button{
+  color: var(--color-accent); 
+  border: 1px solid var(--color-accent);
+  padding: 8px 16px;
+  border-radius: 26px;
 }
 
 .nav-right {
@@ -40,6 +42,12 @@ a{
 }
 
 /* Hover (si pas actif) */
+.desktop-link-button.active {
+  background-color: var(--color-accent);
+  color: white;
+  border: none;
+}
+
 .desktop-link:not(.active):hover {
   border-bottom: solid 1px var(--color-accent);
 }
@@ -125,7 +133,7 @@ a{
     height: 100dvh;
   }
 
-  .desktop-link {
+  .desktop-link, .desktop-link-button{
     display: none;
   }
 }
