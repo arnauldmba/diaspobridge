@@ -29,12 +29,12 @@
         </app-city-autocomplete-component>
 
         <div class="col-sm">
-            <mat-form-field appearance="outline" class="w-100 custom-border-color custom-border-color-left custom-border-focus custom-green-focus-label">
+            <mat-form-field appearance="outline" class="w-100 custom-border-color custom-border-color-left custom-border-focus custom-green-focus-label input-hover">
                 <mat-label class="muted" [class.color-1]="isFocused" style="font-size: var(--text-sm);">Période de départ</mat-label>
 
                 <mat-date-range-input [rangePicker]="rangePicker">
-                    <input matStartDate [(ngModel)]="fromDate" name="fromDate" placeholder="Du" [required]="!!toDate">
-                    <input matEndDate [(ngModel)]="toDate" name="toDate" placeholder="Au" [required]="!!fromDate" >
+                    <input matStartDate [(ngModel)]="fromDate" name="fromDate" placeholder="Du" [required]="!!toDate" readonly (focus)="rangePicker.open()"> <!--'readonly' empeche l'utilisateur d entrer la date lui meme. l oblige a utiliser le rangepicker-->
+                    <input matEndDate [(ngModel)]="toDate" name="toDate" placeholder="Au" [required]="!!fromDate" readonly (focus)="rangePicker.open()"> <!--'rangePicker.open()' pemet d ouvrir le datepicker au click sans le input -->
                 </mat-date-range-input>
 
                 <mat-datepicker-toggle matIconSuffix [for]="rangePicker" style="color: var(--color-input);"></mat-datepicker-toggle>

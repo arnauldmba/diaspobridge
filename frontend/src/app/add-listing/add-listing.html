@@ -32,11 +32,11 @@
 
                 <!-- Date -->
                 <div class="row justify-content-center mb-3">
-                    <mat-form-field appearance="outline" class="w-full d-block col custom-border-focus custom-green-focus-label">
+                    <mat-form-field appearance="outline" class="w-full d-block col custom-border-focus custom-green-focus-label input-hover">
                         <mat-label>Date de départ</mat-label>
 
-                        <input matInput [matDatepicker]="picker" [(ngModel)]="newListing.departDate" name="departDate"
-                            #departDate="ngModel" required [matDatepickerFilter]="futureDatesOnly" />
+                        <input matInput [matDatepicker]="picker" [(ngModel)]="newListing.departDate" name="departDate" style="cursor: pointer;"
+                            #departDate="ngModel" required [matDatepickerFilter]="futureDatesOnly" readonly (click)="picker.open()" />
 
                         <mat-datepicker-toggle class="border-color-input" matIconSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker [startAt]="today"></mat-datepicker>
