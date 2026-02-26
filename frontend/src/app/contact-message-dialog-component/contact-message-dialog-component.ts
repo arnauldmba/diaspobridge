@@ -37,7 +37,6 @@ export class ContactMessageDialogComponent {
   }
 
   onSend() {
-    console.log('Sending message:', this.message);
     this.touched = true;
     if (!this.message.trim()) return; // ✅ bloque l’envoi
     this.ref.close(this.message.trim()); // ✅ renvoie le message au parent

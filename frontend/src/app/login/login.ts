@@ -39,11 +39,9 @@ export class Login implements OnInit {
       next: (response) => {
         const jwtToken = response.headers.get('Authorization');
         if (jwtToken) {
-          console.log('Login sucess: *******', jwtToken);
           this.authService.saveToken(jwtToken);
           this.router.navigate(['/listings']);
         } else {
-          console.log("erreur connection1: ", this.errorLogin)
           this.errorLogin = 1;
         }
       },

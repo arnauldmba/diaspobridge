@@ -36,10 +36,10 @@ export class SearchListing implements OnInit {
     this.listingService.searchTripsByCountry(criteria).subscribe({
       next: (page) => {
         this.listings = page.content;
-        console.log('Résultats de la recherche:', page);
+        /*console.log('Résultats de la recherche:', page);*/
       },
       error: (err) => {
-        console.error('Erreur lors de la recherche:', err);
+        console.error('seach error', err);
       }
     });
   }

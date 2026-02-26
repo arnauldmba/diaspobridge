@@ -52,7 +52,6 @@ export class MyListings {
 
     this.listingService.deleteListing(listing.id!).subscribe({
       next: () => {
-        console.log('Listing deleted successfully');
 
         // 🔥 Mettre à jour la liste en local :
         this.myListings = this.myListings.filter(

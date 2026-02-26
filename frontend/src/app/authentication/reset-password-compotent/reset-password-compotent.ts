@@ -34,7 +34,6 @@ export class ResetPasswordCompotent implements OnInit {
 
   ngOnInit(): void {
     this.token = this.route.snapshot.queryParamMap.get('token') ?? '';
-    console.log("token recu dans reset: ", this.token);
     if (!this.token) {
       this.snack.open("Lien invalide: token manquant. Redemande un nouveau lien.", "OK", { duration: 6000 });
     }

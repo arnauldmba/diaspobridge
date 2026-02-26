@@ -45,7 +45,6 @@ export class MyMatches {
           //const first = matches[0];  // take first match 
           //this.onOpenChat(first.id, first.otherFirstName); // open first match
         }
-        console.log("tout premier match", this.myMatches[0]); // ✅ ici
       },
       error: (err) => {
         console.error(err); 

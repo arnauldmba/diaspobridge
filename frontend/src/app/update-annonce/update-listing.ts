@@ -23,13 +23,12 @@ export class UpdateListing implements OnInit {
     this.listingService.consultListing(this.activatedRoute.snapshot.params['id']).subscribe(listing => {
       this.currentListing = listing;
     });
-    console.log("---", this.currentListing);
   }
 
   updateListing(updatedListing: TransporterTrip): void {
-    console.log('Listing updated successfully', updatedListing);
+    /*console.log('Listing updated successfully', updatedListing);*/
     this.listingService.uptateListing(updatedListing).subscribe(() => {
-      console.log('Listing updated successfully', updatedListing);
+      /*console.log('Listing updated successfully', updatedListing);*/
     });
     this.router.navigate(['/my-listings']);
   }

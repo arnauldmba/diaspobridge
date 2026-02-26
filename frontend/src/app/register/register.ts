@@ -57,8 +57,6 @@ export class Register {
     user.email = formValue.email;
     user.password = formValue.password;
 
-    console.log('Payload envoyé au backend:', payload);
-
     this.authService.registerUser(user).subscribe({
       next: (res) => {
         this.authService.setRegistredUser(user);

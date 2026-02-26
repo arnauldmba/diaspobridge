@@ -21,9 +21,10 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 })
 export class ListingDetails {
 
+  /*
   onContactDetail(arg0: number) {
     console.log('Contact detail clicked for listing ID:', arg0);
-  }
+  }*/
 
   private route = inject(ActivatedRoute);
   private listingService = inject(ListingService);
@@ -44,13 +45,10 @@ export class ListingDetails {
 
     const listingId = Number(this.route.snapshot.paramMap.get('id'));
 
-    console.log('Listing ID from route:', listingId);
-
     this.listingService.getListingById(listingId).subscribe({
       next: (data) => {
         this.trip = data;
         this.isLoading = false;
-        console.log('Listing details:', this.trip);
       },
       error: (err) => {
         console.error('Error fetching listing details', err);
@@ -62,12 +60,11 @@ export class ListingDetails {
   onContact() {
     this.matchService.contactTransporter(this.trip.id).subscribe({
       next: (match) => {
-        console.log('Match created:', match);
         // Navigate to chat with the match ID
         this.router.navigate(['/chat', match.id]);
       },
       error: (err) => {
-        console.error('Error contacting transporter', err);
+        /*console.error('Error contacting transporter', err);*/
 
       }
     });
@@ -75,7 +72,6 @@ export class ListingDetails {
 
   onContact2() {
     // Placeholder for contact logic
-    console.log('Contact transporter for trip ID:', this.trip.id);
     this.router.navigate(['/chat', this.trip.id]);
   }
 
@@ -100,12 +96,11 @@ export class ListingDetails {
 
       this.matchService.contactTransporter(this.trip.id).subscribe({
         next: (match) => {
-          console.log('Match created:', match);
           this.sendMessage(message, match.id);
           this.router.navigate(['/messages']);
         },
         error: (err) => {
-          console.error('Error contacting transporter', err);
+          /*console.error('Error contacting transporter', err);*/
         }
       });
     });
@@ -116,13 +111,11 @@ export class ListingDetails {
     if (!text) return;
 
     if (!matchId || matchId <= 0) {
-      console.error('Invalid matchId provided to ChatMessaging:', matchId);
       return;
     }; // valider matchId; si invalide, ne rien faire
 
     this.messageService.send(matchId, text).subscribe({
       next: (saved) => {
-        console.log('Message sent successfully:', saved);
       },
       error: (err) => console.error(err)
     });

@@ -107,7 +107,7 @@ export class ChatMessaging implements OnChanges, OnInit{
     if (!text) return;
 
     if(!this.matchId || this.matchId <= 0){
-      console.error('Invalid matchId provided to ChatMessaging:', this.matchId);
+      /*console.error('Invalid matchId provided to ChatMessaging:', this.matchId);*/
       return;
     }; // valider matchId; si invalide, ne rien faire
 

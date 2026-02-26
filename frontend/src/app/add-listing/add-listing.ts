@@ -72,12 +72,12 @@ export class AddListing implements OnInit {
 
     this.listingService.addListing(this.newListing).subscribe({
       next: (response) => {
-        console.log('Listing added successfully:', response);
+        /*console.log('Listing added successfully:', response);*/
         this.message = 'Listing added successfully!';
         this.router.navigate(['/listings']);
       },
       error: (error) => {
-        console.error('Error adding listing:', error);
+        /*console.error('Error adding listing:', error);*/
         this.message = 'Error adding listing. Please try again.';
       }
     });
