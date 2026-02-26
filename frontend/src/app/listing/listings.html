@@ -31,25 +31,34 @@
         <div class="col-sm">
             <mat-form-field appearance="outline" class="w-100 custom-border-color custom-border-color-left custom-border-focus custom-green-focus-label input-hover">
                 <mat-label class="muted" [class.color-1]="isFocused" style="font-size: var(--text-sm);">Période de départ</mat-label>
+                <!--<mat-icon class="border-color-input" matPrefix>today</mat-icon>-->
 
                 <mat-date-range-input [rangePicker]="rangePicker">
                     <input matStartDate [(ngModel)]="fromDate" name="fromDate" placeholder="Du" [required]="!!toDate" readonly (focus)="rangePicker.open()"> <!--'readonly' empeche l'utilisateur d entrer la date lui meme. l oblige a utiliser le rangepicker-->
-                    <input matEndDate [(ngModel)]="toDate" name="toDate" placeholder="Au" [required]="!!fromDate" readonly (focus)="rangePicker.open()"> <!--'rangePicker.open()' pemet d ouvrir le datepicker au click sans le input -->
+                    <input matEndDate [(ngModel)]="toDate" name="toDate" placeholder="Au" [required]="!!fromDate" readonly (focus)="rangePicker.open()"> <!--(focus)="rangePicker.open()" pemet d ouvrir le datepicker au click sans le input -->
                 </mat-date-range-input>
 
-                <mat-datepicker-toggle matIconSuffix [for]="rangePicker" style="color: var(--color-input);"></mat-datepicker-toggle>
-                <mat-date-range-picker #rangePicker required></mat-date-range-picker>
+                <!--<mat-datepicker-toggle matIconSuffix [for]="rangePicker" style="color: var(--color-input);"></mat-datepicker-toggle>-->
+                <mat-datepicker-toggle matIconPrefix [for]="rangePicker" style="color: var(--color-input);"></mat-datepicker-toggle>
+                <mat-date-range-picker #rangePicker required>
+                    <mat-date-range-picker-actions>
+                        <button *ngIf="fromDate || toDate" mat-icon-button (click)="clearDate()" matButton>Fermer</button>
+                        <button matButton matDateRangePickerCancel>Fermer</button>
+                        <button matButton="elevated" matDateRangePickerApply>Appliquer</button>
+                    </mat-date-range-picker-actions>
+                </mat-date-range-picker>
+
+                <mat-icon *ngIf="fromDate || toDate" mat-icon-button (click)="clearDate()" type="button" matIconSuffix>close_small</mat-icon>
 
                 <mat-hint class="muted" *ngIf="(!fromDate && !toDate) || (fromDate && toDate)">Choisis une période (ex: 10 jan → 31 jan)</mat-hint>
 
                 <mat-error *ngIf="fromDate && !toDate">
-                Complète la période avec une date de fin.
+                    Complète la période avec une date de fin.
                 </mat-error>
 
                 <mat-error *ngIf="!fromDate && toDate">
-                Ajoute une date de début.
-                </mat-error>
-                
+                    Ajoute une date de début.
+                </mat-error>   
             </mat-form-field>
         </div>
 

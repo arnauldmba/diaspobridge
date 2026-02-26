@@ -20,6 +20,16 @@
     #model="ngModel"
   />
 
+  <mat-icon
+    *ngIf="value"
+    mat-icon-button
+    matSuffix
+    aria-label="Clear"
+    type="button"
+    (click)="clear()"
+  >close
+  </mat-icon>
+
   <mat-autocomplete
     #auto="matAutocomplete"
     (optionSelected)="onSelected($event.option.value)"

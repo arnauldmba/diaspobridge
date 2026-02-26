@@ -146,4 +146,10 @@ export class CityAutocompleteComponent implements ControlValueAccessor, OnChange
       })
     );
   }
+
+  clear(): void {
+    this.value = '';
+    this.onChange('');
+    this.refreshFiltered('');
+  }
 }

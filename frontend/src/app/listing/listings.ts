@@ -48,8 +48,6 @@ export class Listings implements OnInit {
 
   citiesCM = CITIES_CM;
 
-  selectedDate: Date | null = null;
-
   readonly selectedPeriodList: {name:string , value: string}[] = [{name: '7days', value: 'Prochains 7 jours'}, {name: 'thisMonth', value: 'Ce mois-ci'}, {name: '30days', value: '30 jours'}];
   selectedPeriod: string = '';
   today = new Date();
@@ -239,5 +237,10 @@ export class Listings implements OnInit {
     this.selectedPeriod = chip;
     this.filterSelect();
     this.onSearch();
+  }
+
+  clearDate(): void {
+    this.toDate = null; 
+    this.fromDate = null; 
   }
 }
