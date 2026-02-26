@@ -1,7 +1,8 @@
 export interface BaseCity {
-  id: number;
+  id: string;
   name: string;
   aliases?: string[];
-  state?: string;   // pour Allemagne
-  region?: string;  // pour Cameroun
+  state?: string;
+  region?: string;
+  country: 'DE' | 'CM';
 }

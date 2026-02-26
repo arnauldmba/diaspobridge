@@ -16,7 +16,6 @@
             <form #tripForm="ngForm" (ngSubmit)="addListing(tripForm)">
                 <div class="row row-cols-1 row-cols-lg-2 g-3 g-lg-2 mb-3">
                     <app-city-autocomplete-component 
-                        [cities]="citiesDE" 
                         label="Ville de départ (Allemagne)"
                         placeholder="Ex : Köln, Berlin…"
                         hint="Ville où le colis sera remis au transporteur."
@@ -24,7 +23,7 @@
                     </app-city-autocomplete-component>
 
                     <app-city-autocomplete-component 
-                        [cities]="citiesCM" label="Où au Cameroun ?"
+                        label="Où au Cameroun ?"
                         placeholder="Ex : Douala, Yaoundé…" hint="Ville d’arrivée du colis au Cameroun."
                         [(ngModel)]="newListing.destCity" name="destCity" [required]="true" [minlength]="2">
                     </app-city-autocomplete-component>

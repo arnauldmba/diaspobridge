@@ -11,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 
 import { BaseCity } from '../model/cities-base';
 import { CITIES_DE, citySearchKey, normalizeCityQuery } from '../model/cities-de';
+import { ALL_CITIES } from '../model/cities-all';
 
 @Component({
   selector: 'app-city-autocomplete-component',
@@ -42,7 +43,7 @@ export class CityAutocompleteComponent implements ControlValueAccessor, OnChange
   @Input() icon: string | null = 'location_on';
 
   // ✅ liste de villes injectée
-  @Input() cities: BaseCity[] = CITIES_DE;
+  @Input() cities: BaseCity[] = ALL_CITIES;
 
   // ✅ validations template-driven
   @Input() required = false;
@@ -75,6 +76,15 @@ export class CityAutocompleteComponent implements ControlValueAccessor, OnChange
       this.indexed = (this.cities ?? []).map(c => ({ city: c, key: citySearchKey(c) }));
       this.refreshFiltered(this.value);
     }
+  }
+
+  ngOnInit(): void {
+    this.rebuildIndex();
+    this.refreshFiltered(this.value);
+  }
+
+  private rebuildIndex(): void {
+    this.indexed = (this.cities ?? []).map(c => ({ city: c, key: citySearchKey(c) }));
   }
 
   // appelé à chaque frappe
@@ -125,7 +135,8 @@ export class CityAutocompleteComponent implements ControlValueAccessor, OnChange
       debounceTime(120),
       distinctUntilChanged(),
       map(val => {
-        if (!val || val.length < this.minlength) return base.slice(0, 20);
+        // ✅ Ne rien afficher tant que l’utilisateur ne tape pas assez
+        if (!val || val.length < this.minlength) return [];
 
         return this.indexed
           .filter(x => x.key.includes(val))

@@ -15,8 +15,6 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 import { CommonModule } from '@angular/common';
 import { MatChipsModule } from '@angular/material/chips';
 import { CityAutocompleteComponent } from "../city-autocomplete-component/city-autocomplete-component";
-import { CITIES_CM } from '../model/cities-cm';
-import { CITIES_DE } from '../model/cities-de';
 
 
 @Component({
@@ -29,9 +27,6 @@ import { CITIES_DE } from '../model/cities-de';
   styleUrl: './add-listing.css',
 })
 export class AddListing implements OnInit {
-
-  citiesDE = CITIES_DE;
-  citiesCM = CITIES_CM;
 
   message: string = '';
   originCountry: any;

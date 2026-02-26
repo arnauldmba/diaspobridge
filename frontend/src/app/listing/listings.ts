@@ -22,6 +22,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { CityAutocompleteComponent } from "../city-autocomplete-component/city-autocomplete-component";
 import { CITIES_CM } from '../model/cities-cm';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ALL_CITIES } from '../model/cities-all';
 
 
 @Component({
