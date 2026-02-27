@@ -10,11 +10,12 @@ import { FirstLetterPipe } from "./shared/first-letter-pipe";
 import { BehaviorSubject } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { MatBadgeModule } from '@angular/material/badge';
+import { Footer } from "./footer/footer/footer";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [AsyncPipe, RouterLink, RouterOutlet, RouterLinkWithHref, MatIconModule, RouterLinkActive, MatButtonModule, MatMenuModule, FirstLetterPipe, MatBadgeModule],
+  imports: [AsyncPipe, RouterLink, RouterOutlet, RouterLinkWithHref, MatIconModule, RouterLinkActive, MatButtonModule, MatMenuModule, FirstLetterPipe, MatBadgeModule, Footer],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

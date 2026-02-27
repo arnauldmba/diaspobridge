@@ -1,0 +1,88 @@
+<span class="material-symbols-outlined back-button-to-listing" (click)="backToListing()">
+    arrow_left_alt
+</span>
+
+ <div class="contact-container">
+
+  <section class="hero">
+    <h1>Contact</h1>
+    <p class="subtitle">
+      Une question, un signalement ou une suggestion ? Écris-nous, on te répond dès que possible.
+    </p>
+  </section>
+
+  <section class="section">
+    <h2>Formulaire</h2>
+
+    <form class="contact-card" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Nom (optionnel)</mat-label>
+        <input matInput formControlName="name" autocomplete="name" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" autocomplete="email" />
+        <mat-error *ngIf="form.get('email')?.hasError('required')">
+          L’email est obligatoire.
+        </mat-error>
+        <mat-error *ngIf="form.get('email')?.hasError('email')">
+          Format d’email invalide.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Sujet</mat-label>
+        <input matInput formControlName="subject" />
+        <mat-error *ngIf="form.get('subject')?.hasError('required')">
+          Le sujet est obligatoire.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Message</mat-label>
+        <textarea matInput rows="5" formControlName="message"></textarea>
+        <mat-hint align="end">{{ (form.get('message')?.value?.length || 0) }}/800</mat-hint>
+        <mat-error *ngIf="form.get('message')?.hasError('required')">
+          Le message est obligatoire.
+        </mat-error>
+        <mat-error *ngIf="form.get('message')?.hasError('maxlength')">
+          Le message ne doit pas dépasser 800 caractères.
+        </mat-error>
+      </mat-form-field>
+
+      <div class="actions">
+        <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid || sending">
+          {{ sending ? 'Envoi…' : 'Envoyer' }}
+        </button>
+
+        <button mat-button type="button" (click)="reset()" [disabled]="sending">
+          Effacer
+        </button>
+      </div>
+
+      <p class="note">
+        DiasporaBridge est une plateforme de mise en relation. Pour un signalement, indique si possible le nom
+        d’utilisateur concerné, la date et une description courte.
+      </p>
+
+    </form>
+  </section>
+
+  <section class="section">
+    <h2>Nous écrire directement</h2>
+
+    <div class="contact-card simple">
+      <div class="line">
+        <span class="label">Email</span>
+        <a class="value" href="mailto:support@diasporabridge.com">support@diasporabridge.com</a>
+      </div>
+      <div class="line">
+        <span class="label">Temps de réponse</span>
+        <span class="value muted">Généralement sous 24–48h</span>
+      </div>
+    </div>
+  </section>
+
+</div>

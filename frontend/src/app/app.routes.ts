@@ -12,14 +12,23 @@ import { VerifEmail } from './verif-email/verif-email';
 import { ListingDetails } from './listing-details/listing-details';
 import { ChatMessaging } from './chat-messaging/chat-messaging';
 import { MyMatches } from './my-matches/my-matches';
-import { ChatDetailComponent } from './chat-detail.component/chat-detail.component';
 import { MenuBurger } from './shared/menu-burger/menu-burger';
 import { ForgotPasswordComponent } from './authentication/forgot-password-component/forgot-password-component';
 import { ResetPasswordCompotent } from './authentication/reset-password-compotent/reset-password-compotent';
 import { CityAutocompleteComponent } from './city-autocomplete-component/city-autocomplete-component';
+import { Apropos } from './footer/apropos/apropos';
+import { Faq } from './footer/faq/faq';
+import { Contact } from './footer/contact/contact';
+import { LegalNotice } from './footer/legal-notice/legal-notice';
+import { PrivacyPolicy } from './footer/privacy-policy/privacy-policy';
 
 export const routes: Routes = [
     { path: "my-listings", component: MyListings, canActivate: [authGuardGuard2]},
+    { path: "apropos", component: Apropos },
+    { path: "politique-de-confidentialite", component: PrivacyPolicy },
+    { path: "mention-legale", component: LegalNotice },
+    { path: "faq", component: Faq },
+    { path: "contact", component: Contact },
     { path: "listings", component: Listings },
     { path: "menu", component: MenuBurger },
     { path: "listing-details/:id", component: ListingDetails },

@@ -23,13 +23,14 @@ import { CityAutocompleteComponent } from "../city-autocomplete-component/city-a
 import { CITIES_CM } from '../model/cities-cm';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ALL_CITIES } from '../model/cities-all';
+import { Footer } from "../footer/footer/footer";
 
 
 @Component({
   selector: 'app-listing',
   standalone: true,
   imports: [FormsModule, CommonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatCardModule, MatTabsModule,
-    MatButtonModule, MatStepperModule, MatDatepickerModule, FirstLetterPipe, MatChipsModule, MatSelectModule, CityAutocompleteComponent, MatProgressSpinnerModule],
+    MatButtonModule, MatStepperModule, MatDatepickerModule, FirstLetterPipe, MatChipsModule, MatSelectModule, CityAutocompleteComponent, MatProgressSpinnerModule, Footer],
   providers: [provideNativeDateAdapter()],
   templateUrl: './listings.html',
   styleUrl: './listings.css',
