@@ -1,0 +1,93 @@
+<span class="material-symbols-outlined back-button-to-listing" (click)="backToListing()">
+    arrow_left_alt
+</span>
+
+<div class="faq-container">
+
+  <section class="hero">
+    <h1>Questions fréquentes</h1>
+    <p class="subtitle">
+      Les réponses aux questions les plus courantes sur <strong>{{ appName }}</strong>.
+    </p>
+  </section>
+
+  <section class="section">
+    <h2>Général</h2>
+
+    <details class="faq-item">
+      <summary>Qu’est-ce que {{ appName }} ?</summary>
+      <p>
+        <span class="underline">{{ appName }}</span> est une plateforme qui met en relation des voyageurs et des expéditeurs
+        pour faciliter le transport de colis entre l’Europe et l’Afrique.
+      </p>
+    </details>
+
+    <details class="faq-item">
+      <summary>Comment ça fonctionne ?</summary>
+      <p>
+        Un voyageur publie son trajet, un expéditeur trouve une annonce adaptée,
+        puis les deux entrent en contact pour s’organiser.
+      </p>
+    </details>
+
+    <details class="faq-item">
+      <summary>Est-ce que <span class="underline">{{ appName }}</span> est payant ?</summary>
+         <p>
+            L’inscription et l’utilisation de {{ appName }} sont entièrement gratuites.
+            Aucun frais n’est appliqué pour publier une annonce, rechercher un trajet
+            ou entrer en contact avec un autre utilisateur.
+        </p>
+    </details>
+  </section>
+
+  <section class="section">
+    <h2>Sécurité & règles</h2>
+
+    <details class="faq-item">
+      <summary>Quels types d’objets sont autorisés ?</summary>
+      <p>
+        Les objets autorisés dépendent des lois et des règles de transport. Les objets illégaux,
+        dangereux ou interdits ne sont pas acceptés. En cas de doute, évite l’envoi.
+      </p>
+    </details>
+
+    <details class="faq-item">
+      <summary>Comment la confiance est-elle assurée ?</summary>
+      <p>
+        {{ appName }} repose sur les profils utilisateurs et la communication directe.
+        Nous améliorons progressivement la plateforme pour renforcer la sécurité et la transparence.
+      </p>
+    </details>
+
+    <details class="faq-item">
+      <summary>Que faire en cas de problème ?</summary>
+        <p>
+            En cas de désaccord entre utilisateurs, nous vous invitons à privilégier
+            un échange direct afin de trouver une solution. DiasporaBridge est une
+            plateforme de mise en relation et n’intervient pas dans les accords conclus
+            entre les utilisateurs. Toutefois, vous pouvez nous signaler tout comportement
+            inapproprié via la page <b>Contact</b>.
+        </p>
+    </details>
+  </section>
+
+  <section class="section">
+    <h2>Compte & annonces</h2>
+
+    <details class="faq-item">
+      <summary>Comment publier une annonce de voyage ?</summary>
+      <p>
+        Connecte-toi, puis va sur la page de création d’annonce. Indique ton départ,
+        ta destination et ta date, puis publie.
+      </p>
+    </details>
+
+    <details class="faq-item">
+      <summary>Comment contacter un utilisateur ?</summary>
+      <p>
+        Ouvre une annonce ou un profil, puis utilise la messagerie pour envoyer un message.
+      </p>
+    </details>
+  </section>
+
+</div>

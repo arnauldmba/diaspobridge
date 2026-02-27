@@ -4,6 +4,10 @@ html, body {
   background: var(--color-bg);
 }
 
+.back-button-to-listing{
+  display: none;
+}
+
 .color-text{
   color: var(--color-text);
 }
@@ -199,6 +203,10 @@ html, body {
     height: 200px;
 }
 
+.underline {
+    text-decoration: underline;
+}
+
 .overlay {
   position: fixed;
   inset: 0;
@@ -261,5 +269,16 @@ html, body {
 @media (max-width: 600px) {
   .container {
     width: calc(100% - 8px);
+  }
+
+  .back-button-to-listing{
+    display: block;
+    background-color: rgba(227, 237, 230, 0.858);
+    border-radius: 50%;
+    padding: 10px;
+    color: rgb(10, 81, 19);
+    position: fixed;
+    z-index: 1000;
+    margin: 12px 0px 0px 14px;
   }
 }
