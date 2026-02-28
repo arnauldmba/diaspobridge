@@ -16,46 +16,60 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface MessageRepository extends JpaRepository<Message, Long> {
-	
-	Page<Message> findByMatchIdOrderBySentAtDesc(Long id, PageRequest of);
-	List<Message> findByMatchIdOrderBySentAtDesc(Long matchId);
-	Optional<Message> findTop1ByMatchIdOrderBySentAtDesc(Long matchId);
-	
-	Page<Message> findByMatchIdOrderBySentAtAsc(Long id, Pageable pageable);
-	List<Message> findByMatchIdOrderBySentAtAsc(Long id);
-	
-	@Query("""
-			  SELECT m FROM Message m
-			  WHERE m.match.id = :matchId
-			    AND m.sentAt > :since
-			  ORDER BY m.sentAt ASC
-			""")
-	List<Message> findNewMessages(@Param("matchId") Long matchId,
-			@Param("since") Instant since);
 
-    /**
-     * 🔹 Trouver tous les messages d’un match, triés par date (du plus ancien au plus récent)
-     */
-    Page<Message> findByMatchOrderBySentAtAsc(Match match, Pageable pageable);
+  Page<Message> findByMatchIdOrderBySentAtDesc(Long id, PageRequest of);
 
-    /**
-     * 🔹 Trouver les messages récents pour un match donné (utilisé dans la vue conversation)
-     */
-    @Query("SELECT m FROM Message m WHERE m.match = :match ORDER BY m.sentAt DESC")
-    Page<Message> findRecentByMatch(@Param("match") Match match, Pageable pageable);
+  List<Message> findByMatchIdOrderBySentAtDesc(Long matchId);
 
-    /**
-     * 🔹 Trouver tous les messages envoyés par un utilisateur (utile pour statistiques ou modération)
-     */
-    Page<Message> findBySender(User sender, Pageable pageable);
+  Optional<Message> findTop1ByMatchIdOrderBySentAtDesc(Long matchId);
 
-    /**
-     * Trouver un message précis pour vérifier l’appartenance
-     */
-    @Query("SELECT m FROM Message m WHERE m.id = :id AND m.sender = :sender")
-    Message findByIdAndSender(@Param("id") Long id, @Param("sender") User sender);
+  Page<Message> findByMatchIdOrderBySentAtAsc(Long id, Pageable pageable);
 
-	Page<Message> findByMatchIdAndSenderIdOrderBySentAtDesc(Long id, Long id2, PageRequest of);
+  List<Message> findByMatchIdOrderBySentAtAsc(Long id);
 
-	Page<Message> findByMatchIdOrderBySentAtAsc(Long id, PageRequest of);
+  @Query("""
+        SELECT m FROM Message m
+        WHERE m.match.id = :matchId
+          AND m.sentAt > :since
+        ORDER BY m.sentAt ASC
+      """)
+  List<Message> findNewMessages(@Param("matchId") Long matchId,
+      @Param("since") Instant since);
+
+  /**
+   * 🔹 Trouver tous les messages d’un match, triés par date (du plus ancien au
+   * plus récent)
+   */
+  Page<Message> findByMatchOrderBySentAtAsc(Match match, Pageable pageable);
+
+  /**
+   * 🔹 Trouver les messages récents pour un match donné (utilisé dans la vue
+   * conversation)
+   */
+  @Query("SELECT m FROM Message m WHERE m.match = :match ORDER BY m.sentAt DESC")
+  Page<Message> findRecentByMatch(@Param("match") Match match, Pageable pageable);
+
+  /**
+   * 🔹 Trouver tous les messages envoyés par un utilisateur (utile pour
+   * statistiques ou modération)
+   */
+  Page<Message> findBySender(User sender, Pageable pageable);
+
+  /**
+   * Trouver un message précis pour vérifier l’appartenance
+   */
+  @Query("SELECT m FROM Message m WHERE m.id = :id AND m.sender = :sender")
+  Message findByIdAndSender(@Param("id") Long id, @Param("sender") User sender);
+
+  Page<Message> findByMatchIdAndSenderIdOrderBySentAtDesc(Long id, Long id2, PageRequest of);
+
+  Page<Message> findByMatchIdOrderBySentAtAsc(Long id, PageRequest of);
+
+  @Query("""
+        select count(m) from Message m
+        where m.match.id = :matchId
+          and m.sender.id <> :meId
+          and (:lastReadAt is null or m.sentAt > :lastReadAt)
+      """)
+  long countUnreadForUser(Long matchId, Long meId, Instant lastReadAt);
 }

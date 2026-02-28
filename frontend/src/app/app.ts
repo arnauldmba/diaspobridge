@@ -15,7 +15,7 @@ import { Footer } from "./footer/footer/footer";
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [AsyncPipe, RouterLink, RouterOutlet, RouterLinkWithHref, MatIconModule, RouterLinkActive, MatButtonModule, MatMenuModule, FirstLetterPipe, MatBadgeModule, Footer],
+  imports: [AsyncPipe, RouterLink, RouterOutlet, RouterLinkWithHref, MatIconModule, RouterLinkActive, MatButtonModule, MatMenuModule, FirstLetterPipe, MatBadgeModule],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

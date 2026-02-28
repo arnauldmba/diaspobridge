@@ -9,6 +9,7 @@ export interface MatchDto {
   proposedBy?: string;
   lastMessagePreview?: string;
   updatedAt?: string;
+  unreadCount?: number;
 
   otherUserId?: number;
   otherFirstName?: string; 

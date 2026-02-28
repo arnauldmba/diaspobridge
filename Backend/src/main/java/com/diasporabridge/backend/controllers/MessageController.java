@@ -97,5 +97,12 @@ public class MessageController {
 	  MessageDto dto = messageService.send(matchId, req.body(), me);
 	  return ResponseEntity.status(HttpStatus.CREATED).body(dto);
 	}
+
+	@PostMapping("/matches/{matchId}/read")
+	public void markRead(@PathVariable Long matchId, Principal principal) {
+		User me = userServiceImpl.currentUser(principal);
+		matchService.markRead(matchId, me);
+	}
+
 }
 

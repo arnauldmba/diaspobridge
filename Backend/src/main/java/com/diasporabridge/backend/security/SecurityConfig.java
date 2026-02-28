@@ -106,7 +106,7 @@ public class SecurityConfig {
         	    
         	    .requestMatchers("/api/profile/me").authenticated()
         	    .requestMatchers("/api/matches/**").authenticated()
-        	    .requestMatchers("/api/messages/**").authenticated()
+				.requestMatchers("/api/messages/**").authenticated()
 
         	    /*.requestMatchers("/api/users/**").hasAuthority("ADMIN")*/
 				/*.requestMatchers("/api/users/**").hasAuthority("ROLE_ADMIN")*/

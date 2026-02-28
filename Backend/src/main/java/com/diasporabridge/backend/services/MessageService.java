@@ -31,7 +31,7 @@ public class MessageService {
     private final MatchService matchService;
     private final ParcelRequestRepository parcelRepo;
     private final TransporterTripRepository tripRepo;
-    //private final MatchServiceRepository matchServiceRepository;
+    // private final MatchServiceRepository matchServiceRepository;
 
     /**
      * 🔹 Envoyer un message dans un match existant
@@ -40,10 +40,9 @@ public class MessageService {
         Match match = matchRepo.findById(matchId)
                 .orElseThrow(() -> new EntityNotFoundException("Match not found"));
 
-     // ✅ autorisation : participants du match
-        boolean authorized =
-            match.getRequester().getId().equals(sender.getId())
-            || match.getTrip().getTransporter().getId().equals(sender.getId());
+        // ✅ autorisation : participants du match
+        boolean authorized = match.getRequester().getId().equals(sender.getId())
+                || match.getTrip().getTransporter().getId().equals(sender.getId());
 
         if (!authorized) {
             throw new SecurityException("User not authorized for this match");
@@ -54,10 +53,10 @@ public class MessageService {
                 .sender(sender)
                 .body(body)
                 .build();
-        
+
         Message saved = messageRepo.save(msg);
-        
-     // ✅ mettre à jour le match pour l'inbox (propre + performant)
+
+        // ✅ mettre à jour le match pour l'inbox (propre + performant)
         Instant now = saved.getSentAt(); // rempli par @PrePersist
         match.setLastMessagePreview(preview(saved.getBody()));
         match.setLastMessageAt(now);
@@ -79,34 +78,36 @@ public class MessageService {
         // Vérifie que le user participe à cette conversation
         boolean authorized = match.getParcel().getSender().getId().equals(requester.getId())
                 || match.getTrip().getTransporter().getId().equals(requester.getId());
-        if (!authorized) throw new SecurityException("User not authorized for this match");
+        if (!authorized)
+            throw new SecurityException("User not authorized for this match");
 
         return messageRepo.findByMatchOrderBySentAtAsc(match, pageable);
     }
-    
+
     @Transactional
     public MessageDto send(Long matchId, String body, User me) {
 
-      Match match = matchRepo.findById(matchId)
-          .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Match not found"));
+        Match match = matchRepo.findById(matchId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Match not found"));
 
-      matchService.ensureParticipant(match, me.getId());
+        matchService.ensureParticipant(match, me.getId());
 
-      Message saved = messageRepo.save(Message.builder()
-          .match(match)
-          .sender(me)
-          .body(body.trim())
-          .build());
+        Message saved = messageRepo.save(Message.builder()
+                .match(match)
+                .sender(me)
+                .body(body.trim())
+                .build());
 
-      Instant now = saved.getSentAt();
-      match.setLastMessagePreview(preview(saved.getBody()));
-      match.setLastMessageAt(now);
-      match.setUpdatedAt(now);
+        Instant now = saved.getSentAt();
+        match.setLastMessagePreview(preview(saved.getBody()));
+        match.setLastMessageAt(now);
+        match.setUpdatedAt(now);
 
-      // pas forcément besoin de save(match) si match est managed, mais ok de le laisser
-      matchRepo.save(match);
+        // pas forcément besoin de save(match) si match est managed, mais ok de le
+        // laisser
+        matchRepo.save(match);
 
-      return new MessageDto(saved.getId(), matchId, me.getId(), saved.getBody(), saved.getSentAt());
+        return new MessageDto(saved.getId(), matchId, me.getId(), saved.getBody(), saved.getSentAt());
     }
 
     /**
@@ -114,22 +115,26 @@ public class MessageService {
      */
     public void deleteMessage(Long id, User requester) {
         Message msg = messageRepo.findByIdAndSender(id, requester);
-        if (msg == null) throw new EntityNotFoundException("Message not found or not owned");
+        if (msg == null)
+            throw new EntityNotFoundException("Message not found or not owned");
         messageRepo.delete(msg);
     }
-    
-    private String preview2(String body) {
-    	if (body == null) return null;
-    	String b = body.trim();
-    	if (b.length() <= 120) return b;
-    	return b.substring(0, 120);
-    }
-    
-    private String preview(String body) {
-        if (body == null) return null;
-        String b = body.trim();
-        if (b.isEmpty()) return null;
-        return b.length() <= 120 ? b : b.substring(0, 120);
-      }
-}
 
+    private String preview2(String body) {
+        if (body == null)
+            return null;
+        String b = body.trim();
+        if (b.length() <= 120)
+            return b;
+        return b.substring(0, 120);
+    }
+
+    private String preview(String body) {
+        if (body == null)
+            return null;
+        String b = body.trim();
+        if (b.isEmpty())
+            return null;
+        return b.length() <= 120 ? b : b.substring(0, 120);
+    }
+}
