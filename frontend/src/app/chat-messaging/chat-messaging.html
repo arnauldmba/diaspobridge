@@ -6,7 +6,7 @@
         keyboard_backspace
     </span> 
     <span class="avatar">{{chatFirstName | firstLetter}}</span>
-    <span class="m-0 ">{{chatFirstName}}</span>
+    <span class="m-0 text-meta-strong">{{chatFirstName}}</span>
   </div>
   
   @if (messages; as msgs) {
@@ -26,14 +26,30 @@
   } @else {
   <p>Loading messages...</p>
   }
-  <div class="chat-input">
-    <form (ngSubmit)="onSend()" class="d-flex gap-2">
-      <textarea [(ngModel)]="draft" name="draft" placeholder="Écris ton message..." class="form-control p-2 w-100"
+
+  <form (ngSubmit)="onSend()">
+    <mat-form-field appearance="outline" class="w-100 m-0 p-0">
+      <textarea 
+        class="m-0"
+        [(ngModel)]="draft"
+        name="draft"
+        matInput placeholder="Écris ton message...">
+      </textarea>
+      <button type="submit" [disabled]="!draft.trim()" matSuffix matIconButton aria-label="Clear">
+        <mat-icon>send</mat-icon>
+      </button>
+    </mat-form-field>
+  </form>
+  <!--<div class="chat-input">
+    <form (ngSubmit)="onSend()" class="d-flex gap-2 ">
+      <textarea [(ngModel)]="draft" matIconSuffix name="draft" placeholder="Écris ton message..." class="form-control p-2 w-100"
         id="exampleFormControlTextarea1" rows="1">
-        </textarea>
+      </textarea>
       <button type="submit" [disabled]="!draft.trim()" class="btn p-2 flex-shrink-1">
         <mat-icon class="mat-icon">send</mat-icon>
       </button>
     </form>
-  </div>
+  </div>-->
+
+  <div style="background-color: red;"></div>
 </div>

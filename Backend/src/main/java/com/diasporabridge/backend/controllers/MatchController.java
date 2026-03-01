@@ -1,6 +1,7 @@
 package com.diasporabridge.backend.controllers;
 
 import java.security.Principal;
+import java.time.Instant;
 import java.util.List;
 
 import org.springframework.dao.DataIntegrityViolationException;
@@ -18,6 +19,7 @@ import com.diasporabridge.backend.entities.Match;
 import com.diasporabridge.backend.entities.TransporterTrip;
 import com.diasporabridge.backend.entities.User;
 import com.diasporabridge.backend.repos.MatchRepository;
+import com.diasporabridge.backend.repos.MessageRepository;
 import com.diasporabridge.backend.repos.TransporterTripRepository;
 import com.diasporabridge.backend.repos.UsersRepository;
 import com.diasporabridge.backend.services.MatchService;
@@ -34,6 +36,7 @@ public class MatchController {
 	private final MatchRepository matchRepository;
     private final UserServiceImpl userServiceImpl;
     private final MatchService matchService;
+    private final MessageRepository messageRepository;
    
     // => create-or-get match
     // => front route vers /chat/{matchId}
@@ -47,11 +50,14 @@ public class MatchController {
     
     @GetMapping("/matches/my")
     public List<MatchDto> myMatches(Principal principal) {
-    	
-    	User me = userServiceImpl.currentUser(principal);
-    	
-    	return matchRepository.findMyMatches(me.getId())
-    			.stream().map(m -> matchService.toDto(m, me)).toList();
+    User me = userServiceImpl.currentUser(principal);
+
+    return matchRepository.findMyMatches(me.getId()).stream().map(match -> {
+            Instant lastReadAt = matchService.lastReadAtFor(match, me.getId());
+            long unread = messageRepository.countUnreadForUser(match.getId(), me.getId(), lastReadAt);
+
+            return matchService.toDto(match, me, unread);
+        }).toList();
     }
     
     // ✅ Détails match

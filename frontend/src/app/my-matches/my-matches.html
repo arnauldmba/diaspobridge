@@ -16,13 +16,14 @@
         <li *ngFor="let match of myMatches" clickable (click)="onOpenChat2(match.id, match.otherFirstName)"
             class="p-3 gap-2 match-item border-bottom" [class.active]="match.id === matchIdParent">
             <!--<div class="avatar border me-2" [style.background]="avatarColor(match.otherFirstName)">-->
-            <div class="avatar">
-                <span>{{match.otherFirstName | firstLetter}}</span>
+            <div class="avatar demo-section"  [matBadge]="match.unreadCount" matBadgeSize="large"
+                [matBadgeHidden]="!match.unreadCount || match.unreadCount === 0">
+            <span>{{ match.otherFirstName | firstLetter }}</span>
             </div>
             <div class="namme-and-date">
                 <div class="w-100 d-flex justify-content-between">
                     <strong class="m-0 p-0">{{match.otherFirstName}}</strong>
-                    <span class="updated-date">{{match.updatedAt | date:'dd.MM.yyyy' }} </span>
+                    <span class="updated-date d-flex">{{match.updatedAt | date:'dd.MM.yyyy' }}</span>
                 </div>
                 <p class="preview-message m-0 p-0">{{match.lastMessagePreview}}</p>
             </div>

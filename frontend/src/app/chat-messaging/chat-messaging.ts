@@ -9,12 +9,18 @@ import { Subscription, switchMap, timer } from 'rxjs';
 import { MatIconModule } from '@angular/material/icon';
 import { FirstLetterPipe } from "../shared/first-letter-pipe";
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSelectModule } from "@angular/material/select";
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @Component({
   selector: 'app-chat-messaging',
   standalone: true,
-  imports: [FormsModule, CommonModule, MatIconModule, FirstLetterPipe, MatProgressSpinnerModule],
+  imports: [FormsModule, CommonModule, MatIconModule, FirstLetterPipe, MatProgressSpinnerModule, MatSelectModule
+    ,MatFormFieldModule, MatInputModule, FormsModule, MatButtonModule, MatIconModule
+  ],
   templateUrl: './chat-messaging.html',
   styleUrl: './chat-messaging.css',
 })
@@ -93,13 +99,24 @@ export class ChatMessaging implements OnChanges, OnInit{
       next: (msgs) => {
         this.messages = msgs; 
         this.isLoading = false; 
+        /*
+        // ✅ Marquer comme lu dès l'ouverture
+        this.messageService.markAsRead(this.matchId).subscribe({
+          error: (err) => console.error('markAsRead failed', err),
+        });
+
+        // ✅ Mets lastSinceIso sur le dernier message existant
+        if (msgs.length > 0) {
+          this.lastSinceIso = msgs[msgs.length - 1].sentAt;
+        } else {
+          this.lastSinceIso = new Date(0).toISOString();
+        }*/
       },
       error: (err) => {
         console.error(err)
         this.isLoading = false; 
       }
     });
-    console.log("Liste de match: ", this.messages);
   }
 
   onSend() {
@@ -146,7 +163,7 @@ export class ChatMessaging implements OnChanges, OnInit{
   startPolling() {
     const id = this.matchId;
 
-    this.sub = timer(0, 2000)
+    this.sub = timer(0, 5000)
       .pipe(switchMap(() => this.messageService.getNewMessages(id, this.lastSinceIso)))
       .subscribe({
         next: (newMsgs) => {
@@ -154,9 +171,15 @@ export class ChatMessaging implements OnChanges, OnInit{
 
           const existing = new Set(this.messages.map((m) => m.id));
           const toAdd = newMsgs.filter((m) => !existing.has(m.id));
+          /*if (!toAdd.length) return;*/
 
           this.messages = [...this.messages, ...toAdd];
           this.lastSinceIso = newMsgs[newMsgs.length - 1].sentAt;
+          /*
+          // ✅ Vu que je suis dans le chat, je marque lu
+          this.messageService.markAsRead(id).subscribe({
+            error: (err) => console.error('markAsRead failed', err),
+          });*/
         },
         error: (err) => console.error(err),
       });

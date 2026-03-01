@@ -7,14 +7,19 @@ import { MatIconModule } from '@angular/material/icon';
 import { getAvatarColor } from '../shared/utils/avatar-color.util';
 import { FirstLetterPipe } from "../shared/first-letter-pipe";
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatBadgeModule } from '@angular/material/badge';
+import { Subscription, switchMap, timer } from 'rxjs';
+import { MessageService } from '../services/message.service';
 
 @Component({
   selector: 'app-my-matches',
-  imports: [CommonModule, MatIconModule, FirstLetterPipe, MatProgressSpinnerModule],
+  imports: [CommonModule, MatIconModule, FirstLetterPipe, MatProgressSpinnerModule, MatBadgeModule],
   templateUrl: './my-matches.html',
   styleUrl: './my-matches.css',
 })
 export class MyMatches {
+
+  sub?: Subscription;
 
   //Selected machtid
   matchIdParent!: number;
@@ -32,6 +37,7 @@ export class MyMatches {
 
   constructor(
     private matchService: MatchService,
+    private messageService: MessageService,
     private router: Router) { }
 
   ngOnInit() {
@@ -40,6 +46,8 @@ export class MyMatches {
     this.matchService.getMyMatches().subscribe({
       next: (matches) => {
         this.myMatches = matches;
+        console.log('myMatches', this.myMatches);
+        console.log('unreadCounts', this.myMatches.map(m => m.unreadCount));
         this.isLoading = false; 
         if (matches.length > 0) {
           //const first = matches[0];  // take first match 
@@ -51,6 +59,8 @@ export class MyMatches {
         this.isLoading = false; 
       }
     });
+
+    this.startPolling();
   }
 
   getFirstLetter(name: string | null | undefined): string {
@@ -58,8 +68,23 @@ export class MyMatches {
   }
 
   onOpenChat2(matchId: number, firstname?: string) {
+    /*const m = this.myMatches.find(x => x.id === matchId);
+    if (m) m.unreadCount = 0; // UI instant*/
+
+    this.matchIdParent = matchId;
+    this.showMessage = true;
+
     this.router.navigate(['/chat', matchId], {
       queryParams: { name: firstname ?? ''}
+    });
+
+    this.messageService.markAsRead(matchId).subscribe({
+      next: () => {
+        // ✅ optionnel : mettre à 0 côté UI immédiatement
+        const m = this.myMatches.find(x => x.id === matchId);
+        if (m) m.unreadCount = 0;
+      },
+      error: (err) => console.error('markAsRead failed', err),
     });
   }
 
@@ -122,5 +147,18 @@ export class MyMatches {
 
   avatarColor(name: string | null | undefined): string {
     return getAvatarColor(name);
+  }
+
+  startPolling(){
+    this.sub = timer(0, 6000).pipe(
+      switchMap(() => this.matchService.getMyMatches())
+    ).subscribe({
+      next: matches => this.myMatches = matches,
+      error: err => console.error(err),
+    });
+  }
+
+  ngOnDestroy() {
+    this.sub?.unsubscribe();
   }
 }

@@ -23,4 +23,12 @@ export class MessageService {
     return this.http.get<MessageDto[]>(`${this.baseUrl}/messages/matches/${matchId}/messages/new`,{ params: { since: sinceIso } }
     );
   }
+
+  markAsRead(matchId: number): Observable<void> {
+    return this.http.post<void>(`${this.baseUrl}/messages/matches/${matchId}/read`, {});
+  }
+
+  markAsRead2(matchId: number): Observable<void> {
+    return this.http.post<void>(`${this.baseUrl}/matches/${matchId}/messages/read`, {});
+  }
 }

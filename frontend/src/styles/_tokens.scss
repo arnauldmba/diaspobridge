@@ -95,15 +95,15 @@
   }
 
   /* Enlever la ligne du bas (underline) */
-  .no-underline .mdc-line-ripple::before,
-  .no-underline .mdc-line-ripple::after {
+  .custom-border-line .no-underline .mdc-line-ripple::before,
+  .custom-border-line .no-underline .mdc-line-ripple::after {
     display: none !important;
   }
 
   /*change le background du input*/
   .custom-background .mdc-text-field {
-    background-color: white;
-    border-radius: 8px;
+    /*background-color: white;*/
+    border-radius: 48px;
   }
 
   /* ajouter un pointer clickable sur uune balise */

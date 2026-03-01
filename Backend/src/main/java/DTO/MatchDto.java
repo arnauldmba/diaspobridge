@@ -13,6 +13,7 @@ public record MatchDto(
     String proposedBy,
     String lastMessagePreview,
     Instant updatedAt,
+    long unreadCount,
     
     Long otherUserId,
     String otherFirstName,

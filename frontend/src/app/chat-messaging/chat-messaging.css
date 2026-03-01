@@ -1,7 +1,7 @@
 .container-chat {
     display: flex;
     flex-direction: column;
-    height: 80dvh;
+    height: 90dvh;
     margin: auto;
     width:  50%;
     position: relative;
@@ -21,13 +21,15 @@
 
 .chat-input {
     margin: 10px;
+    border: 1px solid red;
+    border-radius: 24px;
 }
 
 .chat-input textarea {
     resize: none;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #e8e8e8;
+    border-radius: 24px;
+    background-color: var(--color-bg);
+    margin: 4px;
 }
 
 ul {
@@ -85,18 +87,17 @@ ul {
     .container-chat {
         display: flex;
         flex-direction: column;
-        height: 92dvh;
+        height: 100dvh;
         width: 100%;
-        /*
         position: relative;
         position: fixed;
         inset: 0;
         z-index: 50;
-        background-color: white;
-        */
+        background-color: var(--color-bg);
     }
 
-    .chat-message {
-        margin-top: 4px;
+    
+    form {
+        padding: 16px 16px 0px 16px; 
     }
 }

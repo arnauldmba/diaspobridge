@@ -63,6 +63,12 @@ public class Match {
 	@Column(name = "last_message_at")
 	private Instant lastMessageAt;
 
+	@Column(name = "requester_last_read_at")
+	private Instant requesterLastReadAt;
+
+	@Column(name = "trip_owner_last_read_at")
+	private Instant tripOwnerLastReadAt;
+
 	@PrePersist
 	void onCreate() { this.createdAt = this.updatedAt = Instant.now(); }
 

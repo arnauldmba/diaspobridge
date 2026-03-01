@@ -22,6 +22,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
@@ -71,6 +72,10 @@ public class MatchService {
     }
 
     public MatchDto toDto(Match match, User me) {
+        return toDto(match, me, 0L); // valeur par défaut
+    }
+
+    public MatchDto toDto(Match match, User me, long unreadCount) {
         var lastMsg = messageRepository.findTop1ByMatchIdOrderBySentAtDesc(match.getId())
             .map(Message::getBody)
             .map(b -> b.length() > 38 ? b.substring(0, 35) + "…" : b)
@@ -96,7 +101,8 @@ public class MatchService {
             match.getProposedBy().name(),
             lastMsg,
             match.getUpdatedAt(),
-            
+            unreadCount,
+
             other.getId(),
             other.getFirstName(),
             other.getLastName(),
@@ -107,6 +113,52 @@ public class MatchService {
     List<Match> findMyMatches(@Param("userId") Long userId){
     	return matchRepository.findMyMatches(userId);
     }
-    
-    
+
+    public Instant lastReadAtFor(Match match, Long meId) {
+        if (match.getRequester().getId().equals(meId)) {
+            return match.getRequesterLastReadAt();
+        }
+
+        if (match.getTrip().getTransporter().getId().equals(meId)) {
+            return match.getTripOwnerLastReadAt();
+        }
+
+        throw new IllegalStateException("User " + meId + " is not participant of match " + match.getId());
+    }   
+
+    /* 
+    @Transactional
+    public void markRead(Long matchId, Long meId) {
+    Match match = matchRepository.findById(matchId)
+        .orElseThrow(() -> new RuntimeException("Match not found"));
+
+    Instant now = Instant.now();
+
+    if (match.getRequester().getId().equals(meId)) {
+        match.setRequesterLastReadAt(now);
+        } else if (match.getTrip().getTransporter().getId().equals(meId)) {
+            match.setTripOwnerLastReadAt(now);
+        } else {
+            throw new RuntimeException("Not allowed");
+        }
+    }
+    */
+
+    @Transactional
+    public void markRead(Long matchId, User me) {
+    Match match = matchRepository.findById(matchId)
+        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Match not found"));
+
+        ensureParticipant(match, me.getId());
+
+        Instant now = Instant.now();
+
+        if (match.getRequester().getId().equals(me.getId())) {
+            match.setRequesterLastReadAt(now);
+        } else if (match.getTrip().getTransporter().getId().equals(me.getId())) {
+            match.setTripOwnerLastReadAt(now);
+        }
+
+        matchRepository.save(match);
+    }
 }
