@@ -51,6 +51,7 @@ export class AddListing implements OnInit {
     departDate: '',
     maxWeightKg: 0,
     pricePerKg: 0,
+    note: '',
     isActive: true,
     transporter: {} as User
   };
@@ -83,4 +84,18 @@ export class AddListing implements OnInit {
     });
   }
 
+  resetForm(){
+    this.newListing = {
+      originCity: '',
+      originCountry: 'Allemagne',
+      destCity: '',
+      destCountry: 'Cameroun',
+      departDate: '',
+      maxWeightKg: 0,
+      pricePerKg: 0,
+      note: '',
+      isActive: true,
+      transporter: {} as User
+    };
+  }
 }

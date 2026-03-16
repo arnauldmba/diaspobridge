@@ -1,11 +1,4 @@
-.user-profil-and-listings {
-    display: grid;
-    grid-template-columns: 1fr 200px;
-    grid-template-rows: auto 1fr;
-    gap: 20px;
 
-    grid-template-areas: "annonces user";
-}
 
 .user-profil {
     grid-area: user;    
@@ -29,6 +22,10 @@
     font-size: var(--text-base);
 }
 
+.location-icon{
+    font-size: 18px;
+}
+
 .container-description {
     flex: 2;
     color: var(--color-text);
@@ -36,18 +33,11 @@
     font-weight: 400;
 }
 
+
+
 @media (max-width: 768px) {
     .user-listings {
         display: grid;
         grid-template-columns: 1fr;/* 1 colonnes */
-    }
-
-    .user-profil-and-listings {
-        grid-template-columns: 1fr;
-        grid-template-areas:
-            "user"
-            "annonces"
-            
-        ;
     }
 }

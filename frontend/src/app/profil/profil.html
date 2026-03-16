@@ -1,0 +1,40 @@
+@if (isLoading) {
+<div class="overlay">
+    <mat-spinner 
+        diameter="50">
+    </mat-spinner>
+</div>
+}
+
+<div class="mt-app pb-4 profil-header">
+    <div class="profil">
+        <div class="avatar">
+            {{(currentUser?.firstName | firstLetter )}}
+        </div>
+        <div class="profil-desc">
+            <h6 class="pseudo">{{currentUser?.firstName}}</h6>
+            <span class="my-1">{{currentUser?.email}}</span>
+            <!--<p class="m-0 p-0">⭐️ <span>5.0/5.0</span>  •  <span></span>pas encore de voyage</p>-->
+        </div>
+    </div>
+
+    <div class="container-button">
+        <!--<button class="edit-button"> Modifier </button>-->
+        <button (click)="logout()" class="logout-button">Se deconneter</button>
+    </div>
+</div>
+
+<mat-tab-group class="border-top">
+    <mat-tab label="Annonces">
+        <app-my-listings></app-my-listings>
+    </mat-tab>
+    <!--<mat-tab label="Avis"> 
+        Aucun avis pour le moment
+    </mat-tab>-->
+     <mat-tab label="Compte">
+        <app-footer></app-footer>
+        <div class="text-center mt-2">
+            
+        </div>
+     </mat-tab>
+</mat-tab-group>

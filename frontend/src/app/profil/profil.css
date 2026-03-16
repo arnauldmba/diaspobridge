@@ -1,0 +1,78 @@
+.profil{
+    display: flex;
+    align-items: center;
+}
+
+.avatar{
+    width: 68px;
+    height: 68px;
+}
+
+.pseudo{
+    margin: 0px;
+    padding: 0px;
+    font-family: var(--font-title);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--text-base);
+}
+
+.profil-desc{
+    display: grid;
+    margin-left: var(--space-2);
+    align-items: center;
+}
+
+.profil-desc span {
+    font-size: 13px; 
+    color: rgb(85, 82, 82);
+}
+
+.profil-desc p {
+    font-size: 12px; 
+    font-family: var(--font-body);
+    color: rgb(85, 82, 82);
+}
+
+.container-button{
+    display: flex;
+    justify-content: center;
+}
+
+.edit-button, .logout-button{
+    width: 94%;
+    height: 42px;
+    border: 0.1px solid rgb(128, 128, 128);
+    border-radius: 4px;
+    background: var(--color-bg);
+    font-family: var(--font-title);
+}
+
+.logout-button{
+    color: red;
+}
+
+@media (min-width: 600px) {
+    .profil-header{
+        display: flex;
+        align-items: center;
+        width: min(1120px, calc(100% - 32px));
+        margin-inline: auto;
+    }
+
+    .container-button{
+        width: 300px;
+        margin-left: 16px;
+    }
+}    
+
+@media (max-width: 600px) {
+    .container-button{
+        display: flex;
+        justify-content: center;
+    }
+
+    .profil{
+        margin-left: 14px;
+        margin-bottom: 14px;
+    }
+}

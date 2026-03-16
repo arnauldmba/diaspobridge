@@ -5,20 +5,51 @@
     </mat-spinner>
 </div>
 }
-<div class="container mt-app">
+
+<div class="mt-app">
     <!-- Site presentation -->
-    <div class="mb-4 p-0 container-intro-message">
-        <h2 class="mb-2 app-title-color">Trouvez des <span class="app-color-secondary">voyageurs</span> à destination du Cameroun</h2>
-        <p class="muted">Entrez en contact avec des <span class="">voyageurs</span> vérifiés qui peuvent <span
+    <div class="container-intro-message container">
+        <h2 class="mb-2 page-title">Trouvez des <span class="app-color-secondary">voyageurs</span> à destination du Cameroun</h2>
+        <p class="muted element-app mt-3">Entrez en contact avec des <span class="">voyageurs</span> vérifiés qui peuvent <span
                 class="">transporter</span>
             vos colis en toute sécurité
         </p>
     </div>
 
-    <!-- Search bar: Transport city, Period, search bar --> 
-    <div class="row align-items-start seach-items mb-3">
+    <!--hint="Ville où votre colis doit arriver." -->
+    <div class="nav-bar-phone border-bottom">
         <app-city-autocomplete-component 
-            class="col-sm custom-border-color custom-border-color-left"
+            class="col-sm"
+            label="Où au Cameroun (optionnel) ?"
+            placeholder="Ex : Douala, Yaoundé…" 
+            [(ngModel)]="pickupCity"
+            name="pickupCity" 
+            [required]="false" 
+            [minlength]="2">
+        </app-city-autocomplete-component>
+        <div class="nav-bar-filter">
+            <div 
+                class="filter-item"
+                [class.active]="selectedFilter === 1"
+                (click)="selectFilter(1)">
+                Tout
+            </div>
+
+            <div
+                *ngFor="let day of [7,15,30]"
+                class="filter-item"
+                [class.active]="selectedFilter === day"
+                (click)="selectFilter(day)"
+            >
+                <span>{{day}}</span> jours
+            </div>
+        </div>
+    </div>
+
+    <!-- Search bar: Transport city, Period, search bar computer--> 
+    <div class="row align-items-start seach-items mb-3 search-bar-container container">
+        <app-city-autocomplete-component 
+            class="col-sm"
             label="Où au Cameroun (optionnel) ?"
             placeholder="Ex : Douala, Yaoundé…" 
             hint="Ville où votre colis doit arriver." 
@@ -29,7 +60,7 @@
         </app-city-autocomplete-component>
 
         <div class="col-sm">
-            <mat-form-field appearance="outline" class="w-100 custom-border-color custom-border-color-left custom-border-focus custom-green-focus-label input-hover">
+            <mat-form-field appearance="outline" class="w-100 custom-border-focus custom-green-focus-label input-hover">
                 <mat-label class="muted" [class.color-1]="isFocused" style="font-size: var(--text-sm);">Période de départ</mat-label>
                 <!--<mat-icon class="border-color-input" matPrefix>today</mat-icon>-->
 
@@ -39,7 +70,7 @@
                 </mat-date-range-input>
 
                 <!--<mat-datepicker-toggle matIconSuffix [for]="rangePicker" style="color: var(--color-input);"></mat-datepicker-toggle>-->
-                <mat-datepicker-toggle matIconPrefix [for]="rangePicker" style="color: var(--color-input);"></mat-datepicker-toggle>
+                <mat-datepicker-toggle matIconPrefix [for]="rangePicker" style="color: var(--color-accent);"></mat-datepicker-toggle>
                 <mat-date-range-picker #rangePicker required>
                     <mat-date-range-picker-actions>
                         <button *ngIf="fromDate || toDate" mat-icon-button (click)="clearDate()" matButton>Fermer</button>
@@ -76,6 +107,7 @@
     </div>
 
     <!--Item select -->
+    <!--
     <div class="filter-div">
         <div class="d-flex align-items-center">
             <mat-chip-listbox class="my-3" aria-label="Cutest dog breeds">
@@ -108,53 +140,55 @@
         }   
     </div>
     }
+-->
+
+<h4 class="avaible-trips">Voyageurs disponibles</h4>
 
     <!--Item trip / card -->
-    <div class="row row-cols-1 row-cols-lg-3 g-3 g-lg-4">
+    <div class="row row-cols-1 row-cols-lg-3 g-3 g-lg-4 container">
         @for (listing of listings; track listing.id) {
         <div class="col align-items-center">
-            <div class="card shadow-app card--hover pt-2 pb-1" style="width: 100%" (click)="openListing(listing.id)">
+            <div class="card shadow-app card--hover" style="width: 100%" (click)="openListing(listing.id)">
                 <div class="card-body">
                     <div class="d-flex">
                         <div class="col">
                             <div class="d-flex align-items-center gap-1">
-                                <span class="material-symbols-outlined icon-size-xl app-title-color">location_on</span>
-                                <strong class="app-title-color">{{listing.originCity}} </strong>
+                                <span class="material-symbols-outlined icon-size-xl color-1">location_on</span>
+                                <span class="city">{{listing.originCity}} </span>
                                 <!--<strong>{{listing.originCity}}, {{listing.originCountry}} </strong>-->
                             </div>
                             <div class="divider-with-text offset">
                                 <span class="material-symbols-outlined">flight_takeoff</span>
                             </div>
                             <div class="d-flex align-items-center gap-1 mb-3">
-                                <span class="material-symbols-outlined icon-size-xl app-title-color">location_on</span>
-                                <strong class="app-title-color">{{listing.destCity}}</strong>
+                                <span class="material-symbols-outlined icon-size-xl color-1">location_on</span>
+                                <span class="city">{{listing.destCity}} </span>
                                 <!--<span class="text-meta-strong">{{listing.destCity}}, {{listing.destCountry}}</span>-->
                             </div>
                         </div>
                     </div>
 
-                    <div class="row">
+                    <div class="row mt-1">
                         <div class="d-flex mb-3 gap-4 col-8">
                             <div class="card-text d-flex align-items-center gap-1" style="color: var(--color-muted);">
                                 <span class="material-symbols-outlined icon-size-lg">calendar_today</span>
-                                <span class="text-meta">{{listing.departDate | date:'dd MMM yyyy' }}</span>
+                                <span class="icon-desc">{{listing.departDate | date:'dd MMM yyyy' }}</span>
                             </div>
                             <div class="card-text d-flex align-items-center gap-1" style="color: var(--color-muted);">
                                 <span class="material-symbols-outlined icon-size-lg">balance</span>
-                                <span class="text-meta">{{listing.maxWeightKg}}kg</span>
+                                <span class="icon-desc">{{listing.maxWeightKg}}Kg</span>
                             </div>
                         </div>
-                        <span class="mb-3 col-4 text-end"
-                            style="font-size: var(--text-xl); color: var(--color-accent); font-weight: 1000;">
-                            {{listing.pricePerKg}}€/kg
+                        <span class="mb-3 col-4 text-end price">
+                            {{listing.pricePerKg}}€/Kg
                         </span>
                     </div>
-                    <div class="border-top align-items-center d-flex align-items-start gap-2 pt-3">
+                    <div class="border-top align-items-center d-flex align-items-start gap-2 pt-2">
                         <div class="avatar">
                         <!--<div class="avatar" [style.background]="avatarColor(listing.transporter.firstName)">-->    
                             {{(listing.transporter.firstName | firstLetter )}}
                         </div>
-                        <span class="text-meta">{{listing.transporter.firstName}}</span>
+                        <span class="pseudo">{{listing.transporter.firstName}}</span>
                     </div>
                 </div>
             </div>
@@ -180,4 +214,6 @@
     </div>
 </div>
 
-<app-footer></app-footer>
+<div class="mb-app">
+    <app-footer></app-footer>
+</div>

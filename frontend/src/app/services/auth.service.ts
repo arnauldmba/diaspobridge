@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { LoginRequest } from '../model/LoginRequest';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, tap, throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -20,6 +20,9 @@ export class AuthService {
 
   private userEmailSubject = new BehaviorSubject<string | null>(null);
   public userEmail$ = this.userEmailSubject.asObservable();
+
+  private currentUserSubject = new BehaviorSubject<User | null>(null);
+  currentUser$ = this.currentUserSubject.asObservable();
 
   usersList: User[] = [];
   token!: string;
@@ -126,6 +129,7 @@ export class AuthService {
 
     this.userEmailSubject.next(null);
     this.authStateSubject.next(false);
+    this.clearCurrentUser();
   }
 
   logout(): void {
@@ -144,6 +148,36 @@ export class AuthService {
   // Get current user (for simulation purposes, return the first user)
   getCurrentUser(): User | null {
     return this.usersList.length > 0 ? this.usersList[0] : null;
+  }
+
+  getCurrentUser2(userId: number): Observable<User> {
+    return this.http.get<User>(`${this.apiUrl}/users/${userId}`);
+  }
+
+  /*getRegisteredUser(): Observable<User> {
+    if (this.logedUserId == null) {
+      return throwError(() => new Error('loggedUserId is undefined'));
+    }
+
+    return this.getCurrentUser2(this.logedUserId);
+  }*/
+
+  loadCurrentUser(): Observable<User> {
+    if (this.logedUserId == null) {
+      return throwError(() => new Error('loggedUserId is undefined'));
+    }
+
+    return this.getCurrentUser2(this.logedUserId).pipe(
+      tap(user => this.currentUserSubject.next(user))
+    );
+  }
+
+  getCurrentUserValue(): User | null {
+    return this.currentUserSubject.value;
+  }
+
+  clearCurrentUser(): void {
+    this.currentUserSubject.next(null);
   }
 
   loadToken(): void {

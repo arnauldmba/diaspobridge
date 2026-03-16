@@ -1,3 +1,11 @@
+.avaible-trips{
+  display: none;
+}
+
+.nav-bar-phone{
+  display: none;
+}
+
 /* Divider with text (horizontal) */
 .divider-with-text {
   display: flex;
@@ -40,6 +48,10 @@
 /* Mobile */
 @media (max-width: 600px) {
 
+  .search-bar-container{
+    display: none;
+  }
+
   .container-intro-message{
     text-align: center;
   }
@@ -53,11 +65,12 @@
   }
 
   .avaible-trips{
-    display: none;
+    display: block;
+    font-size: 18px;
+    margin: 24px 0px 16px 16px;
   }
 
   .filter-div{
-    display: block;
     flex-direction: column-reverse;
   }
 
@@ -65,5 +78,43 @@
     text-align: center;
     margin-top: 10px;
     margin-bottom: 10px;
+  }
+
+  .nav-bar-phone{
+    display: block;
+    margin-bottom: 14px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    background: var(--color-bg);
+    padding: 12px 16px 0px 16px;
+    border-bottom: 1px solid #ddd;
+    transition: box-shadow 0.3s ease;
+  }
+
+  .nav-bar-filter {
+    display: flex;
+    justify-content: center;
+  }
+
+  .filter-item {
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 0px;
+    margin: 0px;
+    color: #7f7f80;
+
+    cursor: pointer;
+    padding-bottom: 4px;
+  }
+
+  .filter-item.active {
+    font-weight: 1000;
+    color: black;
+    border-bottom: 2px solid green;
+    /*background-color: rgba(0, 128, 0, 0.092);*/
   }
 }

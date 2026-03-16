@@ -23,17 +23,6 @@
     padding: var(--space-5);
 }
 
-.container-consignes-2 {
-    display: none;
-}
-
-.container-consignes-2 li {
-    margin: 4px 0px;
-    font-size: 12px;
-    font-weight: 400;
-    color: rgb(94, 93, 93);
-}
-
 .container-consignes {
     flex: 3;
 }
@@ -57,6 +46,10 @@
         flex-direction: column;
     }
 
+    .container-consignes{
+        margin-top: 16px;
+    }
+
     .add-listing-form {
         flex: 7;
         border: none;
@@ -64,11 +57,7 @@
         padding: 0px;
     }
 
-    .container-consignes {
+    .why{
         display: none;
-    }
-
-    .container-consignes-2 {
-        display: block;
     }
 }

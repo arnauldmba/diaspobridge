@@ -37,6 +37,8 @@ import { Footer } from "../footer/footer/footer";
 })
 export class Listings implements OnInit {
 
+  selectedFilter: number = 1;
+
   isFocused: boolean = false;
 
   dateInteracted = false;
@@ -140,6 +142,7 @@ export class Listings implements OnInit {
     this.onSearch();
   }
 
+  /*
   filterSelect() {
     if (this.selectedPeriod === '7days') {
       this.seachResutat = "Prochains 7 jours";
@@ -173,6 +176,7 @@ export class Listings implements OnInit {
       }
     } 
   }
+  */
 
   private fetch(criteria: CountrySearchCriteria): void {
     this.isLoading = true; 
@@ -236,12 +240,44 @@ export class Listings implements OnInit {
 
   applyQuickPeriod(chip: string) {
     this.selectedPeriod = chip;
-    this.filterSelect();
+    //this.filterSelect();
     this.onSearch();
   }
 
   clearDate(): void {
     this.toDate = null; 
     this.fromDate = null; 
+  }
+
+  /**
+   * Methode pour le filtre. elle permet de gerer le focus
+   * lorsqu on click sur un items (7jours, 15 jours, 30 jours)
+   * @param days 
+   */
+  selectFilter(days: number) {
+    this.selectedFilter = days;
+    this.filterSelect2(days);
+    console.log('days: ', days);
+  }
+
+  filterSelect2(days: number) {
+    this.fromDate = new Date();
+    this.toDate = new Date();
+
+    if(days === 1){
+      this.resetFilters();
+    }else if (days === 7) {
+      this.seachResutat = "Prochains 7 jours";
+      this.toDate.setDate(this.toDate.getDate() + days);
+      this.onSearch();
+    }else if (days === 15) {
+      this.seachResutat = "Prochains 7 jours";
+      this.toDate.setDate(this.toDate.getDate() + days);
+      this.onSearch();
+    }else if (days === 30) {
+      this.seachResutat = "Prochains 7 jours";
+      this.toDate.setDate(this.toDate.getDate() + days);
+      this.onSearch();
+    }
   }
 }

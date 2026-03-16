@@ -10,7 +10,8 @@
 }
 
 <div class="matches">
-    <h1 class="title subpage-title mt-app app-title-color">Messages</h1>
+    <h1 class="title page-title mt-app app-title-color mb-4">Messages</h1>
+    
     @if(myMatches.length > 0){
     <ul class="m-0 p-0" [class.hide-on-mobile]="showMessage">
         <li *ngFor="let match of myMatches" clickable (click)="onOpenChat2(match.id, match.otherFirstName)"
@@ -22,7 +23,7 @@
             </div>
             <div class="namme-and-date">
                 <div class="w-100 d-flex justify-content-between">
-                    <strong class="m-0 p-0">{{match.otherFirstName}}</strong>
+                    <span class="m-0 p-0" style="font-family: var(--font-title); font-weight: var(--font-weight-bold);">{{match.otherFirstName}}</span>
                     <span class="updated-date d-flex">{{match.updatedAt | date:'dd.MM.yyyy' }}</span>
                 </div>
                 <p class="preview-message m-0 p-0">{{match.lastMessagePreview}}</p>

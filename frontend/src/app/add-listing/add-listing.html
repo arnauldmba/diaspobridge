@@ -1,7 +1,7 @@
-<div class="container-add-listing mt-app">
+<div class="container-add-listing mt-app mb-app">
     <!-- First titel -->
     <div class="mb-4 p-0 border-0">
-        <h1 class="app-title-color">Créer une nouvelle annonce</h1>
+        <h1 class="app-title-color page-title mb-3">Créer une nouvelle annonce</h1>
         <p style="color: var(--color-muted);">Partagez vos projets de voyage et aidez d'autres personnes à envoyer
             des colis chez elles
         </p>
@@ -16,6 +16,7 @@
             <form #tripForm="ngForm" (ngSubmit)="addListing(tripForm)">
                 <div class="row row-cols-1 row-cols-lg-2 g-3 g-lg-2 mb-3">
                     <app-city-autocomplete-component 
+                        class="muted"
                         label="Ville de départ (Allemagne)"
                         placeholder="Ex : Köln, Berlin…"
                         hint="Ville où le colis sera remis au transporteur."
@@ -32,7 +33,7 @@
                 <!-- Date -->
                 <div class="row justify-content-center mb-3">
                     <mat-form-field appearance="outline" class="w-full d-block col custom-border-focus custom-green-focus-label input-hover">
-                        <mat-label>Date de départ</mat-label>
+                        <mat-label class="label-input">Date de départ</mat-label>
 
                         <input matInput [matDatepicker]="picker" [(ngModel)]="newListing.departDate" name="departDate" style="cursor: pointer;"
                             #departDate="ngModel" required [matDatepickerFilter]="futureDatesOnly" readonly (click)="picker.open()" />
@@ -80,11 +81,11 @@
                 </div>
 
                 <!-- NOTE (optionnel) -->
-                <div class="row justify-content-center mb-3">
+                <div class="row justify-content-center mb-4">
                     <mat-form-field appearance="outline" class="example-full-width custom-border-focus custom-green-focus-label">
-                        <mat-label>Laisser un commentaire</mat-label>
-                        <textarea matInput [(ngModel)]="newListing.note" name="note" maxlength="500"
-                            style="height: 100px;" placeholder="Laisser un commentaire...">
+                        <mat-label class="label-input">Laisser un commentaire</mat-label>
+                        <textarea matInput [(ngModel)]="newListing.note" name="note" #note="ngModel" maxlength="500"
+                            style="max-height: 200px; min-height: 100px;" placeholder="Laisser un commentaire...">
                         </textarea>
                         <mat-hint style="color: rgba(0,0,0,0.748)">
                             Indiquez les informations relatives à ce que vous pouvez transporter.
@@ -92,22 +93,9 @@
                     </mat-form-field>
                 </div>
 
-                <!-- Consignes importantes -->
-                <div class="my-4 p-3 rounded-2 container-consignes-2"
-                    style="background-color: #1cbd271e; border: 1px solid var(--color-accent);">
-                    <h6 class="mb-2">Consignes importantes</h6>
-                    <ul>
-                        <li>Ne transportez que des articles avec lesquels vous êtes à l'aise.</li>
-                        <li>Vérifiez le contenu avant d'accepter les colis.</li>
-                        <li>Communiquez de manière transparente.</li>
-                        <li>Respectez les réglementations douanières.</li>
-                        <li>Fournissez des mises à jour de suivi lorsque cela est possible.</li>
-                    </ul>
-                </div>
-
                 <!-- BOUTONS -->
                 <div class="d-flex gap-2">
-                    <button type="button" class="btn-app btn-ghost col">
+                    <button type="reset" class="btn-app btn-ghost col">
                         Annuler
                     </button>
 
@@ -120,12 +108,11 @@
                 <div *ngIf="message">
                     <h5>{{ message }}</h5>
                 </div>
-
             </form>
         </div>
 
         <div class="container-consignes">
-            <div class="border p-3 rounded-4 mb-4">
+            <div class="border p-3 rounded-4 mb-4 why">
                 <!--<img src="assets/images/add-listing-illustration.png" class="card-img-top"
                     alt="Illustration de création d'annonce">-->
                 <div class="card-body">

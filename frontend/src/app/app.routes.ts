@@ -21,6 +21,7 @@ import { Faq } from './footer/faq/faq';
 import { Contact } from './footer/contact/contact';
 import { LegalNotice } from './footer/legal-notice/legal-notice';
 import { PrivacyPolicy } from './footer/privacy-policy/privacy-policy';
+import { Profil } from './profil/profil';
 
 export const routes: Routes = [
     { path: "my-listings", component: MyListings, canActivate: [authGuardGuard2]},
@@ -31,6 +32,7 @@ export const routes: Routes = [
     { path: "contact", component: Contact },
     { path: "listings", component: Listings },
     { path: "menu", component: MenuBurger },
+    { path: "profil", component: Profil, canActivate: [authGuardGuard2] },
     { path: "listing-details/:id", component: ListingDetails },
     { path: "add-listing", component: AddListing, canActivate: [authGuardGuard2] },
     { path: "update-listing/:id", component: UpdateListing },

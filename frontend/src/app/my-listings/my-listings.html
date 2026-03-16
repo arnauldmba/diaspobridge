@@ -1,21 +1,21 @@
-<div class="container mt-app">
-    <h1 class="mb-2 app-title-color">Mes annonces</h1>
+<!--<div class="container mt-app">
+    <h1 class="mb-3 app-title-color page-title">Mes annonces</h1>
     <p class="muted">Gérez vos annonces de transport et modifiez-les selon vos besoins</p>
-</div>
+</div>-->
 
-<div class="user-profil-and-listings container">
+<div class="user-profil-and-listings container mb-app mt-4">
     <div class="user-listings">
         @for (listing of myListings; track listing.id) {
         <div class="">
-            <div class="d-grid gap-1 border rounded-3 p-2">
+            <div class="d-grid gap-1 border rounded-4 p-2" style="background-color: white;">
                 <div class="pb-1 mb-1 p-2">
-                    <div class="d-flex align-items-center">
-                        <span class="material-symbols-outlined color-accent">location_on</span>
-                        <span>{{listing.originCity}}</span>
+                    <div class="d-flex align-items-center gap-1">
+                        <span class="material-symbols-outlined icon-size-xl color-accent">location_on</span>
+                        <span class="city">{{listing.originCity}}</span>
                         <span class="material-symbols-outlined mx-2"
                             style="color: var(--color-muted);">arrow_right_alt</span>
-                        <span class="material-symbols-outlined color-accent">location_on</span>
-                        <span>{{listing.destCity}}</span>
+                        <span class="material-symbols-outlined icon-size-xl color-accent">location_on</span>
+                        <span class="city">{{listing.destCity}}</span>
                     </div>
                 </div>
 
@@ -64,10 +64,10 @@
         }
     </div>
     <!--Item trip / card -->
-    <div class="user-profil">
+    <!--<div class="user-profil">
         <div class="d-grid gap-2 border rounded-3 p-4 text-center">
             <span>👤 </span>
             <span>{{currentUserEmail}}</span>
         </div>
-    </div>
+    </div>-->
 </div>

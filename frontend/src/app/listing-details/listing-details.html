@@ -1,4 +1,4 @@
-<div class="mt-app">
+<div class="mt-app mb-app">
     @if (isLoading) {
     <div class="overlay">
         <mat-spinner 
@@ -23,7 +23,7 @@
     </div>
 
     <div class="container mb-4 app-title-color">
-        <h1>Détail du voyage</h1>
+        <h1 class="page-title">Détail du voyage</h1>
     </div>
 
     @if (!isLoading && trip) {
@@ -35,7 +35,7 @@
                     <div class="d-flex gap-2">
                         <mat-icon class="color-1 location-icon">location_on</mat-icon>
                         <p class="p-0 m-0">
-                            <strong>{{trip.originCity}}, {{trip.originCountry}}</strong><br>
+                            <span class="city">{{trip.originCity}}, {{trip.originCountry}}</span><br>
                             <span class="muted">Départ</span>
                         </p>
                     </div>
@@ -44,36 +44,38 @@
                     <div class="d-flex gap-2">
                         <mat-icon class="color-1 location-icon">location_on</mat-icon>
                         <p>
-                            <strong>{{trip.destCity}}, {{trip.destCountry}}</strong><br>
+                            <span class="city">{{trip.destCity}}, {{trip.destCountry}}</span><br>
                             <span class="muted">Arrivé</span>
                         </p>
                     </div>
                 </div>
 
-                <div class="date-weight-kilo mt-2">
-                    <div class="mt-2">
+                <div class="date-weight-kilo mt-2 p-0">
+                    <div class="mt-3">
                         <div class="row">
-                            <div class="d-flex mb-3 gap-4 col-8">
+                            <div class="d-flex gap-4 col-8">
                                 <div class="card-text d-flex align-items-center gap-1"
                                     style="color: var(--color-muted);">
                                     <span class="material-symbols-outlined icon-size-lg">calendar_today</span>
-                                    <span class="text-meta">{{trip.departDate | date:'dd MMM yyyy' }}</span>
+                                    <span class="icon-desc">{{trip.departDate | date:'dd MMM yyyy' }}</span>
                                 </div>
                                 <div class="card-text d-flex align-items-center gap-1"
                                     style="color: var(--color-muted);">
                                     <span class="material-symbols-outlined icon-size-lg">balance</span>
-                                    <span class="text-meta">{{trip.maxWeightKg}}kg</span>
+                                    <span class="icon-desc">{{trip.maxWeightKg}}kg</span>
                                 </div>
                             </div>
-                            <span class="mb-2 col-4 text-end"
-                                style="font-size: var(--text-xxl); color: var(--color-accent); font-weight: 1000;">
+                            <span class="mb-2 col-4 text-end price">
                                 {{trip.pricePerKg}}€/kg
                             </span>
                         </div>
                     </div>
 
-                    <div style="background-color: var(--color-bg-accent);" class="pt-2 pb-2 px-3 mt-2 rounded-2">
-                        <h6 class="mt-1 muted" style="font-size: var(--text-ms);">Description</h6>
+                    <div 
+                        style="background-color: var(--color-bg-accent); font-family: var(--font-body);" 
+                        class="pt-2 pb-2 px-3 mt-3 mb-4 rounded-2"
+                    >
+                        <h6 class="mt-1 muted" style="font-size: var(--text-ms); font-family: var(--font-title);">Description</h6>
                         @if(trip.note){
                         <p style="font-size: var(--text-sm);">{{trip.note}}</p>
                         }@else {
@@ -87,16 +89,18 @@
             <div class="trip-user-info">
                 <div class="rounded-4 transporter-detail">
                     <div class="trip-details-button">
-                        <h5 class="">Transporteur</h5>
+                        <h5>Transporteur</h5>
                         <div class="user-foto-and-name gap-2">
                             <div class="avatar" style="width: 50px; height: 50px;">
                                 {{(trip.transporter.firstName | firstLetter )}}
                             </div>
-                            <h6 class="m-0 p-0">{{trip.transporter.firstName}}</h6>
+                            <h6 class="m-0 p-0 text-meta-strong">{{trip.transporter.firstName}}</h6>
                         </div>
 
                         <div class="d-grid gap-2 pb-2">
-                            <button (click)="onContactClick()" class="btn-app btn-app-primary gap-2">
+                            <button 
+                                (click)="onContactClick()" 
+                                class="btn-app btn-app-primary gap-1">
                                 <mat-icon class="material-symbols-outlined">chat_bubble</mat-icon>
                                 Contacter le transporteur
                             </button>

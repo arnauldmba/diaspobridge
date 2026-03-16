@@ -1,0 +1,21 @@
+<div class="admin-layout">
+  <aside class="admin-sidebar">
+    <h2>Admin</h2>
+    <nav>
+      <a routerLink="/admin/dashboard">Dashboard</a>
+      <a routerLink="/admin/users">Users</a>
+      <a routerLink="/admin/trips">Trips</a>
+      <a routerLink="/admin/parcels">Parcels</a>
+    </nav>
+  </aside>
+
+  <div class="admin-main">
+    <main class="admin-content">
+      <router-outlet></router-outlet>
+    </main>
+
+    <main class="admin-content">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>

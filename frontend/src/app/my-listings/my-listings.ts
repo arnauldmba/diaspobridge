@@ -5,6 +5,7 @@ import { RouterLink } from "@angular/router";
 import { AuthService } from '../services/auth.service';
 import { FirstLetterPipe } from "../shared/first-letter-pipe";
 import { MatButtonModule } from '@angular/material/button';
+import { MatIcon, MatIconModule } from "@angular/material/icon";
 
 @Component({
   selector: 'app-my-listings',

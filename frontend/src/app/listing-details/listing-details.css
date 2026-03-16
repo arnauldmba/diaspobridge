@@ -72,13 +72,15 @@
 }
 
 .transporter-additional-info h6{
+    font-family: var(--font-title);
     font-size: 14px;
     font-weight: 500;
     color: var(--color-muted);
 }
 
 .transporter-additional-info li{
-    font-size: 14px;
+    font-family: var(--font-body);
+    font-size: 13px;
     font-weight: 400;
     color: rgba(0, 0, 0, 0.675);
     margin: 6px 0px;
@@ -105,11 +107,18 @@
     .transporter-additional-info,
     .trip-details-button,
     .description,
-    .date-weight-kilo,
     .departure-and-arrival{
         margin-bottom: 10px;
         padding: 16px;
     }
+
+    .trip-details-button .material-symbols-outlined{
+        font-size: 16px;
+        font-weight: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    } 
 
     .transporter-detail {
         border: none;
@@ -119,7 +128,8 @@
     .transporter-detail h5{
         font-size: var(--text-base);
         color: var(--color-muted);
-        font-weight: 400;
+        font-weight: 500;
+        font-family: var(--font-title);
     }
 
     .description{
