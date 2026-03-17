@@ -6,13 +6,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { RouterLink, RouterOutlet, RouterLinkWithHref, RouterLinkActive, NavigationEnd, Router } from '@angular/router';
 import { FirstLetterPipe } from '../../../shared/first-letter-pipe';
-import { Navbar } from '../navbar/navbar';
 import { Observable, filter } from 'rxjs';
 import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-navbar-desk',
-  imports: [AsyncPipe, RouterLink, RouterOutlet, RouterLinkWithHref, MatIconModule, RouterLinkActive, MatButtonModule, MatMenuModule, FirstLetterPipe, MatBadgeModule],
+  standalone: true,
+  imports: [AsyncPipe, RouterLink, RouterLinkWithHref, MatIconModule, RouterLinkActive, MatButtonModule, MatMenuModule, FirstLetterPipe, MatBadgeModule],
   templateUrl: './navbar-desk.html',
   styleUrl: './navbar-desk.css',
 })

@@ -40,7 +40,18 @@ export class Login implements OnInit {
         const jwtToken = response.headers.get('Authorization');
         if (jwtToken) {
           this.authService.saveToken(jwtToken);
-          this.router.navigate(['/listings']);
+
+          this.authService.loadCurrentUser().subscribe({
+            next: (user) => {
+              if(user.role === 'ADMIN'){
+                this.router.navigate(['/admin']);
+              }else{
+                this.router.navigate(['/listings']);
+              }
+            }
+          })
+          //this.router.navigate(['/listings']);
+          
         } else {
           this.errorLogin = 1;
         }

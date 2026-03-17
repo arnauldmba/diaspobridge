@@ -18,12 +18,12 @@
     </a>
     <a routerLinkActive="active" class="desktop-link" routerLink="/messages">Messages</a>
     <a routerLink="/add-listing" class="material-symbols-outlined avatar mobile-link">add</a>
-    <a routerLinkActive="active" class="desktop-link" matBadge="{{unreadMessage}}" matBadgeSize="large" routerLink="/compte">
+    <a routerLinkActive="active" class="desktop-link" [matBadge]="unreadMessage" matBadgeSize="large">
       @if(authService.isLoggedIn()){
         
         <div class="d-flex align-items-center" (click)="!toggleMenu()">
           <span class="avatar">{{ (currentUserEmail2$ | async) | firstLetter }}</span>
-          @if(!mobileMenuOpen ){
+          @if(!mobileMenuOpen){
           <span class="material-symbols-outlined">keyboard_arrow_down</span>
           }@else {
           <span class="material-symbols-outlined d-flex align-items-center">
@@ -69,23 +69,24 @@
 
   <!-- Mobile dropdown -->
   <div class="mobile-menu" [class.open]="mobileMenuOpen" #mobileMenu>
-    <a routerLink="/listings" (click)="closeMenu()" routerLinkActive="active"
-      [routerLinkActiveOptions]="{ exact: true }">
+    <!-- 
+    <a routerLink="/" (click)="closeMenu()" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
       <span class="material-symbols-outlined">list_alt</span> Annonces
     </a>
     <a routerLink="/add-listing" (click)="closeMenu()" routerLinkActive="active">
-      <span class="material-symbols-outlined">add_circle</span> 
+      <span class="material-symbols-outlined">add_circle</span>
       Pulier une annonce
     </a>
     <a routerLink="/messages" (click)="closeMenu()" routerLinkActive="active">
       <span class="material-symbols-outlined">chat_bubble</span>
       <span matBadge="{{unreadMessage}}" matBadgeOverlap="false">Messages</span>
     </a>
+    -->
     <a routerLink="/profil" (click)="closeMenu()" routerLinkActive="active">
       <span class="material-symbols-outlined">account_box</span>
       Profil
     </a>
-
+  
     @if(authService.isLoggedIn()) {
     <a (click)="logout()" class="dropdown-item">
       <span class="material-symbols-outlined">logout</span>
