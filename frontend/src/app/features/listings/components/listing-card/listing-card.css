@@ -1,0 +1,32 @@
+.listing-card-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.listing-card {
+  width: 100%;
+  cursor: pointer;
+}
+
+.route-city {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.route-city--bottom {
+  margin-bottom: 1rem;
+}
+
+.listing-meta .meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--color-muted);
+}
+
+.listing-footer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}

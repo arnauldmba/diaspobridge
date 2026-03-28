@@ -1,0 +1,26 @@
+<h1>Listings</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Departure</th>
+      <th>Arrival</th>
+      <th>Date</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let listing of listings">
+      <td>{{ listing.id }}</td>
+      <td>{{ listing.originCity }}</td>
+      <td>{{ listing.destCity }}</td>
+      <td>{{ listing.departDate }}</td>
+      <td>
+        <button (click)="onHide(listing.id)">Hide</button>
+        <button (click)="onDelete(listing.id)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

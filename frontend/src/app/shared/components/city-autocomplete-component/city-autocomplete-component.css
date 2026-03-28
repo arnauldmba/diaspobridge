@@ -1,0 +1,5 @@
+.clickable-icon {
+  cursor: pointer;
+  border-left: solid 1px var(--color-accent);
+  color: var(--color-accent);
+}

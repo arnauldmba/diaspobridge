@@ -172,6 +172,10 @@ export class AuthService {
     );
   }
 
+  /**
+   * 
+   * @returns return l'utilisateur connecte
+   */
   getCurrentUserValue(): User | null {
     return this.currentUserSubject.value;
   }

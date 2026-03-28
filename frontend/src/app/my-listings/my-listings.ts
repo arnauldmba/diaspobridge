@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { TransporterTrip } from '../model/transporterTrip.model';
 import { ListingService } from '../services/listing.service';
-import { RouterLink } from "@angular/router";
+import { Router, RouterLink } from "@angular/router";
 import { AuthService } from '../services/auth.service';
 import { FirstLetterPipe } from "../shared/first-letter-pipe";
 import { MatButtonModule } from '@angular/material/button';
@@ -20,7 +20,10 @@ export class MyListings {
   notLoggedIn: boolean = false;
   currentUserEmail?:string;
 
-  constructor(private listingService: ListingService, private authService: AuthService) {
+  constructor(
+    private listingService: ListingService, 
+    private authService: AuthService,
+    private router: Router) {
   }
 
   ngOnInit(): void {
@@ -71,5 +74,9 @@ export class MyListings {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     return d < today;
+  }
+
+  onReturntoProfli() {
+    this.router.navigate(['/profil']);
   }
 }

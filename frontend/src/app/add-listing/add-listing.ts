@@ -14,7 +14,7 @@ import { MatDatepickerControl, MatDatepickerModule, MatDatepickerPanel } from '@
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { CommonModule } from '@angular/common';
 import { MatChipsModule } from '@angular/material/chips';
-import { CityAutocompleteComponent } from "../city-autocomplete-component/city-autocomplete-component";
+import { CityAutocompleteComponent } from "../shared/components/city-autocomplete-component/city-autocomplete-component";
 
 
 @Component({

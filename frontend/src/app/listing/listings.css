@@ -53,7 +53,8 @@
   }
 
   .container-intro-message{
-    text-align: center;
+    padding: 0px 16px;
+    background: var(--color-bg);
   }
 
   .seach-items{
@@ -70,11 +71,8 @@
     margin: 24px 0px 16px 16px;
   }
 
-  .filter-div{
-    flex-direction: column-reverse;
-  }
-
   .filter-div {
+    flex-direction: column-reverse;
     text-align: center;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -85,10 +83,8 @@
     margin-bottom: 14px;
     position: sticky;
     top: 0;
-    z-index: 1000;
-
+    z-index: 100;
     background: var(--color-bg);
-    padding: 12px 16px 0px 16px;
     border-bottom: 1px solid #ddd;
     transition: box-shadow 0.3s ease;
   }

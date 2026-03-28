@@ -42,7 +42,6 @@ html, body {
 }
 
 
-
 /**-------- nouveau style ------------*/
 
 .back-button-to-listing{
@@ -113,7 +112,7 @@ html, body {
 }
 
 .mt-app{
-  margin-top: 80px;
+  margin-top: 110px;
 }
 
 .p-2 { padding: var(--space-2); }
@@ -293,6 +292,11 @@ html, body {
   font-family:  var(--font-body);
 }
 
+.cdk-overlay-container,
+.cdk-global-overlay-wrapper {
+  z-index: 4000 !important;
+}
+
 .no-border-field .mdc-line-ripple {
   display: none !important;
 }
@@ -328,6 +332,21 @@ html, body {
   display: none;
 }
 
+.small-field {
+  font-size: 14px;
+}
+
+.small-field .mat-mdc-form-field-flex {
+  height: 40px;
+}
+
+.small-field .mat-mdc-text-field-wrapper {
+  height: 40px;
+}
+
+.small-field .mat-mdc-form-field-infix {
+  padding: 8px 0 !important;
+}
 
 /* Style for Angular Material textarea create listing/annonce end */
 

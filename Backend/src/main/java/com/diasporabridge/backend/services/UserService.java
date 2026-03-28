@@ -24,12 +24,16 @@ public interface UserService {
 	
 	public User updateUser(User user);
 	public User updateUserProfile(Long id, User incomingUser);
+
 	void deleteUser(User user);
 	void deleteUserById(Long id);
+
+	void restoreUserById(Long id);
 	
 	Optional<User> findActiveByEmailIgnoreCase(String email);
 	boolean existsActiveByEmailIgnoreCase(String email);
 	Optional<User> findActiveById(Long id);
+	Optional<User> findById(Long id);
 	
 	List<User> getAllActiveUsers();
 	Optional<User> findByEmail(String email);

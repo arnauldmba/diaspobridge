@@ -14,7 +14,7 @@ import { ChatMessaging } from './chat-messaging/chat-messaging';
 import { MyMatches } from './my-matches/my-matches';
 import { ForgotPasswordComponent } from './authentication/forgot-password-component/forgot-password-component';
 import { ResetPasswordCompotent } from './authentication/reset-password-compotent/reset-password-compotent';
-import { CityAutocompleteComponent } from './city-autocomplete-component/city-autocomplete-component';
+import { CityAutocompleteComponent } from './shared/components/city-autocomplete-component/city-autocomplete-component';
 import { Apropos } from './footer/apropos/apropos';
 import { Faq } from './footer/faq/faq';
 import { Contact } from './footer/contact/contact';
@@ -23,6 +23,7 @@ import { PrivacyPolicy } from './footer/privacy-policy/privacy-policy';
 import { Profil } from './profil/profil';
 import { PublicLayout } from './layouts/public-layout/public-layout';
 import { AdminLayout } from './layouts/admin-layout/admin-layout';
+import { adminGuard } from './core/guard/admin.guard';
 
 export const routes1: Routes = [
     { path: "my-listings", component: MyListings, canActivate: [authGuardGuard2]},
@@ -58,7 +59,8 @@ export const routes: Routes = [
             {
                 path: '', 
                 loadComponent: () => 
-                    import('./listing/listings').then(m => m.Listings)
+                    //import('./listing/listings').then(m => m.Listings)
+                    import('./features/listings/pages/home-listing-page/home-listing-page').then(m => m.HomeListingPage)
             },
             {
                 path: 'search-listing', 
@@ -88,10 +90,10 @@ export const routes: Routes = [
                     import('./my-matches/my-matches').then(m => m.MyMatches)
             },
             {
-                path: 'messages/:matchId', 
+                path: 'chat/:matchId', 
                 canActivate: [authGuardGuard2],
                 loadComponent: () => 
-                    import('./my-matches/my-matches').then(m => m.MyMatches)
+                    import('./chat-messaging/chat-messaging').then(m => m.ChatMessaging)
             },
             {
                 path: 'add-listing', 
@@ -165,11 +167,28 @@ export const routes: Routes = [
     {
         path: 'admin',
         component: AdminLayout,
+        canActivate: [authGuardGuard2, adminGuard],
         children: [
+            {
+            path: '',
+            redirectTo: 'dashboard',
+            pathMatch: 'full'
+            },
             {
                 path: 'dashboard',
                 loadComponent: () =>
-                    import('./features/admin/dashboard/admin-dashbord.component/admin-dashbord.component').then(m => m.AdminDashbordComponent)
+                    import('./features/admin/page/dashboard/admin-dashbord.component/admin-dashbord.component').then(m => m.AdminDashbordComponent)
+            },
+            {
+                path: 'users',
+                loadComponent: () =>
+                import('./features/admin/page/users/admin-users.component/admin-users.component').then(m => m.AdminUsersComponent)
+            },
+
+            {
+                path: 'listings',
+                loadComponent: () =>
+                import('./features/admin/page/listings/admin-trips.component/admin-listings.component').then(m => m.AdminListingsComponent)
             }
         ]
     },

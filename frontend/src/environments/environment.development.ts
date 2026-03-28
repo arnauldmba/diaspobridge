@@ -11,6 +11,6 @@ export const environment : { production: boolean; apiUrl: string } = {
 export const environment: AppEnvironment = {
   production: false,
   //apiUrl: 'http://localhost:8080/diasporabridge/api', // Development API URL service TransporterTrip
-  apiUrl: 'http://192.168.178.72:8080/diasporabridge/api',
+  apiUrl: 'http://192.168.178.75:8080/diasporabridge/api',
   appName: 'MbokoGO'
 };

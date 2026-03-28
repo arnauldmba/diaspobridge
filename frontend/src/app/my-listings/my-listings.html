@@ -1,9 +1,15 @@
-<!--<div class="container mt-app">
-    <h1 class="mb-3 app-title-color page-title">Mes annonces</h1>
-    <p class="muted">Gérez vos annonces de transport et modifiez-les selon vos besoins</p>
-</div>-->
+<div class="container mt-app">
+    <span 
+      class="material-symbols-outlined mb-4"
+      style="cursor: pointer;"
+      (click)="onReturntoProfli()">
+        keyboard_backspace
+    </span>
+    <h1 class="mb-2 app-title-color page-title">Mes annonces</h1>
+    <!--<p class="muted">Gérez vos annonces de transport et modifiez-les selon vos besoins</p>-->
+</div>
 
-<div class="user-profil-and-listings container mb-app mt-4">
+<div class="user-profil-and-listings container mt-4 mb-app">
     <div class="user-listings">
         @for (listing of myListings; track listing.id) {
         <div class="">

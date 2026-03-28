@@ -73,9 +73,26 @@ public class UserServiceImpl implements UserService {
 		usersRepository.delete(user);
 	}
 
+	/* 
 	@Override
 	public void deleteUserById(Long id) {
 		usersRepository.deleteById(id);
+	}
+	*/
+
+	/** Soft delte */
+	@Override
+	public void deleteUserById(Long id) {
+		usersRepository.softDeleteById(id);
+	}
+
+	@Override
+	public void restoreUserById(Long id) {
+		User user = usersRepository.findAnyById(id)
+				.orElseThrow(() -> new RuntimeException("User not found"));
+
+		user.setDeletedAt(null);
+		usersRepository.save(user);
 	}
 
 	@Override
@@ -106,6 +123,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public Optional<User> findActiveById(Long id) {
 		return usersRepository.findActiveById(id);
+	}
+
+	@Override
+	public Optional<User> findById(Long id) {
+		return usersRepository.findAnyById(id);
 	}
 
 	@Override

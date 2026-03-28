@@ -73,12 +73,12 @@ public class SecurityConfig {
 
             c.setAllowedOrigins(java.util.List.of(
                 "http://localhost:4200",
-                "http://192.168.178.72:4200"
-				//,"http://192.168.*.*:4200"
+                "http://192.168.178.75:4200"
+				//"http://192.168.*.*:4200"
             ));
 
             c.setAllowedMethods(java.util.List.of(
-                "GET", "POST", "PUT", "DELETE", "OPTIONS"
+                "GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"
             ));
 
             c.setAllowedHeaders(java.util.List.of(

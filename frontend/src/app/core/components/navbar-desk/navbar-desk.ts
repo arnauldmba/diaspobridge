@@ -8,15 +8,32 @@ import { RouterLink, RouterOutlet, RouterLinkWithHref, RouterLinkActive, Navigat
 import { FirstLetterPipe } from '../../../shared/first-letter-pipe';
 import { Observable, filter } from 'rxjs';
 import { AuthService } from '../../../services/auth.service';
+import { SeachBarComputer } from "../../../features/listings/components/seach-bar-computer/seach-bar-computer";
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-navbar-desk',
   standalone: true,
-  imports: [AsyncPipe, RouterLink, RouterLinkWithHref, MatIconModule, RouterLinkActive, MatButtonModule, MatMenuModule, FirstLetterPipe, MatBadgeModule],
+  imports: [
+    AsyncPipe, 
+    RouterLink, 
+    RouterLinkWithHref, 
+    MatIconModule, 
+    RouterLinkActive, 
+    MatButtonModule, 
+    MatMenuModule, 
+    FirstLetterPipe, 
+    MatBadgeModule, 
+    MatFormFieldModule, 
+    MatInputModule],
   templateUrl: './navbar-desk.html',
   styleUrl: './navbar-desk.css',
 })
 export class NavbarDesk implements OnInit{
+
+  value: string = '';
+
   
   protected readonly title = signal('diasporabridge');
 

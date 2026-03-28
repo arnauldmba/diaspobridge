@@ -1,0 +1,8 @@
+.search-bar-container {
+  margin-inline: auto;
+}
+
+.button-search button {
+  height: 56px;
+  font-size: 16px;
+}

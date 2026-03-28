@@ -59,6 +59,9 @@ public interface UsersRepository extends JpaRepository<User, Long> {
     Optional<User> findActiveById(Long id);
 	boolean existsActiveByEmailIgnoreCase(String email);
 	Optional<User> findActiveByEmailIgnoreCase(String email);
-	
 
+    long count();
+
+    @Query(value = "SELECT * FROM users WHERE id = :id", nativeQuery = true)
+    Optional<User> findAnyById(@Param("id") Long id);
 }

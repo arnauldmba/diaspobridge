@@ -6,7 +6,7 @@
 </div>
 }
 
-<div class="mt-app pb-4 profil-header">
+<div class="mt-app profil-header mb-4">
     <div class="profil">
         <div class="avatar">
             {{(currentUser?.firstName | firstLetter )}}
@@ -17,24 +17,62 @@
             <!--<p class="m-0 p-0">⭐️ <span>5.0/5.0</span>  •  <span></span>pas encore de voyage</p>-->
         </div>
     </div>
-
-    <div class="container-button">
-        <!--<button class="edit-button"> Modifier </button>-->
-        <button (click)="logout()" class="logout-button">Se deconneter</button>
-    </div>
 </div>
 
+<div class="container">
+    <ul class="rounded-4 py-1 box-shad" style="background-color: white; box-shadow: var(--shadow-sm);">
+        <li>
+            <a routerLink="/my-listings">Mes annonces</a>
+            <span class="material-symbols-outlined">chevron_right</span>
+        </li>
+        <li>
+            <a routerLink="/apropos">À propos de nous</a>
+            <span class="material-symbols-outlined">chevron_right</span>
+        </li>
+        <li>
+            <a routerLink="/contact">Contact</a>
+            <span class="material-symbols-outlined">chevron_right</span>
+        </li>
+        <li>
+            <a routerLink="/faq">Questions fréquentes</a>
+            <span class="material-symbols-outlined">chevron_right</span>
+        </li>
+        <li>
+            <a routerLink="/mention-legale">Mention legale</a>
+            <span class="material-symbols-outlined">chevron_right</span>
+        </li>
+        <li>
+            <a routerLink="/politique-de-confidentialite">Politique de confidentialité</a>
+            <span class="material-symbols-outlined">chevron_right</span>
+        </li>
+        <!--<li>
+            <div style="display: flex; align-items: center; gap: 10px; color: red;">
+                <span class="material-symbols-outlined border">logout</span>
+                Se deconnecter
+            </div>
+        </li>-->
+    </ul>
+</div>
+
+<div class="container mt-4">
+    <!--<button class="edit-button"> Modifier </button>-->
+    <button (click)="logout()" class="logout-button border">
+        <span class="material-symbols-outlined">logout</span>
+        Se deconneter
+    </button>
+</div>
+
+
+<!-- 
 <mat-tab-group class="border-top">
     <mat-tab label="Annonces">
         <app-my-listings></app-my-listings>
-    </mat-tab>
+    </mat-tab>-->
     <!--<mat-tab label="Avis"> 
         Aucun avis pour le moment
     </mat-tab>-->
-     <mat-tab label="Compte">
+     <!--<mat-tab label="Compte">
         <app-footer></app-footer>
-        <div class="text-center mt-2">
-            
-        </div>
+        
      </mat-tab>
-</mat-tab-group>
+</mat-tab-group>-->

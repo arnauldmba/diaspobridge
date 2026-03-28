@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { TransporterTrip } from '../model/transporterTrip.model';
 import { ListingService } from '../services/listing.service';
 import { CountrySearchCriteria } from '../model/country-search-criteria.model';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -12,54 +13,60 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { provideNativeDateAdapter } from '@angular/material/core';
-import { FirstLetterPipe } from '../shared/first-letter-pipe';
-import { getAvatarColor } from '../shared/utils/avatar-color.util';
-import { futureDatesOnly } from '../shared/utils/date-filters.util';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSelectModule } from '@angular/material/select';
-import { CityAutocompleteComponent } from "../city-autocomplete-component/city-autocomplete-component";
-import { CITIES_CM } from '../model/cities-cm';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { ALL_CITIES } from '../model/cities-all';
-import { Footer } from "../footer/footer/footer";
+import { provideNativeDateAdapter } from '@angular/material/core';
 
+import { FirstLetterPipe } from '../shared/first-letter-pipe';
+import { getAvatarColor } from '../shared/utils/avatar-color.util';
+import { futureDatesOnly } from '../shared/utils/date-filters.util';
+
+import { Footer } from '../footer/footer/footer';
+import { SeachBar } from '../shared/components/seach-bar/seach-bar';
+import { ListingCard } from "../features/listings/components/listing-card/listing-card";
+import { ListingList } from "../features/listings/components/listing-list/listing-list";
 
 @Component({
   selector: 'app-listing',
   standalone: true,
-  imports: [FormsModule, CommonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatCardModule, MatTabsModule,
-    MatButtonModule, MatStepperModule, MatDatepickerModule, FirstLetterPipe, MatChipsModule, MatSelectModule, CityAutocompleteComponent, MatProgressSpinnerModule, Footer],
+  imports: [
+    FormsModule,
+    CommonModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCardModule,
+    MatTabsModule,
+    MatButtonModule,
+    MatStepperModule,
+    MatDatepickerModule,
+    FirstLetterPipe,
+    MatChipsModule,
+    MatSelectModule,
+    MatProgressSpinnerModule,
+    Footer,
+    SeachBar,
+    ListingList
+],
   providers: [provideNativeDateAdapter()],
   templateUrl: './listings.html',
   styleUrl: './listings.css',
 })
 export class Listings implements OnInit {
+  selectedFilter = 1;
 
-  selectedFilter: number = 1;
+  isLoading = false;
+  isThereResult = false;
+  searchResult = '';
 
-  isFocused: boolean = false;
-
-  dateInteracted = false;
-
-  isLoading = false; // variable pour afficher le spinner (lorsque la page charge les voyages)
-
-  isThereResult: boolean = false; //Vaiable pour afficher et cacher le button: Effacer la recherche
-
-  seachResutat: string = ''; // variable qui contient le resutlat de la recherche
-
-  citiesCM = CITIES_CM;
-
-  readonly selectedPeriodList: {name:string , value: string}[] = [{name: '7days', value: 'Prochains 7 jours'}, {name: 'thisMonth', value: 'Ce mois-ci'}, {name: '30days', value: '30 jours'}];
-  selectedPeriod: string = '';
   today = new Date();
   futureDatesOnly = futureDatesOnly;
 
-  listings!: TransporterTrip[];
+  listings: TransporterTrip[] = [];
 
   pickupCity: string | null = null;
-
   fromDate: Date | null = null;
   toDate: Date | null = null;
 
@@ -72,119 +79,120 @@ export class Listings implements OnInit {
 
   private currentCriteria: CountrySearchCriteria = {
     page: 0,
-    size: 10,
+    size: 12,
     activeOnly: true
   };
 
-  constructor(private listingService: ListingService, private router: Router) { }
+  constructor(
+    private listingService: ListingService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    this.loadAllTrips();
-  }
+    this.route.queryParams.subscribe(params => {
+      const dest = params['dest'] || undefined;
+      const fromDate = params['fromDate'] || undefined;
+      const toDate = params['toDate'] || undefined;
+      const page = params['page'] ? Number(params['page']) : 0;
+      const size = params['size'] ? Number(params['size']) : this.size;
 
-  get canSearch(): boolean {
-    const hasCity = (this.pickupCity?.trim()?.length ?? 0) >= 2;
-    const hasDates = !!(this.fromDate && this.toDate);
-    return hasCity || hasDates;
-  }
+      this.pickupCity = dest ?? null;
+      this.fromDate = fromDate ? new Date(fromDate) : null;
+      this.toDate = toDate ? new Date(toDate) : null;
+      this.size = size;
 
-  openListing(id: number | undefined) {
-    this.router.navigate(['/listing-details/', id]);
-  }
+      const hasSearch = !!dest || !!fromDate || !!toDate;
 
-  loadAllTrips(): void {
-    const criteria: CountrySearchCriteria = {
-      page: 0,
-      size: this.size,
-      activeOnly: true
-    };
-    this.fetch(criteria);
-  }
+      if (hasSearch) {
+        const criteria: CountrySearchCriteria = {
+          dest,
+          fromDate,
+          toDate,
+          page,
+          size,
+          activeOnly: true
+        };
 
-  onSearch(): void {
-    const criteria: CountrySearchCriteria = {
-      origin: this.pickupCity?.trim() || undefined,
-      fromDate: this.fromDate ? this.toIsoDateLocal(this.fromDate) : undefined,
-      toDate: this.toDate ? this.toIsoDateLocal(this.toDate) : undefined,
-      page: 0,
-      size: this.size,
-      activeOnly: true
-    };
-
-    if (this.fromDate && this.toDate && this.fromDate > this.toDate) return;
-    this.fetch(criteria);
-
-    if (!this.pickupCity && !this.fromDate && !this.toDate && !this.selectedPeriod){
-      this.seachResutat = "aucun resultat";
-    }
-
-    this.isThereResult = true;
-  }
-
-  onSearch2(): void {
-    this.selectedPeriod = '';
-
-    const parts: string[] = [];
-
-    if (this.pickupCity?.trim()) {
-      parts.push(this.pickupCity.trim());
-    }
-
-    if (this.fromDate) {
-      parts.push(this.fromDate.toLocaleDateString('de-DE'));
-    }
-
-    if (this.toDate) {
-      parts.push(`- ${this.toDate.toLocaleDateString('de-DE')}`);
-    }
-
-    this.seachResutat = parts.join(' ');
-    this.onSearch();
-  }
-
-  /*
-  filterSelect() {
-    if (this.selectedPeriod === '7days') {
-      this.seachResutat = "Prochains 7 jours";
-      this.fromDate = new Date();
-      this.toDate = new Date();
-      this.toDate.setDate(this.toDate.getDate() + 7);
-
-      if (this.pickupCity) {
-        this.seachResutat = `${this.pickupCity} · ${this.seachResutat}`;
+        this.searchResult = this.buildSearchLabelFromParams(dest, fromDate, toDate);
+        this.isThereResult = true;
+        this.fetch(criteria);
+      } else {
+        this.isThereResult = false;
+        this.searchResult = '';
+        this.fetch({
+          page,
+          size,
+          activeOnly: true
+        });
       }
-
-    } else if (this.selectedPeriod === 'thisMonth') {
-
-      this.seachResutat = "Ce mois-ci";
-      this.fromDate = new Date(this.today.getFullYear(), this.today.getMonth(), 1);
-      this.toDate = new Date(this.today.getFullYear(), this.today.getMonth() + 1, 0);
-
-      if (this.pickupCity) {
-        this.seachResutat = `${this.pickupCity} · ${this.seachResutat}`;
-      }
-
-    } else if (this.selectedPeriod === '30days') {
-
-      this.seachResutat = "30 jours";
-      this.fromDate = new Date();
-      this.toDate = new Date();
-      this.toDate.setDate(this.toDate.getDate() + 30);
-
-      if (this.pickupCity) {
-        this.seachResutat = `${this.pickupCity} · ${this.seachResutat}`;
-      }
-    } 
+    });
   }
-  */
+
+  openListing(id: number | undefined): void {
+    if (!id) return;
+    this.router.navigate(['/listing-details', id]);
+  }
+
+  resetFilters(): void {
+    this.selectedFilter = 1;
+
+    this.router.navigate(['/listings'], {
+      queryParams: {
+        dest: null,
+        fromDate: null,
+        toDate: null,
+        page: 0,
+        size: this.size
+      },
+      queryParamsHandling: 'merge'
+    });
+  }
+
+  prevPage(): void {
+    if (this.isFirst) return;
+    this.updateQueryParams({ page: this.page - 1 });
+  }
+
+  nextPage(): void {
+    if (this.isLast) return;
+    this.updateQueryParams({ page: this.page + 1 });
+  }
+
+  changeSize(newSize: number): void {
+    this.size = newSize;
+    this.updateQueryParams({ page: 0, size: newSize });
+  }
+
+  selectFilter(days: number): void {
+    this.selectedFilter = days;
+
+    if (days === 1) {
+      this.resetFilters();
+      return;
+    }
+
+    const fromDate = new Date();
+    const toDate = new Date();
+    toDate.setDate(toDate.getDate() + days);
+
+    this.router.navigate(['/listings'], {
+      queryParams: {
+        dest: this.pickupCity?.trim() || null,
+        fromDate: this.toIsoDateLocal(fromDate),
+        toDate: this.toIsoDateLocal(toDate),
+        page: 0,
+        size: this.size
+      }
+    });
+  }
 
   private fetch(criteria: CountrySearchCriteria): void {
-    this.isLoading = true; 
+    this.isLoading = true;
 
     this.listingService.searchTrips(criteria).subscribe({
       next: (res) => {
         this.listings = res.content;
-        this.isLoading = false;
         this.totalPages = res.totalPages;
         this.totalElements = res.totalElements;
         this.page = res.number;
@@ -192,92 +200,61 @@ export class Listings implements OnInit {
         this.isFirst = res.first;
         this.isLast = res.last;
 
-        this.currentCriteria = { ...criteria, page: this.page, size: this.size };
+        this.currentCriteria = {
+          ...criteria,
+          page: this.page,
+          size: this.size
+        };
+
+        this.isLoading = false;
       },
       error: (err) => {
-        console.error('Erreur chargement annonces:', err); 
+        console.error('Erreur chargement annonces:', err);
         this.isLoading = false;
       }
     });
   }
 
-  private toIsoDateLocal(d: Date): string {
-    const year = d.getFullYear();
-    const month = String(d.getMonth() + 1).padStart(2, '0');
-    const day = String(d.getDate()).padStart(2, '0');
-    return `${year}-${month}-${day}`;
+  private updateQueryParams(params: Record<string, string | number | null>): void {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: params,
+      queryParamsHandling: 'merge'
+    });
   }
 
+  private buildSearchLabelFromParams(
+    dest?: string,
+    fromDate?: string,
+    toDate?: string
+  ): string {
+    const parts: string[] = [];
 
-  resetFilters(): void {
-    this.pickupCity = '';
-    this.fromDate = null;
-    this.toDate = null;
-  
-    this.isThereResult = false;
-    this.selectedPeriod = '';
-    this.loadAllTrips();
-  }
-
-  avatarColor(name: string | null | undefined): string {
-    return getAvatarColor(name);
-  }
-
-  prevPage(): void {
-    if (this.isFirst) return;
-    this.fetch({ ...this.currentCriteria, page: this.page - 1 });
-  }
-
-  nextPage(): void {
-    if (this.isLast) return;
-    this.fetch({ ...this.currentCriteria, page: this.page + 1 });
-  }
-
-  changeSize(newSize: number): void {
-    this.size = newSize;
-    this.fetch({ ...this.currentCriteria, page: 0, size: newSize });
-  }
-
-  applyQuickPeriod(chip: string) {
-    this.selectedPeriod = chip;
-    //this.filterSelect();
-    this.onSearch();
-  }
-
-  clearDate(): void {
-    this.toDate = null; 
-    this.fromDate = null; 
-  }
-
-  /**
-   * Methode pour le filtre. elle permet de gerer le focus
-   * lorsqu on click sur un items (7jours, 15 jours, 30 jours)
-   * @param days 
-   */
-  selectFilter(days: number) {
-    this.selectedFilter = days;
-    this.filterSelect2(days);
-    console.log('days: ', days);
-  }
-
-  filterSelect2(days: number) {
-    this.fromDate = new Date();
-    this.toDate = new Date();
-
-    if(days === 1){
-      this.resetFilters();
-    }else if (days === 7) {
-      this.seachResutat = "Prochains 7 jours";
-      this.toDate.setDate(this.toDate.getDate() + days);
-      this.onSearch();
-    }else if (days === 15) {
-      this.seachResutat = "Prochains 7 jours";
-      this.toDate.setDate(this.toDate.getDate() + days);
-      this.onSearch();
-    }else if (days === 30) {
-      this.seachResutat = "Prochains 7 jours";
-      this.toDate.setDate(this.toDate.getDate() + days);
-      this.onSearch();
+    if (dest) {
+      parts.push(dest);
     }
+
+    if (fromDate) {
+      parts.push(this.formatDateLabel(fromDate));
+    }
+
+    if (toDate) {
+      parts.push(`- ${this.formatDateLabel(toDate)}`);
+    }
+
+    return parts.join(' ').trim();
+  }
+
+  private formatDateLabel(dateString: string): string {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('de-DE');
+  }
+
+  private toIsoDateLocal(date: Date): string {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+
+    return `${year}-${month}-${day}`;
   }
 }

@@ -6,6 +6,9 @@
 .avatar{
     width: 68px;
     height: 68px;
+    border: 1px solid rgb(0, 95, 0);
+    background-color: var(--color-bg);
+    color: rgb(0, 95, 0)
 }
 
 .pseudo{
@@ -13,18 +16,22 @@
     padding: 0px;
     font-family: var(--font-title);
     font-weight: var(--font-weight-bold);
-    font-size: var(--text-base);
+    font-size: var(--text-xl);
 }
 
 .profil-desc{
     display: grid;
     margin-left: var(--space-2);
     align-items: center;
+    color: rgb(0, 95, 0)
 }
 
 .profil-desc span {
     font-size: 13px; 
-    color: rgb(85, 82, 82);
+}
+
+.profil-desc h6, .profil-desc span{
+    color: rgb(0, 95, 0)
 }
 
 .profil-desc p {
@@ -33,23 +40,50 @@
     color: rgb(85, 82, 82);
 }
 
-.container-button{
+.container-buttonn{
     display: flex;
     justify-content: center;
 }
 
-.edit-button, .logout-button{
-    width: 94%;
-    height: 42px;
-    border: 0.1px solid rgb(128, 128, 128);
-    border-radius: 4px;
-    background: var(--color-bg);
+.logout-button{
+    height: 48px;
+    border-radius: 8px;
+    background: white;
+    color: red;
     font-family: var(--font-title);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0px 20px;
 }
 
-.logout-button{
-    color: red;
+.logout-button span {
+    font-size: 18px;
 }
+
+ul{
+        padding: 0px;
+    }
+
+    ul li{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0px;
+        padding: 14px 10px 14px 20px;
+        font-family: var(--font-body);
+        font-weight: 500;
+    }
+
+    ul li a{
+        text-decoration: none;
+        color: black;
+    }
+
+    ul li span{
+        color: rgb(176, 176, 176);
+        font-weight: 100;
+    }
 
 @media (min-width: 600px) {
     .profil-header{

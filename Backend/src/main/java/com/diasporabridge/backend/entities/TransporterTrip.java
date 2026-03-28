@@ -43,6 +43,9 @@ public class TransporterTrip {
   @Column(name = "max_weight_kg", precision = 5, scale = 2)
   private BigDecimal maxWeightKg;
 
+  @Column(name = "is_hidden", nullable = false)
+  private boolean isHidden = false;
+
   /**
    * Le schéma MySQL utilise un type SET.
    * Pour rester simple et compatible JPA, on stocke ici une liste CSV : "DOCUMENT,PHONE,LAPTOP"

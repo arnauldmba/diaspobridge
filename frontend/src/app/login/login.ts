@@ -5,14 +5,18 @@ import { Router, RouterLink } from '@angular/router';
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from '@angular/material/input';
 import { MatIcon } from "@angular/material/icon";
+import { finalize, switchMap } from 'rxjs';
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule, RouterLink, MatFormFieldModule, MatInputModule],
+  imports: [FormsModule, RouterLink, MatFormFieldModule, MatInputModule, MatProgressSpinnerModule],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
 export class Login implements OnInit {
+
+  isLoading: boolean = true; 
 
   requestUser = {
     email: '',
@@ -50,7 +54,6 @@ export class Login implements OnInit {
               }
             }
           })
-          //this.router.navigate(['/listings']);
           
         } else {
           this.errorLogin = 1;
@@ -74,4 +77,39 @@ export class Login implements OnInit {
     });
   }
 
+  onLoggdin2(): void {
+    this.errorLogin = 0;
+    this.message = '';
+    this.isLoading = true;
+
+    this.authService.login(this.requestUser).pipe(
+      switchMap((response) => {
+        const token = response.headers.get('Authorization');
+        if (!token) throw new Error('TOKEN_MISSING');
+
+        this.authService.saveToken(token);
+        return this.authService.loadCurrentUser();
+      }),
+      finalize(() => this.isLoading = false)
+    ).subscribe({
+      next: (user) => {
+        this.router.navigate([user.role === 'ADMIN' ? '/admin' : '/listings']);
+      },
+      error: (err) => {
+        console.error(err);
+
+        const cause = err?.error?.errorCause;
+
+        if (cause === "disabled") {
+          this.message = "Compte non activé. Vérifiez votre email.";
+        } else if (err.message === 'TOKEN_MISSING') {
+          this.message = "Erreur technique lors de la connexion.";
+        } else {
+          this.message = "Login ou mot de passe incorrect";
+        }
+
+        this.errorLogin = 1;
+      }
+    });
+  }
 }

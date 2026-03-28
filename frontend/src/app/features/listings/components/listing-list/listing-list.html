@@ -1,0 +1,57 @@
+@if (isLoading) {
+  <div class="loading-container">
+    <app-listing-skeleton></app-listing-skeleton>
+  </div>
+} @else {
+
+  @if (listings.length === 0) {
+    <p class="no-result">Aucune annonce trouvée.</p>
+  } @else {
+
+    <div class="row g-3">
+      @for (listing of listings; track listing.id) {
+        <div class="col-12 col-md-6 col-lg-4">
+          <app-listing-card
+            [listing]="listing"
+            (cardClick)="onCardClick($event)">
+          </app-listing-card>
+        </div>
+      }
+    </div>
+  }
+
+  <!-- Pagination -->
+  <div class="pagination mt-4 d-flex justify-content-between align-items-center">
+
+    <button
+      mat-stroked-button
+      (click)="prevPage.emit()"
+      [disabled]="isFirst">
+      Précédent
+    </button>
+
+    <span class="page-info">
+      Page {{ page + 1 }} / {{ totalPages }}
+    </span>
+
+    <button
+      mat-stroked-button
+      (click)="nextPage.emit()"
+      [disabled]="isLast">
+      Suivant
+    </button>
+
+  </div>
+
+  <!-- Page size -->
+  <div class="page-size mt-3">
+    <label>Éléments par page :</label>
+
+    <select [value]="size" (change)="onSizeChange($event)">
+      <option [value]="6">6</option>
+      <option [value]="12">12</option>
+      <option [value]="24">24</option>
+    </select>
+  </div>
+
+}

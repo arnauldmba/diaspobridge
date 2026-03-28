@@ -1,0 +1,73 @@
+<mat-form-field appearance="outline" class="w-100 custom-green-focus-label custom-border-focus">
+  <mat-label>{{ label }}</mat-label>
+
+  @if (icon) {
+    <mat-icon 
+      class="p-0 ps-2 color-input-icon" matPrefix
+    >{{ icon }}</mat-icon>
+  }
+
+  <input
+    matInput
+    [ngModel]="value"
+    (ngModelChange)="onInput($event)"
+    (keydown.enter)="onEnter()"
+    (blur)="onBlur(); model.control.markAsTouched()"
+    [required]="required"
+    [minlength]="minlength"
+    [disabled]="disabled"
+    [matAutocomplete]="auto"
+    [placeholder]="placeholder"
+    #model="ngModel"
+  />
+
+  <mat-icon
+    *ngIf="value"
+    mat-icon-button
+    matSuffix
+    aria-label="Clear"
+    type="button"
+    (click)="onClearClick($event)"
+  >close
+  </mat-icon>
+
+  @if (showSearchIcon) {
+    <mat-icon
+      matSuffix
+      class="clickable-icon"
+      aria-label="Search"
+      type="button"
+      (click)="onSearchClick($event)">
+      search
+    </mat-icon>
+  }
+
+  <mat-autocomplete
+    #auto="matAutocomplete"
+    (optionSelected)="onSelected($event.option.value)"
+    autoActiveFirstOption
+  >
+    @for (c of (filteredCities$ | async); track c.id) {
+      <mat-option [value]="c.name">
+        {{ c.name }}
+        @if (c.state) {
+          <span class="muted">· {{ c.state }}</span>
+        }
+        @if (c.region) {
+          <span class="muted">· {{ c.region }}</span>
+        }
+      </mat-option>
+    }
+  </mat-autocomplete>
+
+  @if (hint) {
+    <mat-hint class="muted">{{ hint }}</mat-hint>
+  }
+
+  @if (model.touched && model.errors?.['required']) {
+    <mat-error>Ce champ est obligatoire.</mat-error>
+  }
+  @if (model.touched && model.errors?.['minlength']) {
+    <mat-error>Minimum {{ minlength }} caractères.</mat-error>
+  }
+</mat-form-field>

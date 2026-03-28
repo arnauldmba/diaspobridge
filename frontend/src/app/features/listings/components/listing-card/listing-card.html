@@ -1,0 +1,50 @@
+<div class="col listing-card-wrapper">
+  <div class="card shadow-app card--hover listing-card" 
+    role="button"
+    tabindex="0"
+    (click)="onCardClick()"
+  >
+    <div class="card-body">
+
+      <div class="route">
+        <div class="route-city">
+          <span class="material-symbols-outlined icon-size-xl color-1">location_on</span>
+          <span class="city">{{ listing.originCity }}</span>
+        </div>
+
+        <div class="divider-with-text offset">
+          <span class="material-symbols-outlined">flight_takeoff</span>
+        </div>
+
+        <div class="route-city route-city--bottom">
+          <span class="material-symbols-outlined icon-size-xl color-1">location_on</span>
+          <span class="city">{{ listing.destCity }}</span>
+        </div>
+      </div>
+
+      <div class="row align-items-start mt-1 listing-meta">
+        <div class="col-8 d-flex gap-4 mb-3">
+          <div class="card-text meta-item">
+            <span class="material-symbols-outlined icon-size-lg">calendar_today</span>
+            <span class="icon-desc">{{ listing.departDate }}</span>
+          </div>
+
+          <div class="card-text meta-item">
+            <span class="material-symbols-outlined icon-size-lg">balance</span>
+            <span class="icon-desc">{{ listing.maxWeightKg }} Kg</span>
+          </div>
+        </div>
+
+        <div class="col-4 text-end mb-3">
+          <span class="price">{{ listing.pricePerKg }}€/Kg</span>
+        </div>
+      </div>
+
+      <div class="listing-footer border-top pt-2">
+        <div class="avatar">{{ listing.transporter.firstName| firstLetter }}</div>
+        <span class="pseudo">{{ listing.transporter.firstName }}</span>
+      </div>
+
+    </div>
+  </div>
+</div>

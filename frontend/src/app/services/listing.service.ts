@@ -12,11 +12,9 @@ const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
-
 @Injectable({
   providedIn: 'root',
 })
-
 export class ListingService {
   apiUrl = environment.apiUrl + '/trip';
 
@@ -29,8 +27,7 @@ export class ListingService {
   }
 
   getListingById(listingId: number): Observable<TransporterTrip> {
-    const url = `${this.apiUrl}/${listingId}`;
-    return this.http.get<TransporterTrip>(url);
+    return this.http.get<TransporterTrip>(`${this.apiUrl}/${listingId}`);
   }
 
   addListing(newListing: TransporterTrip): Observable<TransporterTrip> {
@@ -43,13 +40,15 @@ export class ListingService {
   }
 
   consultListing(listingId: number): Observable<TransporterTrip> {
-    const url = `${this.apiUrl}/${listingId}`;
-    return this.http.get<TransporterTrip>(url);
+    return this.http.get<TransporterTrip>(`${this.apiUrl}/${listingId}`);
   }
 
   uptateListing(updatedListing: TransporterTrip): Observable<TransporterTrip> {
-    const url = `${this.apiUrl}/${updatedListing.id}`;
-    return this.http.put<TransporterTrip>(url, updatedListing, httpOptions);
+    return this.http.put<TransporterTrip>(
+      `${this.apiUrl}/${updatedListing.id}`,
+      updatedListing,
+      httpOptions
+    );
   }
 
   searchTripsByCountry(criteria: CountrySearchCriteria): Observable<Page<TransporterTrip>> {
@@ -81,7 +80,8 @@ export class ListingService {
   searchTrips(criteria: CountrySearchCriteria): Observable<Page<TransporterTrip>> {
     let params = new HttpParams();
 
-    if (criteria.origin) params = params.set('dest', criteria.origin); // si on veut chercher par ville d'arrivee on utilise 'dest' et pas 'origin'
+    if (criteria.origin) params = params.set('origin', criteria.origin); // si on veut chercher par ville d'arrivee on utilise 'dest' et pas 'origin'
+    if (criteria.dest) params = params.set('dest', criteria.dest); // si on veut chercher par ville d'arrivee on utilise 'dest' et pas 'origin'
     if (criteria.fromDate) params = params.set('fromDate', criteria.fromDate);
     if (criteria.toDate) params = params.set('toDate', criteria.toDate);
 
