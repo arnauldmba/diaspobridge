@@ -1,3 +1,4 @@
+<!--
 <div class="search-entry-wrapper">
   <button class="search-entry-button" type="button" (click)="openSearchOverlay()">
     <span class="material-symbols-outlined search-icon">search</span>
@@ -37,7 +38,7 @@
         />
       </mat-form-field>
 
-      <!--<mat-form-field appearance="outline" class="full-width">
+      <mat-form-field appearance="outline" class="full-width">
         <mat-label>Période</mat-label>
 
         <mat-date-range-input [rangePicker]="picker">
@@ -47,11 +48,50 @@
 
         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-date-range-picker #picker></mat-date-range-picker>
-      </mat-form-field>-->
+      </mat-form-field>
 
       <button class="search-submit-btn" type="button" (click)="submitSearch()">
         Rechercher
       </button>
+    </div>
+  </div>
+}
+-->
+
+<div class="search-entry-wrapper">
+  <button class="search-entry-button" type="button" (click)="openSearchOverlay()">
+    <span class="material-symbols-outlined search-icon">search</span>
+
+    <div class="search-entry-text">
+      @if (!searchSummary) {
+        <span class="search-placeholder">Destination, dates...</span>
+      } @else {
+        <span class="search-value">{{ searchSummary }}</span>
+      }
+    </div>
+  </button>
+</div>
+
+@if (showSearchOverlay) {
+  <div class="search-overlay">
+    <div class="container text-center mt-3">
+      Recherche
+    </div>
+
+    <div class="search-overlay__content">
+      <app-city-autocomplete-component
+        (backClick)="closeSearchOverlay()"
+        icon="arrow_back"
+        [cities]="cities"
+        label="Où au Cameroun ?"
+        placeholder="Ex: Douala, Yaoundé…"
+        [(ngModel)]="destination"
+        name="destCity"
+        [showSearchIcon]="true"
+        (searchClick)="submitSearch()"
+        [required]="false"
+        [minlength]="2">
+      </app-city-autocomplete-component>
     </div>
   </div>
 }

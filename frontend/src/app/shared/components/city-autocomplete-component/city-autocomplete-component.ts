@@ -52,9 +52,11 @@ export class CityAutocompleteComponent implements ControlValueAccessor, OnChange
   @Input() placeholder = '';
   @Input() hint = '';
   @Input() icon: string | null = '';
+  @Output() backClick = new EventEmitter<void>();
 
   @Input() showSearchIcon = false;
   @Output() searchClick = new EventEmitter<void>();
+
 
   @ViewChild(MatAutocompleteTrigger) autoTrigger!: MatAutocompleteTrigger;
 
@@ -190,6 +192,12 @@ export class CityAutocompleteComponent implements ControlValueAccessor, OnChange
     event.stopPropagation(); // 🔥 empêche le focus input
     this.autoTrigger?.closePanel();
     this.onSearch();
+  }
+
+  onBackClick(event: MouseEvent): void{
+    event.stopPropagation(); // 🔥 empêche le focus input
+    this.autoTrigger?.closePanel();
+    this.backClick.emit();
   }
 
   clear(): void {

@@ -1,55 +1,9 @@
 import { Routes } from '@angular/router';
-import { MyListings } from './my-listings/my-listings';
-import { Listings } from './listing/listings';
-import { AddListing } from './add-listing/add-listing';
-import { UpdateListing } from './update-annonce/update-listing';
-import { SearchListing } from './search-listing/search-listing';
-import { Login } from './login/login';
-import { Forbidden } from './forbidden/forbidden';
-import { authGuardGuard2 } from './guards/auth-guard-guard';
-import { Register } from './register/register';
-import { VerifEmail } from './verif-email/verif-email';
-import { ListingDetails } from './listing-details/listing-details';
-import { ChatMessaging } from './chat-messaging/chat-messaging';
-import { MyMatches } from './my-matches/my-matches';
-import { ForgotPasswordComponent } from './authentication/forgot-password-component/forgot-password-component';
-import { ResetPasswordCompotent } from './authentication/reset-password-compotent/reset-password-compotent';
-import { CityAutocompleteComponent } from './shared/components/city-autocomplete-component/city-autocomplete-component';
-import { Apropos } from './footer/apropos/apropos';
-import { Faq } from './footer/faq/faq';
-import { Contact } from './footer/contact/contact';
-import { LegalNotice } from './footer/legal-notice/legal-notice';
-import { PrivacyPolicy } from './footer/privacy-policy/privacy-policy';
-import { Profil } from './profil/profil';
+import { authGuardGuard2 } from './core/guard/auth-guard-guard';
 import { PublicLayout } from './layouts/public-layout/public-layout';
 import { AdminLayout } from './layouts/admin-layout/admin-layout';
 import { adminGuard } from './core/guard/admin.guard';
-
-export const routes1: Routes = [
-    { path: "my-listings", component: MyListings, canActivate: [authGuardGuard2]},
-    { path: "apropos", component: Apropos },
-    { path: "politique-de-confidentialite", component: PrivacyPolicy },
-    { path: "mention-legale", component: LegalNotice },
-    { path: "faq", component: Faq },
-    { path: "contact", component: Contact },
-    { path: "listings", component: Listings },
-    { path: "profil", component: Profil, canActivate: [authGuardGuard2] },
-    { path: "listing-details/:id", component: ListingDetails },
-    { path: "add-listing", component: AddListing, canActivate: [authGuardGuard2] },
-    { path: "update-listing/:id", component: UpdateListing },
-    { path: "seach", component: CityAutocompleteComponent },
-    { path: "chat/:matchId", component: ChatMessaging },
-    { path: "messages", component: MyMatches, canActivate: [authGuardGuard2] },
-    { path: "messages/:matchId", component: MyMatches, canActivate: [authGuardGuard2] },
-    { path: "search-listing", component: SearchListing },
-    { path: "forgot-password", component: ForgotPasswordComponent },
-    { path: "reset-password", component: ResetPasswordCompotent },
-    { path: "login", component: Login },
-    { path: "register", component: Register}, 
-    { path: "app-forbidden", component: Forbidden },
-    { path: "verifEmail", component: VerifEmail },
-    { path: "", redirectTo: "listings", pathMatch: "full" }
-];
+import { AuthLayout } from './layouts/auth-lauyout/auth-layout';
 
 export const routes: Routes = [
     {
@@ -63,107 +17,142 @@ export const routes: Routes = [
                     import('./features/listings/pages/home-listing-page/home-listing-page').then(m => m.HomeListingPage)
             },
             {
-                path: 'search-listing', 
+                path: 'listing-details/:id', 
                 loadComponent: () => 
-                    import('./search-listing/search-listing').then(m => m.SearchListing)
+                    import('./features/listings/pages/listing-details/listing-details').then(m => m.ListingDetails)
             },
             {
                 path: 'my-listings', 
                 canActivate: [authGuardGuard2],
                 loadComponent: () => 
-                    import('./my-listings/my-listings').then(m => m.MyListings)
+                    import('./features/profil/pages/my-listings/my-listings').then(m => m.MyListings)
             },
-            {
-                path: 'listing-details/:id', 
-                loadComponent: () => 
-                    import('./listing-details/listing-details').then(m => m.ListingDetails)
-            },
+            
             {
                 path: 'update-listing/:id', 
+                canActivate: [authGuardGuard2],
                 loadComponent: () => 
-                    import('./update-annonce/update-listing').then(m => m.UpdateListing)
+                    import('./features/listings/pages/update-annonce/update-listing').then(m => m.UpdateListing)
             },
             {
                 path: 'messages', 
                 canActivate: [authGuardGuard2],
                 loadComponent: () => 
-                    import('./my-matches/my-matches').then(m => m.MyMatches)
+                    import('./features/match/pages/my-matches/my-matches').then(m => m.MyMatches)
             },
             {
                 path: 'chat/:matchId', 
                 canActivate: [authGuardGuard2],
                 loadComponent: () => 
-                    import('./chat-messaging/chat-messaging').then(m => m.ChatMessaging)
+                    import('./features/match/pages/chat-messaging/chat-messaging').then(m => m.ChatMessaging)
             },
             {
                 path: 'add-listing', 
                 canActivate: [authGuardGuard2],
                 loadComponent: () => 
-                    import('./add-listing/add-listing').then(m => m.AddListing)
+                    import('./features/listings/pages/add-listing/add-listing').then(m => m.AddListing)
             },
             {
                 path: 'profil', 
                 canActivate: [authGuardGuard2],
                 loadComponent: () => 
-                    import('./profil/profil').then(m => m.Profil)
+                    import('./features/profil/pages/profil/profil').then(m => m.Profil)
             },
-            {
+            /*{
                 path: 'login', 
                 loadComponent: () => 
-                    import('./login/login').then(m => m.Login)
+                    import('./features/auth/pages/login/login').then(m => m.Login)
             },
             {
                 path: 'register', 
                 loadComponent: () => 
-                    import('./register/register').then(m => m.Register)
-            },
+                    import('./features/auth/pages/register/register').then(m => m.Register)
+            },*/
             {
                 path: 'app-forbidden', 
                 loadComponent: () => 
-                    import('./forbidden/forbidden').then(m => m.Forbidden)
+                    import('./shared/components/forbidden/forbidden').then(m => m.Forbidden)
             },
-            {
+            /*{
                 path: 'reset-password', 
                 loadComponent: () => 
-                    import('./authentication/reset-password-compotent/reset-password-compotent').then(m => m.ResetPasswordCompotent)
+                    import('./features/auth/pages/reset-password-compotent/reset-password-compotent').then(m => m.ResetPasswordCompotent)
             },
             {
                 path: 'forgot-password', 
                 loadComponent: () => 
-                    import('./authentication/forgot-password-component/forgot-password-component').then(m => m.ForgotPasswordComponent)
+                    import('./features/auth/pages/forgot-password-component/forgot-password-component').then(m => m.ForgotPasswordComponent)
             },
             {
                 path: 'verifEmail', 
                 loadComponent: () => 
-                    import('./verif-email/verif-email').then(m => m.VerifEmail)
-            },
+                    import('./features/auth/verif-email/verif-email').then(m => m.VerifEmail)
+            },*/
             {
                 path: 'apropos', 
                 loadComponent: () => 
-                    import('./footer/apropos/apropos').then(m => m.Apropos)
+                    import('./features/profil/pages/footer/apropos/apropos').then(m => m.Apropos)
             },
             {
                 path: 'politique-de-confidentialite', 
                 loadComponent: () => 
-                    import('./footer/privacy-policy/privacy-policy').then(m => m.PrivacyPolicy)
+                    import('./features/profil/pages/footer/privacy-policy/privacy-policy').then(m => m.PrivacyPolicy)
             },
             {
                 path: 'mention-legale', 
                 loadComponent: () => 
-                    import('./footer/legal-notice/legal-notice').then(m => m.LegalNotice)
+                    import('./features/profil/pages/footer/legal-notice/legal-notice').then(m => m.LegalNotice)
             },
             {
                 path: 'faq', 
                 loadComponent: () => 
-                    import('./footer/faq/faq').then(m => m.Faq)
+                    import('./features/profil/pages/footer/faq/faq').then(m => m.Faq)
             },
             {
                 path: 'contact', 
                 loadComponent: () => 
-                    import('./footer/contact/contact').then(m => m.Contact)
+                    import('./features/profil/pages/footer/contact/contact').then(m => m.Contact)
             }
         ]
     },
+
+    {
+        path: 'auth',
+        component: AuthLayout,
+        children: [
+            {
+                path: 'login',
+                loadComponent: () =>
+                    import('./features/auth/pages/login/login')
+                        .then(m => m.Login)
+            },
+            {
+                path: 'register',
+                loadComponent: () =>
+                    import('./features/auth/pages/register/register')
+                        .then(m => m.Register)
+            },
+            {
+                path: 'forgot-password',
+                loadComponent: () =>
+                    import('./features/auth/pages/forgot-password-component/forgot-password-component')
+                        .then(m => m.ForgotPasswordComponent)
+            },
+            {
+                path: 'reset-password',
+                loadComponent: () =>
+                    import('./features/auth/pages/reset-password-compotent/reset-password-compotent')
+                        .then(m => m.ResetPasswordCompotent)
+            },
+            {
+                path: 'verify-email',
+                loadComponent: () =>
+                    import('./features/auth/pages/verif-email/verif-email')
+                        .then(m => m.VerifEmail)
+            }
+        ]
+    },
+
     {
         path: 'admin',
         component: AdminLayout,

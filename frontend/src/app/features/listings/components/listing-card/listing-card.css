@@ -30,3 +30,34 @@
   align-items: center;
   gap: 0.5rem;
 }
+
+/* Divider with text (horizontal) */
+.divider-with-text {
+  display: flex;
+  align-items: center;
+  color: var(--color-muted);
+  margin: 2px 0px 2px 26px;
+}
+
+.divider-with-text::before,
+.divider-with-text::after {
+  content: "";
+  height: 1px;
+  background-color: #e5e7eb;
+  flex: 1;
+}
+
+.divider-with-text span {
+  padding: 0 8px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Décalage horizontal */
+.divider-with-text.offset::before {
+  flex: 1; /* ligne gauche plus longue */
+}
+
+.divider-with-text.offset::after {
+  flex: 22; /* ligne droite plus courte */
+}

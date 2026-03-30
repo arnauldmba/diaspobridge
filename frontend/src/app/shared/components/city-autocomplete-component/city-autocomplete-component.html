@@ -3,7 +3,10 @@
 
   @if (icon) {
     <mat-icon 
-      class="p-0 ps-2 color-input-icon" matPrefix
+      class="border-color-input" 
+      type="button"
+      matPrefix
+      (click)="onBackClick($event)"
     >{{ icon }}</mat-icon>
   }
 
@@ -24,6 +27,7 @@
   <mat-icon
     *ngIf="value"
     mat-icon-button
+    class="muted"
     matSuffix
     aria-label="Clear"
     type="button"

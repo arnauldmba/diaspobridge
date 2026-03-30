@@ -1,0 +1,38 @@
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FormControl, FormsModule } from '@angular/forms';
+import { TransporterTrip } from '../../../../model/transporterTrip.model';
+import { ListingService } from '../../services/listing.service';
+
+@Component({
+  selector: 'app-update-listing',
+  imports: [FormsModule],
+  templateUrl: './update-listing.html',
+  styles: ``,
+})
+export class UpdateListing implements OnInit {
+
+  currentListing = new TransporterTrip();
+
+  constructor(
+    private activatedRoute: ActivatedRoute, 
+    private listingService: ListingService,
+    private router: Router) 
+  {}
+
+  ngOnInit(): void {
+
+    this.listingService.consultListing(this.activatedRoute.snapshot.params['id']).subscribe(listing => {
+      this.currentListing = listing;
+    });
+  }
+
+  updateListing(updatedListing: TransporterTrip): void {
+    /*console.log('Listing updated successfully', updatedListing);*/
+    this.listingService.uptateListing(updatedListing).subscribe(() => {
+      /*console.log('Listing updated successfully', updatedListing);*/
+    });
+    this.router.navigate(['/my-listings']);
+  }
+
+}

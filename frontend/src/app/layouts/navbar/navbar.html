@@ -1,0 +1,37 @@
+<nav class="mobile-bottom-nav">
+  <a
+    class="nav-item"
+    routerLink="/"
+    [class.active]="isHomeSection()"
+  >
+    <mat-icon class="nav-icon">home</mat-icon>
+    <span class="nav-label">Accueil</span>
+  </a>
+
+  <a
+    class="nav-item"
+    routerLink="/add-listing"
+    [class.active]="isCreateSection()"
+  >
+    <mat-icon class="nav-icon">add_circle</mat-icon>
+    <span class="nav-label">Publier</span>
+  </a>
+
+  <a
+    class="nav-item"
+    routerLink="/messages"
+    [class.active]="isMessagesSection()"
+  >
+    <mat-icon class="nav-icon">chat</mat-icon>
+    <span class="nav-label">Messages</span>
+  </a>
+
+  <a
+    class="nav-item"
+    routerLink="/profil"
+    [class.active]="isProfileSection()"
+  >
+    <mat-icon class="nav-icon">account_circle</mat-icon>
+    <span class="nav-label">Profil</span>
+  </a>
+</nav>

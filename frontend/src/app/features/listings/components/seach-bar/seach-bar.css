@@ -65,7 +65,7 @@
 }
 
 .search-overlay__content {
-  padding: 16px;
+  padding: 8px 14px 14px 14px;
   display: flex;
   flex-direction: column;
   gap: 1px;

@@ -2,11 +2,11 @@ import { ApplicationConfig, LOCALE_ID, provideBrowserGlobalErrorListeners, provi
 import { provideRouter, withInMemoryScrolling } from '@angular/router';
 import { routes } from './app.routes';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { tokenInterceptor } from './services/token-interceptor';
 import { provideToastr } from 'ngx-toastr';
 
 import { importProvidersFrom } from '@angular/core';
 import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
+import { tokenInterceptor } from './core/interceptors/token-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [

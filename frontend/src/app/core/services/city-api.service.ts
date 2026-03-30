@@ -1,4 +1,3 @@
-// src/app/core/services/city-api.service.ts
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable, map } from 'rxjs';

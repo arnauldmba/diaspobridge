@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from "@angular/router";
-import { NavbarDesk } from "../../core/components/navbar-desk/navbar-desk";
-import { Navbar } from "../../core/components/navbar/navbar";
+import { NavbarDesk } from "../navbar-desk/navbar-desk";
+import { Navbar } from "../navbar/navbar";
 
 @Component({
   selector: 'app-public-layout',

@@ -1,4 +1,4 @@
-import { AppEnvironment } from "../Interfaces/app-environments";
+import { AppEnvironment } from "./models/app-environments";
 
 /*
 export const environment : { production: boolean; apiUrl: string } = {
