@@ -1,0 +1,10 @@
+.clickable-icon {
+  cursor: pointer;
+  border-left: solid 1px var(--color-muted);
+  color: var(--color-muted);
+}
+
+.icon-prefix{
+  cursor: pointer;
+  color: var(--color-muted);
+}

@@ -4,6 +4,46 @@ html, body {
   background: var(--color-bg);
 }
 
+/**-------- nouveau style ------------*/
+.icon-desc{
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: var(--font-weight-medium);
+}
+
+.label-input {
+  font-size: var(--text-sm); 
+  color: var(--color-muted);
+  font-weight: var(--font-weight-normal);
+}
+
+.color-input-icon{
+  color: var(--color-muted);
+}
+
+.city{
+  color: rgb(73, 73, 73);
+  font-family: var(--font-title);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+.price{
+  font-family: var(--font-title);
+  font-size: var(--text-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-accent);
+}
+
+.pseudo{
+  font-family: var(--font-title);
+  font-size: 13px;
+  font-weight: var(--font-weight-medium);
+}
+
+
+/**-------- nouveau style ------------*/
+
 .back-button-to-listing{
   display: none;
 }
@@ -19,7 +59,7 @@ html, body {
 .muted { color: var(--color-muted); }
 
 .app-title-color{
-  color: rgb(2, 43, 2);
+  color: rgb(61, 62, 61);
 }
 
 .icon-size-lg{
@@ -37,11 +77,14 @@ html, body {
 }
 
 .text-meta {
+  font-family: 'Poppins', sans-serif;
   font-weight: 400;
   font-size: var(--text-sm);
+  
 }
 
 .text-meta-strong {
+  font-family: var(--font-title);
   font-weight: 500;
   font-size: var(--text-sm);
   color: rgb(45, 45, 45);
@@ -69,7 +112,7 @@ html, body {
 }
 
 .mt-app{
-  margin-top: 80px;
+  margin-top: 110px;
 }
 
 .p-2 { padding: var(--space-2); }
@@ -93,9 +136,12 @@ html, body {
 .btn-app {
   border: none;
   border-radius: var(--radius-sm);
+  font-family: var(--font-title);
+  font-size: var(--text-sm);
   padding: 10px 14px;
   font-weight: 400;
   cursor: pointer;
+  color: white;
 }
 
 .btn-app-sm {
@@ -108,13 +154,11 @@ html, body {
 
 .btn-app-primary {
   background-color: var(--color-accent);
-  color: white;
 }
 
 .btn-app-outline-secondary{
   background-color: white;
   border: var(--border);
-  font-size: var(--text-sm);
   color: black;
 }
 
@@ -197,10 +241,10 @@ html, body {
 }
 
 .spinner-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
 }
 
 .underline {
@@ -215,6 +259,23 @@ html, body {
   justify-content: center;
   align-items: center;
   z-index: 999;
+}
+
+.page-title{
+  font-family: var(--font-title);
+  font-weight: 600;
+  font-size: var(--text-xxxxl);
+  letter-spacing: 0.2px;
+  /*color: rgb(29, 96, 29);*/
+}
+
+.element-app{
+  font-family:  var(--font-body);
+}
+
+.cdk-overlay-container,
+.cdk-global-overlay-wrapper {
+  z-index: 4000 !important;
 }
 
 .no-border-field .mdc-line-ripple {
@@ -252,6 +313,21 @@ html, body {
   display: none;
 }
 
+.small-field {
+  font-size: 14px;
+}
+
+.small-field .mat-mdc-form-field-flex {
+  height: 40px;
+}
+
+.small-field .mat-mdc-text-field-wrapper {
+  height: 40px;
+}
+
+.small-field .mat-mdc-form-field-infix {
+  padding: 8px 0 !important;
+}
 
 /* Style for Angular Material textarea create listing/annonce end */
 
@@ -267,6 +343,14 @@ html, body {
 
 /* Mobile */
 @media (max-width: 600px) {
+  .mt-app{
+    margin-top: 26px;
+  }
+
+  .mb-app{
+    margin-bottom: 90px;
+  }
+
   .container {
     width: calc(100% - 8px);
   }

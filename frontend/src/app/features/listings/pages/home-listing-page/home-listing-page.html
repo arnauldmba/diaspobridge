@@ -1,0 +1,56 @@
+<div class="mt-app container intro-text mb-4">
+    <h2 class="mb-2 page-title">
+    Trouvez des <span class="app-color-secondary">voyageurs</span> à destination du Cameroun
+    </h2>
+
+    <p class="muted element-app mt-2">
+    Entrez en contact avec des <span>voyageurs</span> vérifiés qui peuvent
+    <span>transporter</span> vos colis en toute sécurité
+    </p>
+</div>
+
+<div class="header container text-center search-bar-computer">
+    <app-seach-bar-computer (search)="onDesktopSearch($event)"></app-seach-bar-computer>
+</div>
+
+<div class="search-bar-mobile">
+    <app-seach-bar></app-seach-bar>
+</div>
+
+<div class="container">
+    <app-listing-filters
+        [selectedFilter]="selectedFilter"
+        (filterSelected)="onFilterSelected($event)">
+    </app-listing-filters>
+</div>
+
+
+
+@if (isThereResult) {
+<div class="border p-4 mt-4 text-center" style="background-color: rgba(0, 128, 0, 0.125);">
+    <span>{{resultLabel}}</span> @if(searchCity){<strong> "{{searchCity}}"</strong>} - 
+    <span class="reset-action" (click)="resetFilters()">Réinitialiser</span>
+</div>
+
+}@else {
+    <!--<div class="container mt-4">
+        <h4>Voyageur disponible</h4>
+    </div>-->
+}
+
+<div class="container mt-4">
+    <app-listing-list
+        [listings]="listings"
+        [isLoading]="isLoading"
+        [page]="page"
+        [totalPages]="totalPages"
+        [isFirst]="isFirst"
+        [isLast]="isLast"
+        [size]="size"
+        [totalElements]="totalElements"
+        (listingClick)="openListing($event)"
+        (prevPage)="prevPage()"
+        (nextPage)="nextPage()"
+        (sizeChange)="changeSize($event)">
+    </app-listing-list>
+</div>

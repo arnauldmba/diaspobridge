@@ -44,10 +44,12 @@ public class User {
 	  @Column(length = 40)
 	  private String phone;
 	  
-	  // 🟢 Champs à ajouter :
 	  @Builder.Default
 	  @Column(name = "is_active", nullable = false)
 	  private Boolean isActive = false;
+
+	  @Column(name = "is_blocked", nullable = false)
+	  private boolean isBlocked = false;
 
 	  @Builder.Default
 	  @Column(name = "email_verified", nullable = false)

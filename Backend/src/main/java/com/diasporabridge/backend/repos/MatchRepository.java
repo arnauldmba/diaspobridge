@@ -77,5 +77,7 @@ public interface MatchRepository extends JpaRepository<Match, Long> {
 
     // 🔹 Nombre de matches actifs d’un transporteur
     long countByTrip_Transporter_IdAndStatus(Long transporterId, MatchStatus status);
+
+    long count();
 }
 

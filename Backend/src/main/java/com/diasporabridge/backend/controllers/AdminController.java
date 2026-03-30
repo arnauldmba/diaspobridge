@@ -1,7 +1,18 @@
 package com.diasporabridge.backend.controllers;
 
+import com.diasporabridge.backend.entities.TransporterTrip;
 import com.diasporabridge.backend.entities.User;
+import com.diasporabridge.backend.services.AdminService;
+import com.diasporabridge.backend.services.TransporterTripService;
 import com.diasporabridge.backend.services.UserService;
+
+import DTO.AdminDashboardStatsDTO;
+import DTO.AdminTripRowDTO;
+import DTO.AdminUserRowDTO;
+import lombok.RequiredArgsConstructor;
+
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -13,10 +24,21 @@ import org.springframework.web.bind.annotation.*;
 @PreAuthorize("hasRole('ADMIN')")
 public class AdminController {
 
+  private final AdminService adminService;
   private final UserService userService;
 
-  public AdminController(UserService userService) {
+
+  public AdminController(UserService userService, AdminService adminService) {
     this.userService = userService;
+    this.adminService = adminService; 
+  }
+
+  // =========================
+  // DASHBOARD
+  // =========================
+  @GetMapping("/dashboard/stats")
+  public AdminDashboardStatsDTO getStats() {
+    return adminService.getDashboardStats();
   }
 
   @GetMapping("/ping")
@@ -30,10 +52,19 @@ public class AdminController {
     return userService.getAllActiveUsers(pageable);
   }
 
+  // retourn uniquement les utilisateurs actifs
+  // ✅ GET /api/admin/users/{id}
+  @GetMapping("/users/{id}/active")
+  public User getUserActiveById(@PathVariable Long id) {
+    return userService.findActiveById(id)
+        .orElseThrow(() -> new RuntimeException("User not found"));
+  }
+
+  // retourn uniquement les utilisateurs actifs
   // ✅ GET /api/admin/users/{id}
   @GetMapping("/users/{id}")
   public User getUserById(@PathVariable Long id) {
-    return userService.findActiveById(id)
+    return userService.findById(id)
         .orElseThrow(() -> new RuntimeException("User not found"));
   }
 
@@ -69,5 +100,44 @@ public class AdminController {
   public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
     userService.deleteUserById(id);
     return ResponseEntity.noContent().build();
+  }
+
+  // ✅ RESTORE /api/admin/users/{id}
+  @PatchMapping("/users/{id}/restore")
+  public ResponseEntity<Void> restoreUser(@PathVariable Long id) {
+      userService.restoreUserById(id);
+      return ResponseEntity.noContent().build();
+  }
+
+  // =========================
+  // LISTINGS
+  // =========================
+  @GetMapping("/listings")
+  public List<TransporterTrip> getListings() {
+      return adminService.getAllListings();
+      //return transporterTripService.getAllTransporterTrip();
+  }
+
+  @DeleteMapping("/listings/{id}")
+  public void deleteListing(@PathVariable Long id) {
+      adminService.deleteListing(id);
+  }
+
+  @PatchMapping("/listings/{id}/hide")
+  public void hideListing(@PathVariable Long id) {
+      adminService.hideListing(id);
+  }
+
+  // =========================
+  // USERS
+  // =========================
+  @GetMapping("/users/all")
+  public List<AdminUserRowDTO> getAllUsersIncludingDeleted() {
+      return adminService.getAllUsersIncludingDeleted();
+  }
+
+  @GetMapping("/trips/all")
+  public List<AdminTripRowDTO> getAllTripsIncludingDeletedTransporters() {
+      return adminService.getAllTripsIncludingDeletedTransporters();
   }
 }

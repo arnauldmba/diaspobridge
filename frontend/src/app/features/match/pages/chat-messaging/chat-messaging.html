@@ -1,0 +1,53 @@
+<div class="container-chat mt-app">
+  <div class="container-titel-and-back-button border-bottom">
+    <span 
+      class="material-symbols-outlined back-button" 
+      (click)="onReturntoMatchList()">
+        keyboard_backspace
+    </span>
+    <span class="avatar">{{chatFirstName | firstLetter}}</span>
+    <span class="m-0 text-meta-strong">{{chatFirstName}}</span>
+  </div>
+  
+  @if (messages; as msgs) {
+  <div class="chat-message" #scrollContainer>
+    <ul>
+      @for (m of msgs; track m.id) {
+      <li class="{{m.senderId === curruntUser ? 'my-chat-message' : 'other-chat-message'}}">
+        <span> 
+          {{ m.body }} 
+          <br /><small>{{ formatMessageDate(m.sentAt) }}</small>
+        </span>
+      </li>
+      }
+      <!--<li #bottomAnchor style="height: 1px; background-color: red;"></li>-->
+    </ul>
+  </div>
+  } @else {
+  <p>Loading messages...</p>
+  }
+
+  <form (ngSubmit)="onSend()">
+    <mat-form-field appearance="outline" class="w-100 m-0 p-0">
+      <textarea 
+        class="m-0"
+        [(ngModel)]="draft"
+        name="draft"
+        matInput placeholder="Écris ton message...">
+      </textarea>
+      <button type="submit" [disabled]="!draft.trim()" matSuffix matIconButton aria-label="Clear">
+        <mat-icon>send</mat-icon>
+      </button>
+    </mat-form-field>
+  </form>
+  <!--<div class="chat-input">
+    <form (ngSubmit)="onSend()" class="d-flex gap-2 ">
+      <textarea [(ngModel)]="draft" matIconSuffix name="draft" placeholder="Écris ton message..." class="form-control p-2 w-100"
+        id="exampleFormControlTextarea1" rows="1">
+      </textarea>
+      <button type="submit" [disabled]="!draft.trim()" class="btn p-2 flex-shrink-1">
+        <mat-icon class="mat-icon">send</mat-icon>
+      </button>
+    </form>
+  </div>-->
+</div>

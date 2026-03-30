@@ -1,0 +1,29 @@
+.nav-bar-filter {
+  display: flex;
+  justify-content: center;
+}
+
+.filter-item {
+  width: 100%;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 0px;
+  margin: 0px;
+  color: #7f7f80;
+
+  cursor: pointer;
+  padding-bottom: 4px;
+  transition: 0.2s ease;
+}
+
+/*.filter-item:hover {
+  background: #e5e7eb;
+}*/
+
+.filter-item.active {
+  font-weight: 1000;
+  color: black;
+  border-bottom: 2px solid green;
+  /*background-color: rgba(0, 128, 0, 0.092);*/
+}

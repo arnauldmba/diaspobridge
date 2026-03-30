@@ -16,23 +16,16 @@ public class SimpleMailService {
         SimpleMailMessage msg = new SimpleMailMessage();
         msg.setFrom("maloudalm15@gmail.com");
         msg.setTo(to);
-        msg.setSubject("DiasporaBridge - Réinitialisation du mot de passe");
+        msg.setSubject("MbokoGo - Réinitialisation du mot de passe");
         msg.setText(
             "Bonjour,\n\n" +
             "Tu as demandé une réinitialisation de mot de passe.\n" +
             "Clique sur ce lien (valide 30 minutes) :\n" +
             resetLink + "\n\n" +
             "Si tu n'es pas à l'origine de cette demande, ignore ce message.\n\n" +
-            "DiasporaBridge"
+            "MbokoGo"
         );
-
-        System.out.println();
-        System.out.println();
-        System.out.println("MAIL: about to send reset email to {}" + to);
         mailSender.send(msg);
-        System.out.println("MAIL: sent reset email to {}\"" + to);
-        System.out.println();
-        System.out.println();
     }
 }
 

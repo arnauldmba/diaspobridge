@@ -1,0 +1,15 @@
+<div class="admin-layout">
+  <aside class="sidebar">
+    <h2>Admin</h2>
+
+    <nav>
+      <a routerLink="/admin/dashboard" routerLinkActive="active">Dashboard</a>
+      <a routerLink="/admin/users" routerLinkActive="active">Users</a>
+      <a routerLink="/admin/listings" routerLinkActive="active">Listings</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <router-outlet></router-outlet>
+  </main>
+</div>

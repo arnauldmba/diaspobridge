@@ -1,0 +1,31 @@
+<h1>Users</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Role</th>
+      <th>Status</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let user of users">
+      <td>{{ user.id }}</td>
+      <td>{{ user.firstName }} {{ user.lastName }}</td>
+      <td>{{ user.email }}</td>
+      <td>{{ user.role }}</td>
+      <td>{{ getStatus(user) }}</td>
+      <td>
+        <button *ngIf="!user.isActive" (click)="onActif(user.id)">Activer</button>
+        <button *ngIf="user.isActive" (click)="onDeactif(user.id)">Desactiver</button>
+
+        <button *ngIf="!user.deletedAt" (click)="deleteUser(user.id)">Supprimer</button>
+        <button *ngIf="user.deletedAt" (click)="restoreUser(user.id)">Restaurer user</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

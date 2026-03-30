@@ -20,13 +20,17 @@
 
   /* Typography */
   --font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --font-title: 'Poppins', system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
 
   --text-xs: 12px;
   --text-sm: 14px;
   --text-base: 16px;
   --text-lg: 18px;
-  --text-xl: 22px;
-  --text-xxl: 26px;
+  --text-xl: 20px;
+  --text-xxl: 24px;
+  --text-xxxl: 26px;
+  --text-xxxxl: 28px;
 
   --line-tight: 1.2;
   --line-normal: 1.5;
@@ -43,6 +47,11 @@
   --radius-sm: 6px;
   --radius-md: 10px;
   --radius-lg: 14px;
+
+    /* Font weights */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 600;
 
   /* Shadows */
   --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.08);
@@ -64,7 +73,7 @@
   /*change la couleur des bordures des inputs*/
   .custom-border-color .mdc-notched-outline__leading,
   .custom-border-color .mdc-notched-outline__trailing {
-    border-color: var(--color-input) !important;
+    border-color: var(--color-accent) !important;
   }
 
   .custom-border-color-left .mdc-notched-outline__notch{
@@ -85,6 +94,7 @@
     .mat-mdc-text-field-wrapper.mdc-text-field--focused
     .mdc-floating-label {
     color: var(--color-input) !important;
+    /*color: var(--color-input) !important;*/
   }
 
   /* Supprime les bordures du input*/
@@ -125,5 +135,14 @@
     background-color: rgba(47, 80, 55, 0.107);
     border-radius: 4px;
     transition: background-color 0.2s ease;
+  }
+
+  @media (max-width: 600px) {
+    --text-xs: 12px;
+    --text-sm: 14px;
+    --text-base: 16px;
+    --text-lg: 18px;
+    --text-xl: 22px;
+    --text-xxl: 26px;
   }
 }

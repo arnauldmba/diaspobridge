@@ -1,0 +1,34 @@
+.header{
+    width: 600px;
+}
+
+.search-bar-computer{
+    width: 600px;
+}
+
+.reset-action {
+  cursor: pointer;
+  text-decoration: underline;
+  margin-left: 4px;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    .search-bar-computer{
+        display: none;
+    }
+
+    .intro-text{
+        text-align: start;
+    }
+}
+
+@media (min-width: 600px) {
+    .search-bar-mobile{
+        display: none;
+    }
+
+    .intro-text{
+        text-align: center;
+    }
+}

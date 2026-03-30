@@ -10,6 +10,7 @@ export class User {
   lastName!: string;
   phone!: string;
   isActive!: boolean;
+  isBlocked!: boolean;
   emailVerified?: boolean;
   deletedAt!: string;
   createdAt!: string;

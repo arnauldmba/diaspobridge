@@ -1,0 +1,55 @@
+<!--@if (isLoading) {
+<div class="overlay">
+    <mat-spinner 
+        diameter="50">
+    </mat-spinner>
+</div>
+}
+-->
+
+
+<form class="">
+    <div class="text-start mb-4">
+        <h1 class="app-title-color page-title">Connectez vous</h1>
+        <p class="element-app">
+            Enregistez vous sur MbokoGO pour pourvoir transporter un colis. <br>
+            Vous pouvez aussi trouver des personnes pour vous aider a transporter vos colis.<br>
+        </p>
+    </div>
+    <div class="mb-1">
+        <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Entrez votre Email-adresse</mat-label>
+            <input matInput type="email" [(ngModel)]="requestUser.email" name="email"
+                placeholder="mustermann@mail.com">
+        </mat-form-field>
+    </div>
+    <div class="mb-1">
+        <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Mot de passe</mat-label>
+            <input matInput type="password" [(ngModel)]="requestUser.password" id="inputPassword"
+                name="passwordHash">
+        </mat-form-field>
+    </div>
+    <div class="mb-2">
+        <div class="">
+            <button class="btn-app d-flex align-items-center justify-content-center gap-2 btn-app-primary w-100"
+                (click)="onLoggdin()" style="height: 56px; font-size: 16px;">
+                Connectez vous
+            </button>
+        </div>
+        <div class="text-start mt-3">
+            <a routerLink="/auth/forgot-password">Mot de passe oublié ? </a>
+        </div>
+    </div>
+    <div class="col text-start">
+        Nouveau sur MbokoGO?
+        <a routerLink="/auth/register">inscrivez vous</a>
+    </div>
+    @if(errorLogin == 1){
+    <div class="text-danger text-center">
+        <div class="text-danger text-center">
+            {{message}}
+        </div>
+    </div>
+    }
+</form>

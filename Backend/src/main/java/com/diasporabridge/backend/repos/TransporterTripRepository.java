@@ -109,4 +109,8 @@ public interface TransporterTripRepository extends JpaRepository<TransporterTrip
     
     /** * 3️⃣ Trouver tous les trips actifs (pour affichage global) */ 
     Page<TransporterTrip> findByIsActiveTrue(Pageable pageable);
+
+    long count();
+
+    List<TransporterTrip> findByIsHiddenFalseAndTransporterDeletedAtIsNullAndTransporterIsBlockedFalse();
 }

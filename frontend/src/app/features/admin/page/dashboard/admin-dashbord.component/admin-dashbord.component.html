@@ -1,0 +1,30 @@
+<h1>Admin Dashboard</h1>
+
+@if (stats) {
+  <div class="stats-grid">
+    <div class="card">
+      <h3>Users</h3>
+      <p>{{ stats.totalUsers }}</p>
+    </div>
+
+    <div class="card">
+      <h3>Listings</h3>
+      <p>{{ stats.totalListings }}</p>
+    </div>
+
+    <div class="card">
+      <h3>Parcel Requests</h3>
+      <p>{{ stats.totalParcelRequests }}</p>
+    </div>
+
+    <div class="card">
+      <h3>Matches</h3>
+      <p>{{ stats.totalMatches }}</p>
+    </div>
+
+    <div class="card">
+      <h3>Messages</h3>
+      <p>{{ stats.totalMessages }}</p>
+    </div>
+  </div>
+}

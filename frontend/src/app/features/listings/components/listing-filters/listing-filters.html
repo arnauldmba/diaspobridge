@@ -1,0 +1,17 @@
+
+<div class="nav-bar-filter mt-3">
+    <div
+    class="filter-item"
+    [class.active]="selectedFilter === 1"
+    (click)="selectFilter(1)">
+    Tout
+    </div>
+
+    <div
+    *ngFor="let day of [7, 15, 30]"
+    class="filter-item"
+    [class.active]="selectedFilter === day"
+    (click)="selectFilter(day)">
+    <span>{{ day }}</span> jours
+    </div>
+</div>

@@ -24,6 +24,7 @@ public class PasswordResetController {
     public ResponseEntity<?> forgotPassword(@RequestBody ForgotPasswordRequest req) {
         passwordResetService.requestReset(req.email());
         // Toujours OK (ne pas leak si email existe)
+
         return ResponseEntity.ok().build();
     }
 

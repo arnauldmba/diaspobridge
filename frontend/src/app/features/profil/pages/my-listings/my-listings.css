@@ -1,0 +1,43 @@
+
+
+.user-profil {
+    grid-area: user;    
+}
+
+.user-listings {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* 2 colonnes */
+    gap: 8px;
+
+    grid-area: annonces;
+}
+
+.span-text {
+    font-size: var(--text-xs);
+    margin-left: 2px;
+}
+
+.icon-size-m {
+    font-size: var(--text-base);
+}
+
+.location-icon{
+    font-size: 18px;
+}
+
+.container-description {
+    flex: 2;
+    color: var(--color-text);
+    font-size: var(--text-xs);
+    font-weight: 400;
+}
+
+
+
+@media (max-width: 768px) {
+    .user-listings {
+        display: grid;
+        grid-template-columns: 1fr;/* 1 colonnes */
+    }
+}

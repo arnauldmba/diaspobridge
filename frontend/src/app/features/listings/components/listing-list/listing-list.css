@@ -1,0 +1,25 @@
+.loading-container {
+  display: flex;
+  justify-content: center;
+  padding: 2rem 0;
+}
+
+.no-result {
+  text-align: center;
+  margin: 2rem 0;
+  color: var(--color-muted);
+}
+
+.pagination {
+  gap: 1rem;
+}
+
+.page-info {
+  font-weight: 500;
+}
+
+.page-size {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}

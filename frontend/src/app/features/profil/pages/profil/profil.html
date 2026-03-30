@@ -1,0 +1,66 @@
+@if (isLoading) {
+<div class="overlay">
+    <mat-spinner 
+        diameter="50">
+    </mat-spinner>
+</div>
+}
+
+<div class="mt-app profil-header mb-4">
+    <div class="profil">
+        <div class="avatar">
+            {{(currentUser?.firstName | firstLetter )}}
+        </div>
+        <div class="profil-desc">
+            <h6 class="pseudo">{{currentUser?.firstName}}</h6>
+            <span class="my-1">{{currentUser?.email}}</span>
+            <!--<p class="m-0 p-0">⭐️ <span>5.0/5.0</span>  •  <span></span>pas encore de voyage</p>-->
+        </div>
+    </div>
+</div>
+
+<div class="container mb-3">
+    <ul class="rounded-4 py-1" style="background-color: white; box-shadow: var(--shadow-sm);">
+        <!--<li>
+            <a routerLink="/my-listings">Mon profil</a>
+            <span class="material-symbols-outlined">chevron_right</span>
+        </li>-->
+        <li>
+            <a routerLink="/my-listings">Mes annonces</a>
+            <span class="material-symbols-outlined">chevron_right</span>
+        </li>
+    </ul>
+</div>
+
+<div class="container">
+    <ul class="rounded-4 py-1" style="background-color: rgb(255, 255, 255); box-shadow: var(--shadow-sm);">
+        <li>
+            <a routerLink="/apropos">À propos de nous</a>
+            <span class="material-symbols-outlined">chevron_right</span>
+        </li>
+        <li>
+            <a routerLink="/contact">Contact</a>
+            <span class="material-symbols-outlined">chevron_right</span>
+        </li>
+        <li>
+            <a routerLink="/faq">Questions fréquentes</a>
+            <span class="material-symbols-outlined">chevron_right</span>
+        </li>
+        <li>
+            <a routerLink="/mention-legale">Mention legale</a>
+            <span class="material-symbols-outlined">chevron_right</span>
+        </li>
+        <li>
+            <a routerLink="/politique-de-confidentialite">Politique de confidentialité</a>
+            <span class="material-symbols-outlined">chevron_right</span>
+        </li>
+    </ul>
+</div>
+
+<div class="container mt-4">
+    <!--<button class="edit-button"> Modifier </button>-->
+    <button (click)="logout()" class="logout-button border">
+        <span class="material-symbols-outlined">logout</span>
+        Se deconneter
+    </button>
+</div>

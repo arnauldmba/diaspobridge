@@ -48,7 +48,9 @@ public class TransporterTripRestController {
     
 	@GetMapping
 	List <TransporterTrip> getAllTransporterTrip(){
-		return this.transporterTripService.getAllVisibleTrips();
+		//return this.transporterTripService.getAllVisibleTrips();
+        return tripRepository
+                .findByIsHiddenFalseAndTransporterDeletedAtIsNullAndTransporterIsBlockedFalse();
 	}
 	
 	// recuperer un trip par ID

@@ -12,7 +12,7 @@ export class TransporterTrip {
   pricePerKg?: number;          // BigDecimal → number
   acceptedTypes?: string;        // CSV ex: "DOCUMENT,PHONE,LAPTOP"
   isActive!: boolean;
-  note?: string;
+  note!: string;
   createdAt?: string;            // Instant → string
   updatedAt?: string;            // Instant → string
 }

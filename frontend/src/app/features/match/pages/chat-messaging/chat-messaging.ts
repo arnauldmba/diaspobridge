@@ -1,0 +1,195 @@
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { MessageDto } from '../../../../model/message-dto';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MessageService } from '../../services/message.service';
+import { Subscription, switchMap, timer } from 'rxjs';
+import { MatIconModule } from '@angular/material/icon';
+import { FirstLetterPipe } from "../../../../shared/first-letter-pipe";
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSelectModule } from "@angular/material/select";
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { AuthService } from '../../../../core/services/auth.service';
+
+
+@Component({
+  selector: 'app-chat-messaging',
+  standalone: true,
+  imports: [FormsModule, CommonModule, MatIconModule, FirstLetterPipe, MatProgressSpinnerModule, MatSelectModule
+    ,MatFormFieldModule, MatInputModule, FormsModule, MatButtonModule, MatIconModule
+  ],
+  templateUrl: './chat-messaging.html',
+  styleUrl: './chat-messaging.css',
+})
+
+export class ChatMessaging implements OnChanges, OnInit{
+
+  isLoading = false; // varaible pour gerer le chargement des voyages (spinner)
+
+  matchId!: number;
+  messages: MessageDto[] = [];
+  draft = '';
+  curruntUser = 0 ;
+  chatFirstName = '';
+
+  private lastSinceIso = new Date(0).toISOString();
+  private sub?: Subscription;
+
+  constructor(private route: ActivatedRoute,
+    private router: Router,
+    private messageService: MessageService,
+    private authService: AuthService,
+  ) { }
+
+  private initChat(id: number){
+    // stop ancien polling si on change de match
+    this.sub?.unsubscribe();
+
+    this.matchId = id;
+    this.messages = []; 
+    this.lastSinceIso = new Date(0).toISOString();
+
+    this.loadMessages();
+    this.startPolling();
+  }
+
+  ngOnInit(): void {
+    this.authService.loadToken();
+    this.curruntUser = this.authService.logedUserId ?? 0;
+
+    this.route.paramMap.subscribe(params => {
+      const id = Number(params.get('matchId'));
+      if(!id || id <= 0) return; 
+      this.initChat(id);
+    })
+
+    this.route.queryParamMap.subscribe(q => {
+      this.chatFirstName = q.get('name') ?? '';
+    })
+
+    if (this.matchId && this.matchId > 0){
+      this.initChat(this.matchId);
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if(!changes['matchId']) return;
+
+    this.sub?.unsubscribe(); // arrêter l'ancien abonnement s'il existe
+
+    if(!this.matchId || this.matchId <= 0){
+      console.error('Invalid matchId provided to ChatMessaging:', this.matchId);
+      return;
+    }; 
+
+    this.messages = []; // réinitialiser les messages
+    this.lastSinceIso = new Date(0).toISOString(); // réinitialiser lastSinceIso
+
+    this.loadMessages();
+    this.startPolling();  
+  }
+
+  loadMessages() {
+    this.isLoading = true; 
+    
+    this.messageService.list(this.matchId).subscribe({
+      next: (msgs) => {
+        this.messages = msgs; 
+        this.isLoading = false; 
+        /*
+        // ✅ Marquer comme lu dès l'ouverture
+        this.messageService.markAsRead(this.matchId).subscribe({
+          error: (err) => console.error('markAsRead failed', err),
+        });
+
+        // ✅ Mets lastSinceIso sur le dernier message existant
+        if (msgs.length > 0) {
+          this.lastSinceIso = msgs[msgs.length - 1].sentAt;
+        } else {
+          this.lastSinceIso = new Date(0).toISOString();
+        }*/
+      },
+      error: (err) => {
+        console.error(err)
+        this.isLoading = false; 
+      }
+    });
+  }
+
+  onSend() {
+    const text = this.draft.trim();
+    if (!text) return;
+
+    if(!this.matchId || this.matchId <= 0){
+      /*console.error('Invalid matchId provided to ChatMessaging:', this.matchId);*/
+      return;
+    }; // valider matchId; si invalide, ne rien faire
+
+    this.messageService.send(this.matchId, text).subscribe({
+      next: (saved) => {
+        this.messages = [...this.messages, saved];
+        this.draft = '';
+      },
+      error: (err) => console.error(err)
+    });
+  }
+
+  formatMessageDate(sentAt: string | Date): string {
+    const d = new Date(sentAt);
+
+    const today = new Date();
+    const startOfToday = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+
+    const startOfMsgDay = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+
+    const diffDays = Math.round(
+      (startOfToday.getTime() - startOfMsgDay.getTime()) / (1000 * 60 * 60 * 24)
+    );
+
+    if (diffDays === 0) return "Aujourd'hui";
+    if (diffDays === 1) return "Hier";
+
+    // format 18.12.2025
+    const dd = String(d.getDate()).padStart(2, "0");
+    const mm = String(d.getMonth() + 1).padStart(2, "0");
+    const yyyy = d.getFullYear();
+    return `${dd}.${mm}.${yyyy}`;
+  }
+
+
+  startPolling() {
+    const id = this.matchId;
+
+    this.sub = timer(0, 5000)
+      .pipe(switchMap(() => this.messageService.getNewMessages(id, this.lastSinceIso)))
+      .subscribe({
+        next: (newMsgs) => {
+          if (!newMsgs.length) return;
+
+          const existing = new Set(this.messages.map((m) => m.id));
+          const toAdd = newMsgs.filter((m) => !existing.has(m.id));
+          /*if (!toAdd.length) return;*/
+
+          this.messages = [...this.messages, ...toAdd];
+          this.lastSinceIso = newMsgs[newMsgs.length - 1].sentAt;
+          /*
+          // ✅ Vu que je suis dans le chat, je marque lu
+          this.messageService.markAsRead(id).subscribe({
+            error: (err) => console.error('markAsRead failed', err),
+          });*/
+        },
+        error: (err) => console.error(err),
+      });
+  }
+
+  ngOnDestroy() {
+    this.sub?.unsubscribe();
+  }
+
+  onReturntoMatchList(){
+    this.router.navigate(['/messages']);
+  }
+}

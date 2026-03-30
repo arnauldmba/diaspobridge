@@ -1,49 +1,188 @@
 import { Routes } from '@angular/router';
-import { MyListings } from './my-listings/my-listings';
-import { Listings } from './listing/listings';
-import { AddListing } from './add-listing/add-listing';
-import { UpdateListing } from './update-annonce/update-listing';
-import { SearchListing } from './search-listing/search-listing';
-import { Login } from './login/login';
-import { Forbidden } from './forbidden/forbidden';
-import { authGuardGuard, authGuardGuard2 } from './guards/auth-guard-guard';
-import { Register } from './register/register';
-import { VerifEmail } from './verif-email/verif-email';
-import { ListingDetails } from './listing-details/listing-details';
-import { ChatMessaging } from './chat-messaging/chat-messaging';
-import { MyMatches } from './my-matches/my-matches';
-import { MenuBurger } from './shared/menu-burger/menu-burger';
-import { ForgotPasswordComponent } from './authentication/forgot-password-component/forgot-password-component';
-import { ResetPasswordCompotent } from './authentication/reset-password-compotent/reset-password-compotent';
-import { CityAutocompleteComponent } from './city-autocomplete-component/city-autocomplete-component';
-import { Apropos } from './footer/apropos/apropos';
-import { Faq } from './footer/faq/faq';
-import { Contact } from './footer/contact/contact';
-import { LegalNotice } from './footer/legal-notice/legal-notice';
-import { PrivacyPolicy } from './footer/privacy-policy/privacy-policy';
+import { authGuardGuard2 } from './core/guard/auth-guard-guard';
+import { PublicLayout } from './layouts/public-layout/public-layout';
+import { AdminLayout } from './layouts/admin-layout/admin-layout';
+import { adminGuard } from './core/guard/admin.guard';
+import { AuthLayout } from './layouts/auth-lauyout/auth-layout';
 
 export const routes: Routes = [
-    { path: "my-listings", component: MyListings, canActivate: [authGuardGuard2]},
-    { path: "apropos", component: Apropos },
-    { path: "politique-de-confidentialite", component: PrivacyPolicy },
-    { path: "mention-legale", component: LegalNotice },
-    { path: "faq", component: Faq },
-    { path: "contact", component: Contact },
-    { path: "listings", component: Listings },
-    { path: "menu", component: MenuBurger },
-    { path: "listing-details/:id", component: ListingDetails },
-    { path: "add-listing", component: AddListing, canActivate: [authGuardGuard2] },
-    { path: "update-listing/:id", component: UpdateListing },
-    { path: "seach", component: CityAutocompleteComponent },
-    { path: "chat/:matchId", component: ChatMessaging },
-    { path: "messages", component: MyMatches, canActivate: [authGuardGuard2] },
-    { path: "messages/:matchId", component: MyMatches, canActivate: [authGuardGuard2] },
-    { path: "search-listing", component: SearchListing },
-    { path: "forgot-password", component: ForgotPasswordComponent },
-    { path: "reset-password", component: ResetPasswordCompotent },
-    { path: "login", component: Login },
-    { path: "register", component: Register}, 
-    { path: "app-forbidden", component: Forbidden },
-    { path: "verifEmail", component: VerifEmail },
-    { path: "", redirectTo: "listings", pathMatch: "full" }
+    {
+        path: '',
+        component: PublicLayout,
+        children: [
+            {
+                path: '', 
+                loadComponent: () => 
+                    //import('./listing/listings').then(m => m.Listings)
+                    import('./features/listings/pages/home-listing-page/home-listing-page').then(m => m.HomeListingPage)
+            },
+            {
+                path: 'listing-details/:id', 
+                loadComponent: () => 
+                    import('./features/listings/pages/listing-details/listing-details').then(m => m.ListingDetails)
+            },
+            {
+                path: 'my-listings', 
+                canActivate: [authGuardGuard2],
+                loadComponent: () => 
+                    import('./features/profil/pages/my-listings/my-listings').then(m => m.MyListings)
+            },
+            
+            {
+                path: 'update-listing/:id', 
+                canActivate: [authGuardGuard2],
+                loadComponent: () => 
+                    import('./features/listings/pages/update-annonce/update-listing').then(m => m.UpdateListing)
+            },
+            {
+                path: 'messages', 
+                canActivate: [authGuardGuard2],
+                loadComponent: () => 
+                    import('./features/match/pages/my-matches/my-matches').then(m => m.MyMatches)
+            },
+            {
+                path: 'chat/:matchId', 
+                canActivate: [authGuardGuard2],
+                loadComponent: () => 
+                    import('./features/match/pages/chat-messaging/chat-messaging').then(m => m.ChatMessaging)
+            },
+            {
+                path: 'add-listing', 
+                canActivate: [authGuardGuard2],
+                loadComponent: () => 
+                    import('./features/listings/pages/add-listing/add-listing').then(m => m.AddListing)
+            },
+            {
+                path: 'profil', 
+                canActivate: [authGuardGuard2],
+                loadComponent: () => 
+                    import('./features/profil/pages/profil/profil').then(m => m.Profil)
+            },
+            /*{
+                path: 'login', 
+                loadComponent: () => 
+                    import('./features/auth/pages/login/login').then(m => m.Login)
+            },
+            {
+                path: 'register', 
+                loadComponent: () => 
+                    import('./features/auth/pages/register/register').then(m => m.Register)
+            },*/
+            {
+                path: 'app-forbidden', 
+                loadComponent: () => 
+                    import('./shared/components/forbidden/forbidden').then(m => m.Forbidden)
+            },
+            /*{
+                path: 'reset-password', 
+                loadComponent: () => 
+                    import('./features/auth/pages/reset-password-compotent/reset-password-compotent').then(m => m.ResetPasswordCompotent)
+            },
+            {
+                path: 'forgot-password', 
+                loadComponent: () => 
+                    import('./features/auth/pages/forgot-password-component/forgot-password-component').then(m => m.ForgotPasswordComponent)
+            },
+            {
+                path: 'verifEmail', 
+                loadComponent: () => 
+                    import('./features/auth/verif-email/verif-email').then(m => m.VerifEmail)
+            },*/
+            {
+                path: 'apropos', 
+                loadComponent: () => 
+                    import('./features/profil/pages/footer/apropos/apropos').then(m => m.Apropos)
+            },
+            {
+                path: 'politique-de-confidentialite', 
+                loadComponent: () => 
+                    import('./features/profil/pages/footer/privacy-policy/privacy-policy').then(m => m.PrivacyPolicy)
+            },
+            {
+                path: 'mention-legale', 
+                loadComponent: () => 
+                    import('./features/profil/pages/footer/legal-notice/legal-notice').then(m => m.LegalNotice)
+            },
+            {
+                path: 'faq', 
+                loadComponent: () => 
+                    import('./features/profil/pages/footer/faq/faq').then(m => m.Faq)
+            },
+            {
+                path: 'contact', 
+                loadComponent: () => 
+                    import('./features/profil/pages/footer/contact/contact').then(m => m.Contact)
+            }
+        ]
+    },
+
+    {
+        path: 'auth',
+        component: AuthLayout,
+        children: [
+            {
+                path: 'login',
+                loadComponent: () =>
+                    import('./features/auth/pages/login/login')
+                        .then(m => m.Login)
+            },
+            {
+                path: 'register',
+                loadComponent: () =>
+                    import('./features/auth/pages/register/register')
+                        .then(m => m.Register)
+            },
+            {
+                path: 'forgot-password',
+                loadComponent: () =>
+                    import('./features/auth/pages/forgot-password-component/forgot-password-component')
+                        .then(m => m.ForgotPasswordComponent)
+            },
+            {
+                path: 'reset-password',
+                loadComponent: () =>
+                    import('./features/auth/pages/reset-password-compotent/reset-password-compotent')
+                        .then(m => m.ResetPasswordCompotent)
+            },
+            {
+                path: 'verify-email',
+                loadComponent: () =>
+                    import('./features/auth/pages/verif-email/verif-email')
+                        .then(m => m.VerifEmail)
+            }
+        ]
+    },
+
+    {
+        path: 'admin',
+        component: AdminLayout,
+        canActivate: [authGuardGuard2, adminGuard],
+        children: [
+            {
+            path: '',
+            redirectTo: 'dashboard',
+            pathMatch: 'full'
+            },
+            {
+                path: 'dashboard',
+                loadComponent: () =>
+                    import('./features/admin/page/dashboard/admin-dashbord.component/admin-dashbord.component').then(m => m.AdminDashbordComponent)
+            },
+            {
+                path: 'users',
+                loadComponent: () =>
+                import('./features/admin/page/users/admin-users.component/admin-users.component').then(m => m.AdminUsersComponent)
+            },
+
+            {
+                path: 'listings',
+                loadComponent: () =>
+                import('./features/admin/page/listings/admin-trips.component/admin-listings.component').then(m => m.AdminListingsComponent)
+            }
+        ]
+    },
+    {
+        path: '**',
+        redirectTo: ''
+    }
 ];

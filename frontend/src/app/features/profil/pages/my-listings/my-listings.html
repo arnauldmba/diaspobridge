@@ -1,0 +1,79 @@
+<div class="container mt-app">
+    <span 
+      class="material-symbols-outlined mb-4"
+      style="cursor: pointer;"
+      (click)="onReturntoProfli()">
+        keyboard_backspace
+    </span>
+    <h1 class="mb-2 app-title-color page-title">Mes annonces</h1>
+    <!--<p class="muted">Gérez vos annonces de transport et modifiez-les selon vos besoins</p>-->
+</div>
+
+<div class="user-profil-and-listings container mt-4 mb-app">
+    <div class="user-listings">
+        @for (listing of myListings; track listing.id) {
+        <div class="">
+            <div class="d-grid gap-1 border rounded-4 p-2" style="background-color: white;">
+                <div class="pb-1 mb-1 p-2">
+                    <div class="d-flex align-items-center gap-1">
+                        <span class="material-symbols-outlined icon-size-xl color-accent">location_on</span>
+                        <span class="city">{{listing.originCity}}</span>
+                        <span class="material-symbols-outlined mx-2"
+                            style="color: var(--color-muted);">arrow_right_alt</span>
+                        <span class="material-symbols-outlined icon-size-xl color-accent">location_on</span>
+                        <span class="city">{{listing.destCity}}</span>
+                    </div>
+                </div>
+
+                <div class="d-grid align-items-center">
+                    <div class="d-flex align-items-center justify-content-between" style="color: var(--color-muted);">
+                        <div class="px-3 d-flex">
+                            <div class="d-flex align-items-center">
+                                <span class="material-symbols-outlined icon-size-m">calendar_today</span>
+                                <span class="span-text">{{listing.departDate}}</span>
+                            </div>
+                            <div class="d-flex align-items-center ms-3">
+                                <span class="material-symbols-outlined icon-size-m">weight</span>
+                                <span class="span-text"> {{listing.maxWeightKg}}kg</span>
+                            </div>
+                        </div>
+
+                        <strong class="color-accent me-2" style="font-size: var(--text-lg);">
+                            {{listing.pricePerKg}}€/kg
+                        </strong>
+                    </div>
+                </div>
+
+                <div class="container-description border-top my-2 p-2">
+                    {{listing.note}}
+                </div>
+
+                <div class="d-flex gap-2 justify-content-end">
+                    <button class="button-modifier" matButton [routerLink]="['/update-listing', listing.id]" 
+                        [disabled]="isPastTrip(listing.departDate)">
+                        Modifier
+                    </button>
+                    <button matButton (click)="deleteAnnonce(listing)" style="color: red;">
+                        Supprimer
+                    </button>
+                </div>
+            </div>
+            <div class="text-muted small p-1" style="height: 20px;">
+                @if (isPastTrip(listing.departDate)) {
+                Voyage déjà passé — modification impossible.
+                }
+            </div>
+        </div>
+
+        }@empty{
+        <h4>Aucune annonce pour le moment!</h4>
+        }
+    </div>
+    <!--Item trip / card -->
+    <!--<div class="user-profil">
+        <div class="d-grid gap-2 border rounded-3 p-4 text-center">
+            <span>👤 </span>
+            <span>{{currentUserEmail}}</span>
+        </div>
+    </div>-->
+</div>
