@@ -1,0 +1,13 @@
+{
+  "NAV": {
+    "HOME": "Listings",
+    "SEARCH": "Search",
+    "CREATE": "Create Listing",
+    "PROFILE": "Profile",
+    "MESSAGES": "Messages",
+    "PUBLISH": "Publish",
+    "LOGIN": "Login",
+    "REGISTER": "Register",
+    "LOGOUT": "Logout"
+  }
+}

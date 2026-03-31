@@ -1,0 +1,13 @@
+{
+  "NAV": {
+    "HOME": "Annonces",
+    "SEARCH": "Rechercher",
+    "CREATE": "Créer une annonce",
+    "PROFILE": "Profil",
+    "MESSAGES": "Messages",
+    "PUBLISH": "Publier",
+    "LOGIN": "Connexion",
+    "REGISTER": "Inscription",
+    "LOGOUT": "Déconnexion"
+  }
+}

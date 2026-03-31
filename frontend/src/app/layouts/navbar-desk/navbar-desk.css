@@ -127,6 +127,13 @@ a{
   background: var(--color-bg);
 }
 
+.lang-btn {
+  font-size: 20px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
 /* ===== Mobile layout ===== */
 @media (max-width: 767px) {
   .navbar {
