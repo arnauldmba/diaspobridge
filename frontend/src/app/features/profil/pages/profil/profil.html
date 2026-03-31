@@ -32,7 +32,7 @@
     </ul>
 </div>
 
-<div class="container">
+<div class="container mb-3">
     <ul class="rounded-4 py-1" style="background-color: rgb(255, 255, 255); box-shadow: var(--shadow-sm);">
         <li>
             <a routerLink="/apropos">{{ 'PROFILE_PAGE.ABOUT_US' | translate }}</a>
@@ -57,10 +57,12 @@
     </ul>
 </div>
 
-<div class="container mt-4">
+<div class="container mt-3 mb-4">
     <!--<button class="edit-button"> Modifier </button>-->
     <button (click)="logout()" class="logout-button border">
         <span class="material-symbols-outlined">logout</span>
         {{ 'PROFILE_PAGE.LOGOUT' | translate }}
     </button>
 </div>
+
+<app-language-switcher class="container switcher-language"></app-language-switcher>
