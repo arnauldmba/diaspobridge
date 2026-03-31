@@ -7,10 +7,11 @@ import { FirstLetterPipe } from '../../../../shared/first-letter-pipe';
 import { User } from '../../../../model/users.model';
 import { AuthService } from '../../../../core/services/auth.service';
 import { TranslatePipe } from '@ngx-translate/core';
+import { LanguageSwitcher } from "../../../../shared/components/language-switcher/language-switcher";
 
 @Component({
   selector: 'app-profil',
-  imports: [MatTabsModule, FirstLetterPipe, MatProgressSpinnerModule, RouterLink, TranslatePipe],
+  imports: [MatTabsModule, FirstLetterPipe, MatProgressSpinnerModule, RouterLink, TranslatePipe, LanguageSwitcher],
   templateUrl: './profil.html',
   styleUrl: './profil.css',
 })
