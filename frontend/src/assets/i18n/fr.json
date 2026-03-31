@@ -1,0 +1,154 @@
+{
+  "HOME_LISTING": {
+    "TITLE": "Trouvez des voyageurs à destination du Cameroun",
+    "SUBTITLE": "Entrez en contact avec des voyageurs vérifiés qui peuvent transporter vos colis en toute sécurité",
+    "RESET": "Réinitialiser"
+  },
+  "LISTINGS_FILTER": {
+    "ALL": "Tout",
+    "DAYS": "jours"
+  },
+  "LISTINGS_LIST": {
+    "EMPTY": "Aucune annonce trouvée.",
+    "ITEMS_PER_PAGE": "Éléments par page",
+    "NEXT": "Suivant",
+    "PAGE": "Page",
+    "PREVIOUS": "Précédent"
+  },
+  "SEARCH": {
+    "TITLE": "Recherche",
+    "PLACEHOLDER": "Destination, dates...",
+    "CAMEROON_PLACEHOLDER": "Où au Cameroun ?"
+  },
+  "LISTING_DETAIL": {
+    "TITLE": "Détail de l’annonce",
+    "DEPARTURE": "Départ",
+    "ARRIVAL": "Arrivée",
+    "DESCRIPTION": "Description",
+    "TRANSPORTER": "Transporteur",
+    "CONTACT_TRANSPORTER": "Contacter le transporteur",
+    "SAFETY_TIPS": "Conseils de sécurité",
+    "TIP_IDENTITY": "Vérifier l'identité du transporteur",
+    "TIP_PACK_SECURE": "Emballer les articles de manière sécurisée",
+    "TIP_DECLARE_CONTENT": "Déclarer honnêtement le contenu",
+    "TIP_TRACKING_CONFIRMATION": "Obtenir une confirmation de suivi",
+    "TRIP_TO_ON": "Voyage pour {{city}} le {{date}}",
+    "CANCEL": "Annuler",
+    "SEND": "Envoyer",
+    "AD_NOT_FOUND": "Annonce introuvable!"
+  },
+  "ADD_LISTING": {
+    "TITLE": "Créer une annonce",
+    "SUBTITLE": "Partagez vos projets de voyage et aidez d'autres personnes à envoyer des colis chez elles",
+    "TRAVEL_INFO": "Informations sur le voyage",
+    "DEPARTURE_CITY": "Ville de départ (Allemagne)",
+    "ARRIVAL_CITY": "Ville d’arrivée (Douala)",
+    "HINT_DEPART": "Ville où le colis sera remis au transporteur",
+    "HINT_ARRIVAL": "Ville d’arrivée du colis au Cameroun",
+    "DEPARTURE_DATE": "Date de départ",
+    "AVAILABLE_WEIGHT": "Kilos disponibles",
+    "PRICE_PER_KG": "Prix par kilo",
+    "COMMENT": "Laisser un commentaire",
+    "COMMENT_HINT": "Indiquez les informations relatives à ce que vous pouvez transporter.",
+    "CANCEL": "Annuler",
+    "PUBLISH": "Publier l’annonce",
+    "DEPARTURE_DATE_REQUIRED": "La date de départ est obligatoire.",
+    "AVAILABLE_WEIGHT_REQUIRED": "Le poids disponible est obligatoire.",
+    "AVAILABLE_WEIGHT_MIN": "Le poids doit être au moins de 1 kg.",
+    "PRICE_PER_KG_REQUIRED": "Le prix par kilo est obligatoire.",
+    "PRICE_NON_NEGATIVE": "Le prix ne peut pas être négatif.",
+    "WHY_TITLE": "Pourquoi créer une annonce ?",
+    "WHY_TEXT": "C'est une excellente façon de contribuer à la communauté et de faciliter les échanges entre les voyageurs et les expéditeurs.",
+    "IMPORTANT_GUIDELINES": "Consignes importantes",
+    "GUIDELINE_1": "Ne transportez que des articles avec lesquels vous êtes à l'aise.",
+    "GUIDELINE_2": "Vérifiez le contenu avant d'accepter les colis.",
+    "GUIDELINE_3": "Communiquez de manière transparente.",
+    "GUIDELINE_4": "Respectez les réglementations douanières.",
+    "GUIDELINE_5": "Fournissez des mises à jour de suivi lorsque cela est possible."
+  },
+  "MESSAGES": {
+    "EMPTY": "Aucun message pour le moment"
+  },
+  "PROFILE_PAGE": {
+    "MY_LISTINGS": "Mes annonces",
+    "ABOUT_US": "À propos de nous",
+    "CONTACT": "Contact",
+    "FAQ": "Questions fréquentes",
+    "LEGAL_NOTICE": "Mentions légales",
+    "PRIVACY_POLICY": "Politique de confidentialité",
+    "LOGOUT": "Se déconnecter"
+  },
+  "CITY_INPUT": {
+    "REQUIRED": "Ce champ est obligatoire.",
+    "MIN_LENGTH": "Minimum {{minlength}} caractères."
+  },
+  "FORBIDDEN": {
+    "TITLE": "Accès refusé",
+    "TEXT": "Vous n'avez pas la permission d'accéder à cette page. Veuillez vous connecter pour continuer."
+  },
+  "FORGOT_PASSWORD": {
+    "TITLE": "Mot de passe oublié",
+    "TEXT": "Entre ton email. On t’enverra un lien pour réinitialiser ton mot de passe.",
+    "INFO": "Tu recevras un lien valable pendant un temps limité.",
+    "BACK_TO_LOGIN": "Retour à la connexion", 
+    "SEND_LINK": "Envoyer le lien",
+    "SENDING": "Envoi..."
+  },
+  "AUTH": {
+    "INTRO": "Inscrivez-vous sur MbokoGO pour transporter un colis ou trouver quelqu’un pour vous aider à envoyer le vôtre.",
+    "EMAIL_PLACEHOLDER": "Entrez votre adresse email",
+    "PASSWORD": "Mot de passe",
+    "LOGIN": "Connectez-vous",
+    "FORGOT_PASSWORD": "Mot de passe oublié ?",
+    "NEW_ON_MBOKOGO": "Nouveau sur MbokoGO ?",
+    "REGISTER": "Inscrivez-vous",
+    "USERNAME": "Nom d'utilisateur",
+    "USERNAME_REQUIRED": "Le nom d'utilisateur est obligatoire.",
+    "EMAIL_REQUIRED": "L’email est obligatoire.",
+    "EMAIL_INVALID": "Email non valide.",
+    "PASSWORD_PLACEHOLDER": "Entrez votre mot de passe",
+    "PASSWORD_REQUIRED": "Le mot de passe est obligatoire.",
+    "PASSWORD_MIN": "Le mot de passe doit contenir au moins 6 caractères.",
+    "CONFIRM_PASSWORD": "Confirmer le mot de passe",
+    "CONFIRM_PASSWORD_REQUIRED": "La confirmation du mot de passe est obligatoire.",
+    "CONFIRM_PASSWORD_MIN": "La confirmation du mot de passe doit contenir au moins 6 caractères.",
+    "PASSWORD_MISMATCH": "Le mot de passe et la confirmation du mot de passe ne correspondent pas.",
+    "ALREADY_HAVE_ACCOUNT": "Vous avez déjà un compte ?",
+    "Email deja existant!": "Email deja existant !"
+  },
+  "RESET_PASSWORD": {
+    "TITLE": "Réinitialiser le mot de passe",
+    "NEW_PASSWORD": "Nouveau mot de passe",
+    "MIN_8": "Minimum 8 caractères",
+    "CONFIRM_PASSWORD": "Confirmer le mot de passe",
+    "PASSWORD_MISMATCH": "Les mots de passe ne correspondent pas.",
+    "RESEND_LINK": "Renvoyer un lien",
+    "INVALID_LINK": "Lien invalide (token manquant).",
+    "REQUEST_NEW_LINK": "Demander un nouveau lien"
+  },
+  "VERIFY_EMAIL": {
+    "TITLE": "Confirmer ton email",
+    "TEXT": "On t’a envoyé un code de vérification par email (vérifie aussi le dossier spam).",
+    "CODE": "Code de vérification",
+    "EXPIRES": "Le code expire au bout de 15 minutes.",
+    "NOT_RECEIVED": "Tu n’as rien reçu ?",
+    "RESEND_TEXT": "Entre ton email pour recevoir un nouveau code.",
+    "EMAIL_ADDRESS": "Adresse email",
+    "SECURITY_INFO": "Si l’email existe, on t’enverra un code (pour des raisons de sécurité, on ne confirme pas)."
+  },
+  "MOBILE_NAV": {
+    "LISTINGS": "Annonces",
+    "PUBLISH": "Publier",
+    "MESSAGES": "Messages",
+    "PROFILE": "Profil"
+  },
+  "DESKTOP_NAV": {
+    "LISTINGS": "Annonces",
+    "CREATE_LISTING": "Créer une annonce",
+    "PROFILE": "Profil",
+    "MESSAGES": "Messages",
+    "LOGIN": "Connexion",
+    "REGISTER": "Inscription",
+    "LOGOUT": "Déconnexion"
+  }
+}

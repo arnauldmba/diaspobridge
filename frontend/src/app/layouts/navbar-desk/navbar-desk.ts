@@ -7,15 +7,16 @@ import { MatMenuModule } from '@angular/material/menu';
 import { RouterLink, RouterOutlet, RouterLinkWithHref, RouterLinkActive, NavigationEnd, Router } from '@angular/router';
 import { FirstLetterPipe } from '../../shared/first-letter-pipe';
 import { Observable, filter } from 'rxjs';
-import { SeachBarComputer } from "../../features/listings/components/seach-bar-computer/seach-bar-computer";
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { AuthService } from '../../core/services/auth.service';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-navbar-desk',
   standalone: true,
   imports: [
+    TranslatePipe,
     AsyncPipe, 
     RouterLink, 
     RouterLinkWithHref, 
@@ -34,6 +35,7 @@ export class NavbarDesk implements OnInit{
 
   value: string = '';
 
+  currentLang = 'fr';
   
   protected readonly title = signal('diasporabridge');
 
@@ -56,10 +58,19 @@ export class NavbarDesk implements OnInit{
   @ViewChild('mobileMenu') mobileMenu!: ElementRef;
   @ViewChild('navbar') navbar!: ElementRef;
 
-  constructor(public authService: AuthService, public router: Router) { 
-    this.router.events
-      .pipe(filter((e) => e instanceof NavigationEnd))
-      .subscribe(() => (this.mobileMenuOpen = false));
+  constructor(
+    public authService: AuthService, 
+    public router: Router,
+    private translate: TranslateService)
+    {
+      this.router.events
+        .pipe(filter((e) => e instanceof NavigationEnd))
+        .subscribe(() => (this.mobileMenuOpen = false));
+  }
+
+  switchLang(lang: string) {
+    this.translate.use(lang);
+    localStorage.setItem('lang', lang);
   }
 
   ngOnInit(): void {
@@ -98,5 +109,11 @@ export class NavbarDesk implements OnInit{
     if (!clickedInside) {
       this.closeMenu();
     }
+  }
+
+  toggleLang() {
+    this.currentLang = this.currentLang === 'fr' ? 'en' : 'fr';
+    this.translate.use(this.currentLang);
+    localStorage.setItem('lang', this.currentLang);
   }
 }

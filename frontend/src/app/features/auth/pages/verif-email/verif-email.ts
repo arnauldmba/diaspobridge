@@ -5,11 +5,12 @@ import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../../core/services/auth.service';
 import { LoginRequest } from '../../../../model/LoginRequest';
 import { User } from '../../../../model/users.model';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-verif-email',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, TranslatePipe],
   templateUrl: './verif-email.html',
   styleUrl: './verif-email.css',
 })

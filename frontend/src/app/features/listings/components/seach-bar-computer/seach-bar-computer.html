@@ -1,62 +1,6 @@
-<!--<div class="row align-items-start seach-items mb-3 search-bar-container container">
-   <app-city-autocomplete-component
-    class="col-sm"
-    label="Où au Cameroun (optionnel) ?"
-    placeholder="Ex : Douala, Yaoundé…"
-    hint="Ville où votre colis doit arriver."
-    [(ngModel)]="destCity"
-    name="destCity"
-    [required]="false"
-    [minlength]="2">
-  </app-city-autocomplete-component>
-
- <div class="col-sm">
-    <mat-form-field appearance="outline" class="w-100">
-      <mat-label>Entrer une période</mat-label>
-
-      <mat-date-range-input [rangePicker]="picker">
-        <input
-          matStartDate
-          [(ngModel)]="fromDate"
-          name="fromDate"
-          placeholder="Du"
-          [required]="!!toDate"
-          readonly
-          (focus)="picker.open()">
-
-        <input
-          matEndDate
-          [(ngModel)]="toDate"
-          name="toDate"
-          placeholder="Au"
-          [required]="!!fromDate"
-          readonly
-          (focus)="picker.open()">
-      </mat-date-range-input>
-
-      <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
-      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-date-range-picker #picker></mat-date-range-picker>
-    </mat-form-field>
-  </div>
-
-  <div class="col-sm button-search">
-    <button
-      class="btn-app btn-app-primary w-100 d-flex align-items-center justify-content-center gap-2"
-      type="button"
-      (click)="onSearch()"
-      [disabled]="!canSearch">
-      <mat-icon>search</mat-icon>
-      Rechercher
-    </button>
-  </div>
-</div>-->
-
-
-
 <app-city-autocomplete-component
   [cities]="cities"
-  label="Où au Cameroun ?"
+  label="{{ 'SEARCH.CAMEROON_PLACEHOLDER' | translate }}"
   placeholder="Ex: Douala, Yaoundé…"
   [(ngModel)]="destCity"
   name="destCity"

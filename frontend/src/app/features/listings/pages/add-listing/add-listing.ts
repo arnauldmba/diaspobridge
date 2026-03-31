@@ -17,12 +17,13 @@ import { ListingService } from '../../services/listing.service';
 import { CityAutocompleteComponent } from '../../../../shared/components/city-autocomplete-component/city-autocomplete-component';
 import { BaseCity } from '../../../../shared/models/cities-model';
 import { CityDataService } from '../../../../shared/services/city-data.services';
+import { TranslatePipe } from '@ngx-translate/core';
 
 
 @Component({
   selector: 'app-add-listing',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatFormField, MatLabel, MatIcon, MatHint, MatCardModule,
+  imports: [CommonModule, FormsModule, MatFormField, MatLabel, MatIcon, MatHint, MatCardModule,TranslatePipe,
     MatButtonModule, MatInputModule, MatFormFieldModule, MatStepperModule, MatDatepickerModule, MatChipsModule, CityAutocompleteComponent],
   providers: [provideNativeDateAdapter()],
   templateUrl: './add-listing.html',

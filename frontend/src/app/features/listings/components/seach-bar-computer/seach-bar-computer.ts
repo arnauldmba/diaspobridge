@@ -9,6 +9,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { BaseCity } from '../../../../shared/models/cities-model';
 import { CityDataService } from '../../../../shared/services/city-data.services';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-seach-bar-computer',
@@ -20,6 +21,7 @@ import { CityDataService } from '../../../../shared/services/city-data.services'
     MatFormFieldModule,
     MatDatepickerModule,
     MatFormFieldModule, MatInputModule, MatIconModule,
+    TranslatePipe
 ],
   providers: [provideNativeDateAdapter()],
   changeDetection: ChangeDetectionStrategy.OnPush,

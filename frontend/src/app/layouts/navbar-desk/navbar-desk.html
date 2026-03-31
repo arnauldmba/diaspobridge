@@ -7,16 +7,21 @@
   <!-- Desktop -->
   <div class="nav-right">
     <a class="desktop-link active" routerLink="/listings" (click)="closeMenu()" routerLinkActive="active"
-      [routerLinkActiveOptions]="{ exact: true }">
-      Annonces
+      [routerLinkActiveOptions]="{ exact: true }"> {{ 'NAV.HOME' | translate }}
     </a>
     @if(authService.isAdmin()) {
       <a routerLinkActive="active" class="desktop-link" routerLink="/#">Liste Utilisateur</a>
     }
     <a routerLinkActive="active" class="desktop-link-button" routerLink="/add-listing">
-      Créer une annonce
+      {{ 'NAV.CREATE' | translate }}
     </a>
-    <a routerLinkActive="active" class="desktop-link" routerLink="/messages">Messages</a>
+    <a routerLinkActive="active" class="desktop-link" routerLink="/messages">{{ 'NAV.MESSAGES' | translate }}</a>
+
+    <!-- langue -->
+    <button (click)="toggleLang()" class="lang-btn">
+      {{ currentLang === 'fr' ? '🇬🇧' : '🇫🇷' }}
+    </button>
+
     <a routerLink="/add-listing" class="material-symbols-outlined avatar mobile-link">add</a>
     <a routerLinkActive="active" class="desktop-link" [matBadge]="unreadMessage" matBadgeSize="large">
       @if(authService.isLoggedIn()){
@@ -34,7 +39,7 @@
       }@else{
       <span [matMenuTriggerFor]="menu" class="material-symbols-outlined avatar">person</span>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item routerLink="/auth/login">Connexion/Inscription</button>
+        <button mat-menu-item routerLink="/auth/login">{{ 'NAV.LOGIN' | translate }}/{{ 'NAV.REGISTER' | translate }}</button>
       </mat-menu>
       }
     </a>
@@ -46,12 +51,12 @@
         style="font-size: 14px; font-weight: 1000;"
         class="avatar">{{ (currentUserEmail2$ | async) | firstLetter }}</span>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="logout()">Deconnexion</button>
+        <button mat-menu-item (click)="logout()">{{ 'NAV.LOGOUT' | translate }}</button>
       </mat-menu>
     }@else {
       <span [matMenuTriggerFor]="menu" class="material-symbols-outlined avatar">person</span>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item routerLink="/auth/login">Connexion/Inscription</button>
+        <button mat-menu-item routerLink="/auth/login">{{ 'NAV.LOGIN' | translate }}/{{ 'NAV.REGISTER' | translate }}</button>
       </mat-menu>
     }
     </a>
@@ -84,15 +89,15 @@
     -->
     <a routerLink="/profil" (click)="closeMenu()" routerLinkActive="active">
       <span class="material-symbols-outlined">account_box</span>
-      Profil
+      {{ 'NAV.PROFILE' | translate }}
     </a>
   
     @if(authService.isLoggedIn()) {
     <a (click)="logout()" class="dropdown-item">
       <span class="material-symbols-outlined">logout</span>
-      Deconnexion</a>
+      {{ 'NAV.LOGOUT' | translate }}</a>
     }@else{
-    <a class="dropdown-item color-1" routerLink="/auth/login" (click)="closeMenu()">Connexion</a>
+    <a class="dropdown-item color-1" routerLink="/auth/login" (click)="closeMenu()">{{ 'NAV.HOME' | translate }}</a>
     }
   </div>
 </nav>

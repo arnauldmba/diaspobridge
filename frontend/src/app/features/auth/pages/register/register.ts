@@ -8,10 +8,21 @@ import { MatFormField, MatLabel, MatHint, MatFormFieldModule } from "@angular/ma
 import { MatInputModule } from '@angular/material/input';
 import { User } from '../../../../model/users.model';
 import { AuthService } from '../../../../core/services/auth.service';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-register',
-  imports: [FormsModule, ReactiveFormsModule, RouterLink, CommonModule, MatProgressSpinnerModule, MatFormField, MatLabel, MatFormFieldModule, MatInputModule],
+  imports: [
+    FormsModule, 
+    ReactiveFormsModule, 
+    RouterLink, 
+    CommonModule, 
+    MatProgressSpinnerModule, 
+    MatFormField, MatLabel, 
+    MatFormFieldModule, 
+    MatInputModule,
+    TranslatePipe
+  ],
   templateUrl: './register.html',
   styleUrl: './register.css',
 })

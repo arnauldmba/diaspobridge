@@ -26,7 +26,7 @@
             <span class="material-symbols-outlined">chevron_right</span>
         </li>-->
         <li>
-            <a routerLink="/my-listings">Mes annonces</a>
+            <a routerLink="/my-listings">{{ 'PROFILE_PAGE.MY_LISTINGS' | translate }}</a>
             <span class="material-symbols-outlined">chevron_right</span>
         </li>
     </ul>
@@ -35,23 +35,23 @@
 <div class="container">
     <ul class="rounded-4 py-1" style="background-color: rgb(255, 255, 255); box-shadow: var(--shadow-sm);">
         <li>
-            <a routerLink="/apropos">À propos de nous</a>
+            <a routerLink="/apropos">{{ 'PROFILE_PAGE.ABOUT_US' | translate }}</a>
             <span class="material-symbols-outlined">chevron_right</span>
         </li>
         <li>
-            <a routerLink="/contact">Contact</a>
+            <a routerLink="/contact">{{ 'PROFILE_PAGE.CONTACT' | translate }}</a>
             <span class="material-symbols-outlined">chevron_right</span>
         </li>
         <li>
-            <a routerLink="/faq">Questions fréquentes</a>
+            <a routerLink="/faq">{{ 'PROFILE_PAGE.FAQ' | translate }}</a>
             <span class="material-symbols-outlined">chevron_right</span>
         </li>
         <li>
-            <a routerLink="/mention-legale">Mention legale</a>
+            <a routerLink="/mention-legale">{{ 'PROFILE_PAGE.LEGAL_NOTICE' | translate }}</a>
             <span class="material-symbols-outlined">chevron_right</span>
         </li>
         <li>
-            <a routerLink="/politique-de-confidentialite">Politique de confidentialité</a>
+            <a routerLink="/politique-de-confidentialite">{{ 'PROFILE_PAGE.PRIVACY_POLICY' | translate }}</a>
             <span class="material-symbols-outlined">chevron_right</span>
         </li>
     </ul>
@@ -61,6 +61,6 @@
     <!--<button class="edit-button"> Modifier </button>-->
     <button (click)="logout()" class="logout-button border">
         <span class="material-symbols-outlined">logout</span>
-        Se deconneter
+        {{ 'PROFILE_PAGE.LOGOUT' | translate }}
     </button>
 </div>

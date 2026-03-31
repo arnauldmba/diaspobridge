@@ -6,10 +6,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../../core/services/auth.service';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-forgot-password-component',
-  imports: [FormsModule, MatFormField, MatLabel, MatInputModule, RouterModule],
+  imports: [FormsModule, MatFormField, MatLabel, MatInputModule, RouterModule, TranslatePipe],
   templateUrl: './forgot-password-component.html',
   styleUrl: './forgot-password-component.css',
 })

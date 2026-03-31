@@ -1,0 +1,154 @@
+{
+  "HOME_LISTING": {
+    "TITLE": "Find travelers heading to Cameroon",
+    "SUBTITLE": "Connect with verified travelers who can safely carry your packages",
+    "RESET": "Reset"
+  },
+  "LISTINGS_FILTER": {
+    "ALL": "All",
+    "DAYS": "days"
+  },
+  "LISTINGS_LIST": {
+    "EMPTY": "No listings found.",
+    "ITEMS_PER_PAGE": "Items per page",
+    "NEXT": "Next",
+    "PAGE": "Page",
+    "PREVIOUS": "Previous"
+  },
+  "SEARCH": {
+    "TITLE": "Search",
+    "PLACEHOLDER": "Destination, dates...",
+    "CAMEROON_PLACEHOLDER": "Where in Cameroon?"
+  },
+  "LISTING_DETAIL": {
+    "TITLE": "Listing Details",
+    "DEPARTURE": "Departure",
+    "ARRIVAL": "Arrival",
+    "DESCRIPTION": "Description",
+    "TRANSPORTER": "Traveler",
+    "CONTACT_TRANSPORTER": "Contact the traveler",
+    "SAFETY_TIPS": "Safety Tips",
+    "TIP_IDENTITY": "Verify the traveler’s identity",
+    "TIP_PACK_SECURE": "Pack items securely",
+    "TIP_DECLARE_CONTENT": "Declare the contents honestly",
+    "TIP_TRACKING_CONFIRMATION": "Get tracking confirmation",
+    "TRIP_TO_ON": "Trip to {{city}} on {{date}}",
+    "CANCEL": "Cancel",
+    "SEND": "Send",
+    "AD_NOT_FOUND": "Ad not found!"
+  },
+  "ADD_LISTING": {
+    "TITLE": "Create a Listing",
+    "SUBTITLE": "Share your travel plans and help others send packages back home",
+    "TRAVEL_INFO": "Travel Information",
+    "DEPARTURE_CITY": "Departure City (Germany)",
+    "ARRIVAL_CITY": "Arrival City (Douala)",
+    "HINT_DEPART": "City where the package will be handed over to the carrier",
+    "HINT_ARRIVAL": "City of arrival for the package in Cameroon",
+    "DEPARTURE_DATE": "Departure Date",
+    "AVAILABLE_WEIGHT": "Available Weight",
+    "PRICE_PER_KG": "Price per Kilogram",
+    "COMMENT": "Leave a Comment",
+    "COMMENT_HINT": "Provide details about what you can carry.",
+    "CANCEL": "Cancel",
+    "PUBLISH": "Publish Listing",
+    "DEPARTURE_DATE_REQUIRED": "Departure date is required.",
+    "AVAILABLE_WEIGHT_REQUIRED": "Available weight is required.",
+    "AVAILABLE_WEIGHT_MIN": "Weight must be at least 1 kg.",
+    "PRICE_PER_KG_REQUIRED": "Price per kilogram is required.",
+    "PRICE_NON_NEGATIVE": "Price cannot be negative.",
+    "WHY_TITLE": "Why create a listing?",
+    "WHY_TEXT": "It is a great way to support the community and make it easier for travelers and senders to connect.",
+    "IMPORTANT_GUIDELINES": "Important Guidelines",
+    "GUIDELINE_1": "Only carry items you are comfortable with.",
+    "GUIDELINE_2": "Check the contents before accepting any package.",
+    "GUIDELINE_3": "Communicate transparently.",
+    "GUIDELINE_4": "Respect customs regulations.",
+    "GUIDELINE_5": "Provide tracking updates whenever possible."
+  },
+  "MESSAGES": {
+    "EMPTY": "No messages at the moment"
+  },
+  "PROFILE_PAGE": {
+    "MY_LISTINGS": "My Listings",
+    "ABOUT_US": "About Us",
+    "CONTACT": "Contact",
+    "FAQ": "Frequently Asked Questions",
+    "LEGAL_NOTICE": "Legal Notice",
+    "PRIVACY_POLICY": "Privacy Policy",
+    "LOGOUT": "Log out"
+  },
+  "CITY_INPUT": {
+    "REQUIRED": "This field is required.",
+    "MIN_LENGTH": "Minimum {{minlength}} characters."
+  },
+  "FORBIDDEN": {
+    "TITLE": "Access Denied",
+    "TEXT": "You do not have permission to access this page. Please log in to continue."
+  },
+  "FORGOT_PASSWORD": {
+    "TITLE": "Forgot Password",
+    "TEXT": "Enter your email. We will send you a link to reset your password.",
+    "INFO": "You will receive a link that is valid for a limited time.",
+    "BACK_TO_LOGIN": "Back to Login",
+    "SEND_LINK": "Send the link",
+    "SENDING": "Sending..."
+  },
+  "AUTH": {
+    "INTRO": "Sign up on MbokoGO to carry a package or find someone to help you send yours.",
+    "EMAIL_PLACEHOLDER": "Enter your email address",
+    "PASSWORD": "Password",
+    "LOGIN": "Log in",
+    "FORGOT_PASSWORD": "Forgot password?",
+    "NEW_ON_MBOKOGO": "New to MbokoGO?",
+    "REGISTER": "Sign up",
+    "USERNAME": "Username",
+    "USERNAME_REQUIRED": "Username is required.",
+    "EMAIL_REQUIRED": "Email is required.",
+    "EMAIL_INVALID": "Invalid email.",
+    "PASSWORD_PLACEHOLDER": "Enter your password",
+    "PASSWORD_REQUIRED": "Password is required.",
+    "PASSWORD_MIN": "Password must contain at least 6 characters.",
+    "CONFIRM_PASSWORD": "Confirm Password",
+    "CONFIRM_PASSWORD_REQUIRED": "Password confirmation is required.",
+    "CONFIRM_PASSWORD_MIN": "Password confirmation must contain at least 6 characters.",
+    "PASSWORD_MISMATCH": "Password and password confirmation do not match.",
+    "ALREADY_HAVE_ACCOUNT": "Already have an account?",
+    "Email deja existant!": "Email address already exists !"
+  },
+  "RESET_PASSWORD": {
+    "TITLE": "Reset Password",
+    "NEW_PASSWORD": "New Password",
+    "MIN_8": "Minimum 8 characters",
+    "CONFIRM_PASSWORD": "Confirm Password",
+    "PASSWORD_MISMATCH": "Passwords do not match.",
+    "RESEND_LINK": "Resend Link",
+    "INVALID_LINK": "Invalid link (missing token).",
+    "REQUEST_NEW_LINK": "Request a New Link"
+  },
+  "VERIFY_EMAIL": {
+    "TITLE": "Confirm Your Email",
+    "TEXT": "We sent you a verification code by email (also check your spam folder).",
+    "CODE": "Verification Code",
+    "EXPIRES": "The code expires after 15 minutes.",
+    "NOT_RECEIVED": "Didn’t receive anything?",
+    "RESEND_TEXT": "Enter your email to receive a new code.",
+    "EMAIL_ADDRESS": "Email Address",
+    "SECURITY_INFO": "If the email exists, we will send you a code (for security reasons, we do not confirm it)."
+  },
+  "MOBILE_NAV": {
+    "LISTINGS": "Listings",
+    "PUBLISH": "Publish",
+    "MESSAGES": "Messages",
+    "PROFILE": "Profile"
+  },
+  "DESKTOP_NAV": {
+    "LISTINGS": "Listings",
+    "CREATE_LISTING": "Create a Listing",
+    "PROFILE": "Profile",
+    "MESSAGES": "Messages",
+    "LOGIN": "Login",
+    "REGISTER": "Sign Up",
+    "LOGOUT": "Logout"
+  }
+}

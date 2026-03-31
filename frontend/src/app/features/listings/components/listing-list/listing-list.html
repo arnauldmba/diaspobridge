@@ -5,7 +5,7 @@
 } @else {
 
   @if (listings.length === 0) {
-    <p class="no-result">Aucune annonce trouvée.</p>
+    <p class="no-result">{{ 'LISTINGS_LIST.EMPTY' | translate }}</p>
   } @else {
 
     <div class="row g-3">
@@ -27,7 +27,7 @@
       mat-stroked-button
       (click)="prevPage.emit()"
       [disabled]="isFirst">
-      Précédent
+      {{ 'LISTINGS_LIST.PREVIOUS' | translate }}
     </button>
 
     <span class="page-info">
@@ -38,14 +38,14 @@
       mat-stroked-button
       (click)="nextPage.emit()"
       [disabled]="isLast">
-      Suivant
+      {{ 'LISTINGS_LIST.NEXT' | translate }}
     </button>
 
   </div>
 
   <!-- Page size -->
   <div class="page-size mt-3">
-    <label>Éléments par page :</label>
+    <label>{{ 'LISTINGS_LIST.ITEMS_PER_PAGE' | translate }} :</label> <!-- Éléments par page :-->
 
     <select [value]="size" (change)="onSizeChange($event)">
       <option [value]="6">6</option>

@@ -7,11 +7,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ListingFilters } from "../../components/listing-filters/listing-filters";
 import { SeachBar } from "../../components/seach-bar/seach-bar";
 import { SeachBarComputer } from "../../components/seach-bar-computer/seach-bar-computer";
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home-listing-page',
   standalone: true,
-  imports: [ListingList, ListingFilters, SeachBar, SeachBarComputer],
+  imports: [ListingList, ListingFilters, SeachBar, SeachBarComputer, TranslatePipe],
   templateUrl: './home-listing-page.html',
   styleUrl: './home-listing-page.css',
 })
