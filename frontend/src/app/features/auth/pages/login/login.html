@@ -10,22 +10,21 @@
 
 <form class="">
     <div class="text-start mb-4">
-        <h1 class="app-title-color page-title">Connectez vous</h1>
+        <h1 class="app-title-color page-title">{{'AUTH.LOGIN' | translate }}</h1>
         <p class="element-app">
-            Enregistez vous sur MbokoGO pour pourvoir transporter un colis. <br>
-            Vous pouvez aussi trouver des personnes pour vous aider a transporter vos colis.<br>
+            {{'AUTH.INTRO' | translate }}
         </p>
     </div>
     <div class="mb-1">
         <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Entrez votre Email-adresse</mat-label>
+            <mat-label>{{'AUTH.EMAIL_PLACEHOLDER' | translate }}</mat-label>
             <input matInput type="email" [(ngModel)]="requestUser.email" name="email"
                 placeholder="mustermann@mail.com">
         </mat-form-field>
     </div>
     <div class="mb-1">
         <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Mot de passe</mat-label>
+            <mat-label>{{'AUTH.PASSWORD' | translate }}</mat-label>
             <input matInput type="password" [(ngModel)]="requestUser.password" id="inputPassword"
                 name="passwordHash">
         </mat-form-field>
@@ -34,16 +33,16 @@
         <div class="">
             <button class="btn-app d-flex align-items-center justify-content-center gap-2 btn-app-primary w-100"
                 (click)="onLoggdin()" style="height: 56px; font-size: 16px;">
-                Connectez vous
+                {{'AUTH.LOGIN' | translate }}
             </button>
         </div>
         <div class="text-start mt-3">
-            <a routerLink="/auth/forgot-password">Mot de passe oublié ? </a>
+            <a routerLink="/auth/forgot-password">{{'AUTH.FORGOT_PASSWORD' | translate }}</a>
         </div>
     </div>
     <div class="col text-start">
-        Nouveau sur MbokoGO?
-        <a routerLink="/auth/register">inscrivez vous</a>
+        {{'AUTH.NEW_ON_MBOKOGO' | translate }}
+        <a routerLink="/auth/register">{{'AUTH.REGISTER' | translate }}</a>
     </div>
     @if(errorLogin == 1){
     <div class="text-danger text-center">

@@ -11,11 +11,20 @@ import { ContactMessageDialogComponent } from '../../../../contact-message-dialo
 import { FirstLetterPipe } from '../../../../shared/first-letter-pipe';
 import { AuthService } from '../../../../core/services/auth.service';
 import { ListingService } from '../../services/listing.service';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-listing-details',
   standalone: true,
-  imports: [MatIcon, MatIconModule, A11yModule, FirstLetterPipe, DatePipe, MatProgressSpinnerModule],
+  imports: [
+    MatIcon,
+    MatIconModule,
+    A11yModule,
+    FirstLetterPipe,
+    DatePipe,
+    MatProgressSpinnerModule,
+    TranslatePipe
+  ],
   templateUrl: './listing-details.html',
   styleUrl: './listing-details.css',
 })

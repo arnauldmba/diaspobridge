@@ -1,5 +1,5 @@
 <mat-form-field appearance="outline" class="w-100 custom-green-focus-label custom-border-focus">
-  <mat-label>{{ label }}</mat-label>
+  <mat-label class="label-input">{{ label }}</mat-label>
 
   @if (icon) {
     <mat-icon 
@@ -69,9 +69,9 @@
   }
 
   @if (model.touched && model.errors?.['required']) {
-    <mat-error>Ce champ est obligatoire.</mat-error>
+    <mat-error>{{ 'CITY_INPUT.REQUIRED' | translate }}</mat-error>
   }
   @if (model.touched && model.errors?.['minlength']) {
-    <mat-error>Minimum {{ minlength }} caractères.</mat-error>
+    <mat-error> {{ 'CITY_INPUT.MIN_LENGTH' | translate:{ minlength: 2 } }}</mat-error>
   }
 </mat-form-field>

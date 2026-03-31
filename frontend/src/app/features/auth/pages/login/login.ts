@@ -7,10 +7,18 @@ import { MatIcon } from "@angular/material/icon";
 import { finalize, switchMap } from 'rxjs';
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { AuthService } from '../../../../core/services/auth.service';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule, RouterLink, MatFormFieldModule, MatInputModule, MatProgressSpinnerModule],
+  imports: [
+    FormsModule, 
+    RouterLink, 
+    MatFormFieldModule, 
+    MatInputModule, 
+    MatProgressSpinnerModule,
+    TranslatePipe
+],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })

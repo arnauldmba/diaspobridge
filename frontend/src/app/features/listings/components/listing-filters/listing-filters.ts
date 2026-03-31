@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-listing-filters',
-  imports: [CommonModule],
+  imports: [CommonModule, TranslatePipe],
   templateUrl: './listing-filters.html',
   styleUrl: './listing-filters.css',
 })

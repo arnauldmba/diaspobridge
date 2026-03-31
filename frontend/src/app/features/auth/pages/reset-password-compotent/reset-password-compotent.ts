@@ -8,11 +8,22 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { AuthService } from '../../../../core/services/auth.service';
-
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-reset-password-compotent',
-  imports: [ CommonModule, FormsModule, MatFormFieldModule, MatInputModule,  MatLabel, MatIcon, MatHint, MatError, RouterModule],
+  imports: [ 
+    CommonModule, 
+    FormsModule, 
+    MatFormFieldModule, 
+    MatInputModule,  
+    MatLabel, 
+    MatIcon, 
+    MatHint, 
+    MatError, 
+    RouterModule,
+    TranslatePipe
+  ],
   templateUrl: './reset-password-compotent.html',
   styleUrl: './reset-password-compotent.css',
 })

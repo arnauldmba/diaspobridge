@@ -5,15 +5,6 @@
             diameter="50">
         </mat-spinner>
     </div>
-    <!--
-    <div class="spinner-container">
-        <mat-spinner 
-            diameter="50"
-            strokeWidth="5"
-            color="primary">
-        </mat-spinner>
-    </div>
-    -->
     }
 
     <div class="container mb-2">
@@ -23,7 +14,7 @@
     </div>
 
     <div class="container mb-4 app-title-color">
-        <h1 class="page-title">Détail du voyage</h1>
+        <h1 class="page-title">{{'LISTING_DETAIL.TITLE' | translate }}</h1>
     </div>
 
     @if (!isLoading && trip) {
@@ -36,7 +27,7 @@
                         <mat-icon class="color-1 location-icon">location_on</mat-icon>
                         <p class="p-0 m-0">
                             <span class="city">{{trip.originCity}}, {{trip.originCountry}}</span><br>
-                            <span class="muted">Départ</span>
+                            <span class="muted">{{'LISTING_DETAIL.DEPARTURE' | translate }}</span>
                         </p>
                     </div>
                     <div class="d-flex gap-2 border-start my-2" style="height: 30px; margin-left: 19px;">
@@ -45,7 +36,7 @@
                         <mat-icon class="color-1 location-icon">location_on</mat-icon>
                         <p>
                             <span class="city">{{trip.destCity}}, {{trip.destCountry}}</span><br>
-                            <span class="muted">Arrivé</span>
+                            <span class="muted">{{'LISTING_DETAIL.ARRIVAL' | translate }}</span>
                         </p>
                     </div>
                 </div>
@@ -75,7 +66,7 @@
                         style="background-color: var(--color-bg-accent); font-family: var(--font-body);" 
                         class="pt-2 pb-2 px-3 mt-3 mb-4 rounded-2"
                     >
-                        <h6 class="mt-1 muted" style="font-size: var(--text-ms); font-family: var(--font-title);">Description</h6>
+                        <h6 class="mt-1 muted" style="font-size: var(--text-ms); font-family: var(--font-title);">{{'LISTING_DETAIL.DESCRIPTION' | translate }}</h6>
                         @if(trip.note){
                         <p style="font-size: var(--text-sm);">{{trip.note}}</p>
                         }@else {
@@ -89,7 +80,7 @@
             <div class="trip-user-info">
                 <div class="rounded-4 transporter-detail">
                     <div class="trip-details-button">
-                        <h5>Transporteur</h5>
+                        <h5>{{'LISTING_DETAIL.TRANSPORTER' | translate }}</h5>
                         <div class="user-foto-and-name gap-2">
                             <div class="avatar" style="width: 50px; height: 50px;">
                                 {{(trip.transporter.firstName | firstLetter )}}
@@ -102,17 +93,17 @@
                                 (click)="onContactClick()" 
                                 class="btn-app btn-app-primary gap-1">
                                 <mat-icon class="material-symbols-outlined">chat_bubble</mat-icon>
-                                Contacter le transporteur
+                                {{'LISTING_DETAIL.CONTACT_TRANSPORTER' | translate }}
                             </button>
                         </div>
                     </div>
                     <div class="transporter-additional-info">
-                        <h6 class="pt-1 pb-2">Conseils de sécurité</h6>
+                        <h6 class="pt-1 pb-2">{{'LISTING_DETAIL.SAFETY_TIPS' | translate }}</h6>
                         <ul>
-                            <li>Vérifier l'identité du transporteur</li>
-                            <li>Emballer les articles de manière sécurisée</li>
-                            <li>Déclarer honnêtement le contenu</li>
-                            <li>Obtenir une confirmation de suivi</li>
+                            <li>{{'LISTING_DETAIL.TIP_IDENTITY' | translate }}</li>
+                            <li>{{'LISTING_DETAIL.TIP_PACK_SECURE' | translate }}</li>
+                            <li>{{'LISTING_DETAIL.TIP_DECLARE_CONTENT' | translate }}</li>
+                            <li>{{'LISTING_DETAIL.TIP_TRACKING_CONFIRMATION' | translate }}</li>
                         </ul>
                     </div>
                 </div>
@@ -122,6 +113,6 @@
     }
 
     @if (!isLoading && !trip) {
-    <div>Annonce introuvable!</div>
+    <div>{{'LISTING_DETAIL.AD_NOT_FOUND' | translate }}</div>
     }
 </div>

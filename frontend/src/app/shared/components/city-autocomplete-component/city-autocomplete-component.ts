@@ -23,6 +23,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { BaseCity } from '../../models/cities-model';
 import { citySearchKey, normalizeCityQuery } from '../../data/cities-de';
 import { Router } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-city-autocomplete-component',
@@ -37,6 +38,7 @@ import { Router } from '@angular/router';
     MatInputModule,
     MatAutocompleteModule,
     MatIconModule,
+    TranslatePipe
   ],
   providers: [
     {

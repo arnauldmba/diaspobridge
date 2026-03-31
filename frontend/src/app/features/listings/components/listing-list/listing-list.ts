@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ListingSkeleton } from '../app-listing-skeleton/listing-skeleton';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-listing-list',
@@ -14,7 +15,8 @@ import { ListingSkeleton } from '../app-listing-skeleton/listing-skeleton';
     ListingSkeleton,
     MatProgressSpinnerModule,
     MatButtonModule,
-    ListingCard],
+    ListingCard,
+    TranslatePipe],
   templateUrl: './listing-list.html',
   styleUrl: './listing-list.css',
 })
