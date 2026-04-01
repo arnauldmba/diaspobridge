@@ -1,10 +1,11 @@
 <footer class="app-footer" role="contentinfo">
   <nav class="footer-links" aria-label="Footer navigation">
-    <a routerLink="/apropos">À propos de nous</a>
-    <a routerLink="/contact">Contact</a>
-    <a routerLink="/faq">Questions fréquentes</a>
-    <a routerLink="/mention-legale">Mention legale</a>
-    <a routerLink="/politique-de-confidentialite">Politique de confidentialité</a>
+    <app-language-switcher></app-language-switcher>
+    <a routerLink="/apropos">{{'PROFILE_PAGE.ABOUT_US' | translate}}</a>
+    <a routerLink="/contact">{{'PROFILE_PAGE.CONTACT' | translate}}</a>
+    <a routerLink="/faq">{{'PROFILE_PAGE.FAQ' | translate}}</a>
+    <a routerLink="/mention-legale">{{'PROFILE_PAGE.LEGAL_NOTICE' | translate}}</a>
+    <a routerLink="/politique-de-confidentialite">{{'PROFILE_PAGE.PRIVACY_POLICY' | translate}}</a>
   </nav>
 
   <div class="footer-bottom pt-3 mt-3">

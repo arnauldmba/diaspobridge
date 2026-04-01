@@ -4,7 +4,7 @@
 
     <div class="search-entry-text">
       @if (!searchSummary) {
-        <span class="search-placeholder">Destination, dates...</span>
+        <span class="search-placeholder"> {{'SEARCH.PLACEHOLDER' | translate }}</span>
       } @else {
         <span class="search-value">{{ searchSummary }}</span>
       }
@@ -15,7 +15,7 @@
 @if (showSearchOverlay) {
   <div class="search-overlay">
     <div class="container text-center mt-3">
-      Recherche
+      {{'SEARCH.TITLE' | translate }}
     </div>
 
     <div class="search-overlay__content">
@@ -23,7 +23,7 @@
         (backClick)="closeSearchOverlay()"
         icon="arrow_back"
         [cities]="cities"
-        label="Où au Cameroun ?"
+        label="{{'SEARCH.CAMEROON_PLACEHOLDER' | translate }}"
         placeholder="Ex: Douala, Yaoundé…"
         [(ngModel)]="destination"
         name="destCity"

@@ -6,7 +6,11 @@
 </div>
 }
 
-<div class="mt-app profil-header mb-4">
+<div class="text-end pt-3 pe-3">
+    <app-language-switcher></app-language-switcher>
+</div>
+
+<div class="profil-header mb-4">
     <div class="profil">
         <div class="avatar">
             {{(currentUser?.firstName | firstLetter )}}
@@ -25,8 +29,8 @@
             <a routerLink="/my-listings">Mon profil</a>
             <span class="material-symbols-outlined">chevron_right</span>
         </li>-->
-        <li>
-            <a routerLink="/my-listings">{{ 'PROFILE_PAGE.MY_LISTINGS' | translate }}</a>
+        <li routerLink="/my-listings" style="cursor: pointer;">
+            {{ 'PROFILE_PAGE.MY_LISTINGS' | translate }}
             <span class="material-symbols-outlined">chevron_right</span>
         </li>
     </ul>
@@ -64,5 +68,3 @@
         {{ 'PROFILE_PAGE.LOGOUT' | translate }}
     </button>
 </div>
-
-<app-language-switcher class="container switcher-language"></app-language-switcher>

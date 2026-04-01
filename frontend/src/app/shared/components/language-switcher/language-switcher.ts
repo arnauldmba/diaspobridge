@@ -17,8 +17,8 @@ export class LanguageSwitcher {
   currentLang: AppLanguage = 'fr';
 
   readonly languages: { code: AppLanguage; label: string }[] = [
-    { code: 'fr', label: 'FR' },
-    { code: 'en', label: 'EN' }
+    { code: 'fr', label: '🇫🇷' },
+    { code: 'en', label: '🇬🇧' }
   ];
 
   constructor() {

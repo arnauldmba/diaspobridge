@@ -22,12 +22,11 @@
 
   <!-- Pagination -->
   <div class="pagination mt-4 d-flex justify-content-between align-items-center">
-
     <button
-      mat-stroked-button
+      matButton
       (click)="prevPage.emit()"
       [disabled]="isFirst">
-      {{ 'LISTINGS_LIST.PREVIOUS' | translate }}
+      <span class="material-symbols-outlined">chevron_left</span>
     </button>
 
     <span class="page-info">
@@ -35,16 +34,15 @@
     </span>
 
     <button
-      mat-stroked-button
+      matButton
       (click)="nextPage.emit()"
       [disabled]="isLast">
-      {{ 'LISTINGS_LIST.NEXT' | translate }}
+      <span class="material-symbols-outlined">chevron_right</span>
     </button>
-
   </div>
 
   <!-- Page size -->
-  <div class="page-size mt-3">
+  <div class="page-size mt-3 pagination">
     <label>{{ 'LISTINGS_LIST.ITEMS_PER_PAGE' | translate }} :</label> <!-- Éléments par page :-->
 
     <select [value]="size" (change)="onSizeChange($event)">
@@ -53,5 +51,5 @@
       <option [value]="24">24</option>
     </select>
   </div>
-
 }
+

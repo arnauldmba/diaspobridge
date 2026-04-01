@@ -8,11 +8,12 @@ import { ListingFilters } from "../../components/listing-filters/listing-filters
 import { SeachBar } from "../../components/seach-bar/seach-bar";
 import { SeachBarComputer } from "../../components/seach-bar-computer/seach-bar-computer";
 import { TranslatePipe } from '@ngx-translate/core';
+import { Footer } from "../../../profil/pages/footer/footer/footer";
 
 @Component({
   selector: 'app-home-listing-page',
   standalone: true,
-  imports: [ListingList, ListingFilters, SeachBar, SeachBarComputer, TranslatePipe],
+  imports: [ListingList, ListingFilters, SeachBar, SeachBarComputer, TranslatePipe, Footer],
   templateUrl: './home-listing-page.html',
   styleUrl: './home-listing-page.css',
 })

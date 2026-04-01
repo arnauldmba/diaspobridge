@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
+import { LanguageSwitcher } from "../../../../../shared/components/language-switcher/language-switcher";
 
 @Component({
   selector: 'app-footer',
-  imports: [RouterLink],
+  imports: [RouterLink, TranslatePipe, LanguageSwitcher],
   templateUrl: './footer.html',
   styleUrl: './footer.css',
 })
