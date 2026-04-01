@@ -1,22 +1,21 @@
 .language-switcher {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
+  gap: 0.00rem;
   padding: 0.15rem;
   border-radius: 999px;
-  background: #f3f4f6;
+  background: #ebedf0;
 }
 
 .lang-btn {
   border: none;
   background: transparent;
   font-family: var(--font-title);
-  padding: 0.10rem 0.85rem;
+  padding: 0.0rem 0.65rem;
   border-radius: 999px;
-  /*font-size: 0.7rem;*/
-  font-size: var(--text-sm);
-  font-weight: 400;
-  color: var(--color-accent);
+  font-size: 1rem;
+  /*font-size: var(--text-base);*/
+  /*font-weight: 400;*/
   cursor: pointer;
   transition: all 0.2s ease;
 }
@@ -36,7 +35,7 @@
   /*background: var(--color-accent);*/
   background: #ffff;
   color: white;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.14);
 }
 
 @media (max-width: 768px) {

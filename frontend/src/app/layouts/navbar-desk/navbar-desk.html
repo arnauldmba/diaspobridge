@@ -1,4 +1,6 @@
 <nav class="navbar" #navbar [class.scrolled]="isScrolled">
+  <app-language-switcher class="nav-left"></app-language-switcher>
+
       <!-- App title -->
   <div class="logo" routerLink="/">
     <span style="font-weight: 300">Mboko</span>
@@ -7,7 +9,7 @@
 
   <!-- Desktop -->
   <div class="nav-right">
-    <a class="desktop-link active" routerLink="/listings" (click)="closeMenu()" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"> 
+    <a routerLinkActive="active" class="desktop-link" routerLink="/"  [routerLinkActiveOptions]="{ exact: true }"> 
       {{ 'DESKTOP_NAV.LISTINGS' | translate }}
     </a>
 
@@ -15,9 +17,9 @@
       {{ 'DESKTOP_NAV.CREATE_LISTING' | translate }}
     </a>
 
-    <!--<a routerLinkActive="active" class="desktop-link" routerLink="/messages">
+    <a routerLinkActive="active" class="desktop-link" routerLink="/messages">
       {{ 'DESKTOP_NAV.MESSAGES' | translate }}
-    </a>-->
+    </a>
 
     <a routerLinkActive="active" class="desktop-link" [matBadge]="unreadMessage" matBadgeSize="large">
       @if(authService.isLoggedIn()){
@@ -39,7 +41,6 @@
       </mat-menu>
       }
     </a>
-    <!--<app-language-switcher class="language-switcher-button"></app-language-switcher>-->
   </div>
 
   <!-- Mobile dropdown -->
