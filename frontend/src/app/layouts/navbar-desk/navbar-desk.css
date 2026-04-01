@@ -17,7 +17,9 @@
 
 a{
   text-decoration: none;
-  color: var(--color-accent)
+  color: var(--color-accent);
+  font-family: var(--font-title);
+  font-size: var(--text-xs);
 }
 
 .desktop-link-button{
@@ -62,8 +64,9 @@ a{
   font-weight: 700;
   font-size: var(--text-xxl);
   cursor: pointer;
-  margin: 0px;
+  /*margin: 0 0px 0 122px;*/
   padding: 0px;
+  margin: 0px;
   color: var(--color-accent);
 }
 
@@ -127,12 +130,13 @@ a{
   background: var(--color-bg);
 }
 
-.lang-btn {
-  font-size: 20px;
-  border: none;
-  background: transparent;
-  cursor: pointer;
+/*
+.language-switcher-button{
+  position: absolute;
+  right: 0;
+  margin-right: 8px;
 }
+*/
 
 /* ===== Mobile layout ===== */
 @media (max-width: 767px) {

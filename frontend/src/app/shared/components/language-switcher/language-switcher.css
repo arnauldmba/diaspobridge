@@ -1,7 +1,8 @@
 .language-switcher {
   display: inline-flex;
   align-items: center;
-  padding: 0.01rem;
+  gap: 0.35rem;
+  padding: 0.15rem;
   border-radius: 999px;
   background: #f3f4f6;
 }
@@ -9,10 +10,13 @@
 .lang-btn {
   border: none;
   background: transparent;
-  padding: 0.20rem 0.75rem;
+  font-family: var(--font-title);
+  padding: 0.10rem 0.85rem;
   border-radius: 999px;
-  font-size: 0.7rem;
-  font-weight: 600;
+  /*font-size: 0.7rem;*/
+  font-size: var(--text-sm);
+  font-weight: 400;
+  color: var(--color-accent);
   cursor: pointer;
   transition: all 0.2s ease;
 }
@@ -21,14 +25,26 @@
   background: rgba(0, 0, 0, 0.06);
 }
 
+/*
 .lang-btn.active {
   background: #ffffff;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
 }
+*/
+
+.lang-btn.active {
+  /*background: var(--color-accent);*/
+  background: #ffff;
+  color: white;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+}
 
 @media (max-width: 768px) {
+  .lang-btn{
+    padding: 0.10rem 0.55rem;
+  }
     .lang-btn{
-        font-size: 0.6rem;
+        font-size: 0.8rem;
         font-weight: 500;
     }
 }

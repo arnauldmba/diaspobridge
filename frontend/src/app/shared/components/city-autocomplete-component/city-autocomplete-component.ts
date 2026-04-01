@@ -205,7 +205,7 @@ export class CityAutocompleteComponent implements ControlValueAccessor, OnChange
   clear(): void {
     this.value = '';
     this.onChange('');
-    this.router.navigate(['/listings'], {
+    /*this.router.navigate(['/listings'], {
       queryParams: {
         pickupCity: null,
         dest: null,
@@ -214,7 +214,7 @@ export class CityAutocompleteComponent implements ControlValueAccessor, OnChange
         page: 0,
         size: 12
       }
-    });
+    });*/
     this.refreshFiltered('');
   }
   

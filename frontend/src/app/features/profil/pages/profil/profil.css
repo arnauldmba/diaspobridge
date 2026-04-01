@@ -91,6 +91,7 @@ ul{
         align-items: center;
         width: min(1120px, calc(100% - 32px));
         margin-inline: auto;
+        margin-top: 80px;
     }
 
     .container-button{

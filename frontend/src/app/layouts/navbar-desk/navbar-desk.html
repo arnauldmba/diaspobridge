@@ -1,4 +1,5 @@
 <nav class="navbar" #navbar [class.scrolled]="isScrolled">
+      <!-- App title -->
   <div class="logo" routerLink="/">
     <span style="font-weight: 300">Mboko</span>
     <span style="font-style: italic;">GO</span>
@@ -6,23 +7,18 @@
 
   <!-- Desktop -->
   <div class="nav-right">
-    <a class="desktop-link active" routerLink="/listings" (click)="closeMenu()" routerLinkActive="active"
-      [routerLinkActiveOptions]="{ exact: true }"> {{ 'NAV.HOME' | translate }}
+    <a class="desktop-link active" routerLink="/listings" (click)="closeMenu()" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"> 
+      {{ 'DESKTOP_NAV.LISTINGS' | translate }}
     </a>
-    @if(authService.isAdmin()) {
-      <a routerLinkActive="active" class="desktop-link" routerLink="/#">Liste Utilisateur</a>
-    }
+
     <a routerLinkActive="active" class="desktop-link-button" routerLink="/add-listing">
-      {{ 'NAV.CREATE' | translate }}
+      {{ 'DESKTOP_NAV.CREATE_LISTING' | translate }}
     </a>
-    <a routerLinkActive="active" class="desktop-link" routerLink="/messages">{{ 'NAV.MESSAGES' | translate }}</a>
 
-    <!-- langue -->
-    <button (click)="toggleLang()" class="lang-btn">
-      {{ currentLang === 'fr' ? '🇬🇧' : '🇫🇷' }}
-    </button>
+    <!--<a routerLinkActive="active" class="desktop-link" routerLink="/messages">
+      {{ 'DESKTOP_NAV.MESSAGES' | translate }}
+    </a>-->
 
-    <a routerLink="/add-listing" class="material-symbols-outlined avatar mobile-link">add</a>
     <a routerLinkActive="active" class="desktop-link" [matBadge]="unreadMessage" matBadgeSize="large">
       @if(authService.isLoggedIn()){
         
@@ -39,65 +35,32 @@
       }@else{
       <span [matMenuTriggerFor]="menu" class="material-symbols-outlined avatar">person</span>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item routerLink="/auth/login">{{ 'NAV.LOGIN' | translate }}/{{ 'NAV.REGISTER' | translate }}</button>
+        <button mat-menu-item routerLink="/auth/login">{{ 'DESKTOP_NAV.LOGIN' | translate }}/{{ 'DESKTOP_NAV.LOGOUT' | translate }}</button>
       </mat-menu>
       }
     </a>
-
-    <!-- Mobile-->
-    <a routerLinkActive="active" class="desktop-link-auth burger" routerLink="/compte">
-      @if(authService.isLoggedIn()){
-      <span [matMenuTriggerFor]="menu" 
-        style="font-size: 14px; font-weight: 1000;"
-        class="avatar">{{ (currentUserEmail2$ | async) | firstLetter }}</span>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="logout()">{{ 'NAV.LOGOUT' | translate }}</button>
-      </mat-menu>
-    }@else {
-      <span [matMenuTriggerFor]="menu" class="material-symbols-outlined avatar">person</span>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item routerLink="/auth/login">{{ 'NAV.LOGIN' | translate }}/{{ 'NAV.REGISTER' | translate }}</button>
-      </mat-menu>
-    }
-    </a>
-    <!--Buger menu -->
-    @if(!mobileMenuOpen){
-    <span class="material-symbols-outlined burger" matBadge="{{unreadMessage}}" matBadgeSize="large" (click)="toggleMenu()">
-      menu
-    </span>
-    }@else {
-    <span (click)="closeMenu()" class="material-symbols-outlined burger">
-      close
-    </span>
-    }
+    <!--<app-language-switcher class="language-switcher-button"></app-language-switcher>-->
   </div>
 
   <!-- Mobile dropdown -->
   <div class="mobile-menu" [class.open]="mobileMenuOpen" #mobileMenu>
-    <!-- 
-    <a routerLink="/" (click)="closeMenu()" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-      <span class="material-symbols-outlined">list_alt</span> Annonces
-    </a>
-    <a routerLink="/add-listing" (click)="closeMenu()" routerLinkActive="active">
-      <span class="material-symbols-outlined">add_circle</span>
-      Pulier une annonce
-    </a>
     <a routerLink="/messages" (click)="closeMenu()" routerLinkActive="active">
       <span class="material-symbols-outlined">chat_bubble</span>
-      <span matBadge="{{unreadMessage}}" matBadgeOverlap="false">Messages</span>
+      <span matBadge="{{unreadMessage}}" matBadgeOverlap="false">{{ 'DESKTOP_NAV.MESSAGES' | translate }}</span>
     </a>
-    -->
+   
     <a routerLink="/profil" (click)="closeMenu()" routerLinkActive="active">
       <span class="material-symbols-outlined">account_box</span>
-      {{ 'NAV.PROFILE' | translate }}
+      {{ 'DESKTOP_NAV.PROFILE' | translate }}
     </a>
   
     @if(authService.isLoggedIn()) {
     <a (click)="logout()" class="dropdown-item">
       <span class="material-symbols-outlined">logout</span>
-      {{ 'NAV.LOGOUT' | translate }}</a>
+      {{ 'DESKTOP_NAV.LOGOUT' | translate }}
+    </a>
     }@else{
-    <a class="dropdown-item color-1" routerLink="/auth/login" (click)="closeMenu()">{{ 'NAV.HOME' | translate }}</a>
+    <a class="dropdown-item color-1" routerLink="/auth/login" (click)="closeMenu()">{{ 'DESKTOP_NAV.LOGIN' | translate }}</a>
     }
   </div>
 </nav>

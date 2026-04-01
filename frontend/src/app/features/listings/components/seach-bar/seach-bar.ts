@@ -9,10 +9,19 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BaseCity } from '../../../../shared/models/cities-model';
 import { CityDataService } from '../../../../shared/services/city-data.services';
 import { CityAutocompleteComponent } from '../../../../shared/components/city-autocomplete-component/city-autocomplete-component';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-seach-bar',
-  imports: [MatFormFieldModule, MatInputModule, MatIconModule, MatDatepickerModule, CityAutocompleteComponent, FormsModule],
+  imports: [
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    MatDatepickerModule,
+    CityAutocompleteComponent,
+    FormsModule,
+    TranslatePipe
+  ],
   templateUrl: './seach-bar.html',
   providers: [provideNativeDateAdapter()],
   styleUrl: './seach-bar.css',
