@@ -23,8 +23,7 @@
 
 @if (isThereResult) {
 <div class="border p-4 mt-4 text-center" style="background-color: rgba(0, 128, 0, 0.125);">
-    <span>{{resultLabel}}</span> @if(searchCity){<strong> "{{searchCity}}"</strong>} - 
-    <span class="reset-action" (click)="resetFilters()">{{ 'HOME_LISTING.RESET' | translate }}</span>
+    <span>{{resultLabel}}</span> @if(searchCity){<strong> "{{searchCity}}"</strong>} -<span class="reset-action" (click)="resetFilters()">{{ 'HOME_LISTING.RESET' | translate }}</span>
 </div>
 
 }@else {

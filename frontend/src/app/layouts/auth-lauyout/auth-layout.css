@@ -24,22 +24,6 @@
   padding: 8px 0 20px;
 }
 
-.brand {
-  text-decoration: none;
-  font-size: 22px;
-  font-weight: 700;
-  color: #1f7a1f;
-}
-
-.first-part-brand{
-  font-weight: 300;
-}
-
-.second-part-brand{
-  font-weight: 700;
-  font-style: italic;
-}
-
 .auth-content {
   flex: 1;
   display: flex;
