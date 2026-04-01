@@ -73,7 +73,8 @@ public class SecurityConfig {
 
             c.setAllowedOrigins(java.util.List.of(
                 "http://localhost:4200",
-                "http://192.168.178.75:4200"
+                "http://192.168.178.75:4200",
+				"http://127.0.0.1:4200"
 				//"http://192.168.*.*:4200"
             ));
 

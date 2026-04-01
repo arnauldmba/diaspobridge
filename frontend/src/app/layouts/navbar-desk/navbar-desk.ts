@@ -11,7 +11,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { AuthService } from '../../core/services/auth.service';
 import { TranslatePipe } from '@ngx-translate/core';
-import { LanguageSwitcher } from "../../shared/components/language-switcher/language-switcher";
 
 @Component({
   selector: 'app-navbar-desk',
@@ -29,7 +28,6 @@ import { LanguageSwitcher } from "../../shared/components/language-switcher/lang
     MatFormFieldModule,
     MatInputModule,
     TranslatePipe,
-    LanguageSwitcher
 ],
   templateUrl: './navbar-desk.html',
   styleUrl: './navbar-desk.css',
