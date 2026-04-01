@@ -95,10 +95,18 @@ export class HomeListingPage implements OnInit {
     });
   }
 
+  /*
   get resultLabel(): string {
     if (this.totalElements === 0) return 'Aucun trajet trouvé';
     if (this.totalElements === 1) return '1 trajet trouvé';
     return `${this.totalElements} trajets trouvés`;
+  }*/
+
+  /*Universal version*/
+  get resultLabel(): string {
+    if (this.totalElements === 0) return '0 voyage';
+    if (this.totalElements === 1) return '1 voyage';
+    return `${this.totalElements} voyages`;
   }
 
   onResetFilters(): void {

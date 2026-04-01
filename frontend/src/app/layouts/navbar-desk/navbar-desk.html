@@ -25,7 +25,7 @@
     <a routerLinkActive="active" class="desktop-link" [matBadge]="unreadMessage" matBadgeSize="large">
       @if(authService.isLoggedIn()){
         
-        <div class="d-flex align-items-center" (click)="!toggleMenu()">
+        <div class="d-flex align-items-center" (click)="!toggleMenu()" style="cursor: pointer;">
           <span class="avatar">{{ (currentUserEmail2$ | async) | firstLetter }}</span>
           @if(!mobileMenuOpen){
           <span class="material-symbols-outlined">keyboard_arrow_down</span>
