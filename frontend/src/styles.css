@@ -6,7 +6,8 @@ html, body { height: 100%; }
 
 body { 
     margin: 0; 
-    font-family: Roboto, 
+    font-family: Inter, Arial, sans-serif;
+    /*font-family: Roboto, 
     "Helvetica Neue", sans-serif; 
-    /*background-color: rgb(244, 241, 238);*/
+    background-color: rgb(244, 241, 238);*/
 }
