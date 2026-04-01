@@ -5,6 +5,22 @@ html, body {
 }
 
 /**-------- nouveau style ------------*/
+.brand {
+  text-decoration: none;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--color-accent);
+}
+
+.first-part-brand{
+  font-weight: 100;
+}
+
+.second-part-brand{
+  font-weight: 700;
+  font-style: italic;
+}
+
 .icon-desc{
   font-family: var(--font-body);
   font-size: 13px;
