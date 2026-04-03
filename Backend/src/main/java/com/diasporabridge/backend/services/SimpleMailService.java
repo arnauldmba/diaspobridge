@@ -14,7 +14,7 @@ public class SimpleMailService {
 
     public void sendPasswordResetEmail(String to, String resetLink) {
         SimpleMailMessage msg = new SimpleMailMessage();
-        msg.setFrom("maloudalm15@gmail.com");
+        msg.setFrom("MbokoGO <noreply@mbokogo.com>");
         msg.setTo(to);
         msg.setSubject("MbokoGo - Réinitialisation du mot de passe");
         msg.setText(
