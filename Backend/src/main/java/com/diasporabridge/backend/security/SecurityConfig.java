@@ -2,9 +2,12 @@ package com.diasporabridge.backend.security;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -36,11 +39,14 @@ import lombok.RequiredArgsConstructor;
 @EnableMethodSecurity(prePostEnabled = true)
 @RequiredArgsConstructor
 public class SecurityConfig {
+
 	@Autowired
 	AuthenticationManager authMgr;
 
 	private final UsersRepository usersRepository;
 	
+	@Value("${app.cors.allowed-origins}")
+	private String allowedOrigins;
 	
 	@Bean
 	public SecurityFilterChain filterChain (HttpSecurity http) throws Exception{
@@ -51,42 +57,25 @@ public class SecurityConfig {
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .csrf(csrf -> csrf.disable())
         
-        // permet la coonection avec angular. Sinon erreur Cross origin dans le frontend (angular)
-        /*
-        .cors(cors -> cors.configurationSource(new CorsConfigurationSource() {
-
-			@Override
-			public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
-				CorsConfiguration cors = new CorsConfiguration();
-				// TODO : passer à une variable env plus tard
-				cors.setAllowedOrigins(Collections.singletonList("http://localhost:4200")); 
-				cors.setAllowedMethods(Collections.singletonList("*")); 
-				cors.setAllowedHeaders(Collections.singletonList("*")); 
-				cors.setExposedHeaders(Collections.singletonList("Authorization")); 		
-				return cors;
-			}
-        }))
-        */
-        
         .cors(cors -> cors.configurationSource(request -> {
             CorsConfiguration c = new CorsConfiguration();
 
-            c.setAllowedOrigins(java.util.List.of(
-                "http://localhost:4200",
-                "http://192.168.178.75:4200",
-				"http://127.0.0.1:4200"
-				//"http://192.168.*.*:4200"
-            ));
+			List<String> origins = Arrays.stream(allowedOrigins.split(","))
+                        .map(String::trim)
+                        .toList();
 
-            c.setAllowedMethods(java.util.List.of(
+            c.setAllowedOrigins(origins);
+
+            c.setAllowedMethods(List.of(
                 "GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"
             ));
 
-            c.setAllowedHeaders(java.util.List.of(
+            c.setAllowedHeaders(List.of(
                 "Authorization", "Content-Type", "Accept"
             ));
 
-            c.setExposedHeaders(java.util.List.of("Authorization"));
+            c.setExposedHeaders(List.of("Authorization"));
+			c.setAllowCredentials(true);
             c.setMaxAge(3600L);
 
             return c;
@@ -108,10 +97,7 @@ public class SecurityConfig {
         	    .requestMatchers("/api/profile/me").authenticated()
         	    .requestMatchers("/api/matches/**").authenticated()
 				.requestMatchers("/api/messages/**").authenticated()
-
-        	    /*.requestMatchers("/api/users/**").hasAuthority("ADMIN")*/
-				/*.requestMatchers("/api/users/**").hasAuthority("ROLE_ADMIN")*/
-				//.requestMatchers("/api/users/**").hasRole("ADMIN")
+				
 				.requestMatchers("/api/admin/**").hasRole("ADMIN")
 
 

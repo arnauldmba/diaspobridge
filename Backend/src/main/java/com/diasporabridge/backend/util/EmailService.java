@@ -23,9 +23,10 @@ public class EmailService implements EmailSender {
 		}
 		
 		SimpleMailMessage msg = new SimpleMailMessage();
-		msg.setFrom("maloudalm15@gmail.com"); // ok pour test
+		msg.setFrom("MbokoGO <noreply@mbokogo.com>");
+		//msg.setFrom("noreply@mbokogo.com"); // ok pour test
 		msg.setTo(to);
-		msg.setSubject("DiasporaBridge - Confirmer votre email");
+		msg.setSubject("MbokoGO - Confirmer votre email");
 		msg.setText(email);
 		
 		mailSender.send(msg); 
