@@ -4,6 +4,8 @@ import java.time.Instant;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.diasporabridge.backend.entities.PasswordResetToken;
 import com.diasporabridge.backend.entities.User;
@@ -14,5 +16,7 @@ public interface PasswordResetTokenRepository extends JpaRepository<PasswordRese
 
     void deleteByUser(User user);
 
-    long deleteByExpiresAtBefore(Instant now);
+    @Modifying
+    @Transactional
+    int deleteByExpiresAtBefore(Instant now);
 }
