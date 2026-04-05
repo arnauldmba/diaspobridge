@@ -11,10 +11,10 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 @Service
-public class EmailService implements EmailSender {
+public class EmailServiceOldVersion implements EmailSender {
 
-	private final JavaMailSender mailSender;
-	
+
+	/* 
 	@Override
 	public void sendEmail(String to, String email) {
 		
@@ -30,6 +30,13 @@ public class EmailService implements EmailSender {
 		msg.setText(email);
 		
 		mailSender.send(msg); 
-	  }
+	}
+	*/
+
+	@Override
+	public void sendEmail(String toEmail, String subject, String body) {
+
+		throw new UnsupportedOperationException("Unimplemented method 'sendEmail'");
+	}
 	  
 }

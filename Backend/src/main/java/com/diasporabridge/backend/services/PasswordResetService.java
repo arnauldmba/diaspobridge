@@ -72,41 +72,6 @@ public class PasswordResetService {
         }
     }
 
-    private void createAndSendToken2(User user) {
-        System.out.println("createAndSendToken appelé pour: " + user.getEmail());
-
-        try {
-            tokenRepo.deleteByUser(user);
-            tokenRepo.flush();
-
-            String token = UUID.randomUUID().toString();
-            Instant expiresAt = Instant.now().plus(TOKEN_TTL);
-
-            PasswordResetToken prt = PasswordResetToken.builder()
-                .token(token)
-                .user(user)
-                .expiresAt(expiresAt)
-                .build();
-
-            System.out.println("Token généré: " + token);
-            System.out.println("Avant sauvegarde du token...");
-
-            tokenRepo.saveAndFlush(prt);
-
-            System.out.println("Token sauvegardé en base.");
-
-            String link = frontendBaseUrl + "/auth/reset-password?token=" + token;
-
-            System.out.println("Tentative d'envoi du mail...");
-            mailService.sendPasswordResetEmail(user.getEmail(), link);
-            System.out.println("Mail envoyé avec succès.");
-
-        } catch (Exception e) {
-            System.out.println("Erreur dans createAndSendToken");
-            e.printStackTrace();
-        }
-    }
-
     public void resetPassword(String token, String newPassword) {
         if (token == null || token.trim().isEmpty()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid token");

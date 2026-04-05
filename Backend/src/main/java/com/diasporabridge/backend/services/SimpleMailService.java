@@ -1,8 +1,8 @@
 package com.diasporabridge.backend.services;
 
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+
+import com.diasporabridge.backend.util.EmailSender;
 
 import lombok.RequiredArgsConstructor;
 
@@ -10,22 +10,22 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class SimpleMailService {
 
-    private final JavaMailSender mailSender;
+    private final EmailSender emailSender;
 
     public void sendPasswordResetEmail(String to, String resetLink) {
-        SimpleMailMessage msg = new SimpleMailMessage();
-        msg.setFrom("MbokoGO <noreply@mbokogo.com>");
-        msg.setTo(to);
-        msg.setSubject("MbokoGo - Réinitialisation du mot de passe");
-        msg.setText(
-            "Bonjour,\n\n" +
-            "Tu as demandé une réinitialisation de mot de passe.\n" +
-            "Clique sur ce lien (valide 30 minutes) :\n" +
-            resetLink + "\n\n" +
-            "Si tu n'es pas à l'origine de cette demande, ignore ce message.\n\n" +
-            "MbokoGo"
+        String body =
+                "<p>Bonjour,</p>" +
+                "<p>Tu as demandé une réinitialisation de mot de passe.</p>" +
+                "<p>Clique sur ce lien (valide 30 minutes) :</p>" +
+                "<p><a href=\"" + resetLink + "\">Réinitialiser mon mot de passe</a></p>" +
+                "<p>Si tu n'es pas à l'origine de cette demande, ignore ce message.</p>" +
+                "<p>MbokoGo</p>";
+
+        emailSender.sendEmail(
+                to,
+                "MbokoGo - Réinitialisation du mot de passe",
+                body
         );
-        mailSender.send(msg);
     }
 }
 
