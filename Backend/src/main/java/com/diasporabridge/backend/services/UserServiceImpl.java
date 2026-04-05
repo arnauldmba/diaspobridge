@@ -16,6 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.diasporabridge.backend.brevo.BrevoEmailSenderService;
 import com.diasporabridge.backend.entities.User;
 import com.diasporabridge.backend.entities.User.Role;
 import com.diasporabridge.backend.register.VerificationToken;
@@ -41,6 +42,8 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	EmailSender emailSender;
+
+	private final BrevoEmailSenderService brevoEmailService = null;
 
 	@Override
 	public User saveUser(User user) {
@@ -168,10 +171,17 @@ public class UserServiceImpl implements UserService {
 		// créer et sauver le token lié à un user persisté
 		String code = this.generateCode();
 		VerificationToken token = new VerificationToken(code, savedUser);
-		verificationTokenRepo.save(token);
+		verificationTokenRepo.save(token);		
 
-		// envoyer le code par email a l'utilisateur
-		sendEmailUser(savedUser, token.getToken());
+		// Nouvelle methode d'envoi d'email avec Brevo API
+		try{
+			sendEmailUser(savedUser, token.getToken());
+		} catch (Exception e) {
+			// En cas d'erreur d'envoi, on peut choisir de supprimer le token et/ou l'utilisateur
+			//verificationTokenRepo.delete(token);
+			//usersRepository.delete(savedUser);
+			throw new RuntimeException("Impossible d'envoyer l'email de vérification pour le moment.", e);
+		}
 
 		return savedUser;
 	}
@@ -184,11 +194,17 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void sendEmailUser(User user, String code) {
-		String emailBody = "Bonjour " + "<h1>" + user.getFirstName() +
-				"</h1>" + " Votre code de validation est " + "<h1>" + code + "</h1>" + "\n\n" +
-				"Ce code expire dans 15 minutes.";
+		String emailBody =
+            "<p>Bonjour <strong>" + user.getFirstName() + "</strong>,</p>" +
+            "<p>Votre code de validation est :</p>" +
+            "<h1>" + code + "</h1>" +
+            "<p>Ce code expire dans 15 minutes.</p>";
 
-		emailSender.sendEmail(user.getEmail(), emailBody);
+		emailSender.sendEmail(
+			user.getEmail(), 
+			"Code de validation - MbokoGO", 
+			emailBody
+		);
 	}
 
 	@Override
