@@ -46,8 +46,8 @@ export class MyMatches {
     this.matchService.getMyMatches().subscribe({
       next: (matches) => {
         this.myMatches = matches;
-        console.log('myMatches', this.myMatches);
-        console.log('unreadCounts', this.myMatches.map(m => m.unreadCount));
+        //console.log('myMatches', this.myMatches);
+        //console.log('unreadCounts', this.myMatches.map(m => m.unreadCount));
         this.isLoading = false; 
         if (matches.length > 0) {
           //const first = matches[0];  // take first match 
