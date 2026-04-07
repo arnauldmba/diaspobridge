@@ -36,7 +36,7 @@
         </div>
         
       }@else{
-      <span [matMenuTriggerFor]="menu" class="material-symbols-outlined avatar">person</span>
+      <span [matMenuTriggerFor]="menu" class="material-symbols-outlined avatar" style="cursor: pointer;">person</span>
       <mat-menu #menu="matMenu">
         <button mat-menu-item routerLink="/auth/login">{{ 'DESKTOP_NAV.LOGIN' | translate }}/{{ 'DESKTOP_NAV.LOGOUT' | translate }}</button>
       </mat-menu>

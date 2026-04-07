@@ -29,7 +29,7 @@
   flex: 1;
   display: flex;
   justify-content: center;
-  margin-top: 120px;
+  margin-top: 150px;
 }
 
 .auth-card {
@@ -47,10 +47,6 @@
     padding: 48px;
   }
 
-  .auth-content {
-    margin-top: 150px;
-  }
-
   .language-switcher{
     margin-right: 32px;
   }
@@ -58,7 +54,8 @@
 
 @media (max-width: 768px) {
   .auth-content{
-    padding: 0 26px;
+    padding: 0 16px;
+    margin-top: 94px;
   }
 
   .language-switcher{
