@@ -22,7 +22,15 @@
     routerLink="/messages"
     [class.active]="isMessagesSection()"
   >
-    <mat-icon class="nav-icon">chat</mat-icon>
+    <mat-icon 
+      class="nav-icon"
+      [matBadge]="(totalUnread$ | async) ?? 0"
+      [matBadgeHidden]="((totalUnread$ | async) ?? 0) === 0"
+      matBadgeColor="warn"
+      matBadgeSize="medium"
+    >
+      mail
+    </mat-icon>
     <span class="nav-label">{{'MOBILE_NAV.MESSAGES' | translate }}</span>
   </a>
 
