@@ -29,7 +29,10 @@ export class PwaUpdateService {
         );
 
         snack.onAction().subscribe(() => {
-          window.location.reload();
+          //window.location.reload();
+          this.updates.activateUpdate().then(() => {
+            document.location.reload();
+          });
         });
       });
 

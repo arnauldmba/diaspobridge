@@ -9,7 +9,7 @@
 }
 
 .hero {
-  text-align: center;
+  text-align: start;
   margin-bottom: 40px;
 }
 
@@ -24,7 +24,7 @@
   font-size: 16px;
   opacity: 0.8;
   max-width: 600px;
-  margin: 0 auto;
+  margin: 0;
 }
 
 .section {
@@ -86,6 +86,10 @@
 }
 
 @media (max-width: 768px){
+  .hero, .subtitle {
+    text-align: center;
+  }
+
   .about-container {
     padding: 60px 16px 8px 16px;
     background-color: var(--color-bg);

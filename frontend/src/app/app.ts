@@ -11,32 +11,33 @@ import { PwaUpdateService } from './core/services/pwa-update.service';
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-export class App implements OnInit, AfterViewInit{
+export class App implements AfterViewInit{
 
-  protected readonly title = signal('diasporabridge');
+  //protected readonly title = signal('diasporabridge');
 
   private readonly pwaUpdateService = inject(PwaUpdateService);
 
   constructor(private translate: TranslateService) {
+    this.pwaUpdateService.init();
+
     this.translate.setFallbackLang('fr');
 
-    const savedLang = localStorage.getItem('lang') || 'fr';
-    this.translate.use(savedLang);
-  }
-
-  ngOnInit(): void {
-    this.pwaUpdateService.init();
+    const savedLang = localStorage.getItem('lang');
+    const lang = savedLang === 'en' || savedLang === 'fr' ? savedLang : 'fr';
+    this.translate.use(lang);
   }
 
   ngAfterViewInit(): void {
-      const splash = document.getElementById('app-splash');
+    const splash = document.getElementById('app-splash');
 
-      if (splash) {
+    if (splash) {
+      setTimeout(() => {
         splash.classList.add('hidden');
 
         setTimeout(() => {
           splash.remove();
         }, 300);
-      }
+      }, 500);
+    }
   }
 }

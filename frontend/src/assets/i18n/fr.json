@@ -150,5 +150,151 @@
     "LOGIN": "Connexion",
     "REGISTER": "Inscription",
     "LOGOUT": "Déconnexion"
+  },
+
+  "ABOUT": {
+    "TITLE": "À propos de {{appName}}",
+    "SUBTITLE": "Connecter l’Europe et l’Afrique grâce à des voyageurs de confiance.",
+
+    "MISSION_TITLE": "Notre mission",
+    "MISSION_TEXT": "{{appName}} met en relation des voyageurs et des expéditeurs afin de faciliter le transport de colis entre les communautés.",
+
+    "HOW_IT_WORKS_TITLE": "Comment ça fonctionne ?",
+    "STEP_1": "Un voyageur publie son trajet.",
+    "STEP_2": "Un expéditeur trouve une destination correspondante.",
+    "STEP_3": "Ils entrent en contact et s’organisent directement.",
+
+    "VISION_TITLE": "Notre vision",
+    "VISION_TEXT": "Nous croyons en une communauté connectée, solidaire et moderne. {{appName}} évolue constamment grâce à vos retours."
+  },
+
+  "CONTACT": {
+    "TITLE": "Contact",
+    "SUBTITLE": "Une question, un signalement ou une suggestion ? Écris-nous, on te répond dès que possible.",
+
+    "FORM_TITLE": "Formulaire",
+    "NAME_OPTIONAL": "Nom (optionnel)",
+    "EMAIL": "Email",
+    "EMAIL_REQUIRED": "L’email est obligatoire.",
+    "EMAIL_INVALID": "Format d’email invalide.",
+    "SUBJECT": "Sujet",
+    "SUBJECT_REQUIRED": "Le sujet est obligatoire.",
+    "MESSAGE": "Message",
+    "MESSAGE_REQUIRED": "Le message est obligatoire.",
+    "MESSAGE_MAXLENGTH": "Le message ne doit pas dépasser {{max}} caractères.",
+
+    "SENDING": "Envoi…",
+    "SEND": "Envoyer",
+    "CLEAR": "Effacer",
+
+    "NOTE": "{{appName}} est une plateforme de mise en relation. Pour un signalement, indique si possible le nom d’utilisateur concerné, la date et une description courte.",
+
+    "DIRECT_TITLE": "Nous écrire directement",
+    "DIRECT_EMAIL": "Email",
+    "RESPONSE_TIME": "Temps de réponse",
+    "RESPONSE_TIME_VALUE": "Généralement sous 24–48h"
+  },
+
+  "FAQ": {
+    "TITLE": "Questions fréquentes",
+    "SUBTITLE": "Les réponses aux questions les plus courantes sur {{appName}}.",
+
+    "GENERAL_TITLE": "Général",
+    "Q1": "Qu’est-ce que {{appName}} ?",
+    "A1": "{{appName}} est une plateforme qui met en relation des voyageurs et des expéditeurs pour faciliter le transport de colis entre l’Europe et l’Afrique.",
+
+    "Q2": "Comment ça fonctionne ?",
+    "A2": "Un voyageur publie son trajet, un expéditeur trouve une annonce adaptée, puis les deux entrent en contact pour s’organiser.",
+
+    "Q3": "Est-ce que {{appName}} est payant ?",
+    "A3": "L’inscription et l’utilisation de {{appName}} sont entièrement gratuites. Aucun frais n’est appliqué pour publier une annonce, rechercher un trajet ou entrer en contact avec un autre utilisateur.",
+
+    "SAFETY_TITLE": "Sécurité & règles",
+    "Q4": "Quels types d’objets sont autorisés ?",
+    "A4": "Les objets autorisés dépendent des lois et des règles de transport. Les objets illégaux, dangereux ou interdits ne sont pas acceptés. En cas de doute, évite l’envoi.",
+
+    "Q5": "Comment la confiance est-elle assurée ?",
+    "A5": "{{appName}} repose sur les profils utilisateurs et la communication directe. Nous améliorons progressivement la plateforme pour renforcer la sécurité et la transparence.",
+
+    "Q6": "Que faire en cas de problème ?",
+    "A6": "En cas de désaccord entre utilisateurs, nous vous invitons à privilégier un échange direct afin de trouver une solution. {{appName}} est une plateforme de mise en relation et n’intervient pas dans les accords conclus entre les utilisateurs. Toutefois, vous pouvez nous signaler tout comportement inapproprié via la page Contact.",
+
+    "ACCOUNT_TITLE": "Compte & annonces",
+    "Q7": "Comment publier une annonce de voyage ?",
+    "A7": "Connecte-toi, puis va sur la page de création d’annonce. Indique ton départ, ta destination et ta date, puis publie.",
+
+    "Q8": "Comment contacter un utilisateur ?",
+    "A8": "Ouvre une annonce ou un profil, puis utilise la messagerie pour envoyer un message."
+  }, 
+  
+  "LEGAL": {
+    "TITLE": "Mentions légales",
+    "SUBTITLE": "Informations légales relatives à {{appName}}.",
+
+    "EDITOR_TITLE": "Éditeur du site",
+    "NAME_LABEL": "Nom / Responsable",
+    "NAME_VALUE": "{{appName}} (Projet indépendant)",
+
+    "LEGAL_REP_LABEL": "Représentant légal",
+    "LEGAL_REP_VALUE": "Arnauld Mba",
+
+    "ADDRESS_LABEL": "Adresse",
+    "ADDRESS_VALUE": "Horster Str. 66\n45897 Gelsenkirchen, Allemagne",
+
+    "EMAIL_LABEL": "Email",
+    "PHONE_LABEL": "Téléphone",
+    "PHONE_VALUE": "Optionnel",
+
+    "RESPONSIBILITY_TITLE": "Responsabilité",
+    "RESPONSIBILITY_TEXT": "{{appName}} est une plateforme de mise en relation entre utilisateurs. Les accords conclus entre expéditeurs et voyageurs relèvent de leur seule responsabilité. {{appName}} n’assure pas le transport et ne garantit pas la livraison des colis.",
+
+    "EXTERNAL_LINKS_TITLE": "Liens externes",
+    "EXTERNAL_LINKS_TEXT": "Malgré un contrôle attentif, nous déclinons toute responsabilité quant au contenu des liens externes. Les opérateurs des sites liés sont seuls responsables de leurs contenus.",
+
+    "INTELLECTUAL_PROPERTY_TITLE": "Propriété intellectuelle",
+    "INTELLECTUAL_PROPERTY_TEXT": "Les contenus, textes et éléments graphiques présents sur {{appName}} sont protégés. Toute reproduction ou utilisation sans autorisation préalable est interdite."
+  }, 
+
+  "PRIVACY": {
+    "TITLE": "Politique de confidentialité",
+    "SUBTITLE": "Informations sur la collecte et le traitement des données personnelles.",
+
+    "SECTION_1_TITLE": "1. Responsable du traitement",
+    "SECTION_1_TEXT_1": "Le responsable du traitement des données sur {{appName}} est :",
+    "SECTION_1_NAME": "Arnauld Mba",
+    "SECTION_1_LOCATION": "Gelsenkirchen, Allemagne",
+    "SECTION_1_EMAIL": "Email : support@mbokogo.com",
+
+    "SECTION_2_TITLE": "2. Données collectées",
+    "SECTION_2_TEXT": "Lors de l’utilisation de la plateforme, les données suivantes peuvent être collectées :",
+    "SECTION_2_ITEM_1": "Adresse email",
+    "SECTION_2_ITEM_2": "Nom ou pseudonyme",
+    "SECTION_2_ITEM_3": "Données liées aux annonces publiées",
+    "SECTION_2_ITEM_4": "Messages échangés via la messagerie interne",
+    "SECTION_2_NO_BANK": "Aucune donnée bancaire n’est collectée.",
+
+    "SECTION_3_TITLE": "3. Finalité du traitement",
+    "SECTION_3_TEXT": "Les données sont utilisées uniquement pour :",
+    "SECTION_3_ITEM_1": "Permettre la création et la gestion des comptes",
+    "SECTION_3_ITEM_2": "Faciliter la mise en relation entre utilisateurs",
+    "SECTION_3_ITEM_3": "Assurer le bon fonctionnement de la plateforme",
+    "SECTION_3_NO_SHARE": "Les données ne sont ni vendues ni transmises à des tiers à des fins commerciales.",
+
+    "SECTION_4_TITLE": "4. Stockage des données",
+    "SECTION_4_TEXT": "Les données sont stockées sur des serveurs sécurisés. Des mesures techniques sont mises en place afin de protéger les informations contre tout accès non autorisé.",
+
+    "SECTION_5_TITLE": "5. Droits des utilisateurs",
+    "SECTION_5_TEXT": "Conformément au Règlement Général sur la Protection des Données (RGPD), vous disposez des droits suivants :",
+    "SECTION_5_ITEM_1": "Droit d’accès à vos données",
+    "SECTION_5_ITEM_2": "Droit de rectification",
+    "SECTION_5_ITEM_3": "Droit à l’effacement",
+    "SECTION_5_ITEM_4": "Droit à la limitation du traitement",
+    "SECTION_5_CONTACT": "Pour exercer vos droits, contactez-nous à l’adresse : support@mbokogo.com",
+
+    "SECTION_6_TITLE": "6. Cookies",
+    "SECTION_6_TEXT": "{{appName}} utilise uniquement des cookies techniques nécessaires au fonctionnement du site (par exemple pour maintenir une session active). Aucun cookie publicitaire ou de suivi tiers n’est utilisé.",
+
+    "SECTION_7_TITLE": "7. Modification de la politique",
+    "SECTION_7_TEXT": "Cette politique peut être mise à jour à tout moment afin de refléter l’évolution du service. La version la plus récente est toujours disponible sur cette page."
   }
 }

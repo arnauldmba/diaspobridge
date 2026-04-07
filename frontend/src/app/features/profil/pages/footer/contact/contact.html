@@ -1,86 +1,85 @@
 <span class="material-symbols-outlined back-button-to-listing" (click)="backToListing()">
-    arrow_left_alt
+  arrow_left_alt
 </span>
 
- <div class="contact-container">
+<div class="contact-container">
 
   <section class="hero">
-    <h1>Contact</h1>
+    <h1>{{ 'CONTACT.TITLE' | translate }}</h1>
     <p class="subtitle">
-      Une question, un signalement ou une suggestion ? Écris-nous, on te répond dès que possible.
+      {{ 'CONTACT.SUBTITLE' | translate }}
     </p>
   </section>
 
   <section class="section">
-    <h2>Formulaire</h2>
+    <h2>{{ 'CONTACT.FORM_TITLE' | translate }}</h2>
 
     <form class="contact-card" [formGroup]="form" (ngSubmit)="onSubmit()">
 
       <mat-form-field appearance="outline" class="w-100">
-        <mat-label>Nom (optionnel)</mat-label>
+        <mat-label>{{ 'CONTACT.NAME_OPTIONAL' | translate }}</mat-label>
         <input matInput formControlName="name" autocomplete="name" />
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="w-100">
-        <mat-label>Email</mat-label>
+        <mat-label>{{ 'CONTACT.EMAIL' | translate }}</mat-label>
         <input matInput formControlName="email" autocomplete="email" />
         <mat-error *ngIf="form.get('email')?.hasError('required')">
-          L’email est obligatoire.
+          {{ 'CONTACT.EMAIL_REQUIRED' | translate }}
         </mat-error>
         <mat-error *ngIf="form.get('email')?.hasError('email')">
-          Format d’email invalide.
+          {{ 'CONTACT.EMAIL_INVALID' | translate }}
         </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="w-100">
-        <mat-label>Sujet</mat-label>
+        <mat-label>{{ 'CONTACT.SUBJECT' | translate }}</mat-label>
         <input matInput formControlName="subject" />
         <mat-error *ngIf="form.get('subject')?.hasError('required')">
-          Le sujet est obligatoire.
+          {{ 'CONTACT.SUBJECT_REQUIRED' | translate }}
         </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="w-100">
-        <mat-label>Message</mat-label>
+        <mat-label>{{ 'CONTACT.MESSAGE' | translate }}</mat-label>
         <textarea matInput rows="5" formControlName="message"></textarea>
         <mat-hint align="end">{{ (form.get('message')?.value?.length || 0) }}/800</mat-hint>
         <mat-error *ngIf="form.get('message')?.hasError('required')">
-          Le message est obligatoire.
+          {{ 'CONTACT.MESSAGE_REQUIRED' | translate }}
         </mat-error>
         <mat-error *ngIf="form.get('message')?.hasError('maxlength')">
-          Le message ne doit pas dépasser 800 caractères.
+          {{ 'CONTACT.MESSAGE_MAXLENGTH' | translate:{ max: 800 } }}
         </mat-error>
       </mat-form-field>
 
       <div class="actions">
         <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid || sending">
-          {{ sending ? 'Envoi…' : 'Envoyer' }}
+          {{ sending ? ('CONTACT.SENDING' | translate) : ('CONTACT.SEND' | translate) }}
         </button>
 
         <button mat-button type="button" (click)="reset()" [disabled]="sending">
-          Effacer
+          {{ 'CONTACT.CLEAR' | translate }}
         </button>
       </div>
 
       <p class="note">
-        DiasporaBridge est une plateforme de mise en relation. Pour un signalement, indique si possible le nom
-        d’utilisateur concerné, la date et une description courte.
+        {{ 'CONTACT.NOTE' | translate:{ appName: appName } }}
       </p>
 
     </form>
   </section>
 
   <section class="section">
-    <h2>Nous écrire directement</h2>
+    <h2>{{ 'CONTACT.DIRECT_TITLE' | translate }}</h2>
 
     <div class="contact-card simple">
       <div class="line">
-        <span class="label">Email</span>
+        <span class="label">{{ 'CONTACT.DIRECT_EMAIL' | translate }}</span>
         <a class="value" href="mailto:support@diasporabridge.com">support@mbokogo.com</a>
       </div>
       <div class="line">
-        <span class="label">Temps de réponse</span>
-        <span class="value muted">Généralement sous 24–48h</span>
+        <span class="label">{{ 'CONTACT.RESPONSE_TIME' | translate }}</span>
+        <span class="value muted">{{ 'CONTACT.RESPONSE_TIME_VALUE' | translate }}</span>
       </div>
     </div>
   </section>

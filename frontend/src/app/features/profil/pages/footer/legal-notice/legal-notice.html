@@ -2,77 +2,64 @@
     arrow_left_alt
 </span>
 
-<div class="legal-container">
+<div class="legal-container mb-app">
 
   <section class="hero">
-    <h1>Mentions légales</h1>
+    <h1>{{ 'LEGAL.TITLE' | translate }}</h1>
     <p class="subtitle">
-      Informations légales relatives à {{appName}}.
+      {{ 'LEGAL.SUBTITLE' | translate:{ appName: appName } }}
     </p>
   </section>
 
   <section class="section">
-    <h2>Éditeur du site</h2>
+    <h2>{{ 'LEGAL.EDITOR_TITLE' | translate }}</h2>
 
     <div class="legal-card">
       <div class="row">
-        <span class="label">Nom / Responsable</span>
-        <span class="value">{{appName}} (Projet indépendant)</span>
+        <span class="label">{{ 'LEGAL.NAME_LABEL' | translate }}</span>
+        <span class="value">{{ 'LEGAL.NAME_VALUE' | translate:{ appName: appName } }}</span>
       </div>
 
       <div class="row">
-        <span class="label">Représentant légal</span>
-        <span class="value">Arnauld Mba</span>
+        <span class="label">{{ 'LEGAL.LEGAL_REP_LABEL' | translate }}</span>
+        <span class="value">{{ 'LEGAL.LEGAL_REP_VALUE' | translate }}</span>
       </div>
 
       <div class="row">
-        <span class="label">Adresse</span>
-        <span class="value">
-          Horster Str. 66<br />
-          45897 Gelsenkirchen, Allemagne
-        </span>
+        <span class="label">{{ 'LEGAL.ADDRESS_LABEL' | translate }}</span>
+        <span class="value">{{ 'LEGAL.ADDRESS_VALUE' | translate }}</span>
       </div>
 
       <div class="row">
-        <span class="label">Email</span>
+        <span class="label">{{ 'LEGAL.EMAIL_LABEL' | translate }}</span>
         <a class="value link" href="mailto:support@diasporabridge.com">support@mbokogo.com</a>
       </div>
 
       <div class="row">
-        <span class="label">Téléphone</span>
-        <span class="value muted">Optionnel</span>
+        <span class="label">{{ 'LEGAL.PHONE_LABEL' | translate }}</span>
+        <span class="value muted">{{ 'LEGAL.PHONE_VALUE' | translate }}</span>
       </div>
     </div>
   </section>
 
   <section class="section">
-    <h2>Responsabilité</h2>
+    <h2>{{ 'LEGAL.RESPONSIBILITY_TITLE' | translate }}</h2>
     <div class="legal-card text">
-      <p>
-        {{appName}} est une plateforme de mise en relation entre utilisateurs. Les accords conclus entre
-        expéditeurs et voyageurs relèvent de leur seule responsabilité. {{appName}} n’assure pas le transport
-        et ne garantit pas la livraison des colis.
-      </p>
+      <p>{{ 'LEGAL.RESPONSIBILITY_TEXT' | translate:{ appName: appName } }}</p>
     </div>
   </section>
 
   <section class="section">
-    <h2>Liens externes</h2>
+    <h2>{{ 'LEGAL.RESPONSIBILITY_TITLE' | translate }}</h2>
     <div class="legal-card text">
-      <p>
-        Malgré un contrôle attentif, nous déclinons toute responsabilité quant au contenu des liens externes.
-        Les opérateurs des sites liés sont seuls responsables de leurs contenus.
-      </p>
+      <p>{{ 'LEGAL.RESPONSIBILITY_TEXT' | translate:{ appName: appName } }}</p>
     </div>
   </section>
 
   <section class="section">
-    <h2>Propriété intellectuelle</h2>
+    <h2>{{ 'LEGAL.INTELLECTUAL_PROPERTY_TITLE' | translate }}</h2>
     <div class="legal-card text">
-      <p>
-        Les contenus, textes et éléments graphiques présents sur {{appName}} sont protégés. Toute reproduction
-        ou utilisation sans autorisation préalable est interdite.
-      </p>
+      <p>{{ 'LEGAL.INTELLECTUAL_PROPERTY_TEXT' | translate:{ appName: appName } }}</p>
     </div>
   </section>
 
