@@ -41,6 +41,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      background: linear-gradient(180deg, #f8fffe 0%, #ffffff 100%);
+      transition: opacity 300ms ease, visibility 300ms ease;
     }
 
     #app-splash.hidden {
@@ -49,17 +51,18 @@
       pointer-events: none;
     }
 
-    /*.splash-logo {
-      width: 72px;
-      height: 72px;
+    .splash-logo {
+      width: 292px;
+      height: 272px;
       object-fit: contain;
-    }*/
+      display: block;
+    }
   </style>
 </head>
 <body>
   <!--pour l ecran de chargement -->
   <div id="app-splash">
-      <img src="icon-512x512.png" alt="DiasporaBridge" class="splash-logo" />
+      <img src="icon-512x512.png" alt="MbokoGO" class="splash-logo" />
   </div>
 
   <app-root></app-root>
