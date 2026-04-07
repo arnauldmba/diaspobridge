@@ -3,6 +3,8 @@ import { RouterOutlet } from '@angular/router';
 import { Navbar } from "./layouts/navbar/navbar";
 import { TranslateService } from '@ngx-translate/core';
 import { PwaUpdateService } from './core/services/pwa-update.service';
+import { UnreadMessagesService } from './core/services/unread-messages.service';
+import { AuthService } from './core/services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -16,9 +18,15 @@ export class App implements AfterViewInit{
   //protected readonly title = signal('diasporabridge');
 
   private readonly pwaUpdateService = inject(PwaUpdateService);
+  private readonly unreadMessagesService = inject(UnreadMessagesService);
+  private readonly authService = inject(AuthService);
 
   constructor(private translate: TranslateService) {
     this.pwaUpdateService.init();
+
+    if (this.authService.isLoggedIn()) {
+      this.unreadMessagesService.startPolling();
+    }
 
     this.translate.setFallbackLang('fr');
 

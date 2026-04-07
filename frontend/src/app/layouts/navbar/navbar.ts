@@ -1,16 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { NavigationEnd, Router, RouterLink, RouterLinkWithHref } from '@angular/router';
 import { MatIconModule } from "@angular/material/icon";
 import { filter } from 'rxjs/operators';
 import { TranslatePipe } from '@ngx-translate/core';
+import { UnreadMessagesService } from '../../core/services/unread-messages.service';
+import { MatBadgeModule } from '@angular/material/badge';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-navbar',
-  imports: [RouterLink, MatIconModule, TranslatePipe],
+  imports: [RouterLink, MatIconModule, TranslatePipe, AsyncPipe, MatBadgeModule],
   templateUrl: './navbar.html',
   styleUrl: './navbar.css',
 })
 export class Navbar {
+  private readonly unreadMessagesService = inject(UnreadMessagesService);
+
+  readonly totalUnread$ = this.unreadMessagesService.totalUnread$;
+
   currentUrl = '';
 
   constructor(private router: Router) {
