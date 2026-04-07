@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from '../../../../../../environments/environment';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-faq',
-  imports: [],
+  imports: [TranslatePipe],
   templateUrl: './faq.html',
   styleUrl: './faq.css',
 })

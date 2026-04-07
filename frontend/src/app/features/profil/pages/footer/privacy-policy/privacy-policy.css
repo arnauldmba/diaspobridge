@@ -79,7 +79,7 @@
 
 @media (max-width: 768px) {
     .legal-container {
-        padding: 60px 16px 8px 16px;
+        padding: 60px 16px 80px 16px;
         background-color: var(--color-bg);
         position: absolute;
         z-index: 100;

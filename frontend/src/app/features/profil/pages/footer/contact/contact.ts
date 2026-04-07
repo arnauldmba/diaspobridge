@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 
 import { ToastrService } from 'ngx-toastr';
 import { environment } from '../../../../../../environments/environment';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-contact',
@@ -19,6 +20,7 @@ import { environment } from '../../../../../../environments/environment';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    TranslatePipe
   ],
   templateUrl: './contact.html',
   styleUrl: './contact.css',

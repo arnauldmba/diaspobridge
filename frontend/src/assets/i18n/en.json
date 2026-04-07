@@ -150,5 +150,151 @@
     "LOGIN": "Login",
     "REGISTER": "Sign Up",
     "LOGOUT": "Logout"
+  },
+
+  "ABOUT": {
+    "TITLE": "About {{appName}}",
+    "SUBTITLE": "Connecting Europe and Africa through trusted travelers.",
+
+    "MISSION_TITLE": "Our Mission",
+    "MISSION_TEXT": "{{appName}} connects travelers and senders to make package delivery between communities easier.",
+
+    "HOW_IT_WORKS_TITLE": "How it works",
+    "STEP_1": "A traveler publishes a trip.",
+    "STEP_2": "A sender finds a matching destination.",
+    "STEP_3": "They get in touch and organize everything directly.",
+
+    "VISION_TITLE": "Our Vision",
+    "VISION_TEXT": "We believe in a connected, supportive, and modern community. {{appName}} continuously evolves thanks to your feedback."
+  },
+
+  "CONTACT": {
+    "TITLE": "Contact",
+    "SUBTITLE": "Do you have a question, a report, or a suggestion? Write to us and we will get back to you as soon as possible.",
+
+    "FORM_TITLE": "Form",
+    "NAME_OPTIONAL": "Name (optional)",
+    "EMAIL": "Email",
+    "EMAIL_REQUIRED": "Email is required.",
+    "EMAIL_INVALID": "Invalid email format.",
+    "SUBJECT": "Subject",
+    "SUBJECT_REQUIRED": "Subject is required.",
+    "MESSAGE": "Message",
+    "MESSAGE_REQUIRED": "Message is required.",
+    "MESSAGE_MAXLENGTH": "Message must not exceed {{max}} characters.",
+
+    "SENDING": "Sending…",
+    "SEND": "Send",
+    "CLEAR": "Clear",
+
+    "NOTE": "{{appName}} is a platform that connects people. For a report, please include the username concerned, the date, and a short description if possible.",
+
+    "DIRECT_TITLE": "Contact Us Directly",
+    "DIRECT_EMAIL": "Email",
+    "RESPONSE_TIME": "Response Time",
+    "RESPONSE_TIME_VALUE": "Usually within 24–48h"
+  }, 
+
+  "FAQ": {
+    "TITLE": "Frequently Asked Questions",
+    "SUBTITLE": "Answers to the most common questions about {{appName}}.",
+
+    "GENERAL_TITLE": "General",
+    "Q1": "What is {{appName}}?",
+    "A1": "{{appName}} is a platform that connects travelers and senders to make package transport between Europe and Africa easier.",
+
+    "Q2": "How does it work?",
+    "A2": "A traveler publishes a trip, a sender finds a suitable listing, and then both get in touch to organize everything.",
+
+    "Q3": "Is {{appName}} paid?",
+    "A3": "Registration and use of {{appName}} are completely free. No fees are charged to publish a listing, search for a trip, or contact another user.",
+
+    "SAFETY_TITLE": "Safety & Rules",
+    "Q4": "What types of items are allowed?",
+    "A4": "Allowed items depend on laws and transport rules. Illegal, dangerous, or prohibited items are not accepted. If in doubt, do not send them.",
+
+    "Q5": "How is trust ensured?",
+    "A5": "{{appName}} relies on user profiles and direct communication. We continuously improve the platform to strengthen security and transparency.",
+
+    "Q6": "What should I do in case of a problem?",
+    "A6": "In case of a disagreement between users, we encourage direct communication to find a solution. {{appName}} is a platform that connects people and does not intervene in agreements made between users. However, you can report inappropriate behavior through the Contact page.",
+
+    "ACCOUNT_TITLE": "Account & Listings",
+    "Q7": "How do I publish a travel listing?",
+    "A7": "Log in, then go to the listing creation page. Enter your departure, destination, and date, then publish it.",
+
+    "Q8": "How do I contact a user?",
+    "A8": "Open a listing or a profile, then use the messaging system to send a message."
+  },
+
+  "LEGAL": {
+    "TITLE": "Legal Notice",
+    "SUBTITLE": "Legal information related to {{appName}}.",
+
+    "EDITOR_TITLE": "Website Publisher",
+    "NAME_LABEL": "Name / Responsible",
+    "NAME_VALUE": "{{appName}} (Independent project)",
+
+    "LEGAL_REP_LABEL": "Legal Representative",
+    "LEGAL_REP_VALUE": "Arnauld Mba",
+
+    "ADDRESS_LABEL": "Address",
+    "ADDRESS_VALUE": "Horster Str. 66\n45897 Gelsenkirchen, Germany",
+
+    "EMAIL_LABEL": "Email",
+    "PHONE_LABEL": "Phone",
+    "PHONE_VALUE": "Optional",
+
+    "RESPONSIBILITY_TITLE": "Liability",
+    "RESPONSIBILITY_TEXT": "{{appName}} is a platform that connects users. Agreements made between senders and travelers are their sole responsibility. {{appName}} does not provide transport services and does not guarantee the delivery of parcels.",
+
+    "EXTERNAL_LINKS_TITLE": "External Links",
+    "EXTERNAL_LINKS_TEXT": "Despite careful control, we assume no liability for the content of external links. The operators of the linked pages are solely responsible for their content.",
+
+    "INTELLECTUAL_PROPERTY_TITLE": "Intellectual Property",
+    "INTELLECTUAL_PROPERTY_TEXT": "The content, texts, and graphic elements on {{appName}} are protected. Any reproduction or use without prior authorization is prohibited."
+  },
+  
+  "PRIVACY": {
+    "TITLE": "Privacy Policy",
+    "SUBTITLE": "Information about the collection and processing of personal data.",
+
+    "SECTION_1_TITLE": "1. Data Controller",
+    "SECTION_1_TEXT_1": "The data controller responsible for processing data on {{appName}} is:",
+    "SECTION_1_NAME": "Arnauld Mba",
+    "SECTION_1_LOCATION": "Gelsenkirchen, Germany",
+    "SECTION_1_EMAIL": "Email: support@mbokogo.com",
+
+    "SECTION_2_TITLE": "2. Data Collected",
+    "SECTION_2_TEXT": "When using the platform, the following data may be collected:",
+    "SECTION_2_ITEM_1": "Email address",
+    "SECTION_2_ITEM_2": "Name or username",
+    "SECTION_2_ITEM_3": "Data related to published listings",
+    "SECTION_2_ITEM_4": "Messages exchanged via internal messaging",
+    "SECTION_2_NO_BANK": "No banking data is collected.",
+
+    "SECTION_3_TITLE": "3. Purpose of Processing",
+    "SECTION_3_TEXT": "The data is used only to:",
+    "SECTION_3_ITEM_1": "Enable account creation and management",
+    "SECTION_3_ITEM_2": "Facilitate connections between users",
+    "SECTION_3_ITEM_3": "Ensure proper functioning of the platform",
+    "SECTION_3_NO_SHARE": "Data is neither sold nor shared with third parties for commercial purposes.",
+
+    "SECTION_4_TITLE": "4. Data Storage",
+    "SECTION_4_TEXT": "Data is stored on secure servers. Technical measures are implemented to protect information against unauthorized access.",
+
+    "SECTION_5_TITLE": "5. User Rights",
+    "SECTION_5_TEXT": "In accordance with the General Data Protection Regulation (GDPR), you have the following rights:",
+    "SECTION_5_ITEM_1": "Right of access to your data",
+    "SECTION_5_ITEM_2": "Right to rectification",
+    "SECTION_5_ITEM_3": "Right to erasure",
+    "SECTION_5_ITEM_4": "Right to restriction of processing",
+    "SECTION_5_CONTACT": "To exercise your rights, contact us at: support@mbokogo.com",
+
+    "SECTION_6_TITLE": "6. Cookies",
+    "SECTION_6_TEXT": "{{appName}} only uses technical cookies necessary for the operation of the site (for example to maintain an active session). No advertising or third-party tracking cookies are used.",
+
+    "SECTION_7_TITLE": "7. Policy Updates",
+    "SECTION_7_TEXT": "This policy may be updated at any time to reflect changes in the service. The latest version is always available on this page."
   }
 }
