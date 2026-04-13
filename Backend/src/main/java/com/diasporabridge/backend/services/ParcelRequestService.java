@@ -5,7 +5,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.diasporabridge.backend.parcelrequest.entity.ParcelRequest;
-import com.diasporabridge.backend.repos.ParcelRequestRepository;
+import com.diasporabridge.backend.parcelrequest.repo.ParcelRequestRepository;
 
 import lombok.RequiredArgsConstructor;
 

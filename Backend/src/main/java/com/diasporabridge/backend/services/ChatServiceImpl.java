@@ -9,10 +9,9 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.diasporabridge.backend.user.entity.User;
 import com.diasporabridge.backend.match.entity.Match;
-import com.diasporabridge.backend.repos.MatchRepository;
-import com.diasporabridge.backend.repos.MessageRepository;
-import com.diasporabridge.backend.repos.ParcelRequestRepository;
-import com.diasporabridge.backend.repos.TransporterTripRepository;
+import com.diasporabridge.backend.match.repo.MatchRepository;
+import com.diasporabridge.backend.parcelrequest.repo.ParcelRequestRepository;
+import com.diasporabridge.backend.trip.repo.TransporterTripRepository;
 
 import lombok.RequiredArgsConstructor;
 

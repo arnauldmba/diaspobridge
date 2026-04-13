@@ -1,4 +1,4 @@
-package com.diasporabridge.backend.repos;
+package com.diasporabridge.backend.auth.repo;
 
 import java.time.Instant;
 import java.util.Optional;

@@ -27,10 +27,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.diasporabridge.backend.user.entity.User;
-import com.diasporabridge.backend.repos.TransporterTripRepository;
-import com.diasporabridge.backend.repos.UsersRepository;
+import com.diasporabridge.backend.user.repo.UsersRepository;
 import com.diasporabridge.backend.services.TransporterTripService;
 import com.diasporabridge.backend.trip.entity.TransporterTrip;
+import com.diasporabridge.backend.trip.repo.TransporterTripRepository;
 
 import org.springframework.security.core.Authentication;
 

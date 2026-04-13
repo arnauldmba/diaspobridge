@@ -22,7 +22,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 
 import com.diasporabridge.backend.user.entity.User;
-import com.diasporabridge.backend.repos.UsersRepository;
+import com.diasporabridge.backend.user.repo.UsersRepository;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;

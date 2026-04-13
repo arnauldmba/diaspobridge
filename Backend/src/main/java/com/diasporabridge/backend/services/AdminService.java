@@ -7,14 +7,14 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.diasporabridge.backend.user.entity.User;
-import com.diasporabridge.backend.repos.MatchRepository;
-import com.diasporabridge.backend.repos.MessageRepository;
-import com.diasporabridge.backend.repos.ParcelRequestRepository;
-import com.diasporabridge.backend.repos.TransporterTripRepository;
-import com.diasporabridge.backend.repos.UsersRepository;
-import com.diasporabridge.backend.repos.admin.AdminTripReadRepository;
-import com.diasporabridge.backend.repos.admin.AdminUserReadRepository;
+import com.diasporabridge.backend.user.repo.UsersRepository;
+import com.diasporabridge.backend.admin.repo.AdminTripReadRepository;
+import com.diasporabridge.backend.admin.repo.AdminUserReadRepository;
+import com.diasporabridge.backend.match.repo.MatchRepository;
+import com.diasporabridge.backend.message.repo.MessageRepository;
+import com.diasporabridge.backend.parcelrequest.repo.ParcelRequestRepository;
 import com.diasporabridge.backend.trip.entity.TransporterTrip;
+import com.diasporabridge.backend.trip.repo.TransporterTripRepository;
 
 import DTO.AdminDashboardStatsDTO;
 import DTO.AdminTripRowDTO;

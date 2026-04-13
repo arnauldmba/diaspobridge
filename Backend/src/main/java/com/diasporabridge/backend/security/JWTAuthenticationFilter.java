@@ -19,7 +19,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.diasporabridge.backend.user.entity.User;
-import com.diasporabridge.backend.repos.UsersRepository;
+import com.diasporabridge.backend.user.repo.UsersRepository;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -38,7 +38,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 	//@Autowired
 	private final UsersRepository usersRepository;
 
-	public JWTAuthenticationFilter(AuthenticationManager authenticationManager,UsersRepository usersRepository) {
+	public JWTAuthenticationFilter(AuthenticationManager authenticationManager, UsersRepository usersRepository) {
 		super();
 		this.authenticationManager = authenticationManager;
 		this.usersRepository = usersRepository;

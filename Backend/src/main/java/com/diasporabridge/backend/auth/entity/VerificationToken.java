@@ -1,4 +1,4 @@
-package com.diasporabridge.backend.register;
+package com.diasporabridge.backend.auth.entity;
 
 
 import java.util.Calendar;

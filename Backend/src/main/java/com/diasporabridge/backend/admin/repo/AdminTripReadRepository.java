@@ -1,4 +1,4 @@
-package com.diasporabridge.backend.repos.admin;
+package com.diasporabridge.backend.admin.repo;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.diasporabridge.backend.repos;
+package com.diasporabridge.backend.parcelrequest.repo;
 
 import java.time.LocalDate;
 import java.util.List;

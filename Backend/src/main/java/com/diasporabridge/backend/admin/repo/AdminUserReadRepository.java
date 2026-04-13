@@ -1,4 +1,5 @@
-package com.diasporabridge.backend.repos.admin;
+package com.diasporabridge.backend.admin.repo;
+
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
 import com.diasporabridge.backend.user.entity.User;

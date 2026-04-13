@@ -2,7 +2,7 @@ package com.diasporabridge.backend.services;
 
 import org.springframework.stereotype.Service;
 
-import com.diasporabridge.backend.util.EmailSender;
+import com.diasporabridge.backend.common.email.EmailSender;
 
 import lombok.RequiredArgsConstructor;
 

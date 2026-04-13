@@ -1,4 +1,4 @@
-package com.diasporabridge.backend.repos;
+package com.diasporabridge.backend.message.repo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -1,4 +1,4 @@
-package com.diasporabridge.backend.brevo;
+package com.diasporabridge.backend.common.email.brevo;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -6,7 +6,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
-import com.diasporabridge.backend.util.EmailSender;
+import com.diasporabridge.backend.common.email.EmailSender;
 
 import java.util.List;
 import java.util.Map;

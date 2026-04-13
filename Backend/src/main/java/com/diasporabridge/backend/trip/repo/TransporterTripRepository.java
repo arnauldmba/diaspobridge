@@ -1,4 +1,4 @@
-package com.diasporabridge.backend.repos;
+package com.diasporabridge.backend.trip.repo;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -8,7 +8,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
 
 import com.diasporabridge.backend.trip.entity.TransporterTrip;
 import com.diasporabridge.backend.user.entity.User;

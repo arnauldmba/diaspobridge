@@ -22,8 +22,8 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.diasporabridge.backend.user.entity.User;
 import com.diasporabridge.backend.match.entity.Match;
-import com.diasporabridge.backend.repos.MatchRepository;
-import com.diasporabridge.backend.repos.MessageRepository;
+import com.diasporabridge.backend.match.repo.MatchRepository;
+import com.diasporabridge.backend.message.repo.MessageRepository;
 import com.diasporabridge.backend.services.MatchService;
 import com.diasporabridge.backend.services.MessageService;
 import com.diasporabridge.backend.services.UserServiceImpl;

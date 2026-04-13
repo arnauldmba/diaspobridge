@@ -1,4 +1,4 @@
-package com.diasporabridge.backend.util;
+package com.diasporabridge.backend.common.email;
 
 
 public interface EmailSender {

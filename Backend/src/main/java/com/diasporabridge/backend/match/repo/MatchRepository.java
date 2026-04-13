@@ -1,4 +1,4 @@
-package com.diasporabridge.backend.repos;
+package com.diasporabridge.backend.match.repo;
 
 import com.diasporabridge.backend.match.entity.Match;
 import com.diasporabridge.backend.match.entity.Match.MatchStatus;

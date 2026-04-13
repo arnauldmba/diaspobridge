@@ -16,15 +16,15 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.diasporabridge.backend.brevo.BrevoEmailSenderService;
-import com.diasporabridge.backend.register.VerificationToken;
-import com.diasporabridge.backend.register.VerificationTokenRepository;
-import com.diasporabridge.backend.repos.UsersRepository;
+import com.diasporabridge.backend.auth.entity.VerificationToken;
+import com.diasporabridge.backend.auth.repo.VerificationTokenRepository;
+import com.diasporabridge.backend.common.email.EmailSender;
+import com.diasporabridge.backend.common.email.brevo.BrevoEmailSenderService;
 import com.diasporabridge.backend.services.exception.EmailAlreadyExistsException;
 import com.diasporabridge.backend.services.exception.ExpiredTokenException;
 import com.diasporabridge.backend.services.exception.InvalidTokenException;
 import com.diasporabridge.backend.user.entity.User;
-import com.diasporabridge.backend.util.EmailSender;
+import com.diasporabridge.backend.user.repo.UsersRepository;
 
 import DTO.RegistrationRequest;
 
