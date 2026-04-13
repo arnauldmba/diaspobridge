@@ -11,7 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.diasporabridge.backend.entities.User;
+import com.diasporabridge.backend.user.entity.User;
 import com.diasporabridge.backend.services.UserService;
 
 @Service

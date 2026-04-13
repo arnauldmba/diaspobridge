@@ -4,7 +4,7 @@ import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
-import com.diasporabridge.backend.entities.User;
+import com.diasporabridge.backend.user.entity.User;
 
 import DTO.RegistrationRequest;
 

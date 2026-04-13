@@ -17,14 +17,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.diasporabridge.backend.brevo.BrevoEmailSenderService;
-import com.diasporabridge.backend.entities.User;
-import com.diasporabridge.backend.entities.User.Role;
 import com.diasporabridge.backend.register.VerificationToken;
 import com.diasporabridge.backend.register.VerificationTokenRepository;
 import com.diasporabridge.backend.repos.UsersRepository;
 import com.diasporabridge.backend.services.exception.EmailAlreadyExistsException;
 import com.diasporabridge.backend.services.exception.ExpiredTokenException;
 import com.diasporabridge.backend.services.exception.InvalidTokenException;
+import com.diasporabridge.backend.user.entity.User;
 import com.diasporabridge.backend.util.EmailSender;
 
 import DTO.RegistrationRequest;

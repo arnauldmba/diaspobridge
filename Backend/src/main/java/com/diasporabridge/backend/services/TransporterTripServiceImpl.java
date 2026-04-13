@@ -14,9 +14,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.diasporabridge.backend.entities.TransporterTrip;
-import com.diasporabridge.backend.entities.User;
 import com.diasporabridge.backend.repos.TransporterTripRepository;
+import com.diasporabridge.backend.trip.entity.TransporterTrip;
+import com.diasporabridge.backend.user.entity.User;
 
 import lombok.RequiredArgsConstructor;
 

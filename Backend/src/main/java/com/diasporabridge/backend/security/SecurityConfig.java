@@ -21,12 +21,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 
-import com.diasporabridge.backend.entities.Match;
-import com.diasporabridge.backend.entities.ParcelRequest;
-import com.diasporabridge.backend.entities.TransporterTrip;
-import com.diasporabridge.backend.entities.User;
-import com.diasporabridge.backend.entities.Match.MatchStatus;
-import com.diasporabridge.backend.entities.Match.ProposedBy;
+import com.diasporabridge.backend.user.entity.User;
 import com.diasporabridge.backend.repos.UsersRepository;
 
 import jakarta.servlet.http.HttpServletRequest;

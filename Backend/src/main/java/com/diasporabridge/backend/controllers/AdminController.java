@@ -1,10 +1,10 @@
 package com.diasporabridge.backend.controllers;
 
-import com.diasporabridge.backend.entities.TransporterTrip;
-import com.diasporabridge.backend.entities.User;
+import com.diasporabridge.backend.user.entity.User;
 import com.diasporabridge.backend.services.AdminService;
 import com.diasporabridge.backend.services.TransporterTripService;
 import com.diasporabridge.backend.services.UserService;
+import com.diasporabridge.backend.trip.entity.TransporterTrip;
 
 import DTO.AdminDashboardStatsDTO;
 import DTO.AdminTripRowDTO;

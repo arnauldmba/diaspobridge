@@ -1,4 +1,4 @@
-package com.diasporabridge.backend.entities;
+package com.diasporabridge.backend.trip.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.LocalDate;
 
+import com.diasporabridge.backend.user.entity.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity

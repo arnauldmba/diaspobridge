@@ -1,9 +1,12 @@
-package com.diasporabridge.backend.entities;
+package com.diasporabridge.backend.message.entity;
 
 
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.Instant;
+
+import com.diasporabridge.backend.match.entity.Match;
+import com.diasporabridge.backend.user.entity.User;
 
 @Entity
 @Table(name = "messages")

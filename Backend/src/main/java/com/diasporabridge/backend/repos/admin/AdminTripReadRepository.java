@@ -4,7 +4,8 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
-import com.diasporabridge.backend.entities.TransporterTrip;
+
+import com.diasporabridge.backend.trip.entity.TransporterTrip;
 
 public interface AdminTripReadRepository extends Repository<TransporterTrip, Long>{
     @Query(value = """

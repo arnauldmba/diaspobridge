@@ -1,4 +1,4 @@
-package com.diasporabridge.backend.entities;
+package com.diasporabridge.backend.user.entity;
 
 import java.time.Instant;
 import org.hibernate.annotations.SQLDelete;

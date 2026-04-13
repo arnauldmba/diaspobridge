@@ -5,8 +5,9 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.diasporabridge.backend.entities.ParcelRequest;
-import com.diasporabridge.backend.entities.ParcelRequest.Status;
+import com.diasporabridge.backend.parcelrequest.entity.ParcelRequest;
+import com.diasporabridge.backend.parcelrequest.entity.ParcelRequest.Status;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

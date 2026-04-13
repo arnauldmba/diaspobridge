@@ -1,14 +1,12 @@
 package com.diasporabridge.backend.services;
 
-
-import com.diasporabridge.backend.entities.Match;
-import com.diasporabridge.backend.entities.Match.MatchStatus;
-import com.diasporabridge.backend.entities.Message;
-import com.diasporabridge.backend.entities.TransporterTrip;
-import com.diasporabridge.backend.entities.User;
+import com.diasporabridge.backend.user.entity.User;
+import com.diasporabridge.backend.match.entity.Match;
+import com.diasporabridge.backend.message.entity.Message;
 import com.diasporabridge.backend.repos.MatchRepository;
 import com.diasporabridge.backend.repos.MessageRepository;
 import com.diasporabridge.backend.repos.TransporterTripRepository;
+import com.diasporabridge.backend.trip.entity.TransporterTrip;
 
 import DTO.MatchDto;
 import jakarta.transaction.Transactional;

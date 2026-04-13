@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.diasporabridge.backend.entities.User;
+import com.diasporabridge.backend.user.entity.User;
 import com.diasporabridge.backend.services.UserService;
 
 import DTO.RegistrationRequest;

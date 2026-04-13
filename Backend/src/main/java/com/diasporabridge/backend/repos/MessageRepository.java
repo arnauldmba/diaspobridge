@@ -1,9 +1,10 @@
 package com.diasporabridge.backend.repos;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import com.diasporabridge.backend.entities.Match;
-import com.diasporabridge.backend.entities.Message;
-import com.diasporabridge.backend.entities.User;
+
+import com.diasporabridge.backend.match.entity.Match;
+import com.diasporabridge.backend.message.entity.Message;
+import com.diasporabridge.backend.user.entity.User;
 
 import java.time.Instant;
 import java.util.List;

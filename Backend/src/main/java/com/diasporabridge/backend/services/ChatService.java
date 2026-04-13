@@ -4,9 +4,8 @@ package com.diasporabridge.backend.services;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.diasporabridge.backend.entities.Match;
-import com.diasporabridge.backend.entities.Message;
-import com.diasporabridge.backend.entities.User;
+import com.diasporabridge.backend.match.entity.Match;
+import com.diasporabridge.backend.user.entity.User;
 
 public interface ChatService {
 	

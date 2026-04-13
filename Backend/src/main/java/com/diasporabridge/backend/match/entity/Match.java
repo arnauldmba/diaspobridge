@@ -1,10 +1,14 @@
-package com.diasporabridge.backend.entities;
+package com.diasporabridge.backend.match.entity;
 
 
 import jakarta.persistence.*;
 import lombok.*;
 import java.math.BigDecimal;
 import java.time.Instant;
+
+import com.diasporabridge.backend.parcelrequest.entity.ParcelRequest;
+import com.diasporabridge.backend.trip.entity.TransporterTrip;
+import com.diasporabridge.backend.user.entity.User;
 
 @Entity
 @Table(

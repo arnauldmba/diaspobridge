@@ -13,10 +13,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.diasporabridge.backend.entities.PasswordResetToken;
-import com.diasporabridge.backend.entities.User;
+import com.diasporabridge.backend.auth.entity.PasswordResetToken;
 import com.diasporabridge.backend.repos.PasswordResetTokenRepository;
 import com.diasporabridge.backend.repos.UsersRepository;
+import com.diasporabridge.backend.user.entity.User;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;

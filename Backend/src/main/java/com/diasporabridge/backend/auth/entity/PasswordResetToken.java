@@ -1,7 +1,9 @@
-package com.diasporabridge.backend.entities;
+package com.diasporabridge.backend.auth.entity;
 
 
 import java.time.Instant;
+
+import com.diasporabridge.backend.user.entity.User;
 
 import jakarta.persistence.*;
 import lombok.*;

@@ -5,8 +5,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
-import com.diasporabridge.backend.entities.User;
 import com.diasporabridge.backend.services.UserService;
+import com.diasporabridge.backend.user.entity.User;
+
 
 @EnableScheduling
 @SpringBootApplication

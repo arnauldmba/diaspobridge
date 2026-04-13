@@ -7,9 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.diasporabridge.backend.entities.Match;
-import com.diasporabridge.backend.entities.Message;
-import com.diasporabridge.backend.entities.User;
+import com.diasporabridge.backend.user.entity.User;
+import com.diasporabridge.backend.match.entity.Match;
 import com.diasporabridge.backend.repos.MatchRepository;
 import com.diasporabridge.backend.repos.MessageRepository;
 import com.diasporabridge.backend.repos.ParcelRequestRepository;
@@ -23,7 +22,6 @@ import lombok.RequiredArgsConstructor;
 public class ChatServiceImpl implements ChatService{
 
 	private final MatchRepository matchRepo;
-	private final MessageRepository messageRepo;
 	private final ParcelRequestRepository parcelRepo;
 	private final TransporterTripRepository tripRepo;
 
@@ -69,7 +67,4 @@ public class ChatServiceImpl implements ChatService{
 		// save inutile si JPA flush, mais ok:
 		matchRepo.save(match);
 	}
-
-	
-
 }

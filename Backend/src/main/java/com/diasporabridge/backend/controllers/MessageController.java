@@ -20,9 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.diasporabridge.backend.entities.Match;
-import com.diasporabridge.backend.entities.Message;
-import com.diasporabridge.backend.entities.User;
+import com.diasporabridge.backend.user.entity.User;
+import com.diasporabridge.backend.match.entity.Match;
 import com.diasporabridge.backend.repos.MatchRepository;
 import com.diasporabridge.backend.repos.MessageRepository;
 import com.diasporabridge.backend.services.MatchService;
@@ -103,6 +102,5 @@ public class MessageController {
 		User me = userServiceImpl.currentUser(principal);
 		matchService.markRead(matchId, me);
 	}
-
 }
 

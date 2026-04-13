@@ -11,8 +11,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.diasporabridge.backend.entities.User;
 import com.diasporabridge.backend.register.VerificationToken;
+import com.diasporabridge.backend.user.entity.User;
 
 import jakarta.transaction.Transactional;
 

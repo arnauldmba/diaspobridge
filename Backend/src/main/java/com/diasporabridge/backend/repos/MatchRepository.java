@@ -1,8 +1,8 @@
 package com.diasporabridge.backend.repos;
 
-import com.diasporabridge.backend.entities.Match;
-import com.diasporabridge.backend.entities.Match.MatchStatus;
-import com.diasporabridge.backend.entities.Match.ProposedBy;
+import com.diasporabridge.backend.match.entity.Match;
+import com.diasporabridge.backend.match.entity.Match.MatchStatus;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

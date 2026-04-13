@@ -4,7 +4,7 @@ package com.diasporabridge.backend.register;
 import java.util.Calendar;
 import java.util.Date;
 
-import com.diasporabridge.backend.entities.User;
+import com.diasporabridge.backend.user.entity.User;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

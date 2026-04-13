@@ -7,8 +7,8 @@ import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.diasporabridge.backend.entities.TransporterTrip;
-import com.diasporabridge.backend.entities.User;
+import com.diasporabridge.backend.trip.entity.TransporterTrip;
+import com.diasporabridge.backend.user.entity.User;
 
 public interface TransporterTripService {
 	public TransporterTrip saveTransporterTrip(TransporterTrip transporterTrip);

@@ -10,8 +10,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.diasporabridge.backend.entities.TransporterTrip;
-import com.diasporabridge.backend.entities.User;
+import com.diasporabridge.backend.trip.entity.TransporterTrip;
+import com.diasporabridge.backend.user.entity.User;
 
 public interface TransporterTripRepository extends JpaRepository<TransporterTrip, Long> {
 
