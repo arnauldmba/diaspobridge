@@ -1,0 +1,24 @@
+package com.diasporabridge.backend.parcelrequest.service;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
+import com.diasporabridge.backend.parcelrequest.entity.ParcelRequest;
+import com.diasporabridge.backend.parcelrequest.repo.ParcelRequestRepository;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+public class ParcelRequestService {
+  private final ParcelRequestRepository parcelRepo;
+
+  public Page<ParcelRequest> listForSender(Long senderId, Pageable pageable) {
+    return parcelRepo.findBySender_IdOrderByCreatedAtDesc(senderId, pageable);
+  }
+
+  public boolean deleteOwned(Long id, Long senderId) {
+    return parcelRepo.deleteByIdAndSender_Id(id, senderId) > 0;
+  }
+}

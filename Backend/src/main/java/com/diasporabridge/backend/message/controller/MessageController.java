@@ -1,0 +1,101 @@
+package com.diasporabridge.backend.message.controller;
+
+import java.security.Principal;
+import java.time.Instant;
+import java.util.List;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
+
+import com.diasporabridge.backend.user.entity.User;
+import com.diasporabridge.backend.user.service.UserServiceImpl;
+import com.diasporabridge.backend.match.entity.Match;
+import com.diasporabridge.backend.match.repo.MatchRepository;
+import com.diasporabridge.backend.match.service.MatchService;
+import com.diasporabridge.backend.message.dto.MessageDto;
+import com.diasporabridge.backend.message.repo.MessageRepository;
+import com.diasporabridge.backend.message.service.MessageService;
+
+import lombok.RequiredArgsConstructor;
+
+@RestController
+@RequestMapping("/api/messages")
+@RequiredArgsConstructor
+public class MessageController {
+	
+    private final UserServiceImpl userServiceImpl;
+	private final MatchRepository matchRepository;
+	private final MessageRepository messageRepository;
+	private final MatchService matchService;
+	private final MessageService messageService;
+
+	public record SendMessageRequest(String body) {}
+
+	@GetMapping("/matches/{matchId}/messages")
+	public List<MessageDto> list(@PathVariable Long matchId, Principal principal) {
+		User me = userServiceImpl.currentUser(principal);
+
+		Match match = matchRepository.findById(matchId)
+				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Match not found"));
+
+		matchService.ensureParticipant(match, me.getId());
+
+		return messageRepository.findByMatchIdOrderBySentAtAsc(matchId)
+				.stream()
+				.map(m -> new MessageDto(m.getId(), matchId, m.getSender().getId(), m.getBody(), m.getSentAt()))
+				.toList();
+	}
+	
+	//nouvelle methode pour la finale*******
+	@GetMapping("/matches/{matchId}/messages/new")
+	public List<MessageDto> getNewMessages(@PathVariable Long matchId,
+	                                       @RequestParam Instant since,
+	                                       Principal principal) {
+
+	  User me = userServiceImpl.currentUser(principal);
+
+	  Match match = matchRepository.findById(matchId)
+	      .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Match not found"));
+
+	  matchService.ensureParticipant(match, me.getId());
+
+	  return messageRepository.findNewMessages(matchId, since).stream()
+	      .map(m -> new MessageDto(
+	          m.getId(),
+	          m.getMatch().getId(),
+	          m.getSender().getId(),
+	          m.getBody(),
+	          m.getSentAt()
+	      ))
+	      .toList();
+	}
+	
+	@PostMapping("/matches/{matchId}/messages")
+	public ResponseEntity<MessageDto> send(@PathVariable Long matchId,
+	                                       @RequestBody SendMessageRequest req,
+	                                       Principal principal) {
+	  User me = userServiceImpl.currentUser(principal);
+
+	  if (req.body() == null || req.body().trim().isEmpty()) {
+	    throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Message empty");
+	  }
+
+	  MessageDto dto = messageService.send(matchId, req.body(), me);
+	  return ResponseEntity.status(HttpStatus.CREATED).body(dto);
+	}
+
+	@PostMapping("/matches/{matchId}/read")
+	public void markRead(@PathVariable Long matchId, Principal principal) {
+		User me = userServiceImpl.currentUser(principal);
+		matchService.markRead(matchId, me);
+	}
+}
+
