@@ -1,4 +1,4 @@
-package com.diasporabridge.backend.controllers;
+package com.diasporabridge.backend.user.controller;
 
 import java.util.List;
 

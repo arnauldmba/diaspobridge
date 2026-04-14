@@ -1,4 +1,4 @@
-package com.diasporabridge.backend.controllers;
+package com.diasporabridge.backend.parcelrequest.controller;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;

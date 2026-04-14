@@ -1,4 +1,4 @@
-package com.diasporabridge.backend.security;
+package com.diasporabridge.backend.security.jwt;
 
 public final class SecParams {
   public static final long EXP_TIME = 24 * 60 * 60 * 1000;

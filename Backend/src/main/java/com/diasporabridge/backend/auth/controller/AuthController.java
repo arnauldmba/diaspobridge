@@ -1,4 +1,4 @@
-package com.diasporabridge.backend.security;
+package com.diasporabridge.backend.auth.controller;
 
 import java.util.Map;
 

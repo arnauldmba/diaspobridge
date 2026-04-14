@@ -1,4 +1,4 @@
-package com.diasporabridge.backend.controllers;
+package com.diasporabridge.backend.admin.controller;
 
 import com.diasporabridge.backend.user.entity.User;
 import com.diasporabridge.backend.user.service.UserService;

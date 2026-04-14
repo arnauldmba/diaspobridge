@@ -1,4 +1,4 @@
-package com.diasporabridge.backend.security;
+package com.diasporabridge.backend.security.service;
 
 import java.util.ArrayList;
 import java.util.List;

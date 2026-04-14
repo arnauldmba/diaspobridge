@@ -1,4 +1,4 @@
-package com.diasporabridge.backend.security;
+package com.diasporabridge.backend.security.filter;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,6 +18,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.diasporabridge.backend.auth.dto.LoginRequest;
+import com.diasporabridge.backend.security.jwt.SecParams;
 import com.diasporabridge.backend.user.entity.User;
 import com.diasporabridge.backend.user.repo.UsersRepository;
 
@@ -27,8 +27,6 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import com.fasterxml.jackson.core.exc.StreamReadException;
-import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 

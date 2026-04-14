@@ -1,4 +1,4 @@
-package com.diasporabridge.backend.controllers;
+package com.diasporabridge.backend.match.controller;
 
 import java.security.Principal;
 import java.time.Instant;

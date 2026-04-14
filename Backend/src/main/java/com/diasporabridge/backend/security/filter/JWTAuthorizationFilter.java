@@ -1,4 +1,4 @@
-package com.diasporabridge.backend.security;
+package com.diasporabridge.backend.security.filter;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,6 +18,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.diasporabridge.backend.security.jwt.SecParams;
 import com.diasporabridge.backend.user.entity.User;
 import com.diasporabridge.backend.user.repo.UsersRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
