@@ -12,7 +12,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,9 +27,9 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.diasporabridge.backend.user.entity.User;
 import com.diasporabridge.backend.user.repo.UsersRepository;
-import com.diasporabridge.backend.services.TransporterTripService;
 import com.diasporabridge.backend.trip.entity.TransporterTrip;
 import com.diasporabridge.backend.trip.repo.TransporterTripRepository;
+import com.diasporabridge.backend.trip.service.TransporterTripService;
 
 import org.springframework.security.core.Authentication;
 

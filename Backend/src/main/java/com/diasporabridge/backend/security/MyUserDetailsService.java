@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.diasporabridge.backend.user.entity.User;
-import com.diasporabridge.backend.services.UserService;
+import com.diasporabridge.backend.user.service.UserService;
 
 @Service
 public class MyUserDetailsService implements UserDetailsService {

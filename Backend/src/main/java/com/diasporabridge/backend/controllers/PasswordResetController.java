@@ -3,7 +3,8 @@ package com.diasporabridge.backend.controllers;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.diasporabridge.backend.services.PasswordResetService;
+import com.diasporabridge.backend.auth.service.PasswordResetService;
+
 import org.springframework.transaction.annotation.Transactional;
 
 

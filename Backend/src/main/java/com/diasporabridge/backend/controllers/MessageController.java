@@ -21,14 +21,14 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.diasporabridge.backend.user.entity.User;
+import com.diasporabridge.backend.user.service.UserServiceImpl;
 import com.diasporabridge.backend.match.entity.Match;
 import com.diasporabridge.backend.match.repo.MatchRepository;
+import com.diasporabridge.backend.match.service.MatchService;
+import com.diasporabridge.backend.message.dto.MessageDto;
 import com.diasporabridge.backend.message.repo.MessageRepository;
-import com.diasporabridge.backend.services.MatchService;
-import com.diasporabridge.backend.services.MessageService;
-import com.diasporabridge.backend.services.UserServiceImpl;
+import com.diasporabridge.backend.message.service.MessageService;
 
-import DTO.MessageDto;
 import lombok.RequiredArgsConstructor;
 
 @RestController

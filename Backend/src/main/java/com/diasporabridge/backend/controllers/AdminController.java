@@ -1,15 +1,14 @@
 package com.diasporabridge.backend.controllers;
 
 import com.diasporabridge.backend.user.entity.User;
-import com.diasporabridge.backend.services.AdminService;
-import com.diasporabridge.backend.services.TransporterTripService;
-import com.diasporabridge.backend.services.UserService;
+import com.diasporabridge.backend.user.service.UserService;
+import com.diasporabridge.backend.admin.dto.AdminDashboardStatsDTO;
+import com.diasporabridge.backend.admin.dto.AdminTripRowDTO;
+import com.diasporabridge.backend.admin.dto.AdminUserRowDTO;
+import com.diasporabridge.backend.admin.service.AdminService;
 import com.diasporabridge.backend.trip.entity.TransporterTrip;
 
-import DTO.AdminDashboardStatsDTO;
-import DTO.AdminTripRowDTO;
-import DTO.AdminUserRowDTO;
-import lombok.RequiredArgsConstructor;
+//import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 

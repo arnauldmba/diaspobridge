@@ -18,6 +18,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.diasporabridge.backend.auth.dto.LoginRequest;
 import com.diasporabridge.backend.user.entity.User;
 import com.diasporabridge.backend.user.repo.UsersRepository;
 

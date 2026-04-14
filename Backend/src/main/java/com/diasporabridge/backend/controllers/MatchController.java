@@ -4,25 +4,22 @@ import java.security.Principal;
 import java.time.Instant;
 import java.util.List;
 
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.diasporabridge.backend.user.entity.User;
+import com.diasporabridge.backend.user.service.UserServiceImpl;
+import com.diasporabridge.backend.match.dto.MatchDto;
 import com.diasporabridge.backend.match.entity.Match;
 import com.diasporabridge.backend.match.repo.MatchRepository;
+import com.diasporabridge.backend.match.service.MatchService;
 import com.diasporabridge.backend.message.repo.MessageRepository;
-import com.diasporabridge.backend.services.MatchService;
-import com.diasporabridge.backend.services.UserServiceImpl;
 
-import DTO.MatchDto;
 import lombok.RequiredArgsConstructor;
 
 @RestController

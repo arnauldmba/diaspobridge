@@ -1,9 +1,7 @@
 package com.diasporabridge.backend.controllers;
 
 import java.util.List;
-import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,10 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.diasporabridge.backend.user.entity.User;
-import com.diasporabridge.backend.services.UserService;
-
-import DTO.RegistrationRequest;
-import jakarta.transaction.Transactional;
+import com.diasporabridge.backend.user.service.UserService;
 
 
 @RestController
@@ -27,7 +22,6 @@ import jakarta.transaction.Transactional;
 @CrossOrigin
 public class UserRESTController {
 
-	//@Autowired
 	private final UserService userService;
 	
 	public UserRESTController(UserService userService) { 
