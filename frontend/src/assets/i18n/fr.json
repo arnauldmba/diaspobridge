@@ -76,7 +76,7 @@
     "FAQ": "Questions fréquentes",
     "LEGAL_NOTICE": "Mentions légales",
     "PRIVACY_POLICY": "Politique de confidentialité",
-    "LOGOUT": "Se déconnecter"
+    "LOGOUT": "Déconnexion"
   },
   "CITY_INPUT": {
     "REQUIRED": "Ce champ est obligatoire.",
@@ -296,5 +296,33 @@
 
     "SECTION_7_TITLE": "7. Modification de la politique",
     "SECTION_7_TEXT": "Cette politique peut être mise à jour à tout moment afin de refléter l’évolution du service. La version la plus récente est toujours disponible sur cette page."
+  },
+
+    "INSTALL_SHEET": {
+    "TITLE": "Installer MbokoGO",
+    "CLOSE": "Fermer",
+    "SUBTITLE": "Accédez plus rapidement à l’application depuis votre téléphone.",
+    "BENEFITS": {
+      "FAST": "Ouverture plus rapide",
+      "APP_LIKE": "Expérience plus proche d’une vraie application",
+      "HOME": "Accès direct depuis l’écran d’accueil"
+    },
+    "INSTALL_NOW": "Installer maintenant",
+    "UNAVAILABLE": "L’option d’installation n’est pas encore disponible. Réessayez un peu plus tard.",
+    "IOS": {
+      "STEP_1": "Ouvrez MbokoGO dans <strong>Safari</strong>",
+      "STEP_2": "Touchez le bouton <strong>Partager</strong>",
+      "STEP_3": "Choisissez <strong>Ajouter à l’écran d’accueil</strong>",
+      "CONFIRM": "C'est bon"
+    }
+  },
+
+  "INSTALL": {
+    "INSTALL_APP": "Installer MbokoGO",
+    "CLOSE": "Fermer",
+    "PROFILE": {
+        "TITLE": "Installer MbokoGO",
+        "DESCRIPTION": "Accès rapide depuis votre téléphone"
+    }
   }
 }

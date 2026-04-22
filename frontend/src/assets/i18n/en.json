@@ -296,5 +296,33 @@
 
     "SECTION_7_TITLE": "7. Policy Updates",
     "SECTION_7_TEXT": "This policy may be updated at any time to reflect changes in the service. The latest version is always available on this page."
+  },
+  
+  "INSTALL_SHEET": {
+    "TITLE": "Install MbokoGO",
+    "CLOSE": "Close",
+    "SUBTITLE": "Access the app faster from your phone.",
+    "BENEFITS": {
+      "FAST": "Faster launch",
+      "APP_LIKE": "App-like experience",
+      "HOME": "Direct access from your home screen"
+    },
+    "INSTALL_NOW": "Install now",
+    "UNAVAILABLE": "Installation is not available yet. Please try again later.",
+    "IOS": {
+      "STEP_1": "Open MbokoGO in <strong>Safari</strong>",
+      "STEP_2": "Tap the Share <strong>Share button</strong>",
+      "STEP_3": "Select <strong>Add to Home Screen</strong>",
+      "CONFIRM": "Got it"
+    }
+  },
+
+  "INSTALL": {
+    "INSTALL_APP": "Install MbokoGO",
+    "CLOSE": "Close",
+    "PROFILE": {
+      "TITLE": "Install MbokoGO",
+      "DESCRIPTION": "Quick access from your phone"
+    }
   }
 }

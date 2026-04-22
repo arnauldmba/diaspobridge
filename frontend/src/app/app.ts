@@ -1,28 +1,32 @@
 import { AfterViewInit, Component, inject, OnInit, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Navbar } from "./layouts/navbar/navbar";
 import { TranslateService } from '@ngx-translate/core';
 import { PwaUpdateService } from './core/services/pwa-update.service';
 import { UnreadMessagesService } from './core/services/unread-messages.service';
 import { AuthService } from './core/services/auth.service';
+import { PwaInstallService } from './core/services/pwa-install.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [ RouterOutlet, Navbar],
+  imports: [ RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
 export class App implements AfterViewInit{
 
-  //protected readonly title = signal('diasporabridge');
+  protected readonly title = signal('MbokoGO');
+
+  canInstall$: Observable<boolean>;
 
   private readonly pwaUpdateService = inject(PwaUpdateService);
   private readonly unreadMessagesService = inject(UnreadMessagesService);
   private readonly authService = inject(AuthService);
 
-  constructor(private translate: TranslateService) {
+  constructor(private translate: TranslateService, private pwaInstallService: PwaInstallService) {
     this.pwaUpdateService.init();
+    this.canInstall$ = this.pwaInstallService.canInstall$;
 
     if (this.authService.isLoggedIn()) {
       this.unreadMessagesService.startPolling();
@@ -47,5 +51,9 @@ export class App implements AfterViewInit{
         }, 300);
       }, 500);
     }
+  }
+
+  ngOnInit(): void {
+    this.pwaInstallService.init();
   }
 }

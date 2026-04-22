@@ -1,0 +1,59 @@
+<div class="install-banner">
+    <!-- HOME: Android / Chrome / Edge -->
+    <div
+        class="install-entry home"
+        *ngIf="mode === 'home' && (canInstall$ | async)"
+        (click)="openInstallSheet()"
+    >
+        <div class="install-entry__left2">
+            <mat-icon class="m-0 p-0">download</mat-icon>
+            <span>{{ 'INSTALL.INSTALL_APP' | translate }}</span>
+        </div>
+
+        <button
+            mat-icon-button
+            type="button"
+            aria-label="Fermer"
+            (click)="closeHomeBanner($event)"
+        >
+            <mat-icon style="color: white;">close</mat-icon>
+        </button>
+    </div>
+
+    <!-- HOME: iPhone -->
+    <div
+    class="install-entry home"
+    *ngIf="mode === 'home' && (showIosHelp$ | async)"
+    (click)="openInstallSheet()"
+    >
+        <div class="install-entry__left2">
+            <mat-icon class="mat-icon-style">download</mat-icon>
+            <span>{{ 'INSTALL.INSTALL_APP' | translate }}</span>
+        </div>
+
+        <button
+            mat-icon-button
+            type="button"
+            aria-label="Fermer"
+            (click)="closeHomeIosBanner($event)"
+        >
+            <mat-icon style="color: white;">close</mat-icon>
+        </button>
+    </div>
+</div>
+
+<!-- PROFILE -->
+<div
+  class="install-entry profile"
+  *ngIf="mode === 'profile' && ((canShowProfileInstall$ | async) || (showProfileIosHelp$ | async))"
+  (click)="openInstallSheet()"
+>
+    <div class="install-entry__left_profile">
+    <!--<div class="border">-->
+        <mat-icon style="color: var(--color-accent); font-size: 24px;">download</mat-icon>
+        <div>
+        <strong>{{ 'INSTALL.PROFILE.TITLE' | translate }}</strong>
+        <p>{{ 'INSTALL.PROFILE.DESCRIPTION' | translate }}</p>
+        </div>
+    </div>
+</div>

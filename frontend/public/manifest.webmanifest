@@ -11,14 +11,46 @@
   "start_url": "/",
   "icons": [
     {
-      "src": "icons/icon-192x192.png",
+      "src": "/icons/icon-192x192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
-      "src": "icons/icon-512x512.png",
+      "src": "/icons/icon-512x512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/assets/img/home.png",
+      "sizes": "1125x2436",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Acceuil"
+    }, 
+    {
+      "src": "/assets/img/add-annonce.png",
+      "sizes": "1125x2436",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Ajouter une annonce"
+    },
+    {
+      "src": "/assets/img/messages.png",
+      "sizes": "1125x2436",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Messages"
+    }, 
+    {
+      "src": "/assets/img/annonce-details.png",
+      "sizes": "1125x2436",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Détails de l'annonce"
     }
   ]
 }

@@ -1,0 +1,45 @@
+<div class="install-sheet">
+  <div class="install-sheet__header">
+    <h3>{{ 'INSTALL_SHEET.TITLE' | translate }}</h3>
+    <button mat-icon-button type="button" aria-label="Fermer" (click)="close()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  
+  <div class="subtitle px-3">
+    <p>{{ 'INSTALL_SHEET.SUBTITLE' | translate }}</p>
+  </div>
+
+  <div class="install-sheet__content" *ngIf="!showIosInstructions; else iosBlock">
+    <div class="install-sheet__benefits px-1">
+      <ul>
+        <li [innerHTML]="'INSTALL_SHEET.BENEFITS.FAST' | translate "></li>
+        <li [innerHTML]="'INSTALL_SHEET.BENEFITS.APP_LIKE' | translate "></li>
+        <li [innerHTML]="'INSTALL_SHEET.BENEFITS.HOME' | translate "></li>
+      </ul>
+    </div>
+
+    <button class="button-install mt-2" (click)="install()">
+      {{ 'INSTALL_SHEET.INSTALL_NOW' | translate }}
+    </button>
+
+    <ng-template #installUnavailable>
+      <p class="install-sheet__hint">
+        {{ 'INSTALL_SHEET.UNAVAILABLE' | translate }}
+      </p>
+    </ng-template>
+  </div>
+
+  <ng-template #iosBlock>
+    <div class="install-sheet__content px-3">
+      <ol>
+        <li [innerHTML]="'INSTALL_SHEET.IOS.STEP_1' | translate "></li>
+        <li [innerHTML]="'INSTALL_SHEET.IOS.STEP_2' | translate "></li>
+        <li [innerHTML]="'INSTALL_SHEET.IOS.STEP_3' | translate "></li>
+      </ol>
+    </div>
+    <button class="button-install mt-3" (click)="acknowledgeIosHelp()">
+      {{ 'INSTALL_SHEET.IOS.CONFIRM' | translate }}
+    </button>
+  </ng-template>
+</div>
