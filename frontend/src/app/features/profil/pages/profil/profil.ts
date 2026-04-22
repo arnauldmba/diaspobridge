@@ -8,10 +8,11 @@ import { User } from '../../../../model/users.model';
 import { AuthService } from '../../../../core/services/auth.service';
 import { TranslatePipe } from '@ngx-translate/core';
 import { LanguageSwitcher } from "../../../../shared/components/language-switcher/language-switcher";
+import { InstallBanner } from "../../../../shared/components/install-banner/install-banner";
 
 @Component({
   selector: 'app-profil',
-  imports: [MatTabsModule, FirstLetterPipe, MatProgressSpinnerModule, RouterLink, TranslatePipe, LanguageSwitcher],
+  imports: [MatTabsModule, FirstLetterPipe, MatProgressSpinnerModule, RouterLink, TranslatePipe, LanguageSwitcher, InstallBanner],
   templateUrl: './profil.html',
   styleUrl: './profil.css',
 })

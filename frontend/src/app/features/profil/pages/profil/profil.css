@@ -47,8 +47,9 @@
 
 .logout-button{
     height: 48px;
-    border-radius: 8px;
-    background: white;
+    border: none;
+    border-radius: 12px;
+    background: var(--color-bg);
     color: red;
     font-family: var(--font-title);
     display: flex;
@@ -62,28 +63,28 @@
 }
 
 ul{
-        padding: 0px;
-    }
+    padding: 0px;
+}
 
-    ul li{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin: 0px;
-        padding: 14px 10px 14px 20px;
-        font-family: var(--font-body);
-        font-weight: 500;
-    }
+ul li{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0px;
+    padding: 14px 10px 14px 20px;
+    font-family: var(--font-title);
+    font-weight: 500;
+}
 
-    ul li a{
-        text-decoration: none;
-        color: black;
-    }
+ul li a{
+    text-decoration: none;
+    color: black;
+}
 
-    ul li span{
-        color: rgb(176, 176, 176);
-        font-weight: 100;
-    }
+ul li span{
+    color: rgb(176, 176, 176);
+    font-weight: 100;
+}
 
 @media (min-width: 600px) {
     .profil-header{

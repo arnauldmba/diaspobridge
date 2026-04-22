@@ -1,70 +1,86 @@
 @if (isLoading) {
 <div class="overlay">
-    <mat-spinner 
-        diameter="50">
+    <mat-spinner diameter="50">
     </mat-spinner>
 </div>
 }
 
-<div class="text-end pt-3 pe-3">
-    <app-language-switcher></app-language-switcher>
-</div>
+<div class="mb-app">
+    <div class="text-end pt-3 pe-3">
+        <app-language-switcher></app-language-switcher>
+    </div>
 
-<div class="profil-header mb-4">
-    <div class="profil">
-        <div class="avatar">
-            {{(currentUser?.firstName | firstLetter )}}
-        </div>
-        <div class="profil-desc">
-            <h6 class="pseudo">{{currentUser?.firstName}}</h6>
-            <span class="my-1">{{currentUser?.email}}</span>
-            <!--<p class="m-0 p-0">⭐️ <span>5.0/5.0</span>  •  <span></span>pas encore de voyage</p>-->
+    <div class="profil-header mb-4">
+        <div class="profil">
+            <div class="avatar">
+                {{(currentUser?.firstName | firstLetter )}}
+            </div>
+            <div class="profil-desc">
+                <h6 class="pseudo">{{currentUser?.firstName}}</h6>
+                <span class="my-1">{{currentUser?.email}}</span>
+                <!--<p class="m-0 p-0">⭐️ <span>5.0/5.0</span>  •  <span></span>pas encore de voyage</p>-->
+            </div>
         </div>
     </div>
-</div>
 
-<div class="container mb-3">
-    <ul class="rounded-4 py-1" style="background-color: white; box-shadow: var(--shadow-sm);">
-        <!--<li>
+    <div class="container mb-3">
+        <ul class="rounded-4 py-1" style="background-color: white; box-shadow: var(--shadow-sm);">
+            <!--<li>
             <a routerLink="/my-listings">Mon profil</a>
             <span class="material-symbols-outlined">chevron_right</span>
         </li>-->
-        <li routerLink="/my-listings" style="cursor: pointer;">
-            {{ 'PROFILE_PAGE.MY_LISTINGS' | translate }}
-            <span class="material-symbols-outlined">chevron_right</span>
-        </li>
-    </ul>
+            <li routerLink="/my-listings" style="cursor: pointer;">
+                {{ 'PROFILE_PAGE.MY_LISTINGS' | translate }}
+                <span class="material-symbols-outlined">chevron_right</span>
+            </li>
+        </ul>
+    </div>
+
+    <div class="container mb-3">
+        <ul class="rounded-4 py-1" style="background-color: rgb(255, 255, 255); box-shadow: var(--shadow-sm);">
+            <li>
+                <a routerLink="/apropos">{{ 'PROFILE_PAGE.ABOUT_US' | translate }}</a>
+                <span class="material-symbols-outlined">chevron_right</span>
+            </li>
+            <li>
+                <a routerLink="/contact">{{ 'PROFILE_PAGE.CONTACT' | translate }}</a>
+                <span class="material-symbols-outlined">chevron_right</span>
+            </li>
+            <li>
+                <a routerLink="/faq">{{ 'PROFILE_PAGE.FAQ' | translate }}</a>
+                <span class="material-symbols-outlined">chevron_right</span>
+            </li>
+            <li>
+                <a routerLink="/mention-legale">{{ 'PROFILE_PAGE.LEGAL_NOTICE' | translate }}</a>
+                <span class="material-symbols-outlined">chevron_right</span>
+            </li>
+            <li>
+                <a routerLink="/politique-de-confidentialite">{{ 'PROFILE_PAGE.PRIVACY_POLICY' | translate }}</a>
+                <span class="material-symbols-outlined">chevron_right</span>
+            </li>
+        </ul>
+    </div>
+
+    <div class="container mb-3">
+        <ul class="rounded-4 py-1" style="background-color: white; box-shadow: var(--shadow-sm);">
+            <li>
+                <app-install-banner mode="profile"></app-install-banner>
+            </li>
+        </ul>
+    </div>
+
+    <button (click)="logout()" class="logout-button">
+        {{ 'PROFILE_PAGE.LOGOUT' | translate }}
+    </button>
 </div>
 
-<div class="container mb-3">
-    <ul class="rounded-4 py-1" style="background-color: rgb(255, 255, 255); box-shadow: var(--shadow-sm);">
-        <li>
-            <a routerLink="/apropos">{{ 'PROFILE_PAGE.ABOUT_US' | translate }}</a>
-            <span class="material-symbols-outlined">chevron_right</span>
-        </li>
-        <li>
-            <a routerLink="/contact">{{ 'PROFILE_PAGE.CONTACT' | translate }}</a>
-            <span class="material-symbols-outlined">chevron_right</span>
-        </li>
-        <li>
-            <a routerLink="/faq">{{ 'PROFILE_PAGE.FAQ' | translate }}</a>
-            <span class="material-symbols-outlined">chevron_right</span>
-        </li>
-        <li>
-            <a routerLink="/mention-legale">{{ 'PROFILE_PAGE.LEGAL_NOTICE' | translate }}</a>
-            <span class="material-symbols-outlined">chevron_right</span>
-        </li>
-        <li>
-            <a routerLink="/politique-de-confidentialite">{{ 'PROFILE_PAGE.PRIVACY_POLICY' | translate }}</a>
-            <span class="material-symbols-outlined">chevron_right</span>
-        </li>
-    </ul>
-</div>
 
-<div class="container mt-3 mb-4">
-    <!--<button class="edit-button"> Modifier </button>-->
-    <button (click)="logout()" class="logout-button border">
+<!--
+<div class="container mt-3 mb-app">-->
+<!--<button class="edit-button"> Modifier </button>-->
+<!-- <button (click)="logout()" class="logout-button border">
         <span class="material-symbols-outlined">logout</span>
         {{ 'PROFILE_PAGE.LOGOUT' | translate }}
     </button>
 </div>
+-->

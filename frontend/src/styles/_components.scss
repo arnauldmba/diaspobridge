@@ -12,6 +12,18 @@ html, body {
   color: var(--color-accent);
 }
 
+.color-white{
+  color: white;
+}
+
+.color-black{
+  color: black;
+}
+
+.color-accent{
+  color: var(--color-accent);
+}
+
 .first-part-brand{
   font-weight: 100;
 }
@@ -165,6 +177,16 @@ html, body {
   border-radius: var(--radius-sm);
   padding: 10px 14px;
   font-weight: 400;
+  cursor: pointer;
+}
+
+.btn-app-outline-xs {
+  border: none;
+  background-color: none;
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  font-weight: 400;
+  font-size: var(--text-xs);
   cursor: pointer;
 }
 
@@ -360,11 +382,11 @@ html, body {
 /* Mobile */
 @media (max-width: 600px) {
   .mt-app{
-    margin-top: 28px;
+    margin-top: 14px;
   }
 
   .mb-app{
-    padding-bottom: 80px;
+    padding-bottom: 96px;
   }
 
   .mb-app-lg{

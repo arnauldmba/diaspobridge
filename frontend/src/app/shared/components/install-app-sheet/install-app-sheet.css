@@ -1,0 +1,56 @@
+.install-sheet {
+  padding: 8px 12px 24px;
+}
+
+.install-sheet__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+
+  h3{
+    font-family: var(--font-title);
+    font-weight: 600;
+    margin: 0px;
+    font-size: 18px;
+  }
+}
+
+.subtitle{
+  margin-bottom: 14px;
+  font-size: 14px;
+  color: rgb(85, 84, 84);
+  font-weight: 500;
+  font-family: var(--font-texte);
+}
+
+.install-sheet__content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+ol {
+  margin: 0;
+  padding-left: 20px;
+}
+
+li {
+  margin-bottom: 2px;
+  font-size: 12px;
+  font-weight: 400;
+  font-family: var(--font-text);
+  color: rgb(52, 49, 49);
+}
+
+.button-install{
+  border: none;
+  padding: 10px 10px;
+  background: var(--color-accent);
+  border-radius: 30px;
+  color: white;
+  font-family: var(--font-title);
+  font-weight: 400;
+  font-size: 12px;
+  width: 100%;
+}
