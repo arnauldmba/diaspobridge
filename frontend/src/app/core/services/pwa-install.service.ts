@@ -25,12 +25,12 @@ export class PwaInstallService {
   private readonly IOS_DISMISS_KEY = 'mbokogo_ios_install_dismissed_at';
 
   // TEST
-  private readonly DISMISS_DURATION_MS = 30 * 1000;
-  private readonly INSTALL_BANNER_DELAY_MS = 2_000;
+  //private readonly DISMISS_DURATION_MS = 30 * 1000;
+  //private readonly INSTALL_BANNER_DELAY_MS = 2_000;
 
   // PROD
-  // private readonly DISMISS_DURATION_MS = 3 * 24 * 60 * 60 * 1000;
-  // private readonly INSTALL_BANNER_DELAY_MS = 5_000;
+  private readonly DISMISS_DURATION_MS = 3 * 24 * 60 * 60 * 1000;
+  private readonly INSTALL_BANNER_DELAY_MS = 5_000;
 
   private readonly installedSubject = new BehaviorSubject<boolean>(this.isRunningStandalone());
   readonly installed$ = this.installedSubject.asObservable();

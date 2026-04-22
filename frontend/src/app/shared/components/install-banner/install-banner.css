@@ -97,3 +97,15 @@ mat-icon {
   width: 100%;
   background-color: var(--color-accent);
 }
+
+.profile{
+  background-color: white;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0px;
+  padding: 14px 10px 14px 20px;
+  font-family: var(--font-title);
+  font-weight: 500;
+}

@@ -44,16 +44,15 @@
 
 <!-- PROFILE -->
 <div
-  class="install-entry profile"
+  class="install-entry profile rounded-4"
   *ngIf="mode === 'profile' && ((canShowProfileInstall$ | async) || (showProfileIosHelp$ | async))"
   (click)="openInstallSheet()"
 >
     <div class="install-entry__left_profile">
-    <!--<div class="border">-->
         <mat-icon style="color: var(--color-accent); font-size: 24px;">download</mat-icon>
         <div>
-        <strong>{{ 'INSTALL.PROFILE.TITLE' | translate }}</strong>
-        <p>{{ 'INSTALL.PROFILE.DESCRIPTION' | translate }}</p>
+            <strong>{{ 'INSTALL.PROFILE.TITLE' | translate }}</strong>
+            <p>{{ 'INSTALL.PROFILE.DESCRIPTION' | translate }}</p>
         </div>
     </div>
 </div>
