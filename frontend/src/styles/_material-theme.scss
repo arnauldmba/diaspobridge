@@ -8,7 +8,7 @@ $theme: mat.define-theme((
     theme-type: light,
     primary: mat.$azure-palette,
     tertiary: mat.$green-palette,
-    warn: mat.$red-palette,
+   /* warn: mat.$red-palette,*/
   ),
   typography: (
     plain-family: system-ui,
