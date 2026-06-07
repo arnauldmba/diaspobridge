@@ -42,22 +42,12 @@ test('should allow user to type credentials', async ({ page }) => {
 });
 
 test('should login successfully', async ({ page }) => {
+  await page.goto('/auth/login');
 
-    await page.goto('/auth/login');
+  await page.getByTestId('login-email').fill('demo@mbokogo.com');
+  await page.getByTestId('login-password').fill('12demo34');
 
-    await page.getByTestId('login-email').fill('demo@mbokogo.com');
+  await page.getByTestId('login-button').click({ force: true });
 
-    await page.getByTestId('login-password').fill('12demo34');
-
-    await page.getByTestId('login-button').click({ force: true });
-
-    await page.waitForTimeout(2000);
-
-    console.log('URL after click:', page.url());
-    console.log(await page.locator('body').innerText());
-
-    await page.screenshot({
-        path: 'test-results/login-debug.png',
-        fullPage: true
-    });
+  await expect(page.getByRole('link', { name: /Create a Listing/i })).toBeVisible();
 });
