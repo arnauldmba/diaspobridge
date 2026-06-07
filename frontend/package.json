@@ -46,6 +46,7 @@
     "@angular/build": "^20.3.7",
     "@angular/cli": "^20.3.7",
     "@angular/compiler-cli": "^20.3.18",
+    "@playwright/test": "^1.60.0",
     "@types/jasmine": "~5.1.0",
     "baseline-browser-mapping": "^2.10.12",
     "jasmine-core": "~5.9.0",

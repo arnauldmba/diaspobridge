@@ -18,20 +18,30 @@
     <div class="mb-1">
         <mat-form-field appearance="outline" class="w-100">
             <mat-label>{{'AUTH.EMAIL_PLACEHOLDER' | translate }}</mat-label>
-            <input matInput type="email" [(ngModel)]="requestUser.email" name="email"
-                placeholder="mustermann@mail.com">
+            <input 
+                data-testid="login-email"
+                matInput type="email" 
+                [(ngModel)]="requestUser.email" 
+                name="email"
+                placeholder="mustermann@mail.com"
+            >
         </mat-form-field>
     </div>
     <div class="mb-1">
         <mat-form-field appearance="outline" class="w-100">
             <mat-label>{{'AUTH.PASSWORD' | translate }}</mat-label>
-            <input matInput type="password" [(ngModel)]="requestUser.password" id="inputPassword"
+            <input 
+                data-testid="login-password"
+                matInput type="password" 
+                [(ngModel)]="requestUser.password" 
+                id="inputPassword"
                 name="passwordHash">
         </mat-form-field>
     </div>
     <div class="mb-2">
         <div class="">
             <button 
+                data-testid="login-button"
                 type="button"
                 class="btn-app d-flex align-items-center justify-content-center gap-2 btn-app-primary w-100"
                 (click)="onLoggdin()" 
