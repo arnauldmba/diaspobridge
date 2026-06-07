@@ -24,7 +24,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 })
 export class Login implements OnInit {
 
-  isLoading: boolean = true; 
+  isLoading: boolean = false; 
 
   requestUser = {
     email: '',
@@ -46,7 +46,6 @@ export class Login implements OnInit {
   }
 
   onLoggdin(): void {
-
     this.authService.login(this.requestUser).subscribe({
       next: (response) => {
         const jwtToken = response.headers.get('Authorization');
@@ -76,42 +75,6 @@ export class Login implements OnInit {
 
         if (cause === "disabled") {
           this.message = "Compte non activé. Veuillez vérifier votre email.";
-        } else {
-          this.message = "Login ou mot de passe incorrect";
-        }
-
-        this.errorLogin = 1;
-      }
-    });
-  }
-
-  onLoggdin2(): void {
-    this.errorLogin = 0;
-    this.message = '';
-    this.isLoading = true;
-
-    this.authService.login(this.requestUser).pipe(
-      switchMap((response) => {
-        const token = response.headers.get('Authorization');
-        if (!token) throw new Error('TOKEN_MISSING');
-
-        this.authService.saveToken(token);
-        return this.authService.loadCurrentUser();
-      }),
-      finalize(() => this.isLoading = false)
-    ).subscribe({
-      next: (user) => {
-        this.router.navigate([user.role === 'ADMIN' ? '/admin' : '/listings']);
-      },
-      error: (err) => {
-        console.error(err);
-
-        const cause = err?.error?.errorCause;
-
-        if (cause === "disabled") {
-          this.message = "Compte non activé. Vérifiez votre email.";
-        } else if (err.message === 'TOKEN_MISSING') {
-          this.message = "Erreur technique lors de la connexion.";
         } else {
           this.message = "Login ou mot de passe incorrect";
         }
