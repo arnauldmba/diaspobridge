@@ -1,59 +1,269 @@
-# Diasporabridge
+# DiasporaBridge (MbokoGO)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.7.
+DiasporaBridge is a full-stack platform that connects travelers and senders within the African diaspora.
 
-## Development server
+Travelers can publish upcoming trips and available luggage space, while senders can find suitable transport opportunities to send packages to family and friends abroad.
 
-To start a local development server, run:
+The platform aims to make international package transportation more accessible, affordable, and community-driven.
 
-```bash
-ng serve
+---
+
+## Project Status
+
+🚧 Active Development
+
+DiasporaBridge is currently under active development and already includes:
+
+* User authentication and authorization
+* Travel listing management
+* Real-time messaging
+* Multi-language support
+* Progressive Web App (PWA)
+* Automated testing
+* Dockerized backend infrastructure
+
+---
+
+## Features
+
+### Authentication & Security
+
+* User registration
+* Email verification
+* Secure login using JWT
+* Password reset
+* Role-based authorization
+* Protected routes
+
+### Listings
+
+* Create travel listings
+* Edit and delete listings
+* View available trips
+* Search by destination city
+* Search by travel dates
+* Advanced filters (7, 15 and 30 days)
+* Personal listing management
+
+### Messaging
+
+* Real-time messaging
+* Private conversations
+* Communication between travelers and senders
+* Conversation overview
+
+### User Profiles
+
+* Profile management
+* Account information updates
+* Personal dashboard
+
+### Internationalization
+
+* French
+* English
+* Runtime language switching
+
+### Progressive Web App
+
+* Installable application
+* Mobile-first design
+* Responsive user interface
+* App-like experience
+
+---
+
+## Technology Stack
+
+### Frontend
+
+* Angular 20
+* Angular Material
+* TypeScript
+* RxJS
+* PWA
+
+### Backend
+
+* Java 21
+* Spring Boot
+* Spring Security
+* JWT Authentication
+* Maven
+
+### Database
+
+* MySQL 8
+
+### Infrastructure & DevOps
+
+* Docker
+* Docker Compose
+* phpMyAdmin
+* Render
+* Vercel
+
+### Testing
+
+* Jasmine
+* Karma
+* Playwright
+
+### Version Control
+
+* Git
+* GitHub
+
+---
+
+## Architecture
+
+```text
+Angular Frontend
+        │
+        ▼
+Spring Boot REST API
+        │
+        ▼
+MySQL Database
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+The application follows a client-server architecture and uses JWT tokens for secure authentication and authorization.
 
-## Code scaffolding
+---
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Testing Strategy
 
-```bash
-ng generate component component-name
-```
+### Unit Tests
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Implemented using Jasmine and Karma.
 
-```bash
-ng generate --help
-```
+Covered services:
 
-## Building
+* AuthService
+* ListingService
 
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+Run unit tests:
 
 ```bash
 ng test
 ```
 
-## Running end-to-end tests
+---
 
-For end-to-end (e2e) testing, run:
+### Component Tests
+
+Implemented for key business components:
+
+* Login
+* AddListing
+* SearchBarComputer
+
+---
+
+### End-to-End Tests
+
+Implemented using Playwright.
+
+Covered scenarios:
+
+* Login page rendering
+* User credential input
+* Successful authentication workflow
+
+Run E2E tests:
 
 ```bash
-ng e2e
+npx playwright test
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Run E2E tests with browser UI:
 
-## Additional Resources
+```bash
+npx playwright test --headed
+```
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+---
+
+## Running the Project with Docker
+
+### Prerequisites
+
+* Docker
+* Docker Compose
+
+### Start the application
+
+```bash
+docker compose up --build
+```
+
+Services started:
+
+| Service               | Port |
+| --------------------- | ---- |
+| Backend (Spring Boot) | 8080 |
+| MySQL                 | 3306 |
+| phpMyAdmin            | 8082 |
+
+### Stop the application
+
+```bash
+docker compose down
+```
+
+---
+
+## Local Development
+
+### Frontend
+
+```bash
+cd frontend
+npm install
+ng serve
+```
+
+Application:
+
+```text
+http://localhost:4200
+```
+
+### Backend
+
+```bash
+cd backend
+mvn spring-boot:run
+```
+
+API:
+
+```text
+http://localhost:8080
+```
+
+---
+
+## Roadmap
+
+Planned improvements:
+
+* WhatsApp-first contact flow
+* Push notifications
+* Traveler verification system
+* Rating and review system
+* AI-assisted matching between travelers and senders
+* Native mobile applications (iOS / Android)
+
+---
+
+## Author
+
+**Arnauld Mba Kuitche**
+
+Fullstack Developer
+
+Technologies:
+
+Angular • Spring Boot • Java • MySQL • Docker • Playwright • GitHub
