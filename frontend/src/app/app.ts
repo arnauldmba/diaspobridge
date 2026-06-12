@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, inject, OnInit, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { Title, Meta } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 import { PwaUpdateService } from './core/services/pwa-update.service';
 import { UnreadMessagesService } from './core/services/unread-messages.service';
@@ -24,7 +25,11 @@ export class App implements AfterViewInit{
   private readonly unreadMessagesService = inject(UnreadMessagesService);
   private readonly authService = inject(AuthService);
 
-  constructor(private translate: TranslateService, private pwaInstallService: PwaInstallService) {
+  constructor(
+    private titleService: Title,
+    private metaService: Meta,
+    private translate: TranslateService, 
+    private pwaInstallService: PwaInstallService) {
     this.pwaUpdateService.init();
     this.canInstall$ = this.pwaInstallService.canInstall$;
 
@@ -55,5 +60,24 @@ export class App implements AfterViewInit{
 
   ngOnInit(): void {
     this.pwaInstallService.init();
+
+    this.updateSeo();
+
+    this.translate.onLangChange.subscribe(() => {
+      this.updateSeo();
+    });
+  }
+
+  private updateSeo(): void {
+    this.translate.get('SEO.TITLE').subscribe(title => {
+      this.titleService.setTitle(title);
+    });
+
+    this.translate.get('SEO.DESCRIPTION').subscribe(description => {
+      this.metaService.updateTag({
+        name: 'description',
+        content: description
+      });
+    });
   }
 }
