@@ -18,6 +18,7 @@ import { CityAutocompleteComponent } from '../../../../shared/components/city-au
 import { BaseCity } from '../../../../shared/models/cities-model';
 import { CityDataService } from '../../../../shared/services/city-data.services';
 import { TranslatePipe } from '@ngx-translate/core';
+import { AuthService } from '../../../../core/services/auth.service';
 
 
 @Component({
@@ -63,12 +64,25 @@ export class AddListing implements OnInit {
 
   constructor(
     private listingService: ListingService,
+    private authService: AuthService,
     private router: Router,
     private cityDataService: CityDataService
   ) { }
 
   ngOnInit(): void {
     this.cities = this.cityDataService.getAllCities();
+  }
+
+  isAuthenticated(): boolean {
+    return this.authService.isLoggedIn();
+  }
+
+  onSubmit(form: NgForm): void{
+    if(this.authService.isLoggedIn()) {
+      this.addListing(form);
+    } else {
+      console.log('EMAIL_VERIFIACTION');
+    }
   }
 
   addListing(form: NgForm) {

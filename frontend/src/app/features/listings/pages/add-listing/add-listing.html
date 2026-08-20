@@ -11,7 +11,7 @@
                 <mat-icon matPrefix class="color-accent">flight</mat-icon>
                 <h6 class="m-0 fw-medium">{{ 'ADD_LISTING.TRAVEL_INFO' | translate }}</h6>
             </div>
-            <form #tripForm="ngForm" (ngSubmit)="addListing(tripForm)">
+            <form #tripForm="ngForm" (ngSubmit)="onSubmit(tripForm)">
                 <div class="row row-cols-1 row-cols-lg-2 g-3 g-lg-2 mb-3">
                     <app-city-autocomplete-component 
                         class="muted"
