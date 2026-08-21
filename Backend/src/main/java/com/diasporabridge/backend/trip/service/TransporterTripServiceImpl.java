@@ -30,9 +30,9 @@ public class TransporterTripServiceImpl implements TransporterTripService {
 	public TransporterTrip createTrip(TransporterTrip payload, User me) {
 	    validateTripPayload(payload);
 
-	    payload.setId(null);                 // évite overwrite
-	    payload.setTransporter(me);          // FORCE owner
-	    // payload.setIsActive(true);        // optionnel
+	    payload.setId(null);                 
+	    payload.setTransporter(me);          
+	    payload.setIsActive(true);        
 
 	    return transporterTripRepository.save(payload);
 	}
