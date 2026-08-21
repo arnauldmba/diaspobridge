@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, Query } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatFormField, MatLabel, MatHint, MatFormFieldModule } from "@angular/material/form-field";
@@ -21,6 +21,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { AuthService } from '../../../../core/services/auth.service';
 import { EmailVerification } from "../../../auth/components/email-verification/email-verification";
 import { CreateTripRequest } from '../../models/create-trip-request';
+import { TripDraftService } from '../../services/drift-draft/trip-draft.service';
 
 
 @Component({
@@ -35,6 +36,7 @@ import { CreateTripRequest } from '../../models/create-trip-request';
 export class AddListing implements OnInit {
 
   private readonly formBuilder = inject(FormBuilder);
+  private readonly tripDraftService = inject(TripDraftService);
 
   cities: BaseCity[] = [];
 
@@ -104,26 +106,16 @@ export class AddListing implements OnInit {
 
   ngOnInit(): void {
     this.cities = this.cityDataService.getAllCities();
+    this.restoreDraft();
   }
 
   isAuthenticated(): boolean {
     return this.authService.isLoggedIn();
   }
 
-  /*
-  onSubmit(form: NgForm): void{
-    if (form.invalid) {
-      this.message = 'Veuillez corriger les champs en rouge.';
-      form.control.markAllAsTouched(); // force l’affichage des erreurs
-      return; // 
-    }
-
-    if(this.authService.isLoggedIn()) {
-      this.addListing();
-    } else {
-      console.log('EMAIL_VERIFIACTION');
-    }
-  }*/
+  get isLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
+  }
 
     onSubmit(): void {
       if (this.tripFormModel.invalid) {
@@ -164,13 +156,20 @@ export class AddListing implements OnInit {
       if (this.authService.isLoggedIn()) {
         this.addListing(request);
       } else {
-        console.log('Trajet conservé avant authentification :', request);
+        this.tripDraftService.save(request);
+        
+        this.router.navigate(['/auth/login'], {
+          queryParams: {
+            returnUrl: '/add-listing'
+          }
+        });
       }
     }
 
   addListing(request: CreateTripRequest): void {
     this.listingService.addListing(request).subscribe({
       next: () => {
+        this.tripDraftService.clear();
         this.message = 'Listing added successfully!';
         this.router.navigate(['/listings']);
       },
@@ -179,21 +178,6 @@ export class AddListing implements OnInit {
       }
     });
   }
-
-  /*resetForm(){
-    this.newListing = {
-      originCity: '',
-      originCountry: 'Allemagne',
-      destCity: '',
-      destCountry: 'Cameroun',
-      departDate: '',
-      maxWeightKg: null,
-      pricePerKg: 0,
-      note: '',
-      isActive: true,
-      transporter: {} as User
-    };
-  }*/
 
  createEmptyListing(): TransporterTrip{
     return {
@@ -230,5 +214,36 @@ export class AddListing implements OnInit {
     const day = String(date.getDate()).padStart(2, '0');
 
     return `${year}-${month}-${day}`;
+  }
+
+  private restoreDraft(): void {
+    const draft = this.tripDraftService.get();
+
+    if (!draft) {
+      return;
+    }
+
+    const [year, month, day] = draft.departDate
+      .split('-')
+      .map(Number);
+
+    const restoredDate = new Date(
+      year,
+      month - 1,
+      day
+    );
+
+    this.tripFormModel.patchValue({
+      originCity: draft.originCity,
+      destCity: draft.destCity,
+      departDate: restoredDate,
+
+      maxWeightKg: draft.maxWeightKg,
+      pricePerKg: draft.pricePerKg,
+
+      note: draft.note
+    });
+
+    console.log('Brouillon restauré :', draft);
   }
 }

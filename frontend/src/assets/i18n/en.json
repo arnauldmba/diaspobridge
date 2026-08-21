@@ -56,6 +56,7 @@
     "COMMENT_HINT": "Provide details about what you can carry.",
     "CANCEL": "Cancel",
     "PUBLISH": "Publish Listing",
+    "CONTINUE": "Continue",
     "DEPARTURE_DATE_REQUIRED": "Departure date is required.",
     "AVAILABLE_WEIGHT_REQUIRED": "Available weight is required.",
     "AVAILABLE_WEIGHT_MIN": "Weight must be at least 1 kg.",

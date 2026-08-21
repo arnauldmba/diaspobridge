@@ -188,7 +188,13 @@
                         class="btn-app btn-app-primary gap-2 col" 
                         [disabled]="tripFormModel.invalid">
                         
-                        {{ 'ADD_LISTING.PUBLISH' | translate }}
+                        {{  
+                            (
+                                isLoggedIn
+                                    ? 'ADD_LISTING.PUBLISH'
+                                    : 'ADD_LISTING.CONTINUE'
+                            )| translate
+                        }}
                     </button>
                 </div>
 

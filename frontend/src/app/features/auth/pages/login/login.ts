@@ -1,10 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, ActivatedRoute } from '@angular/router';
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from '@angular/material/input';
-import { MatIcon } from "@angular/material/icon";
-import { finalize, switchMap } from 'rxjs';
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { AuthService } from '../../../../core/services/auth.service';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -25,6 +23,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 export class Login implements OnInit {
 
   isLoading: boolean = false; 
+  private readonly route = inject(ActivatedRoute);
 
   requestUser = {
     email: '',
@@ -54,9 +53,17 @@ export class Login implements OnInit {
 
           this.authService.loadCurrentUser().subscribe({
             next: (user) => {
-              if(user.role === 'ADMIN'){
+              const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
+
+              const isSafeReturnUrl =
+                returnUrl?.startsWith('/') &&
+                !returnUrl.startsWith('//');
+
+              if (returnUrl && isSafeReturnUrl) {
+                this.router.navigateByUrl(returnUrl);
+              } else if (user.role === 'ADMIN') {
                 this.router.navigate(['/admin']);
-              }else{
+              } else {
                 this.router.navigate(['/listings']);
               }
             }
