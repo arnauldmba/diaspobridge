@@ -1,0 +1,25 @@
+<!--<form [formGroup]="emailForm" (ngSubmit)="requestCode()" class="example-form">
+    <mat-form-field appearance="outline" class="w-100">
+        <mat-label>{{'AUTH.EMAIL_PLACEHOLDER' | translate }}</mat-label>
+        <input 
+            data-testid="login-email"
+            matInput type="email" 
+            formControlName="email"
+            name="email"
+            placeholder="mustermann@mail.com"
+        >
+    </mat-form-field>
+    <br>
+    <button type="submit" [disabled]="emailForm.invalid">Envoyer</button>
+</form>-->
+
+<mat-form-field appearance="outline" class="w-100">
+    <mat-label>{{'AUTH.EMAIL_PLACEHOLDER' | translate }}</mat-label>
+    <input 
+        data-testid="login-email"
+        matInput type="email" 
+        [(ngModel)]="email_2" 
+        name="email"
+        placeholder="mustermann@mail.com"
+    >
+</mat-form-field>

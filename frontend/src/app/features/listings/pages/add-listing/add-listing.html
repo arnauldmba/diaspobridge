@@ -11,7 +11,7 @@
                 <mat-icon matPrefix class="color-accent">flight</mat-icon>
                 <h6 class="m-0 fw-medium">{{ 'ADD_LISTING.TRAVEL_INFO' | translate }}</h6>
             </div>
-            <form #tripForm="ngForm" (ngSubmit)="addListing(tripForm)">
+            <form [formGroup]="tripFormModel" (ngSubmit)="onSubmit()">
                 <div class="row row-cols-1 row-cols-lg-2 g-3 g-lg-2 mb-3">
                     <app-city-autocomplete-component 
                         class="muted"
@@ -20,7 +20,9 @@
                         label="{{ 'ADD_LISTING.DEPARTURE_CITY' | translate }}"
                         placeholder="Ex : Köln, Berlin…"
                         hint="{{'ADD_LISTING.HINT_DEPART' | translate }}"
-                        [(ngModel)]="newListing.originCity" name="originCity" [required]="true" [minlength]="2">
+                        formControlName="originCity" 
+                        [required]="true" 
+                        [minlength]="2">
                     </app-city-autocomplete-component>
 
                     <app-city-autocomplete-component 
@@ -29,22 +31,48 @@
                         [cities]="cities"
                         placeholder="Ex : Douala, Yaoundé…" 
                         hint="{{ 'ADD_LISTING.HINT_ARRIVAL' | translate }}"
-                        [(ngModel)]="newListing.destCity" name="destCity" [required]="true" [minlength]="2">
+                        formControlName="destCity" 
+                        [required]="true" 
+                        [minlength]="2">
                     </app-city-autocomplete-component>
                 </div>
 
                 <!-- Date -->
                 <div class="row justify-content-center mb-3">
-                    <mat-form-field appearance="outline" class="w-full d-block col custom-border-focus custom-green-focus-label input-hover">
-                        <mat-label class="label-input">{{ 'ADD_LISTING.DEPARTURE_DATE' | translate }}</mat-label>
+                    <mat-form-field 
+                        appearance="outline" 
+                        class="w-full d-block col custom-border-focus custom-green-focus-label input-hover">
 
-                        <input matInput [matDatepicker]="picker" [(ngModel)]="newListing.departDate" name="departDate" style="cursor: pointer;"
-                            #departDate="ngModel" required [matDatepickerFilter]="futureDatesOnly" readonly (click)="picker.open()" />
+                        <mat-label class="label-input">
+                            {{ 'ADD_LISTING.DEPARTURE_DATE' | translate }}
+                        </mat-label>
 
-                        <mat-datepicker-toggle class="border-color-input" matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-datepicker #picker [startAt]="today"></mat-datepicker>
+                        <input 
+                            matInput 
+                            [matDatepicker]="picker" 
+                            formControlName="departDate" 
+                            style="cursor: pointer;"
+                            [matDatepickerFilter]="futureDatesOnly" 
+                            readonly 
+                            (click)="picker.open()" 
+                        />
 
-                        <mat-error *ngIf="departDate.touched && departDate.errors?.['required']">
+                        <mat-datepicker-toggle 
+                            class="border-color-input" 
+                            matIconSuffix 
+                            [for]="picker">
+                        </mat-datepicker-toggle>
+
+                        <mat-datepicker 
+                            #picker 
+                            [startAt]="today">
+                        </mat-datepicker>
+
+                        <mat-error
+                            *ngIf="
+                                tripFormModel.controls.departDate.touched &&
+                                tripFormModel.controls.departDate.hasError('required')
+                            ">
                             {{ 'ADD_LISTING.DEPARTURE_DATE_REQUIRED' | translate }}
                         </mat-error>
                     </mat-form-field>
@@ -53,31 +81,69 @@
                 <!-- weight + price -->
                 <div class="row row-cols-2 row-cols-lg-2 g-2 g-lg-2 mb-3">
                     <mat-form-field appearance="outline" class="example-full-width col custom-border-focus custom-green-focus-label">
-                        <mat-label class="label-input">{{ 'ADD_LISTING.AVAILABLE_WEIGHT' | translate }}</mat-label>
-                        <mat-icon class="border-color-input" matPrefix>balance</mat-icon>
 
-                        <input matInput type="number" [(ngModel)]="newListing.maxWeightKg" name="maxWeightKg"
-                            #maxWeightKg="ngModel" required min="1" placeholder="Kilo disponible" />
+                        <mat-label class="label-input">
+                            {{ 'ADD_LISTING.AVAILABLE_WEIGHT' | translate }}
+                        </mat-label>
 
-                        <mat-error *ngIf="maxWeightKg.touched && maxWeightKg.errors?.['required']">
+                        <mat-icon class="border-color-input" matPrefix>
+                            balance
+                        </mat-icon>
+
+                        <input
+                            matInput
+                            type="number"
+                            formControlName="maxWeightKg"
+                            placeholder="Kilo disponible">
+
+                        <mat-error
+                            *ngIf="
+                            tripFormModel.controls.maxWeightKg.touched &&
+                            tripFormModel.controls.maxWeightKg.hasError('required')
+                            ">
                             {{ 'ADD_LISTING.AVAILABLE_WEIGHT_REQUIRED' | translate }}
                         </mat-error>
-                        <mat-error *ngIf="maxWeightKg.touched && maxWeightKg.errors?.['min']">
+
+                        <mat-error
+                            *ngIf="
+                            tripFormModel.controls.maxWeightKg.touched &&
+                            tripFormModel.controls.maxWeightKg.hasError('min')
+                            ">
                             {{ 'ADD_LISTING.AVAILABLE_WEIGHT_MIN' | translate }}
                         </mat-error>
                     </mat-form-field>
 
-                    <mat-form-field appearance="outline" class="example-full-width col custom-border-focus custom-green-focus-label">
-                        <mat-label class="label-input">{{ 'ADD_LISTING.PRICE_PER_KG' | translate }}</mat-label>
-                        <mat-icon class="border-color-input" matPrefix>euro_symbol</mat-icon>
+                    <mat-form-field appearance="outline" 
+                        class="example-full-width col custom-border-focus custom-green-focus-label">
 
-                        <input matInput type="number" [(ngModel)]="newListing.pricePerKg" name="pricePerKg"
-                            #pricePerKg="ngModel" required min="0" step="0.01" placeholder="Ex: 10" />
+                        <mat-label class="label-input">
+                            {{ 'ADD_LISTING.PRICE_PER_KG' | translate }}
+                        </mat-label>
 
-                        <mat-error *ngIf="pricePerKg.touched && pricePerKg.errors?.['required']">
-                            {{ 'ADD_LISTING.PRICE_PER_KG_REQUIRED' | translate }} Le prix par kilo est obligatoire.
+                        <mat-icon class="border-color-input" matPrefix>
+                            euro_symbol
+                        </mat-icon>
+
+                        <input
+                            matInput
+                            type="number"
+                            formControlName="pricePerKg"
+                            step="0.01"
+                            placeholder="Ex : 10">
+
+                        <mat-error
+                            *ngIf="
+                            tripFormModel.controls.pricePerKg.touched &&
+                            tripFormModel.controls.pricePerKg.hasError('required')
+                            ">
+                            {{ 'ADD_LISTING.PRICE_PER_KG_REQUIRED' | translate }}
                         </mat-error>
-                        <mat-error *ngIf="pricePerKg.touched && pricePerKg.errors?.['min']">
+
+                        <mat-error
+                            *ngIf="
+                                tripFormModel.controls.pricePerKg.touched &&
+                                tripFormModel.controls.pricePerKg.hasError('min')
+                            ">
                             {{ 'ADD_LISTING.PRICE_NON_NEGATIVE' | translate }}
                         </mat-error>
                     </mat-form-field>
@@ -86,13 +152,28 @@
                 <!-- NOTE (optionnel) -->
                 <div class="row justify-content-center mb-4">
                     <mat-form-field appearance="outline" class="example-full-width custom-border-focus custom-green-focus-label">
-                        <mat-label class="label-input">{{ 'ADD_LISTING.COMMENT' | translate }}</mat-label>
-                        <textarea matInput [(ngModel)]="newListing.note" name="note" #note="ngModel" maxlength="500"
-                            style="max-height: 200px; min-height: 100px;" placeholder="Laisser un commentaire...">
+                        <mat-label class="label-input">
+                            {{ 'ADD_LISTING.COMMENT' | translate }}
+                        </mat-label>
+
+                        <textarea
+                            matInput
+                            formControlName="note"
+                            style="max-height: 200px; min-height: 100px;"
+                            placeholder="Laisser un commentaire...">
                         </textarea>
+
                         <mat-hint style="color: rgba(0,0,0,0.748)">
                             {{ 'ADD_LISTING.COMMENT_HINT' | translate }}
                         </mat-hint>
+
+                        <mat-error
+                            *ngIf="
+                                tripFormModel.controls.note.touched &&
+                                tripFormModel.controls.note.hasError('maxlength')
+                            ">
+                            Le message ne doit pas dépasser 500 caractères.
+                        </mat-error>
                     </mat-form-field>
                 </div>
 
@@ -102,7 +183,11 @@
                         {{ 'ADD_LISTING.CANCEL' | translate }} 
                     </button>
 
-                    <button type="submit" class="btn-app btn-app-primary gap-2 col" [disabled]="tripForm.invalid">
+                    <button 
+                        type="submit" 
+                        class="btn-app btn-app-primary gap-2 col" 
+                        [disabled]="tripFormModel.invalid">
+                        
                         {{ 'ADD_LISTING.PUBLISH' | translate }}
                     </button>
                 </div>
@@ -112,6 +197,8 @@
                     <h5>{{ message }}</h5>
                 </div>
             </form>
+
+            
         </div>
 
         <div class="container-consignes">

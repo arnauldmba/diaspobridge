@@ -5,6 +5,7 @@ import { TransporterTrip } from '../../../model/transporterTrip.model';
 import { environment } from '../../../../environments/environment';
 import { CountrySearchCriteria } from '../../../model/country-search-criteria.model';
 import { Page } from '../../../model/page.model';
+import { CreateTripRequest } from '../models/create-trip-request';
 
 // data coming from the backend is of type json
 const httpOptions = {
@@ -29,7 +30,7 @@ export class ListingService {
     return this.http.get<TransporterTrip>(`${this.apiUrl}/${listingId}`);
   }
 
-  addListing(newListing: TransporterTrip): Observable<TransporterTrip> {
+  addListing(newListing: CreateTripRequest): Observable<TransporterTrip> {
     return this.http.post<TransporterTrip>(this.apiUrl, newListing);
   }
 
