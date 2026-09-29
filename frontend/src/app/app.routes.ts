@@ -48,7 +48,6 @@ export const routes: Routes = [
             },
             {
                 path: 'add-listing', 
-                //canActivate: [authGuardGuard2],
                 loadComponent: () => 
                     import('./features/listings/pages/add-listing/add-listing').then(m => m.AddListing)
             },
