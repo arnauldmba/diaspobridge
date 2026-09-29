@@ -19,7 +19,6 @@ import { BaseCity } from '../../../../shared/models/cities-model';
 import { CityDataService } from '../../../../shared/services/city-data.services';
 import { TranslatePipe } from '@ngx-translate/core';
 import { AuthService } from '../../../../core/services/auth.service';
-import { EmailVerification } from "../../../auth/components/email-verification/email-verification";
 import { CreateTripRequest } from '../../models/create-trip-request';
 import { TripDraftService } from '../../services/drift-draft/trip-draft.service';
 
@@ -60,7 +59,7 @@ export class AddListing implements OnInit {
     private authService: AuthService,
     private router: Router,
     private cityDataService: CityDataService
-  ) { }
+  ) {}
 
   readonly tripFormModel = this.formBuilder.group({
     originCity: this.formBuilder.nonNullable.control('', {
@@ -117,54 +116,54 @@ export class AddListing implements OnInit {
     return this.authService.isLoggedIn();
   }
 
-    onSubmit(): void {
-      if (this.tripFormModel.invalid) {
-        this.message = 'Veuillez corriger les champs en rouge.';
-        this.tripFormModel.markAllAsTouched();
-        return;
-      }
-
-      const formValue = this.tripFormModel.getRawValue();
-
-      if (
-        !formValue.departDate ||
-        formValue.maxWeightKg === null ||
-        formValue.pricePerKg === null
-      ) {
-        this.tripFormModel.markAllAsTouched();
-        return;
-      }
-
-      const originCity = this.findCityByName(formValue.originCity);
-      const destCity = this.findCityByName(formValue.destCity);
-
-      const request: CreateTripRequest = {
-        originCity: formValue.originCity.trim(),
-        originCountry: originCity?.country,
-
-        destCity: formValue.destCity.trim(),
-        destCountry: destCity?.country,
-
-        departDate: this.formatLocalDate(formValue.departDate),
-
-        maxWeightKg: formValue.maxWeightKg,
-        pricePerKg: formValue.pricePerKg,
-
-        note: formValue.note.trim(),
-      };
-
-      if (this.authService.isLoggedIn()) {
-        this.addListing(request);
-      } else {
-        this.tripDraftService.save(request);
-        
-        this.router.navigate(['/auth/login'], {
-          queryParams: {
-            returnUrl: '/add-listing'
-          }
-        });
-      }
+  onSubmit(): void {
+    if (this.tripFormModel.invalid) {
+      this.message = 'Veuillez corriger les champs en rouge.';
+      this.tripFormModel.markAllAsTouched();
+      return;
     }
+
+    const formValue = this.tripFormModel.getRawValue();
+
+    if (
+      !formValue.departDate ||
+      formValue.maxWeightKg === null ||
+      formValue.pricePerKg === null
+    ) {
+      this.tripFormModel.markAllAsTouched();
+      return;
+    }
+
+    const originCity = this.findCityByName(formValue.originCity);
+    const destCity = this.findCityByName(formValue.destCity);
+
+    const request: CreateTripRequest = {
+      originCity: formValue.originCity.trim(),
+      originCountry: originCity?.country,
+
+      destCity: formValue.destCity.trim(),
+      destCountry: destCity?.country,
+
+      departDate: this.formatLocalDate(formValue.departDate),
+
+      maxWeightKg: formValue.maxWeightKg,
+      pricePerKg: formValue.pricePerKg,
+
+      note: formValue.note.trim(),
+    };
+
+    if (this.authService.isLoggedIn()) {
+      this.addListing(request);
+    } else {
+      this.tripDraftService.save(request);
+      
+      this.router.navigate(['/auth/login'], {
+        queryParams: {
+          returnUrl: '/add-listing'
+        }
+      });
+    }
+  }
 
   addListing(request: CreateTripRequest): void {
     this.listingService.addListing(request).subscribe({
@@ -192,9 +191,6 @@ export class AddListing implements OnInit {
       isActive: true,
       transporter: {} as User
     };
-  }
-
-  resetForm(){
   }
 
   private findCityByName(name: string): BaseCity | undefined {
