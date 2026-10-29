@@ -17,6 +17,7 @@ import com.diasporabridge.backend.auth.repo.PasswordResetTokenRepository;
 import com.diasporabridge.backend.auth.service.SimpleMailService;
 import com.diasporabridge.backend.user.entity.User;
 import com.diasporabridge.backend.user.repo.UsersRepository;
+import jakarta.annotation.PostConstruct;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,8 +34,15 @@ public class PasswordResetService {
     private final SimpleMailService mailService;
 
     // URL du frontend (prod ou dev) pour construire le lien
-    @Value("${app.frontend.base-url:http://localhost:4200}")
+    @Value("${app.frontend.base-url}")
     private String frontendBaseUrl;
+    
+    @PostConstruct
+    public void checkFrontendUrl() {
+        System.out.println(
+            "FRONTEND URL UTILISEE : " + frontendBaseUrl
+        );
+    }
 
     // Durée de validité token (30 min)
     private static final Duration TOKEN_TTL = Duration.ofMinutes(30);
