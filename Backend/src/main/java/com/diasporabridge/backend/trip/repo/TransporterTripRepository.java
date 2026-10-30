@@ -28,23 +28,32 @@ public interface TransporterTripRepository extends JpaRepository<TransporterTrip
      *      - transporter non soft-deleted
      */
     @Query("""
-        SELECT t FROM TransporterTrip t
-        WHERE (:origin IS NULL OR LOWER(t.originCity) LIKE LOWER(CONCAT('%', :origin, '%')))
-          AND (:dest   IS NULL OR LOWER(t.destCity)   LIKE LOWER(CONCAT('%', :dest,   '%')))
-          AND (:fromDate IS NULL OR t.departDate >= :fromDate)
-          AND (:toDate   IS NULL OR t.departDate <= :toDate)
-          AND (:activeOnly = false OR t.isActive = true)
-          AND t.transporter.deletedAt IS NULL
-        ORDER BY t.departDate ASC
-    """)
-    Page<TransporterTrip> searchTrips(
-            @Param("origin") String origin,
-            @Param("dest") String dest,
-            @Param("fromDate") LocalDate fromDate,
-            @Param("toDate") LocalDate toDate,
-            @Param("activeOnly") boolean activeOnly,
-            Pageable pageable
-    );
+	    SELECT t FROM TransporterTrip t
+	    WHERE (:origin IS NULL OR
+	           LOWER(t.originCity) LIKE LOWER(CONCAT('%', :origin, '%')))
+
+	      AND (:dest IS NULL OR
+	           LOWER(t.destCity) LIKE LOWER(CONCAT('%', :dest, '%')))
+
+	      AND t.departDate >= :fromDate
+	      AND (:toDate IS NULL OR t.departDate <= :toDate)
+
+	      AND (:activeOnly = false OR t.isActive = true)
+
+	      AND t.isHidden = false
+	      AND t.transporter.deletedAt IS NULL
+	      AND t.transporter.isBlocked = false
+
+	    ORDER BY t.departDate ASC
+	""")
+	Page<TransporterTrip> searchTrips(
+	    @Param("origin") String origin,
+	    @Param("dest") String dest,
+	    @Param("fromDate") LocalDate fromDate,
+	    @Param("toDate") LocalDate toDate,
+	    @Param("activeOnly") boolean activeOnly,
+	    Pageable pageable
+	);
 
     /**
      * 3️⃣ Recherche par pays d’origine / destination
@@ -112,4 +121,8 @@ public interface TransporterTripRepository extends JpaRepository<TransporterTrip
     long count();
 
     List<TransporterTrip> findByIsHiddenFalseAndTransporterDeletedAtIsNullAndTransporterIsBlockedFalse();
+
+    List<TransporterTrip> findByIsHiddenFalseAndTransporterDeletedAtIsNullAndTransporterIsBlockedFalseAndDepartDateGreaterThanEqual(
+        LocalDate today
+    );
 }

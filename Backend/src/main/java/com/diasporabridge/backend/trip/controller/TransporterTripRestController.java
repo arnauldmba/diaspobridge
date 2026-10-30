@@ -44,8 +44,7 @@ public class TransporterTripRestController {
 	@GetMapping
 	List <TransporterTrip> getAllTransporterTrip(){
 		//return this.transporterTripService.getAllVisibleTrips();
-        return tripRepository
-                .findByIsHiddenFalseAndTransporterDeletedAtIsNullAndTransporterIsBlockedFalse();
+        return transporterTripService.getVisibleUpcomingTrips();
 	}
 	
 	// recuperer un trip par ID
@@ -123,39 +122,19 @@ public class TransporterTripRestController {
             @RequestParam(required = false) String dest,
             
             @RequestParam(required = false) 
-            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fromDate,
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) 
+            LocalDate fromDate,
             
             @RequestParam(required = false) 
-            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate toDate,
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) 
+            LocalDate toDate,
             
-            @RequestParam(defaultValue = "true") boolean activeOnly,
+            @RequestParam(defaultValue = "true") 
+            boolean activeOnly,
+            
             Pageable pageable) {
-    	
-    	// ✅ Trim (optionnel mais recommandé)
-        origin = normalize(origin);
-        dest = normalize(dest);
-        
-     // ✅ règle: si une seule date est fournie -> recherche exacte ce jour-là
-        if (fromDate != null && toDate == null) {
-            toDate = fromDate;
-        } else if (fromDate == null && toDate != null) {
-            fromDate = toDate;
-        }
-
-        // ✅ optionnel: si l'utilisateur inverse les dates, on swap
-        if (fromDate != null && toDate != null && fromDate.isAfter(toDate)) {
-            LocalDate tmp = fromDate;
-            fromDate = toDate;
-            toDate = tmp;
-        }
         
         return transporterTripService.searchTrips(origin, dest, fromDate, toDate, activeOnly, pageable);
-    }
-    
-    private String normalize(String s) {
-        if (s == null) return null;
-        String t = s.trim();
-        return t.isEmpty() ? null : t;
     }
     
     @GetMapping("/search/country")

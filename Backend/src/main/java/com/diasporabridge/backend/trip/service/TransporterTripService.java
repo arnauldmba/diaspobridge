@@ -48,4 +48,6 @@ public interface TransporterTripService {
 	);
 	
 	public List<TransporterTrip> getAllVisibleTrips();
+
+	List<TransporterTrip> getVisibleUpcomingTrips();
 }

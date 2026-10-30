@@ -1,6 +1,7 @@
 package com.diasporabridge.backend.trip.service;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
 
@@ -102,10 +103,68 @@ public class TransporterTripServiceImpl implements TransporterTripService {
 	}
 
 	@Override
-	public Page<TransporterTrip> searchTrips(String origin, String dest, LocalDate fromDate, LocalDate toDate,
-			boolean activeOnly, Pageable pageable) {
-		return transporterTripRepository.searchTrips(origin, dest, fromDate, toDate, activeOnly, pageable);
+	public Page<TransporterTrip> searchTrips(
+	        String origin,
+	        String dest,
+	        LocalDate fromDate,
+	        LocalDate toDate,
+	        boolean activeOnly,
+	        Pageable pageable) {
+
+	    // 1. Normaliser les critères
+	    origin = normalize(origin);
+	    dest = normalize(dest);
+
+	    // 2. Si une seule date est fournie,
+	    // rechercher exactement ce jour-là
+	    if (fromDate != null && toDate == null) {
+	        toDate = fromDate;
+	    } else if (fromDate == null && toDate != null) {
+	        fromDate = toDate;
+	    }
+
+	    // 3. Corriger les dates inversées
+	    if (fromDate != null && toDate != null
+	            && fromDate.isAfter(toDate)) {
+
+	        LocalDate tmp = fromDate;
+	        fromDate = toDate;
+	        toDate = tmp;
+	    }
+
+	    // 4. Récupérer la date actuelle
+	    LocalDate today = LocalDate.now(
+	        ZoneId.of("Europe/Berlin")
+	    );
+
+	    // 5. Empêcher la recherche de voyages passés
+	    LocalDate effectiveFromDate =
+	        (fromDate == null || fromDate.isBefore(today))
+	            ? today
+	            : fromDate;
+
+	    // 6. Si la période demandée est entièrement passée
+	    if (toDate != null && toDate.isBefore(effectiveFromDate)) {
+	        return Page.empty(pageable);
+	    }
+
+	    // 7. Rechercher les annonces
+	    return transporterTripRepository.searchTrips(
+	        origin,
+	        dest,
+	        effectiveFromDate, // CORRECTION ICI !
+	        toDate,
+	        activeOnly,
+	        pageable
+	    );
 	}
+	
+	private String normalize(String s) {
+        if (s == null) return null;
+        String t = s.trim();
+        
+        return t.isEmpty() ? null : t;
+    }
 	
 	@Override
 	public Optional<TransporterTrip> getTransporterTripById(Long id) {
@@ -195,6 +254,18 @@ public class TransporterTripServiceImpl implements TransporterTripService {
 		return null;
 	}
 
+	@Override
+	public List<TransporterTrip> getVisibleUpcomingTrips() {
+			LocalDate today = LocalDate.now(
+			ZoneId.of("Europe/Berlin")
+		);
+			
+			System.out.println(
+			        ">>> getVisibleUpcomingTrips appelée - Date : " + today
+			    );
 
-
+		return transporterTripRepository
+			.findByIsHiddenFalseAndTransporterDeletedAtIsNullAndTransporterIsBlockedFalseAndDepartDateGreaterThanEqual(today);
+	}
+	
 }
