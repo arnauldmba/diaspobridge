@@ -88,10 +88,40 @@ export class ListingShareService {
 
     const url = this.getShareUrl(trip);
 
-    const message =
-      `✈️ Voyage disponible sur MbokoGO !\n` +
-      `📍 ${trip.originCity} → ${trip.destCity}\n\n` +
-      `Consultez l'annonce : ${url}`;
+    const description = (trip.note ?? '')
+      .replace(/\s+/g, ' ')
+      .trim();
+
+    const shortDescription =
+      description.length > 160
+        ? description.slice(0, 157).trimEnd() + '...'
+        : description;
+
+    const message = [
+      '✈️ Voyage disponible sur MbokoGO !',
+
+      `📍 ${trip.originCity} → ${trip.destCity}`,
+
+      trip.departDate
+        ? `📅 Départ : ${trip.departDate}`
+        : null,
+
+      trip.maxWeightKg != null
+        ? `📦 Poids disponible : ${trip.maxWeightKg} kg`
+        : null,
+
+      trip.pricePerKg != null
+        ? `💰 Prix : ${trip.pricePerKg} €/kg`
+        : null,
+
+      shortDescription
+        ? `💬 ${shortDescription}`
+        : null,
+
+      `🔗 Consultez l'annonce :\n${url}`
+
+    ].filter((line): line is string => line !== null)
+      .join('\n\n');
 
     return `https://wa.me/?text=${encodeURIComponent(message)}`;
   }
