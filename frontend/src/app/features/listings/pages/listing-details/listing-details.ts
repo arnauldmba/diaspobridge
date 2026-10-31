@@ -133,7 +133,7 @@ export class ListingDetails {
     this.router.navigate(['/listings']);
   }
 
-  async onShare(
+  async onShare2(
     event: MouseEvent,
     trip: TransporterTrip
   ): Promise<void> {
@@ -151,5 +151,14 @@ export class ListingDetails {
       // Afficher une notification d'erreur
     }
   }
+
+  onShare(): void {
+  if (!this.trip) return;
+
+  const whatsappUrl =
+    this.listingShareService.getWhatsAppUrl(this.trip);
+
+  window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+}
 
 }
