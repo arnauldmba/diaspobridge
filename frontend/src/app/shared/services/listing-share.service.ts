@@ -23,7 +23,6 @@ export class ListingShareService {
 
     const url = this.getShareUrl(trip);
 
-    // Description rédigée par le voyageur
     const description = (trip.note ?? '')
       .replace(/\s+/g, ' ')
       .trim();
@@ -33,35 +32,54 @@ export class ListingShareService {
         ? description.slice(0, 157).trimEnd() + '...'
         : description;
 
-    const shareData = {
-      title: `${trip.originCity} → ${trip.destCity} | MbokoGO`,
+    // Informations du voyage
+    const message = [
+      `✈️ Voyage disponible sur MbokoGO !`,
+      `📍 ${trip.originCity} → ${trip.destCity}`,
 
-      text: [
-        `✈️ ${trip.originCity} → ${trip.destCity}`,
-        shortDescription
-          ? `💬 ${shortDescription}`
-          : 'Découvrez ce voyage sur MbokoGO !'
-      ].join('\n\n'),
+      trip.departDate
+        ? `📅 Départ : ${trip.departDate}`
+        : null,
 
-      url
-    };
+      trip.maxWeightKg != null
+        ? `📦 Poids disponible : ${trip.maxWeightKg} kg`
+        : null,
 
-    // Partage natif sur les appareils compatibles
+      trip.pricePerKg != null
+        ? `💰 Prix : ${trip.pricePerKg} €/kg`
+        : null,
+
+      shortDescription
+        ? `💬 ${shortDescription}`
+        : null
+
+    ].filter((line): line is string => line !== null)
+      .join('\n');
+
+    // Partage natif
     if (navigator.share) {
       try {
-        await navigator.share(shareData);
+        await navigator.share({
+          title: `${trip.originCity} → ${trip.destCity} | MbokoGO`,
+          text: message,
+          url: url
+        });
+
         return 'shared';
+
       } catch (error) {
-        // L'utilisateur a fermé le menu de partage
-        if (error instanceof DOMException &&
-            error.name === 'AbortError') {
+        if (
+          error instanceof DOMException &&
+          error.name === 'AbortError'
+        ) {
           return 'cancelled';
         }
       }
     }
 
-    // Sinon, copier le lien
-    await navigator.clipboard.writeText(url);
+    // Fallback : copier le message et le lien
+    await navigator.clipboard.writeText(`${message}\n\n${url}`);
+
     return 'copied';
   }
 
