@@ -12,6 +12,8 @@ import { FirstLetterPipe } from '../../../../shared/first-letter-pipe';
 import { AuthService } from '../../../../core/services/auth.service';
 import { ListingService } from '../../services/listing.service';
 import { TranslatePipe } from '@ngx-translate/core';
+import { ListingShareService } from '../../../../shared/services/listing-share.service';
+import { TransporterTrip } from '../../../../model/transporterTrip.model';
 
 @Component({
   selector: 'app-listing-details',
@@ -32,6 +34,8 @@ export class ListingDetails {
 
   private route = inject(ActivatedRoute);
   private listingService = inject(ListingService);
+  private listingShareService = inject(ListingShareService);
+  
   trip: any;
 
   isLoading = false; // varaible pour gerer le chargement des voyages (spinner)
@@ -127,6 +131,25 @@ export class ListingDetails {
 
   onBackToListing() {
     this.router.navigate(['/listings']);
+  }
+
+  async onShare(
+    event: MouseEvent,
+    trip: TransporterTrip
+  ): Promise<void> {
+
+    event.stopPropagation();
+
+    try {
+      const result = await this.listingShareService.shareTrip(this.trip);
+
+      if (result === 'copied') {
+        // Afficher une notification : "Lien copié !"
+      }
+    } catch (error) {
+      console.error('Erreur de partage :', error);
+      // Afficher une notification d'erreur
+    }
   }
 
 }
