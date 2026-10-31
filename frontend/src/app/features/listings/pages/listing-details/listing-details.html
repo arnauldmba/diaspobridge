@@ -88,12 +88,21 @@
                             <h6 class="m-0 p-0 text-meta-strong">{{trip.transporter.firstName}}</h6>
                         </div>
 
-                        <div class="d-grid gap-2 pb-2">
+                        <div class="d-grid gap-3 pb-2">
                             <button 
                                 (click)="onContactClick()" 
-                                class="btn-app btn-app-primary gap-1">
-                                <mat-icon class="material-symbols-outlined">chat_bubble</mat-icon>
-                                {{'LISTING_DETAIL.CONTACT_TRANSPORTER' | translate }}
+                                class="btn-app btn-app-primary gap-2">
+                                <span class="material-symbols-outlined contact-icon">chat_bubble</span>
+                                    {{'LISTING_DETAIL.CONTACT_TRANSPORTER' | translate }}
+                            </button>
+
+                            <button
+                                type="button"
+                                class="share-button btn-app gap-2"
+                                aria-label="Partager cette annonce"
+                                (click)="onShare($event, trip)">
+                                <span class="material-symbols-outlined">ios_share</span>
+                                    Partager cette annonce
                             </button>
                         </div>
                     </div>

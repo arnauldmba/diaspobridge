@@ -5,5 +5,6 @@ export const environment: AppEnvironment = {
     //apiUrl: 'http://localhost:8080/diasporabridge/api',
     //apiUrl: 'http://192.168.178.75:8080/diasporabridge/api',
     apiUrl: 'https://diaspobridge-production.up.railway.app/diasporabridge/api',
+    siteUrl: 'https://www.mbokogo.com',
     appName: 'MbokoGO'
 };

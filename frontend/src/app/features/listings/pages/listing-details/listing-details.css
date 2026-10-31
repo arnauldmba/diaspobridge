@@ -59,11 +59,25 @@
 .transporter-detail button{
     font-size: 14px;
     font-weight: 400;
-    padding: 8px 30px;
+    padding: 10px 30px;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 2;
+}
+
+.share-button{
+    border: 1px solid rgb(176, 176, 176);
+    color: var(--color-accent);
+    background-color: var(--color-bg);
+}
+
+.contact-icon{
+    font-size: 16px;
+}
+
+.share-button .material-symbols-outlined{
+    font-size: 18px;
 }
 
 .transporter-additional-info{
