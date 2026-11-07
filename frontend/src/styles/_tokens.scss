@@ -116,21 +116,6 @@
     border-radius: 48px;
   }
 
-  /* ajouter un pointer clickable sur uune balise */
-  /*
-  .date-clickable{
-    cursor: pointer;
-  }*/
-
-  /* changer la couleur des border d'un input
-  .date-clickable:hover .mdc-notched-outline__leading,
-  .date-clickable:hover .mdc-notched-outline__notch,
-  .date-clickable:hover .mdc-notched-outline__trailing {
-    border-color: red;
-    transition: border-color 0.2s ease;
-  }
-  */
-
   .input-hover:hover .mat-mdc-text-field-wrapper {
     background-color: rgba(47, 80, 55, 0.107);
     border-radius: 4px;
@@ -138,9 +123,9 @@
   }
 
   @media (max-width: 600px) {
-    --text-xs: 12px;
-    --text-sm: 14px;
-    --text-base: 16px;
+    --text-xs: 10px;
+    --text-sm: 12px;
+    --text-base: 15px;
     --text-lg: 18px;
     --text-xl: 22px;
     --text-xxl: 26px;

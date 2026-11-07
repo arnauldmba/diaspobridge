@@ -28,16 +28,18 @@
 }
 
 .container-consignes p {
-    font-size: 13px;
+    font-size: var(--text-xs);
     font-weight: 400;
     color: rgb(94, 93, 93);
+    font-family: var(--font-body);
 }
 
 .container-consignes li {
     margin: 8px 0px;
-    font-size: 13px;
+    font-size: var(--text-xs);
     font-weight: 400;
     color: rgb(94, 93, 93);
+    font-family: var(--font-body);
 }
 
 

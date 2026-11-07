@@ -28,7 +28,7 @@
         <div class="col-8 d-flex gap-4 mb-3">
           <div class="card-text meta-item">
             <span class="material-symbols-outlined icon-size-lg">calendar_today</span>
-            <span class="icon-desc">{{ listing.departDate }}</span>
+            <span class="icon-desc">{{ listing.departDate | date: 'dd MMM yyyy' }}</span>
           </div>
 
           <div class="card-text meta-item">

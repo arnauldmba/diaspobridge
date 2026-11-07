@@ -1,9 +1,7 @@
-<div class="mt-app mb-app">
+<div class="listing-details mt-app mb-app">
     @if (isLoading) {
     <div class="overlay">
-        <mat-spinner 
-            diameter="50">
-        </mat-spinner>
+        <mat-spinner diameter="50"></mat-spinner>
     </div>
     }
 
@@ -13,106 +11,101 @@
         </span>
     </div>
 
-    <div class="container mb-4 app-title-color">
-        <h1 class="page-title">{{'LISTING_DETAIL.TITLE' | translate }}</h1>
+    <div class="container app-title-color">
+        <h1 class="page-title">{{ 'LISTING_DETAIL.TITLE' | translate }}</h1>
     </div>
 
     @if (!isLoading && trip) {
     <div class="container">
-        <div class="trip-container">
-            <div class="trip-details">
-                <div class="departure-and-arrival">
+        <div class="listing-details__layout">
+            <div class="listing-details__main">
+                <div class="listing-route">
                     <p class="muted">Route</p>
                     <div class="d-flex gap-2">
-                        <mat-icon class="color-1 location-icon">location_on</mat-icon>
-                        <p class="p-0 m-0">
-                            <span class="city">{{trip.originCity}}, {{trip.originCountry}}</span><br>
-                            <span class="muted">{{'LISTING_DETAIL.DEPARTURE' | translate }}</span>
+                        <mat-icon class="color-1 listing-route__icon">location_on</mat-icon>
+                        <p class="p-0 m-0 d-grid">
+                            <span class="city">{{ trip.originCity }}, {{ trip.originCountry }}</span>
+                            <span class="muted" style="font-size: var(--text-sm);">{{ 'LISTING_DETAIL.DEPARTURE' | translate }}</span>
                         </p>
                     </div>
-                    <div class="d-flex gap-2 border-start my-2" style="height: 30px; margin-left: 19px;">
-                    </div>
+                    <div class="listing-route__connector d-flex gap-2 border-start my-2"></div>
                     <div class="d-flex gap-2">
-                        <mat-icon class="color-1 location-icon">location_on</mat-icon>
-                        <p>
-                            <span class="city">{{trip.destCity}}, {{trip.destCountry}}</span><br>
-                            <span class="muted">{{'LISTING_DETAIL.ARRIVAL' | translate }}</span>
+                        <mat-icon class="color-1 listing-route__icon">location_on</mat-icon>
+                        <p class="p-0 m-0 d-grid">
+                            <span class="city">{{ trip.destCity }}, {{ trip.destCountry }}</span>
+                            <span class="muted" style="font-size: var(--text-sm)">{{ 'LISTING_DETAIL.ARRIVAL' | translate }}</span>
                         </p>
                     </div>
                 </div>
 
-                <div class="date-weight-kilo mt-2 p-0">
+                <div class="listing-summary mt-2 p-0">
                     <div class="mt-3">
                         <div class="row">
                             <div class="d-flex gap-4 col-8">
-                                <div class="card-text d-flex align-items-center gap-1"
-                                    style="color: var(--color-muted);">
+                                <div class="listing-summary__detail card-text d-flex align-items-center gap-1">
                                     <span class="material-symbols-outlined icon-size-lg">calendar_today</span>
-                                    <span class="icon-desc">{{trip.departDate | date:'dd MMM yyyy' }}</span>
+                                    <span class="icon-desc">{{ trip.departDate | date: 'dd MMM yyyy' }}</span>
                                 </div>
-                                <div class="card-text d-flex align-items-center gap-1"
-                                    style="color: var(--color-muted);">
+                                <div class="listing-summary__detail card-text d-flex align-items-center gap-1">
                                     <span class="material-symbols-outlined icon-size-lg">balance</span>
-                                    <span class="icon-desc">{{trip.maxWeightKg}}kg</span>
+                                    <span class="icon-desc">{{ trip.maxWeightKg }}kg</span>
                                 </div>
                             </div>
-                            <span class="mb-2 col-4 text-end price">
-                                {{trip.pricePerKg}}€/kg
+                            <span class="mb-2 col-4 text-end price listing-summary__price">
+                                {{ trip.pricePerKg }}€/kg
                             </span>
                         </div>
                     </div>
 
-                    <div 
-                        style="background-color: var(--color-bg-accent); font-family: var(--font-body);" 
-                        class="pt-2 pb-2 px-3 mt-3 mb-4 rounded-2"
-                    >
-                        <h6 class="mt-1 muted" style="font-size: var(--text-ms); font-family: var(--font-title);">{{'LISTING_DETAIL.DESCRIPTION' | translate }}</h6>
-                        @if(trip.note){
-                        <p style="font-size: var(--text-sm);">{{trip.note}}</p>
-                        }@else {
-                        <p style="font-style: italic;"> <strong>{{trip.transporter.firstName }}</strong> n’a pas laissé
-                            de note. Contactez-le pour plus d’informations. </p>
+                    <div class="listing-note pt-2 pb-2 px-3 mt-3 mb-3 rounded-2">
+                        <h6 class="listing-note__title mt-1 muted">
+                            {{ 'LISTING_DETAIL.DESCRIPTION' | translate }}
+                        </h6>
+                        @if (trip.note) {
+                        <p class="listing-note__text">{{ trip.note }}</p>
+                        } @else {
+                        <p class="listing-note__empty">
+                            <strong>{{ trip.transporter.firstName }}</strong> n’a pas laissé de note.
+                            Contactez-le pour plus d’informations.
+                        </p>
                         }
                     </div>
                 </div>
             </div>
 
-            <div class="trip-user-info">
-                <div class="rounded-4 transporter-detail">
-                    <div class="trip-details-button">
-                        <h5>{{'LISTING_DETAIL.TRANSPORTER' | translate }}</h5>
-                        <div class="user-foto-and-name gap-2">
-                            <div class="avatar" style="width: 50px; height: 50px;">
-                                {{(trip.transporter.firstName | firstLetter )}}
+            <div class="listing-details__sidebar">
+                <div class="rounded-4 transporter-card">
+                    <div class="transporter-card__contact">
+                        <div class="">
+                            <h5>{{ 'LISTING_DETAIL.TRANSPORTER' | translate }}</h5>
+                            <div class="transporter-card__profile gap-2">
+                                <span class="transporter-card__avatar avatar">
+                                    {{ trip.transporter.firstName | firstLetter }}
+                                </span>
+                                <h6 class="m-0 p-0 text-meta-strong">{{ trip.transporter.firstName }}</h6>
                             </div>
-                            <h6 class="m-0 p-0 text-meta-strong">{{trip.transporter.firstName}}</h6>
                         </div>
 
-                        <div class="d-grid gap-3 pb-2">
-                            <button 
-                                (click)="onContactClick()" 
-                                class="btn-app btn-app-primary gap-2">
-                                <span class="material-symbols-outlined contact-icon">chat_bubble</span>
-                                    {{'LISTING_DETAIL.CONTACT_TRANSPORTER' | translate }}
+                        <div class="container-button">
+                            <button (click)="onContactClick()" class="btn-app btn-app-primary gap-2">
+                                <span class="material-symbols-outlined listing-contact-icon">chat_bubble</span>
+                                {{ 'LISTING_DETAIL.CONTACT_TRANSPORTER' | translate }}
                             </button>
 
-                            <button
-                                type="button"
-                                class="share-button btn-app gap-2"
-                                aria-label="Partager cette annonce"
-                                (click)="onShare()">
+                            <button type="button" class="btn-app btn-app-outline-primary gap-2"
+                                aria-label="Partager cette annonce" (click)="openShareMenu()">
                                 <span class="material-symbols-outlined">ios_share</span>
-                                    Partager cette annonce
+                                Partager cette annonce
                             </button>
                         </div>
                     </div>
-                    <div class="transporter-additional-info">
-                        <h6 class="pt-1 pb-2">{{'LISTING_DETAIL.SAFETY_TIPS' | translate }}</h6>
+                    <div class="transporter-card__safety">
+                        <h6 class="pt-1 pb-2">{{ 'LISTING_DETAIL.SAFETY_TIPS' | translate }}</h6>
                         <ul>
-                            <li>{{'LISTING_DETAIL.TIP_IDENTITY' | translate }}</li>
-                            <li>{{'LISTING_DETAIL.TIP_PACK_SECURE' | translate }}</li>
-                            <li>{{'LISTING_DETAIL.TIP_DECLARE_CONTENT' | translate }}</li>
-                            <li>{{'LISTING_DETAIL.TIP_TRACKING_CONFIRMATION' | translate }}</li>
+                            <li>{{ 'LISTING_DETAIL.TIP_IDENTITY' | translate }}</li>
+                            <li>{{ 'LISTING_DETAIL.TIP_PACK_SECURE' | translate }}</li>
+                            <li>{{ 'LISTING_DETAIL.TIP_DECLARE_CONTENT' | translate }}</li>
+                            <li>{{ 'LISTING_DETAIL.TIP_TRACKING_CONFIRMATION' | translate }}</li>
                         </ul>
                     </div>
                 </div>
@@ -122,6 +115,46 @@
     }
 
     @if (!isLoading && !trip) {
-    <div>{{'LISTING_DETAIL.AD_NOT_FOUND' | translate }}</div>
+    <div>{{ 'LISTING_DETAIL.AD_NOT_FOUND' | translate }}</div>
     }
+
+    <div>
+        @if(shareMenuOpen){
+            @if (trip; as trip) {
+                <app-share-trip
+                    [trip]="trip"
+                    (closed)="closeShareMenu()"
+                    (feedback)="onShareFeedback($event)">
+                </app-share-trip>
+            }
+        }
+    </div>
+
+    @if (shareMessage) {
+    <p class="listing-share-feedback" role="status">
+        {{ shareMessage }}
+    </p>
+    }
+
+    <div class="listing-details__mobile-actions">
+        <div class="contact-transporter-button">
+            <button 
+                class="btn-app btn-app-primary gap-2 w-100"
+                (click)="onContactClick()">
+                
+                <span class="material-symbols-outlined">chat_bubble</span>
+                {{ 'LISTING_DETAIL.CONTACT_TRANSPORTER' | translate }}
+            </button>
+        </div>
+        <div class="share-trip-button">
+            <button 
+                class="btn-app btn-app-outline-primary gap-1 w-100"
+                type="button"
+                (click)="openShareMenu()">
+                
+                <span class="material-symbols-outlined">ios_share</span>
+                Partager
+            </button>
+        </div>
+    </div>
 </div>
