@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnDestroy, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatIcon, MatIconModule } from "@angular/material/icon";
 import { A11yModule } from "@angular/cdk/a11y";
@@ -13,7 +13,10 @@ import { AuthService } from '../../../../core/services/auth.service';
 import { ListingService } from '../../services/listing.service';
 import { TranslatePipe } from '@ngx-translate/core';
 import { ListingShareService } from '../../../../shared/services/listing-share.service';
-import { TransporterTrip } from '../../../../model/transporterTrip.model';
+import { HostListener } from '@angular/core';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
+import { ShareTrip } from '../../components/share-trip/share-trip';
 
 @Component({
   selector: 'app-listing-details',
@@ -25,20 +28,44 @@ import { TransporterTrip } from '../../../../model/transporterTrip.model';
     FirstLetterPipe,
     DatePipe,
     MatProgressSpinnerModule,
-    TranslatePipe
-  ],
+    TranslatePipe,
+    FontAwesomeModule,
+    ShareTrip
+],
   templateUrl: './listing-details.html',
   styleUrl: './listing-details.css',
 })
-export class ListingDetails {
+export class ListingDetails implements OnDestroy {
 
   private route = inject(ActivatedRoute);
   private listingService = inject(ListingService);
-  private listingShareService = inject(ListingShareService);
   
   trip: any;
 
-  isLoading = false; // varaible pour gerer le chargement des voyages (spinner)
+  shareMenuOpen = false;
+  shareMessage = '';
+
+  private messageTimer?: ReturnType<typeof setTimeout>;
+
+  openShareMenu(): void {
+    this.shareMenuOpen = true;
+    this.shareMessage = '';
+  }
+
+  closeShareMenu(): void {
+    this.shareMenuOpen = false;
+  }
+
+  @HostListener('document:keydown.escape')
+  onEscape(): void {
+    if (this.shareMenuOpen) {
+      this.closeShareMenu();
+    }
+  }
+
+  isLoading = false;
+
+  faWhatsapp = faWhatsapp; 
 
   constructor(
     private dialog: MatDialog,
@@ -73,24 +100,20 @@ export class ListingDetails {
       },
       error: (err) => {
         /*console.error('Error contacting transporter', err);*/
-
       }
     });
   }
 
   onContact2() {
-    // Placeholder for contact logic
     this.router.navigate(['/chat', this.trip.id]);
   }
 
   onContactClick() {
-    // ✅ 1. Vérifier si l'utilisateur est connecté
     if (!this.authService.isLoggedIn()) {
-      // Redirection vers login avec returnUrl
       this.router.navigate(['/login'], {
         queryParams: { returnUrl: this.router.url }
       });
-      return; // ⛔ on n'ouvre PAS le dialog
+      return; 
     }
 
     const ref = this.dialog.open(ContactMessageDialogComponent, {
@@ -120,7 +143,7 @@ export class ListingDetails {
 
     if (!matchId || matchId <= 0) {
       return;
-    }; // valider matchId; si invalide, ne rien faire
+    }; 
 
     this.messageService.send(matchId, text).subscribe({
       next: (saved) => {
@@ -133,32 +156,17 @@ export class ListingDetails {
     this.router.navigate(['/listings']);
   }
 
-  async onShare2(
-    event: MouseEvent,
-    trip: TransporterTrip
-  ): Promise<void> {
+  onShareFeedback(message: string): void {
+    clearTimeout(this.messageTimer);
 
-    event.stopPropagation();
+    this.shareMessage = message;
 
-    try {
-      const result = await this.listingShareService.shareTrip(this.trip);
-
-      if (result === 'copied') {
-        // Afficher une notification : "Lien copié !"
-      }
-    } catch (error) {
-      console.error('Erreur de partage :', error);
-      // Afficher une notification d'erreur
-    }
+    this.messageTimer = setTimeout(() => {
+      this.shareMessage = '';
+    }, 3000);
   }
 
-  onShare(): void {
-  if (!this.trip) return;
-
-  const whatsappUrl =
-    this.listingShareService.getWhatsAppUrl(this.trip);
-
-  window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
-}
-
+  ngOnDestroy(): void {
+    clearTimeout(this.messageTimer);
+  }
 }

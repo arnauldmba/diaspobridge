@@ -1,0 +1,65 @@
+<div class="share-overlay">
+
+  <!-- Fond : cliquer pour fermer -->
+  <button
+    type="button"
+    class="share-backdrop"
+    aria-label="Fermer la fenêtre"
+    (click)="closeShareMenu()">
+  </button>
+
+  <section
+    class="share-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="share-title">
+
+    <div class="share-header">
+
+      <h3 id="share-title">
+        Partager cette annonce
+      </h3>
+
+      <button
+        type="button"
+        class="share-close"
+        aria-label="Fermer"
+        (click)="closeShareMenu()">
+        <fa-icon [icon]="faXmark"></fa-icon>
+      </button>
+
+    </div>
+
+    <div class="share-options">
+
+      <button
+        type="button"
+        class="share-option"
+        (click)="shareOnWhatsApp()">
+
+        <fa-icon [icon]="faWhatsapp" class="share-icon whatsapp-icon"></fa-icon>
+        <span class="icon-title">WhatsApp</span>
+      </button>
+
+      <button
+        type="button"
+        class="share-option"
+        (click)="shareOtherApps()">
+
+        <span class="material-symbols-outlined share-icon">more_horiz</span>
+        <span class="icon-title">Autres apps</span>
+      </button>
+
+      <button
+        type="button"
+        class="share-option"
+        (click)="copyTripLink()">
+
+        <span class="material-symbols-outlined share-icon">content_copy</span>
+        <span class="icon-title">Copier le lien</span>
+      </button>
+
+    </div>
+
+  </section>
+</div>

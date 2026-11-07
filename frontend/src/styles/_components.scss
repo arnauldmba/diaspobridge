@@ -35,8 +35,9 @@ html, body {
 
 .icon-desc{
   font-family: var(--font-body);
-  font-size: 13px;
-  font-weight: var(--font-weight-medium);
+  font-size: var(--text-sm);
+  /*font-weight: var(--font-weight-medium);*/
+  font-weight: 100;
 }
 
 .label-input {
@@ -164,12 +165,19 @@ html, body {
 .btn-app {
   border: none;
   border-radius: var(--radius-sm);
+
   font-family: var(--font-title);
   font-size: var(--text-sm);
-  padding: 10px 14px;
   font-weight: 400;
+  
+  padding: 10px 14px;
+  
   cursor: pointer;
-  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 .btn-app-sm {
@@ -178,6 +186,12 @@ html, body {
   padding: 10px 14px;
   font-weight: 400;
   cursor: pointer;
+}
+
+.btn-app-outline-primary{
+  border: 1px solid rgb(176, 176, 176);
+  color: var(--color-accent);
+  background-color: var(--color-bg);
 }
 
 .btn-app-outline-xs {
@@ -192,6 +206,7 @@ html, body {
 
 .btn-app-primary {
   background-color: var(--color-accent);
+  color: white;
 }
 
 .btn-app-outline-secondary{
