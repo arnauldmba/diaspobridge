@@ -32,7 +32,7 @@
   width: 100%;
   max-width: 400px;
 
-  background: var(--color-bg);
+  background: white;
   border-radius: 8px;
   padding: 24px;
 
@@ -100,19 +100,19 @@
   font-size: var(--text-xs);
   font-family: var(--font-title);
   font-weight: 100;
+  color: black;
 }
 
 .share-option:hover {
   background: #f6f9f7;
-  border-radius: 8px;
 }
 
 /* Icônes */
 .share-icon {
-  background: white;
+  /*background: red;*/
 
-  width: 44px;
-  height: 44px;
+  width: 54px;
+  height: 54px;
   flex-shrink: 0;
 
   display: flex;
@@ -120,16 +120,18 @@
   align-items: center;
 
   border-radius: 50%;
-  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.041);
 
-  box-shadow: var(--shadow-md);
+  background-color: rgba(173, 179, 199, 0.295);
 
-  font-size: 19px;
-  color: #333;
+  /*font-size: 19px;
+  color: #333;*/
 }
 
 .whatsapp-icon {
-  color: #00c700;
+  background-color: #00c700;
+  color: white;
+  font-size: 26px;
 }
 
 /* Texte */

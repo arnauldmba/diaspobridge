@@ -53,7 +53,7 @@
 }
 
 .listing-note__text {
-  font-size: var(--text-sm);
+  font-size: var(--text-xs);
 }
 
 .listing-note__empty {
