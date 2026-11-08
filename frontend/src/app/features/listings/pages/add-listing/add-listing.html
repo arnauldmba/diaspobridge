@@ -1,4 +1,5 @@
 <div class="container-add-listing mt-app mb-app">
+
     <!-- First titel -->
     <div class="mb-4 p-0 border-0">
         <h1 class="app-title-color page-title mb-2">{{ 'ADD_LISTING.TITLE' | translate }}</h1>
@@ -175,6 +176,18 @@
                             Le message ne doit pas dépasser 500 caractères.
                         </mat-error>
                     </mat-form-field>
+                </div>
+
+                <div class="p-3 consign-mobile" 
+                    style="background-color: #1cbd271e; border: 1px solid var(--color-accent); border-radius: var(--radius-lg);">
+                    <h6 class="mb-3 text-center">{{ 'ADD_LISTING.IMPORTANT_GUIDELINES' | translate }}</h6>
+                    <ul class="ms-3 p-0">
+                        <li>{{ 'ADD_LISTING.GUIDELINE_1' | translate }}</li>
+                        <li>{{ 'ADD_LISTING.GUIDELINE_2' | translate }}</li>
+                        <li>{{ 'ADD_LISTING.GUIDELINE_3' | translate }}</li>
+                        <li>{{ 'ADD_LISTING.GUIDELINE_4' | translate }}</li>
+                        <li>{{ 'ADD_LISTING.GUIDELINE_5' | translate }}</li>
+                    </ul>
                 </div>
 
                 <!-- BOUTONS -->
